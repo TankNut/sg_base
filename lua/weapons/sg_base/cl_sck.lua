@@ -1,6 +1,8 @@
 AddCSLuaFile()
 
-if SERVER then return end
+if SERVER then
+	return
+end
 
 local errorColor = Color(255, 100, 100)
 

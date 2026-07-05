@@ -1,0 +1,7 @@
+VertexLitGeneric
+{
+	$basetexture "metal/metalpipe003a"
+	$surfaceprop Metal
+
+	%keywords "c17industrial"
+}

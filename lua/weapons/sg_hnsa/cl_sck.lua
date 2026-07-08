@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("sg_gun_base")
 
 if SERVER then
 	return

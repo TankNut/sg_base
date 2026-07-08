@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("weapon_base")
 
 if SERVER then
 	return
@@ -450,7 +451,7 @@ end
 
 local null = Material("null")
 
-function SWEP:DrawSCKWorldModel(flags)
+function SWEP:DrawWorldModel(flags)
 	if not self.ShowWorldModel then
 		render.MaterialOverride(null)
 	end
@@ -462,10 +463,6 @@ function SWEP:DrawSCKWorldModel(flags)
 	self:DrawSCKElements(self.WElements, self, flags)
 end
 
-function SWEP:DrawWorldModel(flags)
-	self:DrawSCKWorldModel(flags)
-end
-
 function SWEP:DrawWorldModelTranslucent(flags)
-	self:DrawSCKWorldModel(flags)
+	self:DrawWorldModel(flags)
 end

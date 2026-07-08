@@ -1,11 +1,7 @@
 VertexLitGeneric
 {
 	$basetexture "metal/metalgrate002a"
-	$surfaceprop Metalgrate
+	$surfaceprop "Metalgrate"
 
-	$alphatest 1
-
-	%keywords "c17industrial"
-
-	%compilepassbullets 1
+	$alphatest "1"
 }

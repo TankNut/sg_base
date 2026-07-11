@@ -3,6 +3,8 @@ DEFINE_BASECLASS("weapon_base")
 
 SWEP.Base = "weapon_base"
 
+SWEP.HoldType = "normal"
+
 SWEP.Animations = {
 	Draw = ACT_VM_DRAW,
 
@@ -46,4 +48,8 @@ end
 
 function SWEP:Think()
 	self:UpdateHoldType()
+
+	if self:GetNextIdle() <= CurTime() then
+		self:PlayAnimation("Idle")
+	end
 end

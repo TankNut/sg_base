@@ -1,8 +1,10 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("sg_base")
 
-function SWEP:CanAttack()
-	return true
+function SWEP:IsFinalBurstShot()
+	local firemode = self:GetFiremode()
+
+	return firemode > 1 and self:GetAttackCount() % firemode == 0
 end
 
 function SWEP:UpdateBurst()
@@ -10,6 +12,8 @@ function SWEP:UpdateBurst()
 
 	if firemode == 0 or self.AutoBurst then
 		self.Primary.Automatic = true
+	elseif firemode == 1 then
+		self.Primary.Automatic = false
 	else
 		self.Primary.Automatic = not self:IsFinalBurstShot()
 	end
@@ -23,6 +27,24 @@ function SWEP:GetDelay()
 	return self.Delay
 end
 
+-- Extra checks for whether the weapon can fire
+function SWEP:CanAttack()
+	if self.Primary.ClipSize > 0 and self:Clip1() < self.AmmoCost then
+		return false
+	end
+
+	return true
+end
+
+-- Where ammo should be taken (if any)
+function SWEP:TakeAmmo()
+	self:TakePrimaryAmmo(self.AmmoCost)
+end
+
+function SWEP:DoFireEffects()
+	self:EmitSound("Weapon_Crossbow.Single")
+end
+
 function SWEP:PrimaryAttack()
 	if not self:CanAttack() then
 		return
@@ -31,9 +53,12 @@ function SWEP:PrimaryAttack()
 	self:SetAttackCount(self:GetAttackCount() + 1)
 	self:UpdateBurst()
 
+	self:TakeAmmo()
+	self:DoFireEffects()
+
 	self:FireWeapon()
 
-	local anim = self:PlayAnimation("Attack")
+	local anim = self:PlayAnimation("Primary")
 	local delay = self:GetDelay()
 
 	if delay == -1 then
@@ -54,14 +79,6 @@ end
 function SWEP:SecondaryAttack()
 end
 
--- Gets called when a player starts attacking
-function SWEP:OnStartAttack()
-end
-
--- Called when the player stops attacking or isn't able to (e.g. their burst has hit it's limit)
-function SWEP:OnStopAttack()
-end
-
 function SWEP:SetAttackDelay(delay)
 	local ct = CurTime()
 	local nextAttack = self:GetNextPrimaryFire()
@@ -74,16 +91,16 @@ function SWEP:SetAttackDelay(delay)
 	self:SetNextPrimaryFire(nextAttack + delay)
 end
 
-function SWEP:CheckAutoAttack()
-	if not self.ForceBurst or not self:GetCanAttack() then
-		return
-	end
+-- Gets called when a player starts attacking
+function SWEP:OnStartAttack()
+end
 
-	local count = self:GetAttackCount()
+-- Called when the player stops attacking or isn't able to (e.g. their burst has hit it's limit)
+function SWEP:OnStopAttack()
+end
 
-	if count > 0 and count % self:GetFiremode() != 0 then
-		self:PrimaryAttack()
-	end
+function SWEP:IsFiring()
+	return self:GetAttackCount() > 0
 end
 
 function SWEP:UpdateAttack()
@@ -109,8 +126,29 @@ function SWEP:UpdateAttack()
 		end
 	end
 
-	self:SetCanAttack(self:GetNextPrimaryFire() <= CurTime())
+	local canAttack = self:GetNextPrimaryFire() <= CurTime()
+
+	self:SetCanAttack(canAttack)
 	self:SetHasAttacked(false)
 
-	self:CheckAutoAttack()
+	if not canAttack then
+		return
+	end
+
+	if self:ShouldAutoAttack() then
+		self:PrimaryAttack()
+	end
+end
+
+-- Return true to force the weapon to fire
+function SWEP:ShouldAutoAttack()
+	if self.ForceBurst then
+		local count = self:GetAttackCount()
+
+		if count > 0 and count % self:GetFiremode() != 0 then
+			return true
+		end
+	end
+
+	return false
 end

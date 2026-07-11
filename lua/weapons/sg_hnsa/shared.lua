@@ -11,6 +11,12 @@ SWEP.Spawnable = true
 
 SWEP.HoldType = "sniper"
 
+SWEP.Primary.Ammo = "XBowBolt"
+SWEP.Primary.ClipSize = 3
+SWEP.Primary.DefaultClip = 3
+
+SWEP.Delay = -1
+
 if CLIENT then
 	SWEP.ShowViewModel = false
 	SWEP.ShowWorldModel = false

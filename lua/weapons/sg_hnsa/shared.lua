@@ -23,3 +23,7 @@ if CLIENT then
 end
 
 include("cl_sck.lua")
+
+function SWEP:GetIdleAnimation()
+	return self:Clip1() == 0 and ACT_VM_FIDGET or ACT_VM_IDLE
+end

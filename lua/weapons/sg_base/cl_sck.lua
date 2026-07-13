@@ -21,8 +21,11 @@ local scaleMatrix = Matrix()
 
 addSCKType("Model", {
 	Init = function(self, tab, element)
-		element.pos = element.pos or Vector()
-		element.angle = element.angle or Angle()
+		element.pos = Vector(element.pos)
+		element.pos.y = -element.pos.y
+
+		element.angle = Angle(element.angle)
+		element.angle.p = -element.angle.p
 
 		local mdl = element.model
 
@@ -58,19 +61,21 @@ addSCKType("Model", {
 			return
 		end
 
-		local pos, ang = self:GetBoneOrientation(tab, element, ent)
+		local matrix = self:GetBoneOrientation(tab, element, ent)
 
-		if not pos then
+		if not matrix then
 			return
 		end
 
-		pos:Add(ang:Forward() * element.pos.x)
-		pos:Add(ang:Right() * element.pos.y)
-		pos:Add(ang:Up() * element.pos.z)
+		matrix:Translate(element.pos)
+		matrix:Rotate(element.angle)
 
-		ang:RotateAroundAxis(ang:Up(), element.angle.y)
-		ang:RotateAroundAxis(ang:Right(), element.angle.p)
-		ang:RotateAroundAxis(ang:Forward(), element.angle.r)
+		local pos = matrix:GetTranslation()
+		local ang = matrix:GetAngles()
+
+		if ent:GetClass() == "viewmodel" and self.ViewModelFlip then
+			ang.r = -ang.r
+		end
 
 		csent:SetPos(pos)
 		csent:SetAngles(ang)
@@ -169,7 +174,8 @@ local spriteFlags = bit.bor(STUDIO_TRANSPARENCY, STUDIO_TWOPASS)
 
 addSCKType("Sprite", {
 	Init = function(self, tab, element)
-		element.pos = element.pos or Vector()
+		element.pos = Vector(element.pos)
+		element.pos.y = -element.pos.y
 
 		local mat = element.sprite
 
@@ -211,17 +217,15 @@ addSCKType("Sprite", {
 			return
 		end
 
-		local pos, ang = self:GetBoneOrientation(tab, element, ent)
+		local matrix = self:GetBoneOrientation(tab, element, ent)
 
-		if not pos then
+		if not matrix then
 			return
 		end
 
-		local ourPos = element.pos or vector_origin
+		matrix:Translate(element.pos)
 
-		pos:Add(ang:Forward() * ourPos.x)
-		pos:Add(ang:Right() * ourPos.y)
-		pos:Add(ang:Up() * ourPos.z)
+		local pos = matrix:GetTranslation()
 
 		render.SetMaterial(element._material)
 		render.DrawSprite(pos, element.size.x, element.size.y, element.color or color_white)
@@ -238,8 +242,8 @@ addSCKType("ClipPlane", {
 			return
 		end
 
-		element.pos = element.pos or Vector()
-		element.angle = element.angle or Angle()
+		element.pos = Vector(element.pos)
+		element.angle = Angle(element.angle)
 
 		parent.clipplanes = parent.clipplanes or {}
 		parent.clipcount = parent.clipcount or 0
@@ -262,17 +266,12 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 	local parent = lookup[element.rel]
 
 	if parent then
-		local pos, ang = self:GetBoneOrientation(lookup, parent, ent)
+		local matrix = self:GetBoneOrientation(lookup, parent, ent)
 
-		pos:Add(ang:Forward() * parent.pos.x)
-		pos:Add(ang:Right() * parent.pos.y)
-		pos:Add(ang:Up() * parent.pos.z)
+		matrix:Translate(parent.pos)
+		matrix:Rotate(parent.angle)
 
-		ang:RotateAroundAxis(ang:Up(), parent.angle.y)
-		ang:RotateAroundAxis(ang:Right(), parent.angle.p)
-		ang:RotateAroundAxis(ang:Forward(), parent.angle.r)
-
-		return pos, ang
+		return matrix
 	else
 		local bone = ent:LookupBone(element.bone or "ValveBiped.Bip01_R_Hand")
 
@@ -280,21 +279,7 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 			return
 		end
 
-		local pos = Vector()
-		local ang = Angle()
-
-		local matrix = ent:GetBoneMatrix(bone)
-
-		if matrix then
-			pos:Set(matrix:GetTranslation())
-			ang:Set(matrix:GetAngles())
-		end
-
-		if ent:GetClass() == "viewmodel" and self.ViewModelFlip then
-			ang.r = -ang.r
-		end
-
-		return pos, ang
+		return ent:GetBoneMatrix(bone)
 	end
 end
 

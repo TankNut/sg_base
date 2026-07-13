@@ -29,6 +29,10 @@ end
 
 -- Extra checks for whether the weapon can fire
 function SWEP:CanAttack()
+	if self:IsReloading() then
+		return false
+	end
+
 	if self.Primary.ClipSize > 0 and self:Clip1() < self.AmmoCost then
 		return false
 	end
@@ -41,21 +45,17 @@ function SWEP:TakeAmmo()
 	self:TakePrimaryAmmo(self.AmmoCost)
 end
 
-function SWEP:DoFireEffects()
-	self:EmitSound("Weapon_Crossbow.Single")
-end
-
 function SWEP:PrimaryAttack()
 	if not self:CanAttack() then
 		return
 	end
 
+	self:PlayWorldAnimation(PLAYER_ATTACK1)
+
 	self:SetAttackCount(self:GetAttackCount() + 1)
 	self:UpdateBurst()
 
 	self:TakeAmmo()
-	self:DoFireEffects()
-
 	self:FireWeapon()
 
 	local anim = self:PlayAnimation("Primary")

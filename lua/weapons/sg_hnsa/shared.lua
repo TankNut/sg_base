@@ -12,10 +12,14 @@ SWEP.Spawnable = true
 SWEP.HoldType = "sniper"
 
 SWEP.Primary.Ammo = "XBowBolt"
-SWEP.Primary.ClipSize = 3
-SWEP.Primary.DefaultClip = 3
+SWEP.Primary.ClipSize = 1
+SWEP.Primary.DefaultClip = 1
 
 SWEP.Delay = -1
+
+SWEP.AnimSounds = {
+	Primary = "Weapon_Crossbow.Single"
+}
 
 if CLIENT then
 	SWEP.ShowViewModel = false

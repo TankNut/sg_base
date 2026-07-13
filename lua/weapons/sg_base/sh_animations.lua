@@ -44,6 +44,14 @@ function SWEP:PlayAnimation(name, rate)
 
 	self:SetNextIdle(CurTime() + duration)
 
+	local callback = self["On" .. name .. "Animation"]
+
+	if isfunction(callback) then
+		callback(self)
+	elseif self.AnimSounds[name] then
+		self:EmitSound(self.AnimSounds[name])
+	end
+
 	return duration
 end
 

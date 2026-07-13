@@ -13,14 +13,15 @@ SWEP.Animations = {
 
 	Primary = ACT_VM_PRIMARYATTACK,
 	Secondary = ACT_VM_SECONDARYATTACK,
+	Pump = ACT_SHOTGUN_PUMP,
 
 	Reload = ACT_VM_RELOAD,
-	ReloadEmpty = ACT_VM_RELOAD,
-
 	ReloadStart = ACT_VM_RELOAD,
 	ReloadSingle = ACT_VM_RELOAD_INSERT,
 	ReloadFinish = ACT_VM_RELOAD_END
 }
+
+SWEP.AnimSounds = {}
 
 include("cl_sck.lua")
 

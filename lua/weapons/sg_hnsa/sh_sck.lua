@@ -1,9 +1,18 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_gun_base")
+
+SWEP.UseHands = true
+SWEP.ViewModel = Model("models/weapons/c_crossbow.mdl")
+SWEP.WorldModel = Model("models/weapons/w_crossbow.mdl")
 
 if SERVER then
 	return
 end
+
+SWEP.ViewModelFOV = 54
+SWEP.ViewModelFlip = false
+
+SWEP.ShowViewModel = false
+SWEP.ShowWorldModel = false
 
 SWEP.VElements = {
 	["Emitter"] = { type = "Model", model = "models/lamps/torch.mdl", bone = "ValveBiped.Crossbow_base", rel = "body mid", pos = Vector(-2.967, -12.82, 1.051), angle = Angle(0, 90, -90), size = Vector(0.13, 0.13, 0.13), color = Color(0, 0, 0, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

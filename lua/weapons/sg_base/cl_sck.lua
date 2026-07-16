@@ -5,6 +5,9 @@ if SERVER then
 	return
 end
 
+SWEP.ShowViewModel = true
+SWEP.ShowWorldModel = true
+
 local errorColor = Color(255, 100, 100)
 
 function SWEP:ThrowSCKError(err)

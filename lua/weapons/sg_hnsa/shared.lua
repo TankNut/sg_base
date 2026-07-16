@@ -3,9 +3,8 @@ DEFINE_BASECLASS("sg_gun_base")
 
 SWEP.Base = "sg_gun_base"
 
-SWEP.UseHands = true
-SWEP.ViewModel = Model("models/weapons/c_crossbow.mdl")
-SWEP.WorldModel = Model("models/weapons/w_crossbow.mdl")
+SWEP.PrintName = "HNSA"
+SWEP.Category = "S&G Munitions"
 
 SWEP.Spawnable = true
 
@@ -18,15 +17,11 @@ SWEP.Primary.DefaultClip = 1
 SWEP.Delay = -1
 
 SWEP.AnimSounds = {
-	Primary = "Weapon_Crossbow.Single"
+	Primary = "Weapon_Crossbow.Single",
+	Reload = "Weapon_Crossbow.Reload"
 }
 
-if CLIENT then
-	SWEP.ShowViewModel = false
-	SWEP.ShowWorldModel = false
-end
-
-include("cl_sck.lua")
+include("sh_sck.lua")
 
 function SWEP:GetIdleAnimation()
 	return self:Clip1() == 0 and ACT_VM_FIDGET or ACT_VM_IDLE

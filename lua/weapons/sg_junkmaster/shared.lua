@@ -14,6 +14,15 @@ SWEP.Primary.Ammo = "smg1"
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 180
 
+SWEP.Firemode = 0
+
+SWEP.AmmoCost = 1
+SWEP.Count = 1
+SWEP.Damage = 17
+
+SWEP.Tracer = 1
+SWEP.TracerName = "tracer"
+
 SWEP.Delay = 60 / 800
 
 SWEP.Recoil = {

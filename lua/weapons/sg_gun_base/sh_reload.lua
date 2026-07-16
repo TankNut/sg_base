@@ -38,7 +38,7 @@ function SWEP:Reload()
 end
 
 -- TODO: Make this into a convar later
-local infiniteAmmo = false
+local infiniteAmmo = true
 
 function SWEP:FinishReload()
 	local first = self:GetFirstReload()

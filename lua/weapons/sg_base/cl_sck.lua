@@ -82,7 +82,9 @@ addSCKType("Model", {
 
 		-- Re-using a single matrix here for optimization
 		if element.size then
+			scaleMatrix:Identity()
 			scaleMatrix:SetScale(element.size)
+
 			csent:EnableMatrix("RenderMultiply", scaleMatrix)
 		end
 

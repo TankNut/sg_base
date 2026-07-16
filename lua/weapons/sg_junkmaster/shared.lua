@@ -36,7 +36,10 @@ SWEP.Tracer = 1
 SWEP.TracerName = "tracer"
 
 -- Recoil
-SWEP.Recoil = Angle(0.35, 0.3)
+SWEP.Recoil = {
+	Min = Angle(0.35, 0.3),
+	Max = Angle(0.35, 0.3)
+}
 
 SWEP.RecoilAdd = 0.1
 SWEP.ViewPunch = 0.7

@@ -36,7 +36,7 @@ SWEP.Tracer = 1 -- 1 tracer per X bullets
 SWEP.TracerName = "tracer" -- tracer effect
 
 -- Recoil
-SWEP.Recoil = { -- Can be a table like this or a single angle for a static value
+SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fire modes) more than anything
 	Min = Angle(1, 1),
 	Max = Angle(1, 1)
 }

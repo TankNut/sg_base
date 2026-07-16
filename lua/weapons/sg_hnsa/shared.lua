@@ -21,7 +21,7 @@ SWEP.AnimSounds = {
 	Reload = "Weapon_Crossbow.Reload"
 }
 
-include("sh_sck.lua")
+include("sh_model.lua")
 
 function SWEP:GetIdleAnimation()
 	return self:Clip1() == 0 and ACT_VM_FIDGET or ACT_VM_IDLE

@@ -47,7 +47,7 @@ SWEP.AnimSounds = {
 	Reload = "Weapon_SMG1.Reload"
 }
 
-include("sh_sck.lua")
+include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Junkmaster.Single1")

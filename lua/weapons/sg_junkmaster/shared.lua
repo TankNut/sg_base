@@ -16,6 +16,15 @@ SWEP.Primary.DefaultClip = 180
 
 SWEP.Delay = 60 / 800
 
+SWEP.Recoil = {
+	Min = Angle(0.35, 0.3),
+	Max = Angle(0.35, 0.3)
+}
+
+SWEP.RecoilAdd = 0.1
+SWEP.ViewPunch = 0.7
+SWEP.RecoilFlip = true
+
 SWEP.AnimSounds = {
 	Reload = "Weapon_SMG1.Reload"
 }

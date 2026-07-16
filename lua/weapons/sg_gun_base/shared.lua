@@ -35,6 +35,15 @@ SWEP.TracerName = "tracer" -- tracer effect
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead
 SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instead of the normal delay
 
+-- Recoil
+SWEP.Recoil = {
+	Min = Angle(1, -1),
+	Max = Angle(1, 1)
+}
+
+SWEP.RecoilAdd = 0 -- Adds a multiple of recoil per second based on the attack duration, can be an angle or overwritten through SWEP:GetRecoilMultiplier()
+SWEP.ViewPunch = 0.4 -- Multiplies viewpunch by this value, can be an angle
+
 -- Reloading
 SWEP.LoopingReload = false -- Your shotgun reloads, uses ReloadSingle
 SWEP.UseReloadStart = true -- Used in conjunction with LoopingReload
@@ -43,6 +52,7 @@ SWEP.UseReloadFinish = true -- Used in conjunction with LoopingReload
 SWEP.ReloadAmount = math.huge -- How much ammo can be reloaded per action
 
 include("sh_attack.lua")
+include("sh_recoil.lua")
 include("sh_reload.lua")
 
 function SWEP:SetupDataTables()

@@ -1,0 +1,73 @@
+AddCSLuaFile()
+
+SWEP.UseHands = true
+SWEP.ViewModel = Model("models/weapons/c_smg1.mdl")
+SWEP.WorldModel = Model("models/weapons/w_smg1.mdl")
+
+if SERVER then
+	return
+end
+
+SWEP.ViewModelFOV = 54
+SWEP.ViewModelFlip = false
+
+SWEP.ShowViewModel = false
+SWEP.ShowWorldModel = false
+
+SWEP.VElements = {
+	["back cover"] = { type = "Model", model = "models/props_combine/stalkerpod_lid.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-0.13, -0.035, 23.964), angle = Angle(-90, 180, 0), size = Vector(0.25, 0.234, 0.25), color = Color(255, 255, 255), material = "" },
+	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-0.631, -0.035, 7.682), angle = Angle(0, -90, 180), size = Vector(0.1, 0.1, 0.13), color = Color(255, 255, 255), material = "" },
+	["barrel detail"] = { type = "Model", model = "models/Items/combine_rifle_cartridge01.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-1.101, 0.648, 8.596), angle = Angle(0, -90, 90), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["barrel detail+"] = { type = "Model", model = "models/Items/combine_rifle_cartridge01.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-1.055, 0.602, 8.057), angle = Angle(0, -101.321, 90), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["body clip 1"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body2+", pos = Vector(0.106, -0.302, -4.963), angle = Angle(0, 180, -180)},
+	["body clip 1+"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body2", pos = Vector(-0.105, -0.303, 4.964), angle = Angle(0, 0, 0)},
+	["body clip 2"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body2", pos = Vector(0.966, -0.242, 4.188), angle = Angle(79.76, 0, 0)},
+	["body clip 2+"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body2+", pos = Vector(-0.965, -0.241, -4.187), angle = Angle(-79.76, 180, -180)},
+	["body top"] = { type = "Model", model = "models/props_combine/combine_generator01.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-1.372, 0.577, 14.651), angle = Angle(0, -90, -180), size = Vector(0.05, 0.06, 0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["body top clip"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body top", pos = Vector(2.348, -0.369, -9.183), angle = Angle(0, 0, -30.18)},
+	["body top clip+"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "body top", pos = Vector(2.389, 0.096, -8.99), angle = Angle(0, 0, 19.401)},
+	["body2"] = { type = "Model", model = "models/props_combine/combine_mortar01a.mdl", bone = "ValveBiped.base", rel = "", pos = Vector(0.035, -0.67, 14.3), angle = Angle(0, -90, -180), size = Vector(0.06, 0.06, 0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["body2+"] = { type = "Model", model = "models/props_combine/combine_mortar01a.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(0.001, -0.001, 0.001), angle = Angle(0, -180, -180), size = Vector(-0.06, -0.06, -0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["foregrip a"] = { type = "Model", model = "models/props_mining/diesel_generator_crank.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-3.563, -0.02, 15.495), angle = Angle(0, 180, -180), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255), material = "" },
+	["foregrip clip"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "foregrip a", pos = Vector(-4.571, -0.018, -0.145), angle = Angle(90, 0, 0)},
+	["receiver"] = { type = "Model", model = "models/Items/BoxMRounds.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-1.137, -0.035, 12.283), angle = Angle(0, -90, -90), size = Vector(0.112, 0.5, 0.16), color = Color(123, 153, 193), material = "" },
+	["receiver release"] = { type = "Model", model = "models/props_combine/combinebutton.mdl", bone = "ValveBiped.base", rel = "receiver", pos = Vector(0.467, 3.236, 1.845), angle = Angle(0, 0, 180), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["stabilizer"] = { type = "Model", model = "models/props_combine/combine_mortar01b.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-0.625, -0.002, 3.356), angle = Angle(0, 180, 0), size = Vector(0.06, 0.06, 0.1), color = Color(255, 255, 255), material = "" },
+	["stabilizer clip"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_Spine4", rel = "stabilizer cover", pos = Vector(0.01, 0.04, -0.072), angle = Angle(0, 0, 180)},
+	["stabilizer cover"] = { type = "Model", model = "models/props_combine/combine_mortar01b.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(-0.626, -0.001, 3.32), angle = Angle(0, -180, 0), size = Vector(0.06, 0.06, 0.1), color = Color(206, 213, 255), material = "models/gibs/metalgibs/metal_gibs" },
+	["stock connect"] = { type = "Model", model = "models/props_combine/CombineThumper002.mdl", bone = "ValveBiped.base", rel = "receiver", pos = Vector(-0.29, 4.373, 2.245), angle = Angle(0, 0, 90), size = Vector(0.023, 0.03, 0.04), color = Color(255, 255, 255), material = "" },
+	["stock end"] = { type = "Model", model = "models/props_c17/playground_swingset_seat01a.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(0.67, -0.057, 28.6), angle = Angle(0, -180, 0), size = Vector(0.16, 0.2, 0.2), color = Color(148, 148, 148), material = "metal2" },
+	["stock ext"] = { type = "Model", model = "models/gibs/scanner_gib01.mdl", bone = "ValveBiped.base", rel = "body2", pos = Vector(0.679, -0.075, 25.37), angle = Angle(-90, 0, 0), size = Vector(0.26, 0.1, 0.26), color = Color(255, 255, 255), material = "" },
+	["trigger"] = { type = "Model", model = "models/weapons/w_pist_fiveseven.mdl", bone = "ValveBiped.base", rel = "receiver", pos = Vector(0.09, 3.84, 7.556), angle = Angle(0, 90, -180), size = Vector(1, 1, 1), color = Color(255, 255, 255), material = "" },
+	["viewfinder"] = { type = "Model", model = "models/gibs/manhack_gib03.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "body2", pos = Vector(-1.387, -0.633, 23.123), angle = Angle(88.302, 0, 0), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" }
+}
+
+SWEP.WElements = {
+	["back cover"] = { type = "Model", model = "models/props_combine/stalkerpod_lid.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-0.13, -0.035, 23.964), angle = Angle(-90, 180, 0), size = Vector(0.25, 0.234, 0.25), color = Color(255, 255, 255), material = "" },
+	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-0.631, -0.035, 7.682), angle = Angle(0, -90, 180), size = Vector(0.1, 0.1, 0.13), color = Color(255, 255, 255), material = "" },
+	["barrel detail"] = { type = "Model", model = "models/Items/combine_rifle_cartridge01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-1.101, 0.648, 8.596), angle = Angle(0, -90, 90), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["barrel detail+"] = { type = "Model", model = "models/Items/combine_rifle_cartridge01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-1.055, 0.602, 8.057), angle = Angle(0, -101.321, 90), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["body clip 1"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body2+", pos = Vector(0.106, -0.302, -4.963), angle = Angle(0, 180, -180)},
+	["body clip 1+"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-0.105, -0.303, 4.964), angle = Angle(0, 0, 0)},
+	["body clip 2"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(0.966, -0.242, 4.188), angle = Angle(79.76, 0, 0)},
+	["body clip 2+"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body2+", pos = Vector(-0.965, -0.241, -4.187), angle = Angle(-79.76, 180, -180)},
+	["body top"] = { type = "Model", model = "models/props_combine/combine_generator01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-1.372, 0.577, 14.651), angle = Angle(0, -90, -180), size = Vector(0.05, 0.06, 0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["body top clip"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body top", pos = Vector(2.348, -0.369, -9.183), angle = Angle(0, 0, -30.18)},
+	["body top clip+"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body top", pos = Vector(2.389, 0.096, -8.99), angle = Angle(0, 0, 19.401)},
+	["body2"] = { type = "Model", model = "models/props_combine/combine_mortar01a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(19.938, 1.222, -6.445), angle = Angle(78.24, 36.595, -35.469), size = Vector(0.06, 0.06, 0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["body2+"] = { type = "Model", model = "models/props_combine/combine_mortar01a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(0.001, -0.001, 0.001), angle = Angle(0, -180, -180), size = Vector(-0.06, -0.06, -0.1), color = Color(255, 255, 255), bonemerge = false, highrender = false, nocull = true, material = "" },
+	["foregrip a"] = { type = "Model", model = "models/props_mining/diesel_generator_crank.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-3.563, -0.02, 14.6), angle = Angle(0, 180, -180), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255), material = "" },
+	["foregrip clip"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "foregrip a", pos = Vector(-4.571, -0.018, -0.145), angle = Angle(90, 0, 0)},
+	["receiver"] = { type = "Model", model = "models/Items/BoxMRounds.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-1.137, -0.035, 13), angle = Angle(0, -90, -90), size = Vector(0.112, 0.5, 0.16), color = Color(123, 153, 193), material = "" },
+	["receiver release"] = { type = "Model", model = "models/props_combine/combinebutton.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "receiver", pos = Vector(0.467, 3.236, 1.845), angle = Angle(0, 0, 180), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" },
+	["stabilizer"] = { type = "Model", model = "models/props_combine/combine_mortar01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-0.625, -0.002, 3.356), angle = Angle(0, 180, 0), size = Vector(0.06, 0.06, 0.1), color = Color(255, 255, 255), material = "" },
+	["stabilizer clip"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "stabilizer cover", pos = Vector(0.01, 0.04, -0.072), angle = Angle(0, 0, 180)},
+	["stabilizer cover"] = { type = "Model", model = "models/props_combine/combine_mortar01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-0.626, -0.001, 3.32), angle = Angle(0, -180, 0), size = Vector(0.06, 0.06, 0.1), color = Color(206, 213, 255), material = "models/gibs/metalgibs/metal_gibs" },
+	["stock connect"] = { type = "Model", model = "models/props_combine/CombineThumper002.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "receiver", pos = Vector(-0.29, 4.373, 2.245), angle = Angle(0, 0, 90), size = Vector(0.023, 0.03, 0.04), color = Color(255, 255, 255), material = "" },
+	["stock end"] = { type = "Model", model = "models/props_c17/playground_swingset_seat01a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(0.67, -0.057, 28.6), angle = Angle(0, -180, 0), size = Vector(0.16, 0.2, 0.2), color = Color(148, 148, 148), material = "metal2" },
+	["stock ext"] = { type = "Model", model = "models/gibs/scanner_gib01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(0.679, -0.075, 25.37), angle = Angle(-90, 0, 0), size = Vector(0.26, 0.1, 0.26), color = Color(255, 255, 255), material = "" },
+	["trigger"] = { type = "Model", model = "models/weapons/w_pist_fiveseven.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "receiver", pos = Vector(0.09, 4.2, 7.5), angle = Angle(0, 90, -180), size = Vector(1, 1, 1), color = Color(255, 255, 255), material = "" },
+	["viewfinder"] = { type = "Model", model = "models/gibs/manhack_gib03.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body2", pos = Vector(-1.387, -0.633, 23.123), angle = Angle(88.302, 0, 0), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255), material = "" }
+}
+
+SWEP.ViewModelBoneMods = {}

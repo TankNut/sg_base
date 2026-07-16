@@ -148,22 +148,15 @@ function SWEP:UpdateAttack()
 		return
 	end
 
-	if self:GetCanAttack() then
-		local duration = self:GetAttackDuration()
-		local hasAttacked = self:GetHasAttacked()
-
-		if hasAttacked then
-			self:SetAttackDuration(duration + FrameTime())
+	if self:GetCanAttack() and not self:GetHasAttacked() or self:IsFinalBurstShot() then
+		if self:GetAttackDuration() > 0 then
+			self:OnStopAttack()
 		end
 
-		if not hasAttacked or self:IsFinalBurstShot() then
-			if self:GetAttackDuration() > 0 then
-				self:OnStopAttack()
-			end
-
-			self:SetAttackCount(0)
-			self:SetAttackDuration(0)
-		end
+		self:SetAttackCount(0)
+		self:SetAttackDuration(0)
+	elseif self:GetAttackCount() > 0 then
+		self:SetAttackDuration(self:GetAttackDuration() + FrameTime())
 	end
 
 	local canAttack = self:GetNextPrimaryFire() <= CurTime()

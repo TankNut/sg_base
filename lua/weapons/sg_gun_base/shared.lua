@@ -24,7 +24,12 @@ SWEP.PumpAction = false -- Forces the weapon to play a pump animation between sh
 -- Actual firing related
 SWEP.AmmoCost = 1 -- Amount of ammo it takes out of the clip when firing
 SWEP.Count = 1 -- How many bullets are fired
-SWEP.Damage = 11
+SWEP.Damage = 11 -- Can be overwritten with SWEP:GetDamage
+
+SWEP.Spread = nil -- Not Yet Implemented
+
+SWEP.Tracer = 1 -- 1 tracer per X bullets
+SWEP.TracerName = "tracer" -- tracer effect
 
 -- Delays
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead

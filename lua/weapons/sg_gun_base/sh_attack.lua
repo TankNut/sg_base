@@ -58,6 +58,8 @@ function SWEP:PrimaryAttack()
 	self:TakeAmmo()
 	self:FireWeapon()
 
+	self:AddRecoil()
+
 	local anim = self:PlayAnimation("Primary")
 	local delay = self:GetDelay()
 
@@ -73,7 +75,45 @@ function SWEP:PrimaryAttack()
 	end
 end
 
+function SWEP:GetShootDir()
+	local owner = self:GetOwner()
+
+	if owner:IsNPC() then
+		return owner:GetAimVector()
+	else
+		return (owner:GetAimVector():Angle() + owner:GetViewPunchAngles()):Forward()
+	end
+end
+
+function SWEP:GetDamage()
+	return self.Damage
+end
+
+function SWEP:BulletCallback(attacker, tr, dmg)
+end
+
 function SWEP:FireWeapon()
+	local owner = self:GetOwner()
+	local damage = self:GetDamage()
+
+	owner:FireBullets({
+		Inflictor = self,
+
+		Src = owner:GetShootPos(),
+		Dir = self:GetShootDir(),
+
+		Num = self.Count,
+		Damage = damage,
+		Force = damage * 0.25,
+		Spread = Vector(),
+
+		Tracer = self.Tracer,
+		TracerName = self.TracerName,
+
+		Callback = function(attacker, tr, dmg)
+			self:BulletCallback(attacker, tr, dmg)
+		end
+	})
 end
 
 function SWEP:SecondaryAttack()

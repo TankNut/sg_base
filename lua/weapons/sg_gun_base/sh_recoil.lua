@@ -22,6 +22,8 @@ function SWEP:AddRecoil(override)
 		local yaw = sharedRand(recoil.Min.y, recoil.Max.y)
 
 		recoil = Angle(pitch, yaw)
+	else
+		recoil = Angle(recoil)
 	end
 
 	if self.RecoilFlip and sharedRand() >= 0.5 then

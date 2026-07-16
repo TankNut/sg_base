@@ -155,7 +155,7 @@ function SWEP:UpdateAttack()
 
 		self:SetAttackCount(0)
 		self:SetAttackDuration(0)
-	elseif self:GetAttackCount() > 0 then
+	else
 		self:SetAttackDuration(self:GetAttackDuration() + FrameTime())
 	end
 

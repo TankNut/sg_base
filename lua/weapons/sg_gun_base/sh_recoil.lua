@@ -18,10 +18,14 @@ function SWEP:AddRecoil(override)
 	end
 
 	if istable(recoil) then
-		local pitch = -sharedRand(recoil.Min.p, recoil.Max.p)
+		local pitch = sharedRand(recoil.Min.p, recoil.Max.p)
 		local yaw = sharedRand(recoil.Min.y, recoil.Max.y)
 
 		recoil = Angle(pitch, yaw)
+	end
+
+	if self.RecoilFlip and sharedRand() >= 0.5 then
+		recoil.y = -recoil.y
 	end
 
 	local mult = self:GetRecoilMultiplier()
@@ -33,7 +37,7 @@ function SWEP:AddRecoil(override)
 		recoil:Add(recoil * mult)
 	end
 
-	ply:ViewPunch(recoil)
+	ply:ViewPunch(-recoil)
 
 	if game.SinglePlayer() or (CLIENT and IsFirstTimePredicted()) then
 		local punch = self.ViewPunch
@@ -45,6 +49,6 @@ function SWEP:AddRecoil(override)
 			recoil:Mul(punch)
 		end
 
-		ply:SetEyeAngles(ply:EyeAngles() + recoil)
+		ply:SetEyeAngles(ply:EyeAngles() - recoil)
 	end
 end

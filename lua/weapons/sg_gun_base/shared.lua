@@ -37,12 +37,13 @@ SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instea
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(1, -1),
+	Min = Angle(1, 1),
 	Max = Angle(1, 1)
 }
 
 SWEP.RecoilAdd = 0 -- Adds a multiple of recoil per second based on the attack duration, can be an angle or overwritten through SWEP:GetRecoilMultiplier()
 SWEP.ViewPunch = 0.4 -- Multiplies viewpunch by this value, can be an angle
+SWEP.RecoilFlip = true -- Lets the recoil flip horizontally
 
 -- Reloading
 SWEP.LoopingReload = false -- Your shotgun reloads, uses ReloadSingle

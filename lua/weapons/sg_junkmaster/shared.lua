@@ -6,34 +6,43 @@ SWEP.Base = "sg_gun_base"
 SWEP.PrintName = "The Junkmaster"
 SWEP.Category = "S&G Munitions"
 
+SWEP.Instructions = "Pull the trigger to shoot anything that moves. That's it, there's really not more to this weapon. About as simple as it gets, I guess."
+SWEP.Purpose = "For filling the gaps left by two weapons that have been completely devoured by this one (RIP Guerilla and Coiled Snake)."
+
 SWEP.Spawnable = true
 
-SWEP.HoldType = "smg"
-
+-- Ammo
 SWEP.Primary.Ammo = "smg1"
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 180
 
+-- HoldType
+SWEP.HoldType = "smg"
+
+-- Firemode
 SWEP.Firemode = 0
 
+-- Balance
 SWEP.AmmoCost = 1
 SWEP.Count = 1
 SWEP.Damage = 17
 
-SWEP.Tracer = 1
-SWEP.TracerName = "tracer"
+SWEP.Spread = nil -- Not Yet Implemented
 
 SWEP.Delay = 60 / 800
 
-SWEP.Recoil = {
-	Min = Angle(0.35, 0.3),
-	Max = Angle(0.35, 0.3)
-}
+-- Tracers
+SWEP.Tracer = 1
+SWEP.TracerName = "tracer"
+
+-- Recoil
+SWEP.Recoil = Angle(0.35, 0.3)
 
 SWEP.RecoilAdd = 0.1
 SWEP.ViewPunch = 0.7
 SWEP.RecoilFlip = true
 
+-- Sounds
 SWEP.AnimSounds = {
 	Reload = "Weapon_SMG1.Reload"
 }

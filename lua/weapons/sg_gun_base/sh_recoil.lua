@@ -1,4 +1,5 @@
 AddCSLuaFile()
+DEFINE_BASECLASS("sg_base")
 
 function SWEP:GetRecoilMultiplier()
 	return self.RecoilAdd * self:GetAttackDuration()

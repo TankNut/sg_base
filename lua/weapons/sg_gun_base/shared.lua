@@ -42,7 +42,7 @@ SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fi
 }
 
 SWEP.RecoilAdd = 0 -- Adds a multiple of recoil per second based on the attack duration, can be an angle or overwritten through SWEP:GetRecoilMultiplier()
-SWEP.ViewPunch = 0.4 -- Multiplies viewpunch by this value, can be an angle
+SWEP.ViewPunch = 0.4 -- Multiplier for the amount of offset that gets added to the player's view directly
 SWEP.RecoilFlip = true -- Lets the recoil flip horizontally
 
 -- Reloading
@@ -55,6 +55,7 @@ SWEP.ReloadAmount = math.huge -- How much ammo can be reloaded per action
 include("sh_attack.lua")
 include("sh_recoil.lua")
 include("sh_reload.lua")
+include("sh_view.lua")
 
 function SWEP:SetupDataTables()
 	BaseClass.SetupDataTables(self)

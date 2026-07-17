@@ -42,7 +42,7 @@ SWEP.Recoil = {
 }
 
 SWEP.RecoilAdd = 0.1
-SWEP.ViewPunch = 0.7
+SWEP.ViewPunch = 0.4
 SWEP.RecoilFlip = true
 
 -- Sounds

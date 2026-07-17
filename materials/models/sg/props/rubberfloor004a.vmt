@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	$basetexture "props/rubberfloor004a"
+	$surfaceprop Rubber
+}

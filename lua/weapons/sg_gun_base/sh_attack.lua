@@ -33,7 +33,7 @@ function SWEP:CanAttack()
 		return false
 	end
 
-	if self.Primary.ClipSize > 0 and self:Clip1() < self.AmmoCost then
+	if self:GetMaxClip1() > 0 and self:Clip1() < self.AmmoCost then
 		return false
 	end
 

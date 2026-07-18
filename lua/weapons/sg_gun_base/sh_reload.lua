@@ -8,7 +8,7 @@ end
 local infiniteAmmo = sg.InfiniteAmmo
 
 function SWEP:CanReload()
-	if self:Clip1() >= self.Primary.ClipSize then
+	if self:Clip1() >= self:GetMaxClip1() then
 		return false
 	end
 
@@ -65,7 +65,7 @@ function SWEP:FinishReload()
 	end
 
 	if self.LoopingReload then
-		if self:Clip1() >= self.Primary.ClipSize or (self:GetCancelReload() and not first) then
+		if self:Clip1() >= self:GetMaxClip1() or (self:GetCancelReload() and not first) then
 			self:SetCancelReload(false)
 			self:SetFinishReload(0)
 

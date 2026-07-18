@@ -34,6 +34,16 @@ function SWEP:CanAttack()
 	end
 
 	if self:GetMaxClip1() > 0 and self:Clip1() < self.AmmoCost then
+		self:EmitSound(self.EmptySound)
+
+		-- TODO: Do we keep this? Move behind a convar maybe?
+		if self:CanReload() then
+			self:Reload()
+		else
+			self:ConCommand("-attack")
+			self:SetAttackDelay(0.2)
+		end
+
 		return false
 	end
 

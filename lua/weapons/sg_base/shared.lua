@@ -54,3 +54,14 @@ function SWEP:Think()
 		self:PlayAnimation("Idle")
 	end
 end
+
+-- Helper functions
+function SWEP:ConCommand(str)
+	local ply = self:GetOwner()
+
+	if not ply:IsPlayer() then
+		return
+	end
+
+	ply:ConCommand(str)
+end

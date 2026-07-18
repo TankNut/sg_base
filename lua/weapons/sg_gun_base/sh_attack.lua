@@ -124,6 +124,10 @@ function SWEP:FireWeapon()
 			self:BulletCallback(attacker, tr, dmg)
 		end
 	})
+
+	if SERVER then
+		sound.EmitHint(SOUND_COMBAT, self:GetPos(), 1500, 0.2, owner)
+	end
 end
 
 function SWEP:SecondaryAttack()

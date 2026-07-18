@@ -82,6 +82,10 @@ function SWEP:SetupDataTables()
 	end
 end
 
+function SWEP:Holster()
+	return not self:IsReloading()
+end
+
 function SWEP:Think()
 	self:UpdateReload()
 	self:UpdateAttack()

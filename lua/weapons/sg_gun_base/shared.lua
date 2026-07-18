@@ -31,10 +31,6 @@ SWEP.Spread = nil -- Not Yet Implemented
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead
 SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instead of the normal delay
 
--- Tracers
-SWEP.Tracer = 1 -- 1 tracer per X bullets
-SWEP.TracerName = "tracer" -- tracer effect
-
 -- Recoil
 SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fire modes) more than anything
 	Min = Angle(1, 1),
@@ -51,6 +47,11 @@ SWEP.UseReloadStart = true -- Used in conjunction with LoopingReload
 SWEP.UseReloadFinish = true -- Used in conjunction with LoopingReload
 
 SWEP.ReloadAmount = math.huge -- How much ammo can be reloaded per action
+
+-- Effects
+SWEP.Tracer = 1 -- 1 tracer per X bullets
+SWEP.TracerName = "sg_e_tracer" -- tracer effect
+SWEP.TracerConfig = {} -- Used to configure the tracer effect
 
 include("sh_attack.lua")
 include("sh_recoil.lua")
@@ -91,4 +92,16 @@ function SWEP:Think()
 	self:UpdateAttack()
 
 	BaseClass.Think(self)
+end
+
+if CLIENT then
+	function SWEP:ConfigureTracer(effect)
+		for k, v in pairs(self.TracerConfig) do
+			if k == "BaseClass" then
+				continue
+			end
+
+			effect[k] = v
+		end
+	end
 end

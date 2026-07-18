@@ -31,10 +31,6 @@ SWEP.Spread = nil -- Not Yet Implemented
 
 SWEP.Delay = 60 / 800
 
--- Tracers
-SWEP.Tracer = 1
-SWEP.TracerName = "tracer"
-
 -- Recoil
 SWEP.Recoil = {
 	Min = Angle(0.35, 0.3),
@@ -45,7 +41,7 @@ SWEP.RecoilAdd = 0.1
 SWEP.ViewPunch = 0.4
 SWEP.RecoilFlip = true
 
--- Sounds
+-- Misc
 SWEP.AnimSounds = {
 	Reload = "Weapon_SMG1.Reload"
 }

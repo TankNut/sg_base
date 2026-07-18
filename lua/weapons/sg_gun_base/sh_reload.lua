@@ -5,12 +5,18 @@ function SWEP:IsReloading()
 	return self:GetFinishReload() != 0
 end
 
+local infiniteAmmo = sg.InfiniteAmmo
+
 function SWEP:CanReload()
 	if self:Clip1() >= self.Primary.ClipSize then
 		return false
 	end
 
 	if self:IsReloading() then
+		return false
+	end
+
+	if not infiniteAmmo:GetBool() and self:Ammo1() == 0 then
 		return false
 	end
 
@@ -37,23 +43,18 @@ function SWEP:Reload()
 	self:SetFinishReload(CurTime() + self:PlayAnimation(anim))
 end
 
--- TODO: Make this into a convar later
-local infiniteAmmo = true
-
 function SWEP:FinishReload()
 	local first = self:GetFirstReload()
 
 	if first then
 		self:SetFirstReload(false)
 	else
-		local amount = math.min(self.Primary.ClipSize - self:Clip1(), self.ReloadAmount)
+		local amount = math.min(self:GetMaxClip1() - self:Clip1(), self.ReloadAmount)
 
-		if not infiniteAmmo then
-			local ply = self:GetOwner()
+		if not infiniteAmmo:GetBool() then
+			amount = math.min(amount, self:Ammo1())
 
-			amount = math.min(amount, ply:GetAmmoCount(self.Primary.Ammo))
-
-			ply:RemoveAmmo(amount, self.Primary.Ammo)
+			self:GetOwner():RemoveAmmo(amount, self.Primary.Ammo)
 		end
 
 		if self.PumpAction and self:Clip1() == 0 then

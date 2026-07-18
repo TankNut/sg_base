@@ -51,17 +51,40 @@ function EFFECT:Think()
 end
 
 local color = Color(255, 255, 255)
+local spriteColor = Color(255, 255, 255)
+
+local sprite = Material("sprites/light_glow02_add")
 
 function EFFECT:Render()
-	render.SetMaterial(self.Material)
-
-	color:SetUnpacked(self.Color:Unpack())
-
 	self.Time = self.Time + FrameTime()
 
-	for i = 0, math.ceil(self.Brightness) - 1 do
-		color.a = (self.Brightness - i) * 255
+	local r, g, b = self.Color:Unpack()
 
-		self.Active = sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Scale, self.Time, color)
-	end
+	self.Active = sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Time, function(startPos, endPos, uv1, uv2)
+		local v1, v2 = startPos:ToScreen(), endPos:ToScreen()
+		v1, v2 = Vector(v1.x, v1.y), Vector(v2.x, v2.y)
+
+		local dist = v1:Distance2D(v2)
+		local spriteBrightness = math.max(math.Remap(dist, self.Scale * 4, 0, 0, 1), 0)
+		local spritePos = startPos + endPos
+		spritePos:Mul(0.5)
+
+		for i = 0, math.ceil(self.Brightness) - 1 do
+			local a = math.min((self.Brightness - i) * 255, 255)
+
+			color:SetUnpacked(r, g, b, a)
+			spriteColor:SetUnpacked(r, g, b, a)
+			spriteColor:SetBrightness(spriteBrightness)
+
+			render.SetMaterial(self.Material)
+			render.DrawBeam(startPos, endPos, self.Scale * 2, uv1, uv2, color)
+
+			render.SetMaterial(sprite)
+			render.DrawSprite(spritePos, self.Scale * 2, self.Scale * 2, spriteColor)
+
+			color:SetBrightness(0.25)
+			render.SetMaterial(self.Material)
+			render.DrawBeam(startPos, endPos, self.Scale * 4, uv1, uv2, color)
+		end
+	end)
 end

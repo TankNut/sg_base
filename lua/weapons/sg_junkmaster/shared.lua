@@ -47,8 +47,8 @@ SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
 -- Misc
-SWEP.AnimSounds = {
-	Reload = "Weapon_SMG1.Reload"
+SWEP.Animations = {
+	Reload = {Sound = "Weapon_SMG1.Reload"}
 }
 
 include("sh_model.lua")

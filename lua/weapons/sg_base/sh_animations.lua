@@ -1,6 +1,33 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("weapon_base")
 
+local function parseAnimationEntry(name, data)
+	if not istable(data) then
+		return {Index = data}
+	end
+
+	local index = ACT_INVALID
+	local snd = data.Sound
+
+	if #data == 0 then -- Grab the default value from sg_base
+		index = weapons.GetStored("sg_base").Animations[name]
+	elseif #data == 1 then
+		index = data[1]
+	else
+		index = data[math.random(#data)]
+	end
+
+	if istable(snd) then
+		snd = snd[math.random(#snd)]
+	end
+
+	return {
+		Index = index,
+		Rate = data.Rate,
+		Sound = snd
+	}
+end
+
 function SWEP:GetAnimation(name)
 	local ply = self:GetOwner()
 
@@ -8,48 +35,52 @@ function SWEP:GetAnimation(name)
 		return
 	end
 
-	local vm = ply:GetViewModel()
 	local func = self["Get" .. name .. "Animation"]
-	local animation = isfunction(func) and func(self) or self.Animations[name]
+	local data = self.Animations[name]
 
-	if not animation then
-		return
+	if func then
+		data = func(self)
 	end
 
-	if istable(animation) then
-		animation = table.Random(animation)
-	end
+	data = parseAnimationEntry(name, data)
 
-	if isnumber(animation) then
-		return vm:SelectWeightedSequence(animation)
-	elseif isstring(animation) then
-		return vm:LookupSequence(animation)
-	end
+	return data
 end
 
-function SWEP:PlayAnimation(name, rate)
-	local index = self:GetAnimation(name)
+function SWEP:PlayAnimation(name)
+	local data = self:GetAnimation(name)
+	local vm = self:GetOwner():GetViewModel()
 
-	if not index then
-		return
+	local index = data.Index
+
+	if isnumber(index) then
+		index = vm:SelectWeightedSequence(index)
+	elseif isstring(index) then
+		index = vm:LookupSequence(index)
 	end
 
-	rate = rate or 1
+	local rate = data.Rate or 1
+	local duration = 0
 
-	local vm = self:GetOwner():GetViewModel()
-	local duration = vm:SequenceDuration(index) / math.abs(rate)
+	if index != ACT_INVALID then
+		duration = vm:SequenceDuration(index) / rate
 
-	vm:SendViewModelMatchingSequence(index)
-	vm:SetPlaybackRate(rate)
+		vm:SendViewModelMatchingSequence(index)
+		vm:SetPlaybackRate(rate)
 
-	self:SetNextIdle(CurTime() + duration)
+		self:SetNextIdle(CurTime() + duration)
+	end
+
+	local snd = data.Sound
+
+	if snd then
+		self:EmitSound(snd)
+	end
 
 	local callback = self["On" .. name .. "Animation"]
 
-	if isfunction(callback) then
+	if callback then
 		callback(self)
-	elseif self.AnimSounds[name] then
-		self:EmitSound(self.AnimSounds[name])
 	end
 
 	return duration

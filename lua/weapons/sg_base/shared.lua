@@ -21,8 +21,6 @@ SWEP.Animations = {
 	ReloadFinish = ACT_VM_RELOAD_END
 }
 
-SWEP.AnimSounds = {}
-
 include("cl_sck.lua")
 
 include("sh_animations.lua")

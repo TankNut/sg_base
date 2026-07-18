@@ -41,6 +41,11 @@ SWEP.RecoilAdd = 0.1
 SWEP.ViewPunch = 0.4
 SWEP.RecoilFlip = true
 
+-- Effects
+SWEP.Tracer = 1
+SWEP.TracerName = "sg_e_tracer"
+SWEP.TracerConfig = {}
+
 -- Misc
 SWEP.AnimSounds = {
 	Reload = "Weapon_SMG1.Reload"

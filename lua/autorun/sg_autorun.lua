@@ -1,6 +1,6 @@
 module("sg", package.seeall)
 
-InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED})
+InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 
 if CLIENT then
 	local dir = Vector()

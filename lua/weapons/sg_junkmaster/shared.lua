@@ -9,6 +9,8 @@ SWEP.Category = "S&G Munitions"
 SWEP.Instructions = "Pull the trigger to shoot anything that moves. That's it, there's really not more to this weapon. About as simple as it gets, I guess."
 SWEP.Purpose = "For filling the gaps left by two weapons that have been completely devoured by this one (RIP Guerilla and Coiled Snake)."
 
+SWEP.Slot = 2
+
 SWEP.Spawnable = true
 
 -- Ammo

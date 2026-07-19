@@ -2,11 +2,14 @@ AddCSLuaFile()
 DEFINE_BASECLASS("sg_gun_base")
 
 SWEP.Base = "sg_gun_base"
+
 SWEP.PrintName = "The Pea Shooter"
 SWEP.Category = "S&G Munitions"
 
 SWEP.Instructions = "Pull the trigger to fire small pellets made of iron at high speeds into whatever you might be pointing at."
 SWEP.Purpose = "For (silently) annoying your target to death with small (but painful) pellets."
+
+SWEP.Slot = 2
 
 SWEP.Spawnable = true
 

@@ -9,6 +9,8 @@ SWEP.Category = "S&G Munitions"
 SWEP.Instructions = "Pull the trigger to become an artist."
 SWEP.Purpose = "For attempting to be artistic with your Graffitti in an extremely violent fashion."
 
+SWEP.Slot = 3
+
 SWEP.Spawnable = true
 
 -- Ammo

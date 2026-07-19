@@ -9,6 +9,8 @@ SWEP.Category = "S&G Munitions"
 SWEP.Instructions = "Pull trigger for instant cheese making."
 SWEP.Purpose = "For making your own cheese so you don't have to buy that other crap."
 
+SWEP.Slot = 1
+
 SWEP.Spawnable = true
 
 -- Ammo

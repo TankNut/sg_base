@@ -28,7 +28,7 @@ SWEP.AutoBurst = true
 
 -- Balance
 SWEP.AmmoCost = 1
-SWEP.Count = 3
+SWEP.Count = 1
 SWEP.Damage = 10
 
 SWEP.Spread = nil -- Not Yet Implemented
@@ -43,7 +43,7 @@ SWEP.Recoil = {
 }
 
 SWEP.RecoilAdd = 0.08
-SWEP.ViewPunch = .4
+SWEP.ViewPunch = 0.4
 SWEP.RecoilFlip = true
 
 -- Effects

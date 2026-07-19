@@ -38,11 +38,11 @@ function SWEP:GetAnimation(name)
 	local func = self["Get" .. name .. "Animation"]
 	local data = self.Animations[name]
 
-	if func then
-		data = func(self)
-	end
-
 	data = parseAnimationEntry(name, data)
+
+	if func then
+		func(self, data)
+	end
 
 	return data
 end

@@ -173,11 +173,11 @@ addSCKType("Model", {
 			end
 		end
 
-		csent:DrawModel(_flags)
+		csent:DrawModel(flags)
 
 		if element.nocull then
 			render.CullMode(element.inversed and MATERIAL_CULLMODE_CCW or MATERIAL_CULLMODE_CW)
-			csent:DrawModel(_flags)
+			csent:DrawModel(flags)
 		end
 
 		if element.clipplanes then
@@ -208,7 +208,7 @@ addSCKType("Sprite", {
 		local mat = element.sprite
 
 		-- Check if the material we're using exists
-		if not mat or string.GetExtensionFromFilename(mat) != "vmt" or not file.Exists("materials/" .. mat, "GAME") then
+		if not mat or not file.Exists("materials/" .. mat .. ".vmt", "GAME") then
 			self:ThrowSCKError(string.format("Invalid sprite: \"%s\" (path not found)", mat))
 
 			return
@@ -438,6 +438,7 @@ function SWEP:DrawSCKElements(tab, ent, flags)
 
 		if def then
 			def.Render(self, tab, element, ent, flags)
+			render.UpdateRefractTexture()
 		end
 	end
 end

@@ -31,11 +31,7 @@ SWEP.Damage = 8
 
 SWEP.Spread = nil -- Not Yet Implemented
 
-SWEP.Delay = 70 / 800
-
--- Tracers
-SWEP.Tracer = 1
-SWEP.TracerName = "tracer"
+SWEP.Delay = 60 / 700
 
 -- Recoil
 SWEP.Recoil = {
@@ -47,17 +43,31 @@ SWEP.RecoilAdd = 0.09
 SWEP.ViewPunch = .5
 SWEP.RecoilFlip = true
 
--- Sounds
-SWEP.AnimSounds = {
-	Reload = "weapons/pistol/pistol_reload1.wav"
+-- Effects
+SWEP.Tracer = 1
+SWEP.TracerName = "sg_e_tracer"
+SWEP.TracerConfig = {}
+
+-- Misc
+SWEP.Animations = {
+	Primary = {Sound = "Weapon_SG_SwissHellBringer.Single1"},
+	Reload = {Sound = "weapons/pistol/pistol_reload1.wav"}
 }
 
 include("sh_model.lua")
 
-function SWEP:OnPrimaryAnimation()
-	self:EmitSound("Weapon_SG_SHB.Single1")
-	self:EmitSound("Weapon_SG_SHB.Single2")
+function SWEP:GetIdleAnimation(data)
+	if self:Clip1() == 0 then
+		data.Index = ACT_VM_IDLE_EMPTY
+	end
 end
+
+function SWEP:GetPrimaryAnimation(data)
+	if self:Clip1() == 0 then
+		data.Index = ACT_VM_DRYFIRE
+	end
+end
+
 
 -- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({

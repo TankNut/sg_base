@@ -31,25 +31,26 @@ SWEP.Damage = 20
 
 SWEP.Spread = nil -- Not Yet Implemented
 
-SWEP.Delay = 47 / 800
-
--- Tracers
-SWEP.Tracer = 1
-SWEP.TracerName = "tracer"
+SWEP.Delay = 60 / 1000
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.35, 0.3),
-	Max = Angle(0.35, 0.3)
+	Min = Angle(0.7, 0.3),
+	Max = Angle(0.7, 0.3)
 }
 
 SWEP.RecoilAdd = 0.15
-SWEP.ViewPunch = 0.6
+SWEP.ViewPunch = 0.2
 SWEP.RecoilFlip = true
 
--- Sounds
-SWEP.AnimSounds = {
-	Reload = "Weapon_SMG1.Reload"
+-- Effects
+SWEP.Tracer = 1
+SWEP.TracerName = "sg_e_tracer"
+SWEP.TracerConfig = {}
+
+-- Misc
+SWEP.Animations = {
+	Reload = {Sound = "Weapon_SMG1.Reload"}
 }
 
 include("sh_model.lua")

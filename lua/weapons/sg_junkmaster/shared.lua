@@ -29,7 +29,8 @@ SWEP.AmmoCost = 1
 SWEP.Count = 1
 SWEP.Damage = 17
 
-SWEP.Spread = nil -- Not Yet Implemented
+SWEP.Accuracy = nil
+SWEP.Range = nil
 
 SWEP.Delay = 60 / 800
 
@@ -46,7 +47,13 @@ SWEP.RecoilFlip = true
 -- Effects
 SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
-SWEP.TracerConfig = {}
+SWEP.TracerConfig = {
+	Material = Material("effects/laser1"),
+	Velocity = 5000,
+	Scale = 8,
+	Color = Color(150, 100, 255),
+	Brightness = 5
+}
 
 -- Misc
 SWEP.Animations = {

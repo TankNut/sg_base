@@ -24,7 +24,7 @@ SWEP.HoldType = "smg"
 -- Firemode
 SWEP.Firemode = 3
 SWEP.ForceBurst = true
-SWEP.AutoBurst = false
+SWEP.AutoBurst = true
 
 -- Balance
 SWEP.AmmoCost = 1
@@ -34,10 +34,7 @@ SWEP.Damage = 10
 SWEP.Spread = nil -- Not Yet Implemented
 
 SWEP.Delay = 60 / 800
-
--- Tracers
-SWEP.Tracer = 1
-SWEP.TracerName = "tracer"
+SWEP.BurstDelay = SWEP.Delay * 4
 
 -- Recoil
 SWEP.Recoil = {
@@ -49,16 +46,21 @@ SWEP.RecoilAdd = 0.08
 SWEP.ViewPunch = .4
 SWEP.RecoilFlip = true
 
--- Sounds
-SWEP.AnimSounds = {
-	Reload = "Weapon_SMG1.Reload"
+-- Effects
+SWEP.Tracer = 1
+SWEP.TracerName = "sg_e_tracer"
+SWEP.TracerConfig = {}
+
+-- Misc
+SWEP.Animations = {
+	Reload = {Sound = "Weapon_SMG1.Reload"}
 }
 
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
-	self:EmitSound("Weapon_SG_PS.Single1")
-	self:EmitSound("Weapon_SG_PS.Single2")
+	self:EmitSound("Weapon_SG_PeaShooter.Single1")
+	self:EmitSound("Weapon_SG_PeaShooter.Single2")
 end
 
 -- Changed the level to 105, that's the default for gunshots and makes it audible at range

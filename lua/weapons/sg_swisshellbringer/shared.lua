@@ -61,10 +61,10 @@ end
 
 -- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
-	name = "Weapon_SG_SHB.Single1",
+	name = "Weapon_SG_SwissHellBringer.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
 	level = 105,
 	pitch = {110, 125},
-	sound = "weapons/pistol/pistol_fire3.wav"
+	sound = "^weapons/pistol/pistol_fire3.wav"
 })

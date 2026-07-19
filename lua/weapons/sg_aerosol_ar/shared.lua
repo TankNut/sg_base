@@ -63,17 +63,17 @@ end
 sound.Add({
 	name = "Weapon_SG_Aerosol.Single1",
 	channel = CHAN_WEAPON,
-	volume = 1,
+	volume = 0.8,
 	level = 105,
 	pitch = {95, 100},
-	sound = "weapons/ak47/ak47-1.wav"
+	sound = ")weapons/ak47/ak47-1.wav"
 })
 
 sound.Add({
 	name = "Weapon_SG_Aerosol.Single2",
 	channel = CHAN_ITEM,
-	volume = 1,
+	volume = 0.8,
 	level = 105,
 	pitch = {80, 85},
-	sound = "weapons/smg1/smg1_fire1.wav"
+	sound = ")weapons/smg1/smg1_fire1.wav"
 })

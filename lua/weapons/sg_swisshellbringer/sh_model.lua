@@ -43,4 +43,3 @@ SWEP.WElements = {
 	["under"] = { type = "Model", model = "models/Items/car_battery01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "side1", pos = Vector(-0.401, 3.635, 0.239), angle = Angle(0, 0, 0), size = Vector(0.15, 0.6, 0.239), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["under2"] = { type = "Model", model = "models/props_lab/reciever01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "under", pos = Vector(0, 2.5, -2), angle = Angle(0, 90, 90), size = Vector(0.3, 0.14, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
-

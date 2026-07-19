@@ -1,5 +1,7 @@
 AddCSLuaFile()
 
+SWEP.RenderGroup = RENDERGROUP_BOTH
+
 SWEP.UseHands = true
 SWEP.ViewModel = Model("models/weapons/c_smg1.mdl")
 SWEP.WorldModel = Model("models/weapons/w_smg1.mdl")

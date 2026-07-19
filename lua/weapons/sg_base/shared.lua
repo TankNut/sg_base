@@ -31,6 +31,7 @@ function SWEP:Initialize()
 	self:SetDeploySpeed(1)
 
 	if CLIENT then
+		self.CSEnts = {}
 		self:InitSCK()
 	end
 end
@@ -42,6 +43,12 @@ end
 function SWEP:OnReloaded()
 	if CLIENT then
 		self:InitSCK()
+	end
+end
+
+function SWEP:OnRemove()
+	if CLIENT then
+		self:ClearCSEnts()
 	end
 end
 

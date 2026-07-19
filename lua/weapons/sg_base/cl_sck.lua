@@ -14,6 +14,25 @@ function SWEP:ThrowSCKError(err)
 	MsgC(errorColor, string.format("[SCK Error] %s", err), "\n")
 end
 
+function SWEP:CreateCSEnt(mdl)
+	local ent = ClientsideModel(mdl, RENDERGROUP_OTHER)
+	ent.RenderGroup = RENDERGROUP_OTHER
+
+	table.insert(self.CSEnts, ent)
+
+	return ent
+end
+
+function SWEP:ClearCSEnts()
+	for _, ent in ipairs(self.CSEnts) do
+		if ent:IsValid() then
+			ent:Remove()
+		end
+	end
+
+	self.CSEnts = {}
+end
+
 local SCKTypes = {}
 
 local function addSCKType(name, data)
@@ -49,7 +68,7 @@ addSCKType("Model", {
 			ent:Remove()
 		end
 
-		ent = ClientsideModel(mdl)
+		ent = self:CreateCSEnt(mdl)
 		ent:SetPos(self:GetPos())
 		ent:SetAngles(self:GetAngles())
 		ent:SetParent(self)
@@ -390,6 +409,8 @@ function SWEP:InitSCKElements(tab)
 end
 
 function SWEP:InitSCK()
+	self:ClearCSEnts()
+
 	local tab = weapons.Get(self:GetClass())
 
 	self.VElements = tab.VElements or {}

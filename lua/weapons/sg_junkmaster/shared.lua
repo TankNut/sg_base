@@ -63,13 +63,13 @@ SWEP.Animations = {
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
-	self:EmitSound("Weapon_SG_JunkMaster.Single1")
-	self:EmitSound("Weapon_SG_JunkMaster.Single2")
+	self:EmitSound("Weapon_SG_Junkmaster.Single1")
+	self:EmitSound("Weapon_SG_Junkmaster.Single2")
 end
 
 -- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
-	name = "Weapon_SG_JunkMaster.Single1",
+	name = "Weapon_SG_Junkmaster.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
 	level = 105,
@@ -78,7 +78,7 @@ sound.Add({
 })
 
 sound.Add({
-	name = "Weapon_SG_JunkMaster.Single2",
+	name = "Weapon_SG_Junkmaster.Single2",
 	channel = CHAN_ITEM,
 	volume = 1,
 	level = 105,

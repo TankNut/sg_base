@@ -80,7 +80,7 @@ function SWEP:PrimaryAttack()
 	self:SetAttackDelay(delay)
 	self:SetHasAttacked(true)
 
-	if self:GetAttackDuration() == 0 then
+	if self:GetFireDuration() == 0 then
 		self:OnStartAttack()
 	end
 end
@@ -163,14 +163,14 @@ function SWEP:UpdateAttack()
 	end
 
 	if self:GetCanAttack() and not self:GetHasAttacked() or self:IsFinalBurstShot() then
-		if self:GetAttackDuration() > 0 then
+		if self:GetFireDuration() > 0 then
 			self:OnStopAttack()
 		end
 
 		self:SetAttackCount(0)
-		self:SetAttackDuration(0)
+		self:SetFireDuration(0)
 	else
-		self:SetAttackDuration(self:GetAttackDuration() + FrameTime())
+		self:SetFireDuration(self:GetFireDuration() + FrameTime())
 	end
 
 	local canAttack = self:GetNextPrimaryFire() <= CurTime()

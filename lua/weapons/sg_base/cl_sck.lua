@@ -110,9 +110,13 @@ addSCKType("Model", {
 			csent:EnableMatrix("RenderMultiply", scaleMatrix)
 		end
 
-		if csent:IsEffectActive(EF_BONEMERGE) != tobool(element.bonemerge) then
-			csent:SetParent(element.bonemerge and ent or self)
+		local parent = element.bonemerge and ent or self
 
+		if csent:GetParent() != parent then
+			csent:SetParent(parent)
+		end
+
+		if csent:IsEffectActive(EF_BONEMERGE) != tobool(element.bonemerge) then
 			if element.bonemerge then
 				csent:AddEffects(EF_BONEMERGE)
 			else

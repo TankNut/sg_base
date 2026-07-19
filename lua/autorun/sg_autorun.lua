@@ -43,3 +43,12 @@ if CLIENT then
 		return true
 	end
 end
+
+sound.Add({
+	name = "Weapon_SG.Empty",
+	channel = CHAN_STATIC,
+	volume = 0.7,
+	level = 75,
+	pitch = 100,
+	sound = ")weapons/pistol/pistol_empty.wav"
+})

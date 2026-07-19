@@ -34,7 +34,7 @@ function SWEP:CanAttack()
 	end
 
 	if self:GetMaxClip1() > 0 and self:Clip1() < self.AmmoCost then
-		self:EmitSound(self.EmptySound)
+		self:EmitSound("Weapon_SG.Empty")
 
 		-- TODO: Do we keep this? Move behind a convar maybe?
 		if self:CanReload() then

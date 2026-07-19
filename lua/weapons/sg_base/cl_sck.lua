@@ -290,6 +290,8 @@ end
 
 -- New bone system to replace the old one SCK uses, should be more performant since we're not recreating the entire bone setup every time we update
 function SWEP:RebuildBoneCache(vm)
+	vm:SetupBones()
+
 	table.Empty(self.BoneCache)
 
 	if table.Count(self.ViewModelBoneMods) == 0 then

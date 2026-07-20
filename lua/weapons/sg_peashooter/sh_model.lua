@@ -126,3 +126,4 @@ SWEP.WElements = {
 	["topback length"] = { type = "Model", model = "models/props_wasteland/controlroom_filecabinet002a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "main", pos = Vector(-6.285, -1.032, 1.988), angle = Angle(-89.5, 2, 0), size = Vector(0.1, 0.047, 0.111), color = Color(76, 76, 76, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} }
 }
 
+SWEP.ViewModelBoneMods = {}

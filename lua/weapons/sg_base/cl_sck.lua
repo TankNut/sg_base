@@ -76,26 +76,24 @@ addSCKType("Model", {
 
 		element._entity = ent
 	end,
-	Render = function(self, tab, element, ent, flags)
+	Render = function(self, tab, element, ent, flags, rendergroups)
 		local csent = element._entity
 
-		if not IsValid(ent) then
+		if not IsValid(ent) or not IsValid(csent) then
+			return
+		end
+
+		if rendergroups and not rendergroups[csent:GetRenderGroup()] then
 			return
 		end
 
 		local matrix = self:GetBoneOrientation(tab, element, ent)
-
-		if not matrix then
-			return
-		end
-
-		matrix:Translate(element.pos)
-		matrix:Rotate(element.angle)
+		if not matrix then return end
 
 		local pos = matrix:GetTranslation()
 		local ang = matrix:GetAngles()
 
-		if ent:GetClass() == "viewmodel" and self.ViewModelFlip then
+		if self.ViewModelFlip and ent:GetClass() == "viewmodel" then
 			ang.r = -ang.r
 		end
 
@@ -124,20 +122,19 @@ addSCKType("Model", {
 			end
 		end
 
-		if element.skin and element.skin != ent:GetSkin() then
+		if element.skin != ent:GetSkin() then
 			csent:SetSkin(element.skin)
 		end
 
-		if element.bodygroup then
-			for id, index in pairs(element.bodygroup) do
-				if csent:GetBodygroup(id) != index then
-					csent:SetBodygroup(id, index)
-				end
+		for id, index in pairs(element.bodygroup) do
+			if csent:GetBodygroup(id) != index then
+				csent:SetBodygroup(id, index)
 			end
 		end
 
 		-- Not using render.MaterialOverride here because we'd have to cache the IMaterial object somehow and that's a lot of extra work
-		if element.material and csent:GetMaterial() != element.material then
+		if element._material != element.material then
+			element._material = element.material
 			csent:SetMaterial(element.material)
 		end
 
@@ -145,9 +142,13 @@ addSCKType("Model", {
 			render.SuppressEngineLighting(true)
 		end
 
-		if element.color then
-			render.SetColorModulation(element.color.r / 255, element.color.g / 255, element.color.b / 255)
-			render.SetBlend(element.color.a / 255)
+		render.SetColorModulation(element.color.r / 255, element.color.g / 255, element.color.b / 255)
+		render.SetBlend(element.color.a / 255)
+
+		local mode = element.color.a < 255 and RENDERMODE_TRANSCOLOR or RENDERMODE_NORMAL
+
+		if csent:GetRenderMode() != mode then
+			csent:SetRenderMode(mode)
 		end
 
 		if element.inversed then
@@ -237,26 +238,14 @@ addSCKType("Sprite", {
 		element._material = CreateMaterial(materialName, "UnlitGeneric", materialParameters)
 	end,
 	Render = function(self, tab, element, ent, flags)
-		if flags and not bit.band(flags, spriteFlags) then
-			return
-		end
-
-		if not element._material then
-			return
-		end
+		if flags and not bit.band(flags, spriteFlags) then return end
+		if not element._material then return end
 
 		local matrix = self:GetBoneOrientation(tab, element, ent)
-
-		if not matrix then
-			return
-		end
-
-		matrix:Translate(element.pos)
-
-		local pos = matrix:GetTranslation()
+		if not matrix then return end
 
 		render.SetMaterial(element._material)
-		render.DrawSprite(pos, element.size.x, element.size.y, element.color or color_white)
+		render.DrawSprite(matrix:GetTranslation(), element.size.x, element.size.y, element.color or color_white)
 	end
 })
 
@@ -291,15 +280,17 @@ addSCKType("ClipPlane", {
 })
 
 function SWEP:GetBoneOrientation(lookup, element, ent)
+	if element._frame == FrameNumber() then
+		return element._matrix
+	end
+
+	element._frame = FrameNumber()
+
 	local parent = lookup[element.rel]
+	local matrix
 
 	if parent then
-		local matrix = self:GetBoneOrientation(lookup, parent, ent)
-
-		matrix:Translate(parent.pos)
-		matrix:Rotate(parent.angle)
-
-		return matrix
+		matrix = Matrix(self:GetBoneOrientation(lookup, parent, ent))
 	else
 		local bone = ent:LookupBone(element.bone or "ValveBiped.Bip01_R_Hand")
 
@@ -307,8 +298,15 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 			return
 		end
 
-		return ent:GetBoneMatrix(bone)
+		matrix = ent:GetBoneMatrix(bone)
 	end
+
+	if element.pos then matrix:Translate(element.pos) end
+	if element.angle then matrix:Rotate(element.angle) end
+
+	element._matrix = matrix
+
+	return matrix
 end
 
 -- New bone system to replace the old one SCK uses, should be more performant since we're not recreating the entire bone setup every time we update
@@ -398,6 +396,8 @@ function SWEP:ResetBoneMods(vm)
 end
 
 function SWEP:InitSCKElements(tab)
+	local renderorder = {}
+
 	for name, element in pairs(tab) do
 		element.renderorder = element.renderorder or 0
 		element.name = name
@@ -406,16 +406,25 @@ function SWEP:InitSCKElements(tab)
 
 		if def then
 			def.Init(self, tab, element)
+			table.insert(renderorder, element)
 		else
 			self:ThrowSCKError(string.format("Unimplemented SCK type: %s", element.type))
 		end
 	end
+
+	table.sort(renderorder, function(a, b)
+		return a.renderorder > b.renderorder
+	end)
+
+	self.RenderOrder[tab] = renderorder
 end
 
 function SWEP:InitSCK()
 	self:ClearCSEnts()
 
 	local tab = weapons.Get(self:GetClass())
+
+	self.RenderOrder = {}
 
 	self.VElements = tab.VElements or {}
 	self.WElements = tab.WElements or {}
@@ -428,8 +437,8 @@ function SWEP:InitSCK()
 	self:InitSCKElements(self.WElements)
 end
 
-function SWEP:DrawSCKElements(tab, ent, flags)
-	for _, element in SortedPairsByMemberValue(tab, "renderorder", true) do
+function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
+	for _, element in ipairs(self.RenderOrder[tab]) do
 		if element.hide then
 			continue
 		end
@@ -437,13 +446,15 @@ function SWEP:DrawSCKElements(tab, ent, flags)
 		local def = SCKTypes[element.type]
 
 		if def then
-			def.Render(self, tab, element, ent, flags)
+			def.Render(self, tab, element, ent, flags, rendergroups)
 			render.UpdateRefractTexture()
 		end
 	end
 end
 
-function SWEP:PreDrawViewModel(vm, _, ply)
+local _flags
+
+function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	if self.InvalidateBoneMods then
 		self:RebuildBoneCache(vm)
 		self.InvalidateBoneMods = false
@@ -456,12 +467,15 @@ function SWEP:PreDrawViewModel(vm, _, ply)
 		-- We can't use the render.MaterialOverride method here because that would affect viewmodel hands as well
 		vm:SetMaterial("null")
 	end
+
+	-- Since the flags aren't available in the normal PostDrawViewModel hook, we store them locally here
+	_flags = flags
 end
 
 function SWEP:PostDrawViewModel(vm, _, ply)
 	vm:SetMaterial("")
 
-	self:DrawSCKElements(self.VElements, vm, nil)
+	self:DrawSCKElements(self.VElements, vm, _flags)
 
 	-- ... and resetting here, we avoid ever running into issues where bones leak into other viewmodels
 	self:ResetBoneMods(vm)
@@ -469,7 +483,17 @@ end
 
 local null = Material("null")
 
-function SWEP:DrawWorldModel(flags)
+local opaque = {
+	[RENDERGROUP_OPAQUE] = true,
+	[RENDERGROUP_BOTH] = true
+}
+
+local translucent = {
+	[RENDERGROUP_TRANSLUCENT] = true,
+	[RENDERGROUP_BOTH] = true
+}
+
+function SWEP:DrawWorldModel(flags, isTranslucent)
 	if not self.ShowWorldModel then
 		render.MaterialOverride(null)
 	end
@@ -478,9 +502,11 @@ function SWEP:DrawWorldModel(flags)
 
 	render.MaterialOverride(nil)
 
-	self:DrawSCKElements(self.WElements, self, flags)
+	local rendergroups = isTranslucent and translucent or opaque
+
+	self:DrawSCKElements(self.WElements, self, flags, rendergroups)
 end
 
 function SWEP:DrawWorldModelTranslucent(flags)
-	self:DrawWorldModel(flags)
+	self:DrawWorldModel(flags, true)
 end

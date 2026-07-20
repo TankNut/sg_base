@@ -1,9 +1,7 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("sg_base")
 
-function SWEP:HasCameraControl()
-	local ply = self:GetOwner()
-
+function SWEP:HasCameraControl(ply)
 	if CLIENT and not ply:ShouldDrawLocalPlayer() then
 		return true
 	end
@@ -15,7 +13,7 @@ local vmRatio = 0.4
 
 if CLIENT then
 	function SWEP:CalcView(ply, pos, ang, fov)
-		if not self:HasCameraControl() then
+		if not self:HasCameraControl(ply) then
 			return
 		end
 

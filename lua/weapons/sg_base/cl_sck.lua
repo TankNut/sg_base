@@ -57,6 +57,13 @@ addSCKType("Model", {
 			return
 		end
 
+		-- Check for bad materials
+		if #element.material > 0 and Material(element.material):GetShader() == "LightmappedGeneric" then
+			self:ThrowSCKError(string.format("Invalid material: \"%s\" (bad shader)", element.material))
+
+			element.material = ""
+		end
+
 		local ent = element._entity
 
 		-- If we're re-initializing the table, check if we actually have to recreate the model

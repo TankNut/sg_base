@@ -60,6 +60,17 @@ addHoldType("sniper", "ar2")
 holdtypes.sniper[ACT_MP_ATTACK_STAND_PRIMARYFIRE] = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
 holdtypes.sniper[ACT_MP_ATTACK_CROUCH_PRIMARYFIRE] = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
 
+addHoldType("shotgun2", "shotgun")
+
+holdtypes.shotgun2[ACT_MP_STAND_IDLE] = ACT_HL2MP_IDLE_AR2
+holdtypes.shotgun2[ACT_MP_WALK] = ACT_HL2MP_WALK_AR2
+holdtypes.shotgun2[ACT_MP_RUN] = ACT_HL2MP_RUN_AR2
+holdtypes.shotgun2[ACT_MP_CROUCH_IDLE] = ACT_HL2MP_IDLE_CROUCH_AR2
+holdtypes.shotgun2[ACT_MP_CROUCHWALK] = ACT_HL2MP_WALK_CROUCH_AR2
+holdtypes.shotgun2[ACT_MP_JUMP] = ACT_HL2MP_JUMP_AR2
+holdtypes.shotgun2[ACT_MP_SWIM_IDLE] = ACT_HL2MP_SWIM_IDLE_AR2
+holdtypes.shotgun2[ACT_MP_SWIM] = ACT_HL2MP_SWIM_AR2
+
 function SWEP:SetWeaponHoldType(name)
 	self.ActivityTranslate2 = holdtypes[name] or holdtypes.normal
 

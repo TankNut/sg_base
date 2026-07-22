@@ -7,5 +7,5 @@ VertexLitGeneric
 	$detailscale "4.283"
 	$detailblendfactor "0.8"
 
-	$surfaceprop "Metal"
+	$surfaceprop "metal"
 }

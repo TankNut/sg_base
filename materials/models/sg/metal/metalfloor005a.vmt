@@ -1,7 +1,5 @@
-LightmappedGeneric
+VertexLitGeneric
 {
 	$basetexture "metal/metalfloor005a"
-	$surfaceprop Metal
-
-	%keywords "borealis,combine"
+	$surfaceprop "metal"
 }

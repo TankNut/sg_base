@@ -1,8 +1,7 @@
 VertexLitGeneric
 {
 	$basetexture "metal/forest_metal_04c"
-	$surfaceprop Metal
+	$surfaceprop "metal"
 
-	$ambientonly 1
-	$model 1
+	$ambientonly "1"
 }

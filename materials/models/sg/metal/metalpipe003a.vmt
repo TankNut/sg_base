@@ -1,5 +1,5 @@
 VertexLitGeneric
 {
 	$basetexture "metal/metalpipe003a"
-	$surfaceprop "Metal"
+	$surfaceprop "metal"
 }

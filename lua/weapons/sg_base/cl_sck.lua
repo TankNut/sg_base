@@ -104,9 +104,11 @@ addSCKType("Model", {
 		csent:SetAngles(ang)
 
 		-- Re-using a single matrix here for optimization
-		if element.size then
+		if element.size != element._size then
 			scaleMatrix:Identity()
 			scaleMatrix:SetScale(element.size)
+
+			element._size = Vector(element.size)
 
 			csent:EnableMatrix("RenderMultiply", scaleMatrix)
 		end
@@ -135,7 +137,6 @@ addSCKType("Model", {
 			end
 		end
 
-		-- Not using render.MaterialOverride here because we'd have to cache the IMaterial object somehow and that's a lot of extra work
 		if element._material != element.material then
 			element._material = element.material
 			csent:SetMaterial(element.material)

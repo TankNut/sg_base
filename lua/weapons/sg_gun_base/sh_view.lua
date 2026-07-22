@@ -1,24 +1,18 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("sg_base")
 
-function SWEP:HasCameraControl(ply)
-	if CLIENT and not ply:ShouldDrawLocalPlayer() then
-		return true
-	end
-
-	return ply:GetViewEntity() == ply
-end
-
 local vmRatio = 0.4
 
 if CLIENT then
 	function SWEP:CalcView(ply, pos, ang, fov)
-		if not self:HasCameraControl(ply) then
+		if ply:GetViewEntity() != ply then
 			return
 		end
 
 		return pos, ang - ply:GetViewPunchAngles() * vmRatio, fov
 	end
+
+	local const = math.pi / 360
 
 	function SWEP:GetViewModelPosition(pos, ang)
 		local ply = self:GetOwner()
@@ -26,7 +20,6 @@ if CLIENT then
 
 		ang:Sub(punch)
 
-		local const = math.pi / 360
 		local fov, vm = ply:GetFOV(), self.ViewModelFOV
 
 		local min = math.tan(math.min(fov, vm) * const)

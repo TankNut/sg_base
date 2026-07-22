@@ -39,6 +39,7 @@ local function addSCKType(name, data)
 	SCKTypes[name] = data
 end
 
+local shouldFlip = false
 local scaleMatrix = Matrix()
 
 addSCKType("Model", {
@@ -85,10 +86,7 @@ addSCKType("Model", {
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)
 		local csent = element._entity
-
-		if not IsValid(ent) or not IsValid(csent) then
-			return
-		end
+		if not IsValid(csent) then return end
 
 		if rendergroups and not rendergroups[csent:GetRenderGroup()] then
 			return
@@ -100,9 +98,7 @@ addSCKType("Model", {
 		local pos = matrix:GetTranslation()
 		local ang = matrix:GetAngles()
 
-		if self.ViewModelFlip and ent:GetClass() == "viewmodel" then
-			ang.r = -ang.r
-		end
+		if shouldFlip then ang.r = -ang.r end
 
 		csent:SetPos(pos)
 		csent:SetAngles(ang)
@@ -121,7 +117,7 @@ addSCKType("Model", {
 			csent:SetParent(parent)
 		end
 
-		if csent:IsEffectActive(EF_BONEMERGE) != tobool(element.bonemerge) then
+		if csent:IsEffectActive(EF_BONEMERGE) != element.bonemerge then
 			if element.bonemerge then
 				csent:AddEffects(EF_BONEMERGE)
 			else
@@ -318,16 +314,16 @@ end
 
 -- New bone system to replace the old one SCK uses, should be more performant since we're not recreating the entire bone setup every time we update
 function SWEP:RebuildBoneCache(vm)
-	vm:SetupBones()
-
-	table.Empty(self.BoneCache)
+	self.BoneCache = nil
 
 	if table.Count(self.ViewModelBoneMods) == 0 then
 		return
 	end
 
+	vm:SetupBones()
+
 	local mods = self.ViewModelBoneMods
-	local cache = self.BoneCache
+	local cache = {}
 
 	for i = 0, vm:GetBoneCount() - 1 do
 		local name = vm:GetBoneName(i)
@@ -362,44 +358,57 @@ function SWEP:RebuildBoneCache(vm)
 			parent = vm:GetBoneParent(parent)
 		end
 	end
+
+	self.BoneCache = cache
 end
 
 local nan = Vector(1 / 0, 1 / 0, 1 / 0)
+local vector_one = Vector(1, 1, 1)
 
 function SWEP:ApplyBoneMods(vm)
-	if table.Count(self.BoneCache) == 0 then
-		return
-	end
+	local cache = self.BoneCache
+	if not cache then return end
 
-	for index, bone in pairs(self.BoneCache) do
+	for i = 0, #cache do
+		local bone = cache[i]
 		local scale = bone.hide and nan or bone.scale
 
-		if vm:GetManipulateBoneScale(index) != scale then
-			vm:ManipulateBoneScale(index, scale)
+		if scale != vector_one then
+			vm:ManipulateBoneScale(i, scale)
 		end
 
-		if vm:GetManipulateBoneAngles(index) != bone.angle then
-			vm:ManipulateBoneAngles(index, bone.angle)
+		if bone.angle != angle_zero then
+			vm:ManipulateBoneAngles(i, bone.angle)
 		end
 
-		if vm:GetManipulateBonePosition(index) != bone.pos then
-			vm:ManipulateBonePosition(index, bone.pos)
+		if bone.pos != vector_origin then
+			vm:ManipulateBonePosition(i, bone.pos)
 		end
 	end
 
 	vm:SetupBones()
 end
 
-local vector_one = Vector(1, 1, 1)
-
 function SWEP:ResetBoneMods(vm)
-	for i = 0, vm:GetBoneCount() - 1 do
-		vm:ManipulateBoneScale(i, vector_one)
-		vm:ManipulateBoneAngles(i, angle_zero)
-		vm:ManipulateBonePosition(i, vector_origin)
-	end
+	local cache = self.BoneCache
+	if not cache then return end
 
-	vm:SetupBones()
+	for i = 0, #cache do
+		local bone = cache[i]
+		local scale = bone.hide and nan or bone.scale
+
+		if scale != vector_one then
+			vm:ManipulateBoneScale(i, vector_one)
+		end
+
+		if bone.angle != angle_zero then
+			vm:ManipulateBoneAngles(i, angle_zero)
+		end
+
+		if bone.pos != vector_origin then
+			vm:ManipulateBonePosition(i, vector_origin)
+		end
+	end
 end
 
 function SWEP:InitSCKElements(tab)
@@ -438,13 +447,14 @@ function SWEP:InitSCK()
 
 	self.ViewModelBoneMods = tab.ViewModelBoneMods or {}
 	self.InvalidateBoneMods = true
-	self.BoneCache = {}
 
 	self:InitSCKElements(self.VElements)
 	self:InitSCKElements(self.WElements)
 end
 
 function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
+	shouldFlip = self.ViewModelFlip and ent:GetClass() == "viewmodel"
+
 	for _, element in ipairs(self.RenderOrder[tab]) do
 		if element.hide then
 			continue
@@ -460,6 +470,7 @@ function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
 end
 
 local _flags
+local nullMaterial = Material("null")
 
 function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	if self.InvalidateBoneMods then
@@ -471,8 +482,7 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	self:ApplyBoneMods(vm)
 
 	if not self.ShowViewModel then
-		-- We can't use the render.MaterialOverride method here because that would affect viewmodel hands as well
-		vm:SetMaterial("null")
+		render.MaterialOverride(nullMaterial)
 	end
 
 	-- Since the flags aren't available in the normal PostDrawViewModel hook, we store them locally here
@@ -480,7 +490,10 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 end
 
 function SWEP:PostDrawViewModel(vm, _, ply)
-	vm:SetMaterial("")
+	if not self.ShowViewModel then
+		render.MaterialOverride(nil)
+		ply:GetHands():DrawModel()
+	end
 
 	self:DrawSCKElements(self.VElements, vm, _flags)
 

@@ -67,6 +67,7 @@ function SWEP:SetupDataTables()
 	-- Attack related
 	self:NetworkVar("Int", "AttackCount")
 	self:NetworkVar("Float", "FireDuration")
+	self:NetworkVar("Float", "LastAttack")
 
 	self:NetworkVar("Bool", "CanAttack")
 	self:NetworkVar("Bool", "HasAttacked")

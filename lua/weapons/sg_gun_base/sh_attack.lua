@@ -83,6 +83,8 @@ function SWEP:PrimaryAttack()
 	if self:GetFireDuration() == 0 then
 		self:OnStartAttack()
 	end
+
+	self:SetLastAttack(CurTime())
 end
 
 function SWEP:GetShootDir()

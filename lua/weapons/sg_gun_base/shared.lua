@@ -89,8 +89,20 @@ function SWEP:Holster()
 	return not self:IsReloading()
 end
 
+function SWEP:UpdatePump()
+	if not self:GetShouldPump() or self:IsReloading() then
+		return
+	end
+
+	if self:GetNextPrimaryFire() <= CurTime() then
+		self:SetNextPrimaryFire(CurTime() + self:PlayAnimation("Pump"))
+		self:SetShouldPump(false)
+	end
+end
+
 function SWEP:Think()
 	self:UpdateReload()
+	self:UpdatePump()
 	self:UpdateAttack()
 
 	BaseClass.Think(self)

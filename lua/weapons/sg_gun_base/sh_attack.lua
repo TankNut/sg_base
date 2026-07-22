@@ -36,13 +36,13 @@ function SWEP:CanAttack()
 	if self:GetMaxClip1() > 0 and self:Clip1() < self.AmmoCost then
 		self:EmitSound("Weapon_SG.Empty")
 
-		-- TODO: Do we keep this? Move behind a convar maybe?
 		if self:CanReload() then
 			self:Reload()
 		else
 			self:ConCommand("-attack")
-			self:SetAttackDelay(0.2)
 		end
+
+		self:SetAttackDelay(0.2)
 
 		return false
 	end
@@ -85,6 +85,10 @@ function SWEP:PrimaryAttack()
 	end
 
 	self:SetLastAttack(CurTime())
+
+	if self.PumpAction then
+		self:SetShouldPump(true)
+	end
 end
 
 function SWEP:GetShootDir()

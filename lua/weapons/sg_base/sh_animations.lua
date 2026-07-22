@@ -73,7 +73,7 @@ function SWEP:PlayAnimation(name)
 
 	local snd = data.Sound
 
-	if snd then
+	if snd and GetPredictionPlayer():IsValid() then
 		self:EmitSound(snd)
 	end
 

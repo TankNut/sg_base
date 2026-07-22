@@ -203,8 +203,6 @@ addSCKType("Model", {
 	end
 })
 
-local spriteFlags = bit.bor(STUDIO_TRANSPARENCY, STUDIO_TWOPASS)
-
 addSCKType("Sprite", {
 	Init = function(self, tab, element)
 		element.pos = Vector(element.pos)
@@ -242,7 +240,7 @@ addSCKType("Sprite", {
 		element._material = CreateMaterial(materialName, "UnlitGeneric", materialParameters)
 	end,
 	Render = function(self, tab, element, ent, flags)
-		if flags and not bit.band(flags, spriteFlags) then return end
+		if flags and not bit.band(flags, STUDIO_TRANSPARENCY) then return end
 		if not element._material then return end
 
 		local matrix = self:GetBoneOrientation(tab, element, ent)

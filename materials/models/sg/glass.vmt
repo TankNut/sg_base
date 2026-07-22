@@ -1,0 +1,12 @@
+VertexLitGeneric
+{
+	$basetexture "glass/glasswindowbreak070a"
+	$surfaceprop "glass"
+	
+	$envmap "env_cubemap"
+	$envmapmask "glass/glasswindowbreak070a_mask"
+	$envmaptint "[.1 .1 .1]"
+	$envmapsphere 1
+
+	$translucent 1
+}

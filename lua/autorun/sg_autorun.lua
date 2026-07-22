@@ -1,8 +1,20 @@
 module("sg", package.seeall)
 
 InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
+DebugMode = CreateConVar("sg_debug", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 
 if CLIENT then
+	function DrawDebugText(str, line, color)
+		surface.SetFont("BudgetLabel")
+
+		local _, offset = surface.GetTextSize("a")
+
+		local x = ScreenScale(5)
+		local y = ScrH() * 0.5
+
+		draw.SimpleText(str, "BudgetLabel", x, y + offset * (line or 0), color or color_white)
+	end
+
 	local dir = Vector()
 
 	-- Returns false if done rendering

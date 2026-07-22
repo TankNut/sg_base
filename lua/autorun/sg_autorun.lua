@@ -53,6 +53,15 @@ sound.Add({
 	sound = ")weapons/pistol/pistol_empty.wav"
 })
 
+sound.Add({
+	name = "Weapon_SG.Pump",
+	channel = CHAN_STATIC,
+	volume = 0.7,
+	level = 75,
+	pitch = 100,
+	sound = ")weapons/shotgun/shotgun_cock.wav"
+})
+
 -- Disabled/unfinished, found to have no discernable impact on performance
 
 --[[

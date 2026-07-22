@@ -101,12 +101,37 @@ function SWEP:GetDamage()
 	return self.Damage
 end
 
+function SWEP:GetAccuracy()
+	return self.Accuracy
+end
+
+function SWEP:GetRange()
+	return self.Range
+end
+
+function SWEP:GetSpread()
+	local accuracy = self:GetAccuracy()
+	local range = self:GetRange()
+
+	if accuracy == 0 or range == 0 then
+		return 0
+	end
+
+	local inches = accuracy / 0.75
+	local yards = (range / 0.75) / 36
+	local MOA = (inches * 100) / yards
+
+	return MOA / 60
+end
+
 function SWEP:BulletCallback(attacker, tr, dmg)
 end
 
 function SWEP:FireWeapon()
 	local owner = self:GetOwner()
 	local damage = self:GetDamage()
+
+	local spread = math.rad(self:GetSpread())
 
 	owner:FireBullets({
 		Inflictor = self,
@@ -117,7 +142,7 @@ function SWEP:FireWeapon()
 		Num = self.Count,
 		Damage = damage,
 		Force = damage * 0.25,
-		Spread = Vector(),
+		Spread = Vector(spread, spread),
 
 		Tracer = self.Tracer,
 		TracerName = self.TracerName,

@@ -16,9 +16,9 @@ SWEP.Animations = {
 	Pump = ACT_SHOTGUN_PUMP,
 
 	Reload = ACT_VM_RELOAD,
-	ReloadStart = ACT_VM_RELOAD,
-	ReloadSingle = ACT_VM_RELOAD_INSERT,
-	ReloadFinish = ACT_VM_RELOAD_END
+	ReloadStart = ACT_SHOTGUN_RELOAD_START,
+	ReloadSingle = ACT_VM_RELOAD,
+	ReloadFinish = ACT_SHOTGUN_RELOAD_FINISH
 }
 
 include("cl_sck.lua")

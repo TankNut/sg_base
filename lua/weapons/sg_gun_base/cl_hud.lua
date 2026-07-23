@@ -10,10 +10,10 @@ function SWEP:DrawDebugHUD()
 end
 
 local sphere_red = Color(255, 0, 0, 50)
-local debugMode = sg.DebugMode
+local developerMode = sg.DeveloperMode
 
 function SWEP:DrawHUDBackground()
-	if not debugMode:GetBool() then
+	if not developerMode:GetBool() then
 		return
 	end
 

@@ -1,7 +1,7 @@
 module("sg", package.seeall)
 
 InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
-DebugMode = CreateConVar("sg_debug", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
+DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 
 if CLIENT then
 	function DrawDebugText(str, line, color)

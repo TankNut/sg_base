@@ -1,0 +1,57 @@
+AddCSLuaFile()
+
+SWEP.UseHands = true
+SWEP.ViewModel = Model("models/weapons/c_shotgun.mdl")
+SWEP.WorldModel = Model("models/weapons/w_shotgun.mdl")
+
+if SERVER then
+	return
+end
+
+SWEP.ViewModelFOV = 60
+SWEP.ViewModelFlip = false
+SWEP.ViewModel = "models/weapons/c_Shotgun.mdl"
+SWEP.WorldModel = "models/weapons/w_shotgun.mdl"
+SWEP.ShowViewModel = true
+SWEP.ShowWorldModel = true
+SWEP.ViewModelBoneMods = {}
+
+SWEP.SCKMaterials = {}
+
+SWEP.IronSightsPos = Vector(0, 0, 0)
+SWEP.IronSightsAng = Vector(0, 0, 0)
+
+SWEP.VElements = {
+	--["ammo display quad"] = { type = "Quad", bone = "ValveBiped.Bip01", rel = "screen", pos = Vector(1.349, 0.212, 0.1), angle = Angle(0, 90.539, 90), size = 0.046, draw_func = nil}, -commented out til quads come online
+	["ammoholder"] = { type = "Model", model = "models/props_c17/playground_teetertoter_stan.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(0, -0.7, 10.698), angle = Angle(90, -90, 0), size = Vector(0.271, 0.271, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "barrelext", pos = Vector(0.26, 0.025, 3.36), angle = Angle(0, 0, 0), size = Vector(0.31, 0.31, 0.55), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["barrelext"] = { type = "Model", model = "models/props_c17/utilityconnecter006c.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(0, 0, -5.116), angle = Angle(0, 0, 180), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["body"] = { type = "Model", model = "models/props_lab/powerbox02b.mdl", bone = "ValveBiped.Gun", rel = "", pos = Vector(0, -0.26, -3.5), angle = Angle(-180, -90, 0), size = Vector(0.27, 0.19, 0.478), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["drum"] = { type = "Model", model = "models/props_wasteland/laundry_basket001.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(-5.116, 0, -15.5), angle = Angle(0, 0, 0), size = Vector(0.18, 0.18, 0.07), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["drum+"] = { type = "Model", model = "models/props_wasteland/laundry_basket001.mdl", bone = "ValveBiped.Gun", rel = "drum", pos = Vector(0, 0, 0), angle = Angle(180, 0, 0), size = Vector(0.18, 0.18, 0.07), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["keypad"] = { type = "Model", model = "models/props_lab/keypad.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(0.77, 0, 8.33), angle = Angle(0, 0, 180), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["screen"] = { type = "Model", model = "models/props_lab/monitor01b.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(-0.465, -2.57, 4.186), angle = Angle(51.279, 0, 180), size = Vector(0.213, 0.213, 0.213), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Gun", rel = "ammoholder", pos = Vector(-2.326, 0.6, 0.2), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell+"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Gun", rel = "ammoholder", pos = Vector(-0.465, 0.6, 0.2), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell++"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Gun", rel = "ammoholder", pos = Vector(1.395, 0.6, 0.2), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["top"] = { type = "Model", model = "models/props_lab/reciever01d.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(1.505, 0, 5.557), angle = Angle(90, 0, -180), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["top 2"] = { type = "Model", model = "models/props_lab/citizenradio.mdl", bone = "ValveBiped.Gun", rel = "top", pos = Vector(-2.25, 0, -1.82), angle = Angle(0, -180, 0), size = Vector(0.27, 0.08, 0.105), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
+}
+
+SWEP.WElements = {
+	["ammoholder"] = { type = "Model", model = "models/props_c17/playground_teetertoter_stan.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-1.2, -0.33, 8.848), angle = Angle(90, -90, 0), size = Vector(0.14, 0.3, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "barrelext", pos = Vector(0.26, 0.025, 3.7), angle = Angle(0, 0, 0), size = Vector(0.22, 0.22, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["barrelext"] = { type = "Model", model = "models/props_c17/utilityconnecter006c.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(0, 0, -5.116), angle = Angle(0, 0, 180), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["body"] = { type = "Model", model = "models/props_lab/powerbox02b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(13.767, 1.18, -5.515), angle = Angle(-83.369, -160.58701, 17.95), size = Vector(0.27, 0.19, 0.478), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["drum"] = { type = "Model", model = "models/props_wasteland/laundry_basket001.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-3.359, -0.01, -12.075), angle = Angle(0, 0, 0), size = Vector(0.12, 0.12, 0.07), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["drum+"] = { type = "Model", model = "models/props_wasteland/laundry_basket001.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "drum", pos = Vector(0, 0, 0), angle = Angle(180, 0, 0), size = Vector(0.12, 0.12, 0.07), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["keypad"] = { type = "Model", model = "models/props_lab/keypad.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(0.77, 0, 8.33), angle = Angle(0, 0, 180), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["screen"] = { type = "Model", model = "models/props_lab/monitor01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-0.465, -2.57, 4.186), angle = Angle(51.279, 0, 180), size = Vector(0.213, 0.213, 0.213), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "ammoholder", pos = Vector(0.995, 0.23, 0.26), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell+"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "ammoholder", pos = Vector(-0.135, 0.23, 0.26), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["shell++"] = { type = "Model", model = "models/weapons/shotgun_shell.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "ammoholder", pos = Vector(-1.425, 0.23, 0.26), angle = Angle(0, 90, 0), size = Vector(0.45, 0.45, 0.45), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["stock"] = { type = "Model", model = "models/props_junk/metalgascan.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-0.954, 0.001, 15.698), angle = Angle(0, 90, 180), size = Vector(0.3, 0.24, 0.4), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["top"] = { type = "Model", model = "models/props_lab/reciever01d.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(1.505, 0, 5.557), angle = Angle(90, 0, -180), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["top 2"] = { type = "Model", model = "models/props_lab/citizenradio.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top", pos = Vector(-2.25, 0, -1.82), angle = Angle(0, -180, 0), size = Vector(0.27, 0.08, 0.105), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
+}
+

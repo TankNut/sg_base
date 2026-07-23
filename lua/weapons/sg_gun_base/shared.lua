@@ -28,6 +28,7 @@ SWEP.Damage = 11 -- Can be overwritten with SWEP:GetDamage
 
 SWEP.Accuracy = 0 -- 24 = Size of a street sign | 12 = Headshot sized, SWEP:GetAccuracy for override
 SWEP.Range = 0 -- Distance to hit an SWEP.Accuracy sized target at, SWEP:GetRange for override
+SWEP.SpreadMod = Vector(1, 1) -- Multiplier for horizontal and vertical spread
 
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead
 SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instead of the normal delay

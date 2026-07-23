@@ -6,8 +6,8 @@ SWEP.Base = "sg_gun_base"
 SWEP.PrintName = "The Castle Doctrine"
 SWEP.Category = "S&G Munitions"
 
-SWEP.Instructions = "Pull the trigger to shoot anything that moves. That's it, there's really not more to this weapon. About as simple as it gets, I guess."
-SWEP.Purpose = "For filling the gaps left by two weapons that have been completely devoured by this one (RIP Guerilla and Coiled Snake)."
+SWEP.Instructions = "Pull the trigger to defend your home (or wherever it is you're standing at the time of said trigger pull)."
+SWEP.Purpose = "For keeping intruders, enemies, and solicitors as far away from your immediate area as possible."
 
 SWEP.Slot = 3
 

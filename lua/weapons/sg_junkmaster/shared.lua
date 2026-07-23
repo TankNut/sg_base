@@ -67,12 +67,11 @@ function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Junkmaster.Single2")
 end
 
--- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
 	name = "Weapon_SG_Junkmaster.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {97, 103},
 	sound = ")weapons/ump45/ump45-1.wav"
 })
@@ -81,7 +80,7 @@ sound.Add({
 	name = "Weapon_SG_Junkmaster.Single2",
 	channel = CHAN_ITEM,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {80, 85},
 	sound = ")weapons/mac10/mac10-1.wav"
 })

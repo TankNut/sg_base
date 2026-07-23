@@ -5,10 +5,6 @@ if SERVER then
 	return
 end
 
-function SWEP:DrawDebugHUD()
-
-end
-
 local sphere_red = Color(255, 0, 0, 50)
 local developerMode = sg.DeveloperMode
 

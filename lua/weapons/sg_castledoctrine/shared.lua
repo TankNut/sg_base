@@ -70,12 +70,11 @@ function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_CastleDoctrine.Single2")
 end
 
--- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
 	name = "Weapon_SG_CastleDoctrine.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {90, 95},
 	sound = ")weapons/shotgun/shotgun_dbl_fire7.wav"
 })
@@ -84,7 +83,7 @@ sound.Add({
 	name = "Weapon_SG_CastleDoctrine.Single2",
 	channel = CHAN_ITEM,
 	volume = 0.6,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {115, 135},
 	sound = ")weapons/awp/awp1.wav"
 })

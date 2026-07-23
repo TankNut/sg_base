@@ -75,7 +75,7 @@ sound.Add({
 	name = "Weapon_SG_Lawnmower.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {100, 125},
 	sound = ")weapons/shotgun/shotgun_dbl_fire7.wav"
 })

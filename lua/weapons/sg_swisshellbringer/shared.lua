@@ -74,7 +74,7 @@ sound.Add({
 	name = "Weapon_SG_SwissHellBringer.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {110, 125},
 	sound = "^weapons/pistol/pistol_fire3.wav"
 })

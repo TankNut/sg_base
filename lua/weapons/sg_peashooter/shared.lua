@@ -68,7 +68,7 @@ sound.Add({
 	name = "Weapon_SG_PeaShooter.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {180, 190},
 	sound = "^weapons/ar1/ar1_dist1.wav"
 })
@@ -77,7 +77,7 @@ sound.Add({
 	name = "Weapon_SG_PeaShooter.Single2",
 	channel = CHAN_ITEM,
 	volume = 1,
-	level = 105,
+	level = sg.LEVEL_GUNFIRE,
 	pitch = {200, 210},
 	sound = ")weapons/pistol/pistol_fire2.wav"
 })

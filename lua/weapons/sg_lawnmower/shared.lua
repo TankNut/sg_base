@@ -23,7 +23,7 @@ SWEP.HoldType = "shotgun2"
 
 -- Firemode
 SWEP.Firemode = 1
-SWEP.PumpAction = true
+SWEP.PumpAction = false
 
 -- Balance
 SWEP.AmmoCost = 1
@@ -32,7 +32,8 @@ SWEP.Damage = 15
 
 SWEP.Accuracy = 26
 SWEP.Range = 1000
-SWEP.SpreadMod = Vector(2.25,2.25)
+SWEP.SpreadMod = Vector(1, 1)
+
 SWEP.Delay = 0.33
 
 -- Recoil
@@ -42,16 +43,15 @@ SWEP.Recoil = {
 }
 
 SWEP.RecoilAdd = 0
-SWEP.ViewPunch = .75
+SWEP.ViewPunch = 0.75
 SWEP.RecoilFlip = false
 
 -- Reloading
 SWEP.LoopingReload = true
 SWEP.UseReloadStart = true
 SWEP.UseReloadFinish = true
-SWEP.PumpAction = false
 
-SWEP.ReloadAmount = 1
+SWEP.ReloadAmount = 2
 
 -- Effects
 SWEP.Tracer = 3
@@ -60,17 +60,12 @@ SWEP.TracerConfig = {}
 
 -- Misc
 SWEP.Animations = {
-	Pump = {Sound = "Weapon_SG.Pump"},
+	Primary = {Sound = "Weapon_SG_Lawnmower.Single1"},
 	ReloadSingle = {Sound = "Weapon_M3.Insertshell"}
 }
 
 include("sh_model.lua")
 
-function SWEP:OnPrimaryAnimation()
-	self:EmitSound("Weapon_SG_Lawnmower.Single1")
-end
-
--- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
 	name = "Weapon_SG_Lawnmower.Single1",
 	channel = CHAN_WEAPON,

@@ -10,16 +10,9 @@ end
 
 SWEP.ViewModelFOV = 60
 SWEP.ViewModelFlip = false
-SWEP.ViewModel = "models/weapons/c_Shotgun.mdl"
-SWEP.WorldModel = "models/weapons/w_shotgun.mdl"
+
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
-SWEP.ViewModelBoneMods = {}
-
-SWEP.SCKMaterials = {}
-
-SWEP.IronSightsPos = Vector(0, 0, 0)
-SWEP.IronSightsAng = Vector(0, 0, 0)
 
 SWEP.VElements = {
 	--["ammo display quad"] = { type = "Quad", bone = "ValveBiped.Bip01", rel = "screen", pos = Vector(1.349, 0.212, 0.1), angle = Angle(0, 90.539, 90), size = 0.046, draw_func = nil}, -commented out til quads come online
@@ -55,3 +48,4 @@ SWEP.WElements = {
 	["top 2"] = { type = "Model", model = "models/props_lab/citizenradio.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top", pos = Vector(-2.25, 0, -1.82), angle = Angle(0, -180, 0), size = Vector(0.27, 0.08, 0.105), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
 
+SWEP.ViewModelBoneMods = {}

@@ -49,6 +49,7 @@ SWEP.UseReloadStart = true -- Used in conjunction with LoopingReload
 SWEP.UseReloadFinish = true -- Used in conjunction with LoopingReload
 
 SWEP.ReloadAmount = math.huge -- How much ammo can be reloaded per action
+SWEP.PartialReloads = true -- Whether the weapon can be reloaded with less than SWEP.ReloadAmount available
 
 -- Effects
 SWEP.Tracer = 1 -- 1 tracer per X bullets

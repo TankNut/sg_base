@@ -7,16 +7,36 @@ end
 
 local infiniteAmmo = sg.InfiniteAmmo
 
-function SWEP:CanReload()
-	if self:Clip1() >= self:GetMaxClip1() then
-		return false
+function SWEP:HasEnoughReserveAmmo(amount)
+	if infiniteAmmo:GetBool() then
+		return true
 	end
 
+	return self:Ammo1() >= amount
+end
+
+function SWEP:GetReloadAmount()
+	local amount = math.min(self:GetMaxClip1() - self:Clip1(), self.ReloadAmount)
+
+	if not infiniteAmmo:GetBool() then
+		amount = math.min(amount, self:Ammo1())
+	end
+
+	if not self.PartialReloads and amount < self.ReloadAmount then
+		return 0
+	end
+
+	return amount
+end
+
+function SWEP:CanReload()
 	if self:IsReloading() then
 		return false
 	end
 
-	if not infiniteAmmo:GetBool() and self:Ammo1() == 0 then
+	local amount = self:GetReloadAmount()
+
+	if amount == 0 or not self:HasEnoughReserveAmmo(amount) then
 		return false
 	end
 
@@ -43,6 +63,24 @@ function SWEP:Reload()
 	self:SetFinishReload(CurTime() + self:PlayAnimation(anim))
 end
 
+function SWEP:ShouldCancelReload(first)
+	local amount = self:GetReloadAmount()
+
+	if amount == 0 or not self:HasEnoughReserveAmmo(amount) then
+		return true
+	end
+
+	if self:GetCancelReload() and not first then
+		return true
+	end
+
+	if not self:HasEnoughReserveAmmo() then
+		return true
+	end
+
+	return false
+end
+
 function SWEP:FinishReload()
 	local first = self:GetFirstReload()
 
@@ -65,7 +103,7 @@ function SWEP:FinishReload()
 	end
 
 	if self.LoopingReload then
-		if self:Clip1() >= self:GetMaxClip1() or (self:GetCancelReload() and not first) then
+		if self:ShouldCancelReload(first) then
 			self:SetCancelReload(false)
 			self:SetFinishReload(0)
 

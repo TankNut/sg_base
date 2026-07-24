@@ -8,6 +8,16 @@ end
 local sphere_red = Color(255, 0, 0, 50)
 local developerMode = sg.DeveloperMode
 
+local function firemodeToText(mode)
+	if mode == 0 then
+		return "Full-auto"
+	elseif mode == 1 then
+		return "Semi-auto"
+	else
+		return mode .. "-Round burst"
+	end
+end
+
 function SWEP:DrawHUDBackground()
 	if not developerMode:GetBool() then
 		return
@@ -23,10 +33,16 @@ function SWEP:DrawHUDBackground()
 	})
 
 	local dist = tr.Fraction * 56756
+
 	local range = self:GetRange()
 	local accuracy = self:GetAccuracy()
 
 	local offset = accuracy * (dist / range)
+
+	sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetFiremode())), 0)
+
+	sg.DrawDebugText(string.format("Weapon range: %.0f at %.0f units", accuracy, range), 2)
+	sg.DrawDebugText(string.format("Aim distance: %.0f units (%.2fx)", dist, dist / range), 3)
 
 	cam.Start3D()
 		render.SetColorMaterial()

@@ -1,14 +1,14 @@
 module("sg", package.seeall)
 
 function DrawDebugText(str, line, color)
-	surface.SetFont("BudgetLabel")
+	surface.SetFont("DebugOverlay")
 
 	local _, offset = surface.GetTextSize("a")
 
 	local x = ScreenScale(5)
 	local y = ScrH() * 0.5
 
-	draw.SimpleText(str, "BudgetLabel", x, y + offset * (line or 0), color or color_white)
+	draw.SimpleText(str, "DebugOverlay", x, y + offset * (line or 0), color or color_white)
 end
 
 local dir = Vector()

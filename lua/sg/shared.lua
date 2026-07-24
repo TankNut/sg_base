@@ -12,6 +12,20 @@ client("cl_render.lua")
 
 shared("sh_sounds.lua")
 
+if CLIENT then
+	concommand.Add("sg_dev_freezevm", function()
+		local lp = LocalPlayer()
+
+		sg.DebugVMPos = lp:EyePos()
+		sg.DebugVMAng = lp:EyeAngles()
+	end)
+
+	concommand.Add("sg_dev_unfreezevm", function()
+		sg.DebugVMPos = nil
+		sg.DebugVMAng = nil
+	end)
+end
+
 -- Disabled/unfinished optimization tool, found to have no discernable impact on performance
 
 --[[

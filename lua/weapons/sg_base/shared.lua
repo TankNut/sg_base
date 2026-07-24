@@ -31,6 +31,8 @@ function SWEP:Initialize()
 	self:SetDeploySpeed(1)
 
 	if CLIENT then
+		self.InitialViewModelFOV = self.ViewModelFOV
+
 		self.CSEnts = {}
 		self:InitSCK()
 	end

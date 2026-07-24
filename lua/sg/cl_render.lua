@@ -52,7 +52,7 @@ end
 
 local spotlightSprite = Material("sprites/light_glow02_add")
 local spotlightBeam = Material("sg/sprites/spotlight")
-local laser = Material("sg/trails/physbeam")
+local laser = Material("sg/sprites/physbeam")
 
 local _color = Color(255, 255, 255)
 local color_black = Color(0, 0, 0, 0)

@@ -1,6 +1,6 @@
 UnlitGeneric
 {
-	$basetexture "sg/trails/physbeam_white"
+	$basetexture "sg/sprites/physbeam_white"
 	
 	$additive "1"
 	$vertexcolor "1"

@@ -15,7 +15,7 @@ SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
 SWEP.VElements = {
-	--["ammo display quad"] = { type = "Quad", bone = "ValveBiped.Bip01", rel = "screen", pos = Vector(1.349, 0.212, 0.1), angle = Angle(0, 90.539, 90), size = 0.046, draw_func = nil}, -commented out til quads come online
+	["ammo display quad"] = { type = "Quad", bone = "ValveBiped.Bip01", rel = "screen", pos = Vector(1.349, -0.22, 0.1), angle = Angle(0, 90.539, 90), size = 0.005, draw_func = "DrawAmmoCounter"},
 	["ammoholder"] = { type = "Model", model = "models/props_c17/playground_teetertoter_stan.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(0, -0.7, 10.698), angle = Angle(90, -90, 0), size = Vector(0.271, 0.271, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "barrelext", pos = Vector(0.26, 0.025, 3.36), angle = Angle(0, 0, 0), size = Vector(0.31, 0.31, 0.55), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrelext"] = { type = "Model", model = "models/props_c17/utilityconnecter006c.mdl", bone = "ValveBiped.Gun", rel = "body", pos = Vector(0, 0, -5.116), angle = Angle(0, 0, 180), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

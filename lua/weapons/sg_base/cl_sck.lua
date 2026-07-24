@@ -5,6 +5,8 @@ if SERVER then
 	return
 end
 
+local developerMode = sg.DeveloperMode
+
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
@@ -203,6 +205,36 @@ addSCKType("Model", {
 	end
 })
 
+addSCKType("ClipPlane", {
+	Init = function(self, tab, element)
+		local parent = tab[element.rel]
+
+		if not parent or parent.type != "Model" then
+			self:ThrowSCKError("Cannot add clip plane: rel is missing or not a model")
+
+			return
+		end
+
+		element.pos = Vector(element.pos)
+		element.angle = Angle(element.angle)
+
+		parent.clipplanes = parent.clipplanes or {}
+		parent.clipcount = parent.clipcount or 0
+
+		if parent.clipcount >= 2 then
+			self:ThrowSCKError("Cannot add clip plane: Maximum limit reached (2)")
+
+			return
+		end
+
+		table.insert(parent.clipplanes, element)
+
+		parent.clipcount = parent.clipcount + 1
+	end,
+	Render = function(self, ent, tab, element)
+	end
+})
+
 addSCKType("Sprite", {
 	Init = function(self, tab, element)
 		element.pos = Vector(element.pos)
@@ -251,33 +283,31 @@ addSCKType("Sprite", {
 	end
 })
 
-addSCKType("ClipPlane", {
+local forward = Color(255, 0, 0)
+local right =   Color(0, 255, 0)
+local up =      Color(0, 0, 255)
+
+addSCKType("Quad", {
 	Init = function(self, tab, element)
-		local parent = tab[element.rel]
-
-		if not parent or parent.type != "Model" then
-			self:ThrowSCKError("Cannot add clip plane: rel is missing or not a model")
-
-			return
-		end
-
-		element.pos = Vector(element.pos)
-		element.angle = Angle(element.angle)
-
-		parent.clipplanes = parent.clipplanes or {}
-		parent.clipcount = parent.clipcount or 0
-
-		if parent.clipcount >= 2 then
-			self:ThrowSCKError("Cannot add clip plane: Maximum limit reached (2)")
-
-			return
-		end
-
-		table.insert(parent.clipplanes, element)
-
-		parent.clipcount = parent.clipcount + 1
+		element.draw_func = self[element.draw_func]
 	end,
-	Render = function(self, ent, tab, element)
+	Render = function(self, tab, element, ent, flags, rendergroups)
+		if not element.draw_func then
+			return
+		end
+
+		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local pos, ang = matrix:GetTranslation(), matrix:GetAngles()
+
+		if developerMode:GetBool() then
+			render.DrawLine(pos - ang:Up(), pos + ang:Up(), forward)
+			render.DrawLine(pos - ang:Forward(), pos + ang:Forward(), right)
+			render.DrawLine(pos - ang:Right(), pos + ang:Right(), up)
+		end
+
+		cam.Start3D2D(pos, ang, element.size)
+			element.draw_func(self, element, ent, flags, rendergroups)
+		cam.End3D2D()
 	end
 })
 

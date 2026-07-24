@@ -18,8 +18,6 @@ end
 
 function SWEP:CreateCSEnt(mdl)
 	local ent = ClientsideModel(mdl, RENDERGROUP_OTHER)
-	ent.RenderGroup = RENDERGROUP_OTHER
-
 	table.insert(self.CSEnts, ent)
 
 	return ent
@@ -312,6 +310,36 @@ addSCKType("Quad", {
 	end
 })
 
+addSCKType("Laser", {
+	Init = function(self, tab, element)
+		element.pixvis = util.GetPixelVisibleHandle()
+	end,
+	Render = function(self, tab, element, ent, flags, rendergroups)
+		-- Don't render during worldmodel opaque pass
+		if rendergroups and bit.band(flags, STUDIO_TRANSPARENCY) == 0 then
+			return
+		end
+
+		local matrix = self:GetBoneOrientation(tab, element, ent)
+		sg.DrawLaser(matrix:GetTranslation(), matrix:GetForward(), element.length, element.width, element.color, element.brightness, element.pixvis)
+	end
+})
+
+addSCKType("Spotlight", {
+	Init = function(self, tab, element)
+		element.pixvis = util.GetPixelVisibleHandle()
+	end,
+	Render = function(self, tab, element, ent, flags, rendergroups)
+		-- Don't render during worldmodel opaque pass
+		if rendergroups and bit.band(flags, STUDIO_TRANSPARENCY) == 0 then
+			return
+		end
+
+		local matrix = self:GetBoneOrientation(tab, element, ent)
+		sg.DrawSpotlight(matrix:GetTranslation(), matrix:GetForward(), element.length, element.width, element.color, element.pixvis)
+	end
+})
+
 function SWEP:GetBoneOrientation(lookup, element, ent)
 	if element._frame == FrameNumber() then
 		return element._matrix
@@ -443,6 +471,8 @@ end
 
 local defaultRenderOrder = {
 	["Quad"] = -10,
+	["Laser"] = -10,
+	["Spotlight"] = -10
 }
 
 function SWEP:InitSCKElements(tab)

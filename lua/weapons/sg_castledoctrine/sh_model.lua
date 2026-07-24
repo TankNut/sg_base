@@ -1,5 +1,7 @@
 AddCSLuaFile()
 
+SWEP.RenderGroup = RENDERGROUP_BOTH
+
 SWEP.UseHands = true
 SWEP.ViewModel = Model("models/weapons/c_shotgun.mdl")
 SWEP.WorldModel = Model("models/weapons/w_shotgun.mdl")
@@ -27,6 +29,7 @@ SWEP.VElements = {
 	["element_name"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_Spine4", rel = "body", pos = Vector(-29.306, -19.747, 1.398), angle = Angle(-8.836, -26.584, -35.975)},
 	["ext clip"] = { type = "ClipPlane", bone = "ValveBiped.Gun", rel = "body ext", pos = Vector(-3.8, 0, 0), angle = Angle(-90, 0, 0)},
 	["flashlight"] = { type = "Model", model = "models/props_wasteland/light_spotlight01_lamp.mdl", bone = "ValveBiped.Gun", rel = "barrelunder", pos = Vector(0, 0, 2.991), angle = Angle(-90, 0, 0), size = Vector(0.4, 0.103, 0.103), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["spotlight"] = { type = "Spotlight", rel = "flashlight", pos = Vector(3.5, 0, 0.4), angle = Angle(), length = 30, width = 30, color = Color(255, 255, 255)},
 	["front sight"] = { type = "Model", model = "models/dav0r/buttons/switch.mdl", bone = "ValveBiped.Gun", rel = "top shroud", pos = Vector(-1.686, 0, 22.84), angle = Angle(-90, 180, 0), size = Vector(0.3, 0.3, 0.3), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "phoenix_storms/smallwheel_side", skin = 0, bodygroup = {} },
 	["gas cover"] = { type = "Model", model = "models/props_wasteland/light_spotlight01_lamp.mdl", bone = "ValveBiped.Gun", rel = "gas pipe", pos = Vector(-21.96, 0, 0.9), angle = Angle(0, 0, 0), size = Vector(0.1, 0.1, 0.1), color = Color(85, 85, 85, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} },
 	["gas pipe"] = { type = "Model", model = "models/weapons/w_combine_sniper.mdl", bone = "ValveBiped.Gun", rel = "top shroud", pos = Vector(0.77, 0, 5.17), angle = Angle(-90, 180, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
@@ -70,6 +73,7 @@ SWEP.WElements = {
 	["body length"] = { type = "Model", model = "models/props_combine/combine_train02a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(17.185, 1.029, -5.043), angle = Angle(-5.254, 91.098, 7.333), size = Vector(0.025, 0.025, 0.017), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["ext clip"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_R_Hand", rel = "body ext", pos = Vector(-3.8, 0, 0), angle = Angle(-90, 0, 0)},
 	["flashlight"] = { type = "Model", model = "models/props_wasteland/light_spotlight01_lamp.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "barrelunder", pos = Vector(0, 0, 3.019), angle = Angle(-89.783, -4.132, 11.582), size = Vector(0.38, 0.103, 0.103), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["spotlight"] = { type = "Spotlight", rel = "flashlight", pos = Vector(3.5, 0, 0.4), angle = Angle(), length = 30, width = 30, color = Color(255, 255, 255)},
 	["front sight"] = { type = "Model", model = "models/dav0r/buttons/switch.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top shroud", pos = Vector(-1.3, 0, 18.113), angle = Angle(-90, -180, 0), size = Vector(0.25, 0.25, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "phoenix_storms/smallwheel_side", skin = 0, bodygroup = {} },
 	["gas cover"] = { type = "Model", model = "models/props_wasteland/light_spotlight01_lamp.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "gas pipe", pos = Vector(-16.101, 0, 0.9), angle = Angle(0, 0, 0), size = Vector(0.1, 0.1, 0.1), color = Color(85, 85, 85, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} },
 	["gas pipe"] = { type = "Model", model = "models/weapons/w_combine_sniper.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top shroud", pos = Vector(0.77, 0, 5.031), angle = Angle(-90, -180, 0), size = Vector(0.52, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

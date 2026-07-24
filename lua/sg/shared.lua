@@ -9,8 +9,11 @@ InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICAT
 DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 
 client("cl_render.lua")
-
 shared("sh_sounds.lua")
+
+function RemapC(val, inMin, inMax, outMin, outMax)
+	return math.Clamp(math.Remap(val, inMin, inMax, outMin, outMax), math.min(outMin, outMax), math.max(outMin, outMax))
+end
 
 if CLIENT then
 	concommand.Add("sg_dev_freezevm", function()

@@ -39,7 +39,6 @@ function Tracer(startpos, endpos, velocity, length, time, callback)
 	startDistance = math.Clamp(startDistance, 0, distance)
 	endDistance = math.Clamp(endDistance, 0, distance)
 
-	-- Is this backwards? I don't know
 	local startPoint = startpos + dir * startDistance
 	local endPoint = startpos + dir * endDistance
 

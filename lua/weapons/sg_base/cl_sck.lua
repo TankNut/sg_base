@@ -441,11 +441,15 @@ function SWEP:ResetBoneMods(vm)
 	end
 end
 
+local defaultRenderOrder = {
+	["Quad"] = -10,
+}
+
 function SWEP:InitSCKElements(tab)
 	local renderorder = {}
 
 	for name, element in pairs(tab) do
-		element.renderorder = element.renderorder or 0
+		element.renderorder = element.renderorder or defaultRenderOrder[element.type] or 0
 		element.name = name
 
 		local def = SCKTypes[element.type]

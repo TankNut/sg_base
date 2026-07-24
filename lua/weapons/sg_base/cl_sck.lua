@@ -271,8 +271,9 @@ addSCKType("Sprite", {
 		element._cachedMaterialName = materialName
 		element._material = CreateMaterial(materialName, "UnlitGeneric", materialParameters)
 	end,
-	Render = function(self, tab, element, ent, flags)
-		if flags and not bit.band(flags, STUDIO_TRANSPARENCY) then return end
+	Render = function(self, tab, element, ent, flags, rendergroups)
+		-- Don't render during worldmodel opaque pass
+		if rendergroups and bit.band(flags, STUDIO_TRANSPARENCY) == 0 then return end
 		if not element._material then return end
 
 		local matrix = self:GetBoneOrientation(tab, element, ent)

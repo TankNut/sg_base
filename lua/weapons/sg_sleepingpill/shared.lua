@@ -19,7 +19,7 @@ SWEP.Primary.ClipSize = 18
 SWEP.Primary.DefaultClip = 120
 
 -- HoldType
-SWEP.HoldType = "pistol"
+SWEP.HoldType = "pistol2"
 
 -- Firemode
 SWEP.Firemode = 1
@@ -37,10 +37,10 @@ SWEP.Delay = 0.06
 -- Recoil
 SWEP.Recoil = {
 	Min = Angle(0.3, -0.25),
-	Max = Angle(.4, .25)
+	Max = Angle(0.4, 0.25)
 }
 
-SWEP.RecoilAdd = .1
+SWEP.RecoilAdd = 0.1
 SWEP.ViewPunch = 1
 SWEP.RecoilFlip = false
 

@@ -42,13 +42,24 @@ end
 local shouldFlip = false
 local scaleMatrix = Matrix()
 
+local function parsePos(pos)
+	pos = Vector(pos)
+	pos.y = -pos.y
+
+	return pos
+end
+
+local function parseAngle(ang)
+	ang = Angle(ang)
+	ang.p = -ang.p
+
+	return ang
+end
+
 addSCKType("Model", {
 	Init = function(self, tab, element)
-		element.pos = Vector(element.pos)
-		element.pos.y = -element.pos.y
-
-		element.angle = Angle(element.angle)
-		element.angle.p = -element.angle.p
+		element.pos = parsePos(element.pos)
+		element.angle = parseAngle(element.angle)
 
 		local mdl = element.model
 
@@ -235,8 +246,11 @@ addSCKType("ClipPlane", {
 
 addSCKType("Sprite", {
 	Init = function(self, tab, element)
-		element.pos = Vector(element.pos)
-		element.pos.y = -element.pos.y
+		element.pos = parsePos(element.pos)
+
+		if element.quad then
+			element.angle = parseAngle(element.angle or angle_zero)
+		end
 
 		local mat = element.sprite
 
@@ -278,7 +292,12 @@ addSCKType("Sprite", {
 		if not matrix then return end
 
 		render.SetMaterial(element._material)
-		render.DrawSprite(matrix:GetTranslation(), element.size.x, element.size.y, element.color or color_white)
+
+		if element.quad then
+			render.DrawQuadEasy(matrix:GetTranslation(), matrix:GetForward(), element.size.x, element.size.y, element.color, matrix:GetAngles().r + 180)
+		else
+			render.DrawSprite(matrix:GetTranslation(), element.size.x, element.size.y, element.color)
+		end
 	end
 })
 

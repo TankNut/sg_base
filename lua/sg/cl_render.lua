@@ -90,10 +90,10 @@ function DrawLaser(pos, dir, length, width, color, brightness, pixvis)
 	dot:Normalize()
 	dot = dot:Dot(dir)
 
-	local visibility = util.PixelVisible(pos, width, pixvis) * math.max(dot, 0)
+	local visibility = util.PixelVisible(pos, width, pixvis) * RemapC(dot, 1, 0.5, 1, 0)
 
 	-- Shrink the dot if the viewpoint is off-axis
-	local size = RemapC(dot, 1 - math.rad(1), 1, width * 0.5, width * 2)
+	local size = RemapC(dot, 1 - math.rad(1), 1, width, width * 3)
 
 	local endpos = pos + dir * length
 	local r, g, b = color:Unpack()

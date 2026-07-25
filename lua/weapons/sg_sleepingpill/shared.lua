@@ -54,11 +54,12 @@ SWEP.Animations = {
 	Reload = {Sound = "weapons/pistol/pistol_reload1.wav"}
 }
 
+include("sh_model.lua")
+
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Sleepingpill.Single1")
 	self:EmitSound("Weapon_SG_Sleepingpill.Single2")
 end
-include("sh_model.lua")
 
 sound.Add({
 	name = "Weapon_SG_Sleepingpill.Single1",

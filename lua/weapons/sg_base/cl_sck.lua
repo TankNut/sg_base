@@ -383,6 +383,7 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 
 	if element.pos then matrix:Translate(element.pos) end
 	if element.angle then matrix:Rotate(element.angle) end
+	if element.offset then matrix:Translate(element.offset) end
 
 	element._matrix = matrix
 
@@ -491,7 +492,8 @@ end
 local defaultRenderOrder = {
 	["Quad"] = -10,
 	["Laser"] = -10,
-	["Spotlight"] = -10
+	["Spotlight"] = -10,
+	["Sprite"] = -5
 }
 
 function SWEP:InitSCKElements(tab)

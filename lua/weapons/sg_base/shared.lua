@@ -44,6 +44,8 @@ function SWEP:SetupDataTables()
 end
 
 function SWEP:OnReloaded()
+	self:SetWeaponHoldType(self:GetHoldType())
+
 	if CLIENT then
 		self:InitSCK()
 	end

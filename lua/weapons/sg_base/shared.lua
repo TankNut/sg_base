@@ -2,6 +2,7 @@ AddCSLuaFile()
 DEFINE_BASECLASS("weapon_base")
 
 SWEP.Base = "weapon_base"
+SWEP.RenderGroup = RENDERGROUP_BOTH
 
 SWEP.HoldType = "normal"
 

@@ -1,0 +1,18 @@
+VertexLitGeneric
+{
+	$basetexture "models/grixis/customs/polymer4"
+	$bumpmap "models/grixis/customs/polymer4_normal"
+
+	$envmap "env_cubemap"
+	$envmaptint "[0.01 0.01 0.01]"
+	$envmapcontrast 0.2
+	$envmapsaturation 0.4
+
+	$phong 1
+	$phongfresnelranges "[0.15 0.3 0.6]"
+	$halflambert 1
+	$phongexponent 35
+	$phongboost 0.35
+
+	$model 1
+}

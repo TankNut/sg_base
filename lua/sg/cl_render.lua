@@ -1,5 +1,7 @@
 module("sg", package.seeall)
 
+IsDrawingViewModels = false
+
 function DrawDebugText(str, line, color)
 	surface.SetFont("DebugOverlay")
 
@@ -82,7 +84,7 @@ function DrawSpotlight(pos, dir, length, width, color, pixvis)
 	render.DepthRange(0, 0)
 		render.DrawSprite(pos, size, size, _color)
 		render.DrawSprite(pos, size, size, _color)
-	render.DepthRange(0, 1)
+	render.DepthRange(0, IsDrawingViewModels and 0.1 or 1)
 end
 
 function DrawLaser(pos, dir, length, width, color, brightness, pixvis)
@@ -112,8 +114,18 @@ function DrawLaser(pos, dir, length, width, color, brightness, pixvis)
 
 		_color:SetBrightness(visibility)
 		render.SetMaterial(spotlightSprite)
+
 		render.DepthRange(0, 0)
 			render.DrawSprite(pos, size, size, _color)
-		render.DepthRange(0, 1)
+		render.DepthRange(0, IsDrawingViewModels and 0.1 or 1)
 	end
 end
+
+-- Tracking viewmodel rendering so we can responsibly reset render.DepthRange
+hook.Add("PreDrawViewModels", "sg_base", function()
+	IsDrawingViewModels = true
+end)
+
+hook.Add("PreDrawEffects", "sg_base", function()
+	IsDrawingViewModels = false
+end)

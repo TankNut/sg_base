@@ -67,40 +67,20 @@ SWEP.Animations = {
 include("sh_model.lua")
 
 if CLIENT then
-	surface.CreateFont("SG_Lawnmower_Ammo", {
-		font = "Trebuchet MS",
-		size = 300,
-		weight = 900,
-		antialias = true,
-		scanlines = 4,
-		blursize = 2,
-		additive = true
-	})
-
-	surface.CreateFont("SG_Lawnmower_Ammo2", {
-		font = "Trebuchet MS",
-		size = 250,
-		weight = 900,
-		antialias = true,
-		scanlines = 4,
-		blursize = 2,
-		additive = true
-	})
-
 	local ammoColor = Color(255, 255, 0)
-	local ammoColor2 = Color(200, 200, 200)
-	
+	local reserveColor = Color(200, 200, 200)
+
 	function SWEP:DrawAmmoCounter()
 		local fraction = self:Clip1() / self:GetMaxClip1()
 
 		ammoColor.r = (1 - fraction) * 255
 		ammoColor.g = fraction * 255
 
-		draw.SimpleText(self:Clip1(), "SG_Lawnmower_Ammo", 0, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(self:Clip1(), "SG_Ammo", 0, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
-	
+
 	function SWEP:DrawReserveCounter()
-		draw.SimpleText(self:Ammo1(), "SG_Lawnmower_Ammo2", 0, 0, ammoColor2, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(self:Ammo1(), "SG_Ammo2", 0, 0, reserveColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end
 

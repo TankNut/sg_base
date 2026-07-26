@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	$basetexture "models/grixis/customs/smgheatshield"
+	$bumpmap "models/grixis/customs/smgheatshield_normal"
+	$surfaceprop Metal
+
+	$phong 1
+	$phongfresnelranges "[0.15 0.5 1]"
+	$phongexponent 12
+	$phongboost 0.15
+}

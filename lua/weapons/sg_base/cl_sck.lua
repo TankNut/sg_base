@@ -310,10 +310,6 @@ addSCKType("Quad", {
 		element.draw_func = self[element.draw_func]
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)
-		if not element.draw_func then
-			return
-		end
-
 		local matrix = self:GetBoneOrientation(tab, element, ent)
 		local pos, ang = matrix:GetTranslation(), matrix:GetAngles()
 
@@ -321,6 +317,10 @@ addSCKType("Quad", {
 			render.DrawLine(pos - ang:Up(), pos + ang:Up(), forward)
 			render.DrawLine(pos - ang:Forward(), pos + ang:Forward(), right)
 			render.DrawLine(pos - ang:Right(), pos + ang:Right(), up)
+		end
+
+		if not element.draw_func then
+			return
 		end
 
 		cam.Start3D2D(pos, ang, element.size)

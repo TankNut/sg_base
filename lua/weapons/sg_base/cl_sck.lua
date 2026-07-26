@@ -555,7 +555,6 @@ function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
 	end
 end
 
-local _flags
 local nullMaterial = Material("null")
 
 function SWEP:PreDrawViewModel(vm, _, ply, flags)
@@ -570,18 +569,15 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	if not self.ShowViewModel then
 		render.MaterialOverride(nullMaterial)
 	end
-
-	-- Since the flags aren't available in the normal PostDrawViewModel hook, we store them locally here
-	_flags = flags
 end
 
-function SWEP:PostDrawViewModel(vm, _, ply)
+function SWEP:PostDrawViewModel(vm, _, ply, flags)
 	if not self.ShowViewModel then
 		render.MaterialOverride(nil)
 		ply:GetHands():DrawModel()
 	end
 
-	self:DrawSCKElements(self.VElements, vm, _flags)
+	self:DrawSCKElements(self.VElements, vm, flags)
 
 	-- ... and resetting here, we avoid ever running into issues where bones leak into other viewmodels
 	self:ResetBoneMods(vm)

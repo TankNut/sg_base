@@ -30,6 +30,7 @@ function EFFECT:Init(data)
 	self.Scale = math.Rand(0.75, 0.9)
 	self.Color = Color(255, 255, 255)
 	self.Brightness = 1
+	self.Fade = false
 
 	if self.Entity.ConfigureTracer then
 		self.Entity:ConfigureTracer(self)
@@ -59,8 +60,9 @@ function EFFECT:Render()
 	self.Time = self.Time + FrameTime()
 
 	local r, g, b = self.Color:Unpack()
+	local drawBeam = self.Fade and sg.DrawFadedBeam or render.DrawBeam
 
-	self.Active = sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Time, function(startPos, endPos, uv1, uv2)
+	self.Active = sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Time, function(startPos, endPos, uv1, uv2, dir)
 		local v1, v2 = startPos:ToScreen(), endPos:ToScreen()
 		v1, v2 = Vector(v1.x, v1.y), Vector(v2.x, v2.y)
 
@@ -77,14 +79,13 @@ function EFFECT:Render()
 			spriteColor:SetBrightness(spriteBrightness)
 
 			render.SetMaterial(self.Material)
-			render.DrawBeam(startPos, endPos, self.Scale * 2, uv1, uv2, color)
+
+			drawBeam(startPos, endPos, self.Scale * 2, uv1, uv2, color)
+			color:SetBrightness(0.25)
+			drawBeam(startPos, endPos, self.Scale * 4, uv1, uv2, color)
 
 			render.SetMaterial(sprite)
 			render.DrawSprite(spritePos, self.Scale * 2, self.Scale * 2, spriteColor)
-
-			color:SetBrightness(0.25)
-			render.SetMaterial(self.Material)
-			render.DrawBeam(startPos, endPos, self.Scale * 4, uv1, uv2, color)
 		end
 	end)
 end

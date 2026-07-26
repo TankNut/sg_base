@@ -13,43 +13,80 @@ function DrawDebugText(str, line, color)
 	draw.SimpleText(str, "DebugOverlay", x, y + offset * (line or 0), color or color_white)
 end
 
-local tracerDir = Vector()
+do
+	local color_black = Color(0, 0, 0)
+	local dir = Vector()
 
--- Returns false if done rendering
-function Tracer(startpos, endpos, velocity, length, time, callback)
-	tracerDir:Set(endpos)
-	tracerDir:Sub(startpos)
+	function DrawFadedBeam(startPos, endPos, width, uv1, uv2, color)
+		local maxOffset = width * 2
 
-	local distance = tracerDir:Length()
+		local distance = startPos:Distance(endPos)
+		local length = math.min(startPos:Distance(endPos) * 0.5, maxOffset)
+		local uvDistance = math.abs(uv1 - uv2)
 
-	tracerDir:Normalize()
+		dir:Set(endPos)
+		dir:Sub(startPos)
+		dir:Normalize()
 
-	-- Minimum length
-	if distance <= 128 then
-		return false
+		local offset = dir * length
+		local uvOffset = (length / distance) * uvDistance
+
+		if length == maxOffset then
+			render.StartBeam(4)
+				render.AddBeam(startPos, width, uv1, color_black)
+				render.AddBeam(startPos + offset, width, uv1 - uvOffset, color)
+				render.AddBeam(endPos - offset, width, uv2 + uvOffset, color)
+				render.AddBeam(endPos, width, uv2, color_black)
+			render.EndBeam()
+		else
+			render.StartBeam(3)
+				render.AddBeam(startPos, width, uv1, color_black)
+				render.AddBeam(startPos + offset, width, uv1 - uvOffset, color)
+				render.AddBeam(endPos, width, uv2, color_black)
+			render.EndBeam()
+		end
 	end
+end
 
-	local lifetime = (distance + length) / velocity
+do
+	local dir = Vector()
 
-	if time > lifetime then
-		return false
+	-- Returns false if done rendering
+	function Tracer(startpos, endpos, velocity, length, time, callback)
+		dir:Set(endpos)
+		dir:Sub(startpos)
+
+		local distance = dir:Length()
+
+		dir:Normalize()
+
+		-- Minimum length
+		if distance <= 128 then
+			return false
+		end
+
+		local lifetime = (distance + length) / velocity
+
+		if time > lifetime then
+			return false
+		end
+
+		local startDistance = velocity * time
+		local endDistance = startDistance - length
+
+		startDistance = math.Clamp(startDistance, 0, distance)
+		endDistance = math.Clamp(endDistance, 0, distance)
+
+		local startPoint = startpos + dir * startDistance
+		local endPoint = startpos + dir * endDistance
+
+		local uv1 = math.abs(startDistance - endDistance) / length
+		local uv2 = 0
+
+		callback(startPoint, endPoint, uv1, uv2, dir)
+
+		return true
 	end
-
-	local startDistance = velocity * time
-	local endDistance = startDistance - length
-
-	startDistance = math.Clamp(startDistance, 0, distance)
-	endDistance = math.Clamp(endDistance, 0, distance)
-
-	local startPoint = startpos + tracerDir * startDistance
-	local endPoint = startpos + tracerDir * endDistance
-
-	local uv1 = math.abs(startDistance - endDistance) / length
-	local uv2 = 0
-
-	callback(startPoint, endPoint, uv1, uv2)
-
-	return true
 end
 
 local spotlightSprite = Material("sprites/light_glow02_add")
@@ -122,10 +159,5 @@ function DrawLaser(pos, dir, length, width, color, brightness, pixvis)
 end
 
 -- Tracking viewmodel rendering so we can responsibly reset render.DepthRange
-hook.Add("PreDrawViewModels", "sg_base", function()
-	IsDrawingViewModels = true
-end)
-
-hook.Add("PreDrawEffects", "sg_base", function()
-	IsDrawingViewModels = false
-end)
+hook.Add("PreDrawViewModels", "sg_base", function() IsDrawingViewModels = true end)
+hook.Add("PreDrawEffects", "sg_base", function() IsDrawingViewModels = false end)

@@ -52,7 +52,8 @@ SWEP.TracerConfig = {
 	Velocity = 5000,
 	Scale = 8,
 	Color = Color(150, 100, 255),
-	Brightness = 5
+	Brightness = 5,
+	Fade = true
 }
 
 -- Misc

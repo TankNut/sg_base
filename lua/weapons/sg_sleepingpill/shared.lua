@@ -74,7 +74,7 @@ if CLIENT then
 			if i < clip then
 				surface.SetDrawColor(200, 0, 0)
 			else
-				surface.SetDrawColor(30, 30, 30)
+				surface.SetDrawColor(40, 40, 40)
 			end
 
 			surface.DrawRect(133, y, 50, 8)

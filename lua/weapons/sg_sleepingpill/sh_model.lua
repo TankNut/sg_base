@@ -58,7 +58,5 @@ SWEP.WElements = {
 }
 
 SWEP.ViewModelBoneMods = {
-	["ValveBiped.square"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
-} --scale vector should be .01 for all to shrink the slide but this breaks the SCK	
-
-
+	["ValveBiped.square"] = { scale = Vector(0.1, 0.1, 0.1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
+}

@@ -359,6 +359,9 @@ addSCKType("Spotlight", {
 	end
 })
 
+local nan = Vector(1 / 0, 1 / 0, 1 / 0)
+local vector_one = Vector(1, 1, 1)
+
 function SWEP:GetBoneOrientation(lookup, element, ent)
 	if element._frame == FrameNumber() then
 		return element._matrix
@@ -379,6 +382,7 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 		end
 
 		matrix = ent:GetBoneMatrix(bone)
+		matrix:SetScale(vector_one)
 	end
 
 	if element.pos then matrix:Translate(element.pos) end
@@ -439,9 +443,6 @@ function SWEP:RebuildBoneCache(vm)
 
 	self.BoneCache = cache
 end
-
-local nan = Vector(1 / 0, 1 / 0, 1 / 0)
-local vector_one = Vector(1, 1, 1)
 
 function SWEP:ApplyBoneMods(vm)
 	local cache = self.BoneCache

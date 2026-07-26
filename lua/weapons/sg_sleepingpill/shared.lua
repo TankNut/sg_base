@@ -61,6 +61,28 @@ function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Sleepingpill.Single2")
 end
 
+if CLIENT then
+	local ammoColor = Color(255, 0, 0)
+
+	function SWEP:DrawAmmoCounter()
+		local clip = self:IsReloading() and 0 or self:Clip1()
+		local y = 123
+
+		draw.SimpleText(clip, "SG_Lawnmower_Ammo", -30, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+		for i = 0, self:GetMaxClip1() - 1 do
+			if i < clip then
+				surface.SetDrawColor(200, 0, 0)
+			else
+				surface.SetDrawColor(30, 30, 30)
+			end
+
+			surface.DrawRect(133, y, 50, 8)
+			y = y - 15
+		end
+	end
+end
+
 sound.Add({
 	name = "Weapon_SG_Sleepingpill.Single1",
 	channel = CHAN_WEAPON,

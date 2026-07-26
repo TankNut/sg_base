@@ -51,7 +51,7 @@ SWEP.TracerConfig = {}
 
 -- Misc
 SWEP.Animations = {
-	Reload = {Sound = "weapons/pistol/pistol_reload1.wav"}
+	Reload = {Sound = "Weapon_Pistol.Reload"}
 }
 
 include("sh_model.lua")
@@ -68,7 +68,7 @@ if CLIENT then
 		local clip = self:IsReloading() and 0 or self:Clip1()
 		local y = 123
 
-		draw.SimpleText(clip, "SG_Lawnmower_Ammo", -30, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(clip, "SG_Ammo", -30, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 		for i = 0, self:GetMaxClip1() - 1 do
 			if i < clip then
@@ -95,7 +95,7 @@ sound.Add({
 sound.Add({
 	name = "Weapon_SG_Sleepingpill.Single2",
 	channel = CHAN_ITEM,
-	volume = .5,
+	volume = 0.5,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {180, 200},
 	sound = ")weapons/pistol/pistol_fire2.wav"

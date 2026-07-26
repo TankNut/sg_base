@@ -68,7 +68,6 @@ include("sh_model.lua")
 
 if CLIENT then
 	local ammoColor = Color(255, 255, 0)
-	local reserveColor = Color(200, 200, 200)
 
 	function SWEP:DrawAmmoCounter()
 		local fraction = self:Clip1() / self:GetMaxClip1()
@@ -79,8 +78,43 @@ if CLIENT then
 		draw.SimpleText(self:Clip1(), "SG_Ammo", 0, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
+	surface.CreateFont("SG_Lawnmower_Ammo2", {
+		font = "Trebuchet MS",
+		size = 200,
+		weight = 900,
+		antialias = true,
+		scanlines = 0,
+		blursize = 2
+	})
+
+	local reserveColor = Color(60, 70, 40)
+
 	function SWEP:DrawReserveCounter()
-		draw.SimpleText(self:Ammo1(), "SG_Ammo2", 0, 0, reserveColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		surface.SetDrawColor(60, 70, 40, 150)
+
+		sg.DrawCircle(-205, -85, 20, 20)
+
+		for x = -220, 210, 50 do
+			surface.DrawRect(x, 90, 40, 20)
+		end
+
+		reserveColor.a = 50
+
+		draw.SimpleText("0000", "SG_Lawnmower_Ammo2", 188, 0, reserveColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+
+		reserveColor.a = 255
+
+		draw.SimpleText(math.min(self:Ammo1(), 9999), "SG_Lawnmower_Ammo2", 188, 0, reserveColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+	end
+
+	function SWEP:DrawReadyScreen()
+		if self:Clip1() > 0 then
+			surface.SetDrawColor(0, 200, 0)
+		else
+			surface.SetDrawColor(200, 0, 0)
+		end
+
+		surface.DrawRect(-38, -25, 80, 50)
 	end
 end
 

@@ -13,6 +13,29 @@ function DrawDebugText(str, line, color)
 	draw.SimpleText(str, "DebugOverlay", x, y + offset * (line or 0), color or color_white)
 end
 
+function DrawCircle(x, y, radius, seg)
+	local circle = {}
+
+	table.insert(circle, {x = x, y = y, u = 0.5, v = 0.5})
+
+	local function addSegment(a)
+		table.insert(circle, {
+			x = x + math.sin(a) * radius,
+			y = y + math.cos(a) * radius,
+			u = math.sin(a) / 2 + 0.5,
+			v = math.cos(a) / 2 + 0.5
+		})
+	end
+
+	for i = 0, seg do
+		addSegment(math.rad((i / seg) * -360))
+	end
+
+	addSegment(math.rad(0)) -- This is needed for non absolute segment counts
+
+	surface.DrawPoly(circle)
+end
+
 do
 	local color_black = Color(0, 0, 0)
 	local dir = Vector()

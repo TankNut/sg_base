@@ -3,5 +3,5 @@ VertexLitGeneric
 	$basetexture "metal/metalgrate002a"
 	$surfaceprop "metalgrate"
 
-	$alphatest "1"
+	$alphatest 1
 }

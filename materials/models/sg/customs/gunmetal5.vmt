@@ -1,11 +1,11 @@
 VertexLitGeneric
 {
-	$basetexture "models/grixis/customs/gunmetal5"
-	$bumpmap "models/grixis/customs/gunmetal5_normal"
-	$surfaceprop Metal
+	$basetexture "models/sg/customs/gunmetal5"
+	$bumpmap "models/sg/customs/gunmetal5_normal"
+	$surfaceprop "metal"
 
 	$phong 1
-	$phongfresnelranges "[0.5 0.75 1]"
+	$phongfresnelranges [0.5 0.75 1]
 	$phongexponent 20
 	$phongboost 0.25
 }

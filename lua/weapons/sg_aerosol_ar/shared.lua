@@ -27,7 +27,7 @@ SWEP.Firemode = 0
 -- Balance
 SWEP.AmmoCost = 1
 SWEP.Count = 1
-SWEP.Damage = 20
+SWEP.Damage = 10
 
 SWEP.Spread = nil -- Not Yet Implemented
 
@@ -35,12 +35,12 @@ SWEP.Delay = 60 / 1000
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.7, 0.3),
-	Max = Angle(0.7, 0.3)
+	Min = Angle(0.8, 0.3),
+	Max = Angle(0.9, -0.3)
 }
 
 SWEP.RecoilAdd = 0.15
-SWEP.ViewPunch = 0.2
+SWEP.ViewPunch = 0.4
 SWEP.RecoilFlip = true
 
 -- Effects

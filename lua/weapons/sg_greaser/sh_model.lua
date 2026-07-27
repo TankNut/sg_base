@@ -14,11 +14,6 @@ SWEP.ViewModelFlip = false
 SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false
 
-SWEP.IronSightsPos = Vector(0, 0, 0)
-SWEP.IronSightsAng = Vector(0, 0, 0)
-
-SWEP.SCKMaterials = {"models/sg/metal/metalpipe003a", "models/sg/metal/metalwall014a", "models/sg/metal/metalfloor001a", "models/sg/metal/metalfloor005a",}
-
 SWEP.VElements = {
 	["back"] = { type = "Model", model = "models/props_wasteland/laundry_washer001a.mdl", bone = "ValveBiped.base", rel = "connect", pos = Vector(-0.065, 0.139, 11.069), angle = Angle(0, 164.151, 0), size = Vector(0.037, 0.037, 0.037), color = Color(142, 108, 80, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["base"] = { type = "Model", model = "models/weapons/c_smg1.mdl", bone = "ValveBiped.base", rel = "", pos = Vector(0.021, 0.025, -0.29), angle = Angle(0, 0, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 0), surpresslightning = false, bonemerge = true, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

@@ -14,9 +14,6 @@ SWEP.ViewModelFlip = false
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
-SWEP.IronSightsPos = Vector(0, 0, 0)
-SWEP.IronSightsAng = Vector(0, 0, 0)
-
 SWEP.VElements = {
 	["barrel"] = { type = "Model", model = "models/props_rooftop/chimneypipe01a.mdl", bone = "ValveBiped.base", rel = "frontbarrelholder", pos = Vector(0, 1, 0), angle = Angle(-90, 0, 0), size = Vector(0.05, 0.05, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrelmain+"] = { type = "Model", model = "models/xqm/jetbody2fuselage.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "body", pos = Vector(0, 12.01, 1.964), angle = Angle(0, -90, -180), size = Vector(0.23, 0.045, 0.1), color = Color(209, 220, 250, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/polymer3", skin = 0, bodygroup = {} },
@@ -82,7 +79,7 @@ SWEP.WElements = {
 	["topsupp"] = { type = "Model", model = "models/props_lab/reciever01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top", pos = Vector(0, -0.7, -1.364), angle = Angle(0, 90, 180), size = Vector(0.152, 0.069, 0.152), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
 
-
+SWEP.ViewModelBoneMods = {
 	["ValveBiped.Bip01_L_Clavicle"] = { scale = Vector(1, 1, 1), pos = Vector(2.156, -1.796, -0.3), angle = Angle(0, 0, 0) },
 	["ValveBiped.Bip01_L_Forearm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 19.401, 0) },
 	["ValveBiped.Bip01_L_Hand"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(-6, -8.623, 0) },

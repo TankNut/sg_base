@@ -27,24 +27,25 @@ SWEP.Firemode = 0
 -- Balance
 SWEP.AmmoCost = 1
 SWEP.Count = 1
-SWEP.Damage = 10
+SWEP.Damage = 15
 
-SWEP.Spread = nil -- Not Yet Implemented
+SWEP.Accuracy = 24
+SWEP.Range = 2000
 
-SWEP.Delay = 60 / 1000
+SWEP.Delay = 0.075
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.8, 0.3),
-	Max = Angle(0.9, -0.3)
+	Min = Angle(0.7, 0.3),
+	Max = Angle(0.8, -0.3)
 }
 
 SWEP.RecoilAdd = 0.15
-SWEP.ViewPunch = 0.4
+SWEP.ViewPunch = 0.2
 SWEP.RecoilFlip = true
 
 -- Effects
-SWEP.Tracer = 1
+SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
@@ -52,8 +53,6 @@ SWEP.TracerConfig = {}
 SWEP.Animations = {
 	Reload = {Sound = "Weapon_SMG1.Reload"}
 }
-
-include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Aerosol.Single1")

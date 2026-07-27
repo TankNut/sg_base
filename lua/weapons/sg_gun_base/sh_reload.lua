@@ -74,10 +74,6 @@ function SWEP:ShouldCancelReload(first)
 		return true
 	end
 
-	if not self:HasEnoughReserveAmmo() then
-		return true
-	end
-
 	return false
 end
 

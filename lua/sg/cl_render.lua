@@ -124,7 +124,7 @@ function DrawSpotlight(pos, dir, length, width, color, pixvis)
 	dot:Normalize()
 	dot = dot:Dot(dir)
 
-	local visibility = util.PixelVisible(pos, 10, pixvis) * math.max(dot, 0)
+	local visibility = util.PixelVisible(pos, width / 15, pixvis) * math.max(dot, 0)
 
 	-- Shrink the dot if the viewpoint is off-axis
 	local size = RemapC(dot, 1 - math.rad(30), 1, width * 0.25, width)
@@ -152,7 +152,7 @@ function DrawLaser(pos, dir, length, width, color, brightness, pixvis)
 	dot:Normalize()
 	dot = dot:Dot(dir)
 
-	local visibility = util.PixelVisible(pos, width, pixvis) * RemapC(dot, 1, 0.5, 1, 0)
+	local visibility = util.PixelVisible(pos, width / 5, pixvis) * math.max(dot, 0)
 
 	-- Shrink the dot if the viewpoint is off-axis
 	local size = RemapC(dot, 1 - math.rad(1), 1, width, width * 3)

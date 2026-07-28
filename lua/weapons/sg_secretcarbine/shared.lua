@@ -130,8 +130,3 @@ sound.Add({
 	pitch = {100, 110},
 	sound = ")weapons/m4a1/m4a1-1.wav"
 })
-
---[[Grixis here, this guy may need a bit of work. Muzzle realignment for sure at minimum. Also not really looking to keep
-the standard ar2 reload anim for this and for any others that are based on this weapon, amongst others. We originally 
-had it do a half-baked goldeneye-style anim where the weapon plays its holster anim, emits some reload sounds, then 
-plays draw with a fresh clip after a bit. Not sure if that's optimal or if there's a better option. Open to ideas ofc.]]--

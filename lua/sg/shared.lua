@@ -10,6 +10,7 @@ DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED
 
 client("cl_fonts.lua")
 client("cl_render.lua")
+shared("sh_keyframe.lua")
 shared("sh_sounds.lua")
 
 function RemapC(val, inMin, inMax, outMin, outMax)

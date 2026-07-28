@@ -387,7 +387,10 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 
 	if element.pos then matrix:Translate(element.pos) end
 	if element.angle then matrix:Rotate(element.angle) end
-	if element.offset then matrix:Translate(element.offset) end
+
+	-- For easy manipulation through code
+	if element.pos2 then matrix:Translate(element.pos2) end
+	if element.angle2 then matrix:Rotate(element.angle2) end
 
 	element._matrix = matrix
 
@@ -521,6 +524,9 @@ function SWEP:InitSCKElements(tab)
 	self.RenderOrder[tab] = renderorder
 end
 
+function SWEP:InitPostSCK()
+end
+
 function SWEP:InitSCK()
 	self:ClearCSEnts()
 
@@ -536,9 +542,23 @@ function SWEP:InitSCK()
 
 	self:InitSCKElements(self.VElements)
 	self:InitSCKElements(self.WElements)
+
+	self:InitPostSCK()
 end
 
+function SWEP:UpdateSCK()
+end
+
+local lastSCKUpdate = 0
+
 function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
+	local frame = FrameNumber()
+
+	if lastSCKUpdate != frame then
+		self:UpdateSCK()
+		lastSCKUpdate = frame
+	end
+
 	shouldFlip = self.ViewModelFlip and ent:GetClass() == "viewmodel"
 
 	for _, element in ipairs(self.RenderOrder[tab]) do

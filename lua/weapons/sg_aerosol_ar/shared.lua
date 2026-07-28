@@ -32,7 +32,7 @@ SWEP.Damage = 15
 SWEP.Accuracy = 24
 SWEP.Range = 2000
 
-SWEP.Delay = 0.075
+SWEP.Delay = 60 / 800
 
 -- Recoil
 SWEP.Recoil = {
@@ -59,6 +59,35 @@ include("sh_model.lua")
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Aerosol.Single1")
 	self:EmitSound("Weapon_SG_Aerosol.Single2")
+end
+
+if CLIENT then
+	function SWEP:InitPostSCK()
+		self.VElements.bolt.pos2 = Vector()
+	end
+
+	local boltAnim = {
+		dist = {
+			{0,       1},
+			{2 / 46,  0},
+			{23 / 46, 0},
+			{43 / 46, 0},
+			{1,       1}
+		}
+	}
+
+	function SWEP:UpdateSCK()
+		local lastAttack = self:GetLastAttack()
+		local cycle = 0
+
+		if self:IsReloading() then
+			cycle = sg.Keyframe(self:GetViewModel(), boltAnim).dist
+		else
+			cycle = math.min(math.TimeFraction(lastAttack, lastAttack + self.Delay, CurTime()), 1)
+		end
+
+		self.VElements.bolt.pos2:SetUnpacked(cycle * 3, 0, 0)
+	end
 end
 
 sound.Add({

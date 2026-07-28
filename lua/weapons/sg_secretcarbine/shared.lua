@@ -47,18 +47,71 @@ SWEP.RecoilFlip = false
 -- Effects
 SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
-SWEP.TracerConfig = {}
+SWEP.TracerConfig = {
+	Material = Material("effects/gunshiptracer"),
+	Length = {128, 256},
+	Scale = {0.5, 1.5}
+}
 
 -- Misc
 SWEP.Animations = {
-	Reload = {Sound = ""}
+	Reload = {Sound = "Weapon_AR2.Reload_Push"}
 }
+
+include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_SecretCarbine.Single1")
 	self:EmitSound("Weapon_SG_SecretCarbine.Single2")
 end
-include("sh_model.lua")
+
+function SWEP:DoImpactEffect(tr, dmg)
+	if tr.HitSky then
+		return
+	end
+
+	local effectdata = EffectData()
+	effectdata:SetOrigin(tr.HitPos + tr.HitNormal)
+	effectdata:SetNormal(tr.HitNormal)
+
+	util.Effect("AR2Impact", effectdata)
+end
+
+if CLIENT then
+	local defaultPos = SWEP.ViewModelBoneMods.Base.pos
+	local lowerPos = Vector(0, 1, -5)
+
+	local defaultAng = SWEP.ViewModelBoneMods.Base.angle
+	local lowerAng = Angle(15, -5, -10)
+
+	local reloadAnim = {
+		pos = {
+			{0,       defaultPos},
+			{10 / 48, lowerPos, math.ease.InOutSine},
+			{36 / 48, lowerPos},
+			{46 / 48, defaultPos, math.ease.InOutSine}
+		},
+		angle = {
+			{0,       defaultAng},
+			{12 / 48, lowerAng, math.ease.InOutSine},
+			{36 / 48, lowerAng},
+			{1,       defaultAng, math.ease.InOutSine}
+		}
+	}
+
+	function SWEP:UpdateSCK()
+		local cycle = self:IsReloading() and self:GetViewModel():GetCycle() or 0
+		local base = self.ViewModelBoneMods.Base
+
+		local anim = sg.Keyframe(cycle, reloadAnim)
+
+		base.pos = anim.pos
+		base.angle = anim.angle
+
+		-- Required for changes to ViewModelBoneMods to apply
+		self.InvalidateBoneMods = true
+	end
+end
 
 sound.Add({
 	name = "Weapon_SG_SecretCarbine.Single1",

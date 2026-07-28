@@ -75,3 +75,7 @@ function SWEP:ConCommand(str)
 
 	ply:ConCommand(str)
 end
+
+function SWEP:GetViewModel(index)
+	return self:GetOwner():GetViewModel(index)
+end

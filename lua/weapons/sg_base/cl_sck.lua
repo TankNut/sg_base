@@ -265,12 +265,6 @@ addSCKType("Sprite", {
 			materialName = materialName .. value
 		end
 
-		-- Don't have to recreate the material if it already exists with the correct parameters
-		if element._cachedMaterialName == materialName then
-			return
-		end
-
-		element._cachedMaterialName = materialName
 		element._material = CreateMaterial(materialName, "UnlitGeneric", materialParameters)
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)

@@ -13,6 +13,12 @@ client("cl_render.lua")
 shared("sh_keyframe.lua")
 shared("sh_sounds.lua")
 
+local errorColor = Color(255, 100, 100)
+
+function ThrowError(...)
+	MsgC(errorColor, "[sg_base] ", string.format(...), "\n")
+end
+
 function RemapC(val, inMin, inMax, outMin, outMax)
 	return math.Clamp(math.Remap(val, inMin, inMax, outMin, outMax), math.min(outMin, outMax), math.max(outMin, outMax))
 end

@@ -10,11 +10,6 @@ local developerMode = sg.DeveloperMode
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
-local errorColor = Color(255, 100, 100)
-
-function SWEP:ThrowSCKError(err)
-	MsgC(errorColor, string.format("[SCK Error] %s", err), "\n")
-end
 
 function SWEP:CreateCSEnt(mdl)
 	local ent = ClientsideModel(mdl, RENDERGROUP_OTHER)
@@ -56,38 +51,33 @@ local function parseAngle(ang)
 	return ang
 end
 
+local badShaders = {
+	["LightmappedGeneric"] = true
+}
+
 addSCKType("Model", {
 	Init = function(self, tab, element)
 		element.pos = parsePos(element.pos)
 		element.angle = parseAngle(element.angle)
 
-		local mdl = element.model
-
 		-- Check if we're creating a valid model
-		if not mdl or string.GetExtensionFromFilename(mdl) != "mdl" or not file.Exists(mdl, "GAME") then
-			self:ThrowSCKError(string.format("Invalid model: \"%s\" (path not found)", mdl))
+		if not element.model or string.GetExtensionFromFilename(element.model) != "mdl" or not file.Exists(element.model, "GAME") then
+			sg.ThrowError("Cannot add %s: File not found (%s)", element, element.model)
 			return
 		end
 
 		-- Check for bad materials
-		if #element.material > 0 and Material(element.material):GetShader() == "LightmappedGeneric" then
-			self:ThrowSCKError(string.format("Invalid material: \"%s\" (bad shader)", element.material))
+		if #element.material > 0 then
+			local shader = Material(element.material):GetShader()
 
-			element.material = ""
-		end
+			if badShaders[shader] then
+				sg.ThrowError("Clearing %s.material: Bad shader (%s)", element, shader)
 
-		local ent = element._entity
-
-		-- If we're re-initializing the table, check if we actually have to recreate the model
-		if IsValid(ent) then
-			if ent:GetModel() == mdl then
-				return
+				element.material = ""
 			end
-
-			ent:Remove()
 		end
 
-		ent = self:CreateCSEnt(mdl)
+		local ent = self:CreateCSEnt(element.model)
 		ent:SetPos(self:GetPos())
 		ent:SetAngles(self:GetAngles())
 		ent:SetParent(self)
@@ -219,7 +209,7 @@ addSCKType("ClipPlane", {
 		local parent = tab[element.rel]
 
 		if not parent or parent.type != "Model" then
-			self:ThrowSCKError("Cannot add clip plane: rel is missing or not a model")
+			sg.ThrowError("Cannot add %s: Parent is missing or not a model", element)
 
 			return
 		end
@@ -231,7 +221,7 @@ addSCKType("ClipPlane", {
 		parent.clipcount = parent.clipcount or 0
 
 		if parent.clipcount >= 2 then
-			self:ThrowSCKError("Cannot add clip plane: Maximum limit reached (2)")
+			sg.ThrowError("Cannot add %s: Maximum clip limit reached (2)", element)
 
 			return
 		end
@@ -252,19 +242,19 @@ addSCKType("Sprite", {
 			element.angle = parseAngle(element.angle or angle_zero)
 		end
 
-		local mat = element.sprite
+		local mat = Material(element.sprite)
 
 		-- Check if the material we're using exists
-		if not mat or not file.Exists("materials/" .. mat .. ".vmt", "GAME") then
-			self:ThrowSCKError(string.format("Invalid sprite: \"%s\" (path not found)", mat))
+		if mat:IsError() then
+			self:ThrowError("Cannot add %s: Base material is invalid", element)
 
 			return
 		end
 
-		local materialName = mat .. "-sck-"
+		local materialName = mat:GetName() .. "-sck-"
 		local materialParameters = {
 			-- This fixes a potential issue where the sprite material name doesn't match the sprite texture name
-			["$basetexture"] = Material(mat):GetTexture("$basetexture"):GetName()
+			["$basetexture"] = mat:GetTexture("$basetexture"):GetName()
 		}
 
 		-- Allow for setting a number of extra sprite keys
@@ -500,10 +490,18 @@ local defaultRenderOrder = {
 	["Sprite"] = -5
 }
 
+local meta = {
+	__tostring = function(self)
+		return string.format("SCK_%s[%s]", self.type, self.name)
+	end
+}
+
 function SWEP:InitSCKElements(tab)
 	local renderorder = {}
 
 	for name, element in pairs(tab) do
+		setmetatable(element, meta)
+
 		element.renderorder = element.renderorder or defaultRenderOrder[element.type] or 0
 		element.name = name
 
@@ -513,7 +511,7 @@ function SWEP:InitSCKElements(tab)
 			def.Init(self, tab, element)
 			table.insert(renderorder, element)
 		else
-			self:ThrowSCKError(string.format("Unimplemented SCK type: %s", element.type))
+			sg.ThrowError("Skipping unimplemented SCK type: " .. element.type)
 		end
 	end
 

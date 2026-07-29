@@ -5,7 +5,7 @@ VertexLitGeneric
 	$surfaceprop "metal"
 
 	$phong 1
-	$phongfresnelranges [0.15 0.5 1]
+	$phongfresnelranges "[0.15 0.5 1]"
 	$phongexponent 12
 	$phongboost 0.15
 }

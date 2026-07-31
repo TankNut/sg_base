@@ -156,7 +156,7 @@ addSCKType("Model", {
 			csent:SetRenderMode(mode)
 		end
 
-		if element.inversed then
+		if element.inverted then
 			render.CullMode(MATERIAL_CULLMODE_CW)
 		end
 
@@ -182,7 +182,7 @@ addSCKType("Model", {
 		csent:DrawModel(flags)
 
 		if element.nocull then
-			render.CullMode(element.inversed and MATERIAL_CULLMODE_CCW or MATERIAL_CULLMODE_CW)
+			render.CullMode(element.inverted and MATERIAL_CULLMODE_CCW or MATERIAL_CULLMODE_CW)
 			csent:DrawModel(flags)
 		end
 

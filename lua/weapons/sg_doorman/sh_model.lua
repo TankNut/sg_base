@@ -46,7 +46,7 @@ SWEP.WElements = {
 }
 
 SWEP.ViewModelBoneMods = {
-	["Base"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
+	["Base"] = { scale = Vector(1, 1, 1), pos = Vector(-3.952, 0, 0), angle = Angle(0, 0, 0) },
 }
 
 

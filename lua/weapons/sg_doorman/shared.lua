@@ -7,7 +7,7 @@ SWEP.PrintName = "The Doorman"
 SWEP.Category = "S&G Munitions"
 
 SWEP.Instructions = "Pull the trigger and watch those doors and windows make themselves."
-SWEP.Purpose = "For when you want to make your own doors or windows. Premade ones are too mainstream."
+SWEP.Purpose = "For when you want to make your own doors or windows. Existing ones are too mainstream."
 
 SWEP.Slot = 2
 

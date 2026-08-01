@@ -478,23 +478,18 @@ end
 
 function SWEP:ResetBoneMods(vm)
 	for i = 0, vm:GetBoneCount() - 1 do
-		local mod = self.ViewModelBoneMods[vm:GetBoneName(i)]
 		local scale = self:GetBoneScale(vm, i)
 
 		if scale != vector_one then
 			vm:ManipulateBoneScale(i, vector_one)
 		end
 
-		if mod then
-			local proxy = mod._proxy
+		if vm:GetManipulateBoneAngles(i) != angle_zero then
+			vm:ManipulateBoneAngles(i, angle_zero)
+		end
 
-			if proxy.angle != angle_zero then
-				vm:ManipulateBoneAngles(i, angle_zero)
-			end
-
-			if proxy.pos != vector_origin then
-				vm:ManipulateBonePosition(i, vector_origin)
-			end
+		if vm:GetManipulateBonePosition(i) != vector_origin then
+			vm:ManipulateBonePosition(i, vector_origin)
 		end
 	end
 end

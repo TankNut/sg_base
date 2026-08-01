@@ -37,18 +37,23 @@ end
 local shouldFlip = false
 local scaleMatrix = Matrix()
 
-local function parsePos(pos)
+local function fixPos(pos)
 	pos = Vector(pos)
 	pos.y = -pos.y
-
-	return pos
 end
 
-local function parseAngle(ang)
+local function fixAng(ang)
 	ang = Angle(ang)
 	ang.p = -ang.p
+end
 
-	return ang
+-- Fix for a discrepancy between the old and new positioning logic
+local function fixPositions(element)
+	if element.pos then element.pos = fixPos(element.pos) end
+	if element.pos2 then element.pos2 = fixPos(element.pos2) end
+
+	if element.angle then element.angle = fixAng(element.angle) end
+	if element.angle2 then element.angle2 = fixAng(element.angle2) end
 end
 
 local badShaders = {
@@ -57,8 +62,7 @@ local badShaders = {
 
 addSCKType("Model", {
 	Init = function(self, tab, element)
-		element.pos = parsePos(element.pos)
-		element.angle = parseAngle(element.angle)
+		fixPositions(element)
 
 		-- Check if we're creating a valid model
 		if not element.model or string.GetExtensionFromFilename(element.model) != "mdl" or not file.Exists(element.model, "GAME") then
@@ -236,11 +240,11 @@ addSCKType("ClipPlane", {
 
 addSCKType("Sprite", {
 	Init = function(self, tab, element)
-		element.pos = parsePos(element.pos)
-
 		if element.quad then
-			element.angle = parseAngle(element.angle or angle_zero)
+			element.angle = element.angle or angle_zero
 		end
+
+		fixPositions(element)
 
 		local mat = Material(element.sprite)
 
@@ -315,6 +319,8 @@ addSCKType("Quad", {
 
 addSCKType("Laser", {
 	Init = function(self, tab, element)
+		fixPositions(element)
+
 		element.pixvis = util.GetPixelVisibleHandle()
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)
@@ -330,6 +336,8 @@ addSCKType("Laser", {
 
 addSCKType("Spotlight", {
 	Init = function(self, tab, element)
+		fixPositions(element)
+
 		element.pixvis = util.GetPixelVisibleHandle()
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)

@@ -36,11 +36,11 @@ SWEP.Delay = 0.1
 -- Recoil
 SWEP.Recoil = {
 	Min = Angle(0.4, -0.35),
-	Max = Angle(.45, .35)
+	Max = Angle(0.45, 0.35)
 }
 
-SWEP.RecoilAdd = .75
-SWEP.ViewPunch = .75
+SWEP.RecoilAdd = 0.75
+SWEP.ViewPunch = 0.75
 SWEP.RecoilFlip = false
 
 -- Effects
@@ -48,16 +48,15 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Reload = {Sound = "Weapon_SMG1.Reload"}
-}
-
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Greaser.Single1")
 	self:EmitSound("Weapon_SG_Greaser.Single2")
+end
+
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_SMG1.Reload")
 end
 
 sound.Add({

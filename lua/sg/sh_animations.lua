@@ -267,7 +267,7 @@ end
 function WeaponSequence(sequence)
 	local anim = setmetatable({Sequence = sequence}, {__index = WEAPON})
 	anim:Initialize()
-	anim:AddEvent(0, "VMSequence", {sequence, 1})
+	anim:AddEvent(0, "VMSequence", sequence)
 
 	return anim
 end

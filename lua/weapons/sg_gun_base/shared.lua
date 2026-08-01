@@ -104,9 +104,11 @@ function SWEP:UpdatePump()
 end
 
 function SWEP:Think()
-	self:UpdateReload()
-	self:UpdatePump()
-	self:UpdateAttack()
+	if GetPredictionPlayer():IsValid() then
+		self:UpdateReload()
+		self:UpdatePump()
+		self:UpdateAttack()
+	end
 
 	BaseClass.Think(self)
 end

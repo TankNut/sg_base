@@ -194,10 +194,6 @@ function SWEP:IsFiring()
 end
 
 function SWEP:UpdateAttack()
-	if not GetPredictionPlayer():IsValid() then
-		return
-	end
-
 	if self:GetCanAttack() and not self:GetHasAttacked() or self:IsFinalBurstShot() then
 		if self:GetFireDuration() > 0 then
 			self:OnStopAttack()

@@ -49,45 +49,16 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Reload = {Sound = "Weapon_SMG1.Reload"}
-}
-
 include("sh_model.lua")
+include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Aerosol.Single1")
 	self:EmitSound("Weapon_SG_Aerosol.Single2")
 end
 
-if CLIENT then
-	function SWEP:InitPostSCK()
-		self.VElements.bolt.pos2 = Vector()
-	end
-
-	local boltAnim = {
-		dist = {
-			{0,       1},
-			{2 / 46,  0},
-			{23 / 46, 0},
-			{43 / 46, 0},
-			{1,       1}
-		}
-	}
-
-	function SWEP:UpdateSCK()
-		local lastAttack = self:GetLastAttack()
-		local cycle = 0
-
-		if self:IsReloading() then
-			cycle = sg.Keyframe(self:GetViewModel(), boltAnim).dist
-		else
-			cycle = math.min(math.TimeFraction(lastAttack, lastAttack + self.Delay, CurTime()), 1)
-		end
-
-		self.VElements.bolt.pos2:SetUnpacked(cycle * 3, 0, 0)
-	end
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_SMG1.Reload")
 end
 
 sound.Add({

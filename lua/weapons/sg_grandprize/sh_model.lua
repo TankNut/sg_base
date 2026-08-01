@@ -11,8 +11,8 @@ end
 SWEP.ViewModelFOV = 54
 SWEP.ViewModelFlip = false
 
-SWEP.ShowViewModel = false
-SWEP.ShowWorldModel = false
+SWEP.ShowViewModel = true
+SWEP.ShowWorldModel = true
 
 SWEP.VElements = {
 	["back"] = { type = "Model", model = "models/props_c17/TrapPropeller_Engine.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-0.02999, -0.11902, 2.77295), angle = Angle(88.41397, -6.08062, 6.23563), size = Vector(0.05, 0.05, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

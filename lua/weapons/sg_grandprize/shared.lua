@@ -49,16 +49,15 @@ SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Reload = {Sound = "weapons/pistol/pistol_reload1.wav"}
-}
-
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_GrandPrize.Single1")
 	self:EmitSound("Weapon_SG_GrandPrize.Single2")
+end
+
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_Pistol.Reload")
 end
 
 sound.Add({

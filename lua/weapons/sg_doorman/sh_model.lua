@@ -14,9 +14,6 @@ SWEP.ViewModelFlip = false
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
-SWEP.IronSightsPos = Vector(0, 0, 0)
-SWEP.IronSightsAng = Vector(0, 0, 0)
-
 SWEP.VElements = {
 	["ammo"] = { type = "Model", model = "models/Items/BoxSRounds.mdl", bone = "Base", rel = "body", pos = Vector(-10, -12.105, 1.579), angle = Angle(0, -90, -90), size = Vector(0.7, 0.7, 0.7), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barel ext"] = { type = "Model", model = "models/props_wasteland/laundry_basket001.mdl", bone = "Base", rel = "body", pos = Vector(-0.5, -11.053, 0), angle = Angle(0, 0, 90), size = Vector(0.044, 0.044, 0.24), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
@@ -48,5 +45,3 @@ SWEP.WElements = {
 SWEP.ViewModelBoneMods = {
 	["Base"] = { scale = Vector(1, 1, 1), pos = Vector(-3.952, 0, 0), angle = Angle(0, 0, 0) },
 }
-
-

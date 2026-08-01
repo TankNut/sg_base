@@ -14,9 +14,6 @@ SWEP.ViewModelFlip = false
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
-SWEP.IronSightsPos = Vector(0, 0, 0)
-SWEP.IronSightsAng = Vector(0, 0, 0)
-
 SWEP.VElements = {
 	["Top rail"] = { type = "Model", model = "models/props_junk/TrashDumpster01a.mdl", bone = "Base", rel = "top", pos = Vector(1.5, 0, 1.6), angle = Angle(0, -90, 0), size = Vector(0.021, 0.05, 0.041), color = Color(74, 74, 74, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} },
 	["Top rail+"] = { type = "Model", model = "models/props_junk/TrashDumpster01a.mdl", bone = "Base", rel = "top", pos = Vector(-2.18, 0, 1.6), angle = Angle(0, -90, 0), size = Vector(0.021, 0.05, 0.041), color = Color(74, 74, 74, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} },
@@ -135,5 +132,3 @@ SWEP.ViewModelBoneMods = {
 	["Shell2"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
 	["Vent"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
 }
-
-

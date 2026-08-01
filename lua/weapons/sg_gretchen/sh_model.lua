@@ -107,6 +107,3 @@ SWEP.WElements = {
 SWEP.ViewModelBoneMods = {
 	["ValveBiped.Pump"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
 }
-
-
-

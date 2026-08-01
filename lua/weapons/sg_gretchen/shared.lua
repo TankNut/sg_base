@@ -58,73 +58,23 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Pump = {Sound = "Weapon_SG.Pump"},
-	ReloadSingle = {Sound = "Weapon_M3.Insertshell"}
-}
-
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
-	self:EmitSound("Weapon_SG_Lawnmower.Single1")
-	self:EmitSound("Weapon_SG_Lawnmower.Single2")
+	self:EmitSound("Weapon_SG_Gretchen.Single1")
+	self:EmitSound("Weapon_SG_Gretchen.Single2")
 end
 
-if CLIENT then
-	local ammoColor = Color(255, 255, 0)
+function SWEP:OnPumpAnimation()
+	self:EmitSound("Weapon_SG.Pump")
+end
 
-	function SWEP:DrawAmmoCounter()
-		local fraction = self:Clip1() / self:GetMaxClip1()
-
-		ammoColor.r = (1 - fraction) * 255
-		ammoColor.g = fraction * 255
-
-		draw.SimpleText(self:Clip1(), "SG_Ammo", 0, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	end
-
-	surface.CreateFont("SG_Lawnmower_Ammo2", {
-		font = "Trebuchet MS",
-		size = 200,
-		weight = 900,
-		antialias = true,
-		scanlines = 0,
-		blursize = 2
-	})
-
-	local reserveColor = Color(60, 70, 40)
-
-	function SWEP:DrawReserveCounter()
-		surface.SetDrawColor(60, 70, 40, 150)
-
-		sg.DrawCircle(-205, -85, 20, 20)
-
-		for x = -220, 210, 50 do
-			surface.DrawRect(x, 90, 40, 20)
-		end
-
-		reserveColor.a = 50
-
-		draw.SimpleText("0000", "SG_Lawnmower_Ammo2", 188, 0, reserveColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-
-		reserveColor.a = 255
-
-		draw.SimpleText(math.min(self:Ammo1(), 9999), "SG_Lawnmower_Ammo2", 188, 0, reserveColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-	end
-
-	function SWEP:DrawReadyScreen()
-		if self:Clip1() > 0 then
-			surface.SetDrawColor(0, 200, 0)
-		else
-			surface.SetDrawColor(200, 0, 0)
-		end
-
-		surface.DrawRect(-38, -25, 80, 50)
-	end
+function SWEP:OnReloadSingleAnimation()
+	self:EmitSound("Weapon_M3.Insertshell")
 end
 
 sound.Add({
-	name = "Weapon_SG_Lawnmower.Single1",
+	name = "Weapon_SG_Gretchen.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
 	level = sg.LEVEL_GUNFIRE,
@@ -133,7 +83,7 @@ sound.Add({
 })
 
 sound.Add({
-	name = "Weapon_SG_Lawnmower.Single2",
+	name = "Weapon_SG_Gretchen.Single2",
 	channel = CHAN_WEAPON,
 	volume = 1,
 	level = sg.LEVEL_GUNFIRE,

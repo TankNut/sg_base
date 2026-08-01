@@ -40,11 +40,15 @@ local scaleMatrix = Matrix()
 local function fixPos(pos)
 	pos = Vector(pos)
 	pos.y = -pos.y
+
+	return pos
 end
 
 local function fixAng(ang)
 	ang = Angle(ang)
 	ang.p = -ang.p
+
+	return ang
 end
 
 -- Fix for a discrepancy between the old and new positioning logic

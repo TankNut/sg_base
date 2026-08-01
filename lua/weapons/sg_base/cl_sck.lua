@@ -10,7 +10,6 @@ local developerMode = sg.DeveloperMode
 SWEP.ShowViewModel = true
 SWEP.ShowWorldModel = true
 
-
 function SWEP:CreateCSEnt(mdl)
 	local ent = ClientsideModel(mdl, RENDERGROUP_OTHER)
 	table.insert(self.CSEnts, ent)
@@ -65,6 +64,7 @@ local badShaders = {
 }
 
 addSCKType("Model", {
+	RenderOrder = 0,
 	Init = function(self, tab, element)
 		fixPositions(element)
 
@@ -112,12 +112,14 @@ addSCKType("Model", {
 		csent:SetPos(pos)
 		csent:SetAngles(ang)
 
-		-- Re-using a single matrix here for optimization
-		if element.size != element._size then
-			scaleMatrix:Identity()
-			scaleMatrix:SetScale(element.size)
+		local proxy = element._proxy
 
-			element._size = Vector(element.size)
+		if proxy.size != element._size then
+			-- Re-using a single matrix here for optimization
+			scaleMatrix:Identity()
+			scaleMatrix:SetScale(proxy.size)
+
+			element._size = Vector(proxy.size)
 
 			csent:EnableMatrix("RenderMultiply", scaleMatrix)
 		end
@@ -136,35 +138,35 @@ addSCKType("Model", {
 			end
 		end
 
-		if element.skin != ent:GetSkin() then
-			csent:SetSkin(element.skin)
+		if proxy.skin != ent:GetSkin() then
+			csent:SetSkin(proxy.skin)
 		end
 
-		for id, index in pairs(element.bodygroup) do
+		for id, index in pairs(proxy.bodygroup) do
 			if csent:GetBodygroup(id) != index then
 				csent:SetBodygroup(id, index)
 			end
 		end
 
-		if element._material != element.material then
-			element._material = element.material
-			csent:SetMaterial(element.material)
+		if element._material != proxy.material then
+			element._material = proxy.material
+			csent:SetMaterial(proxy.material)
 		end
 
-		if element.suppresslightning then
+		if proxy.suppresslightning then
 			render.SuppressEngineLighting(true)
 		end
 
-		render.SetColorModulation(element.color.r / 255, element.color.g / 255, element.color.b / 255)
-		render.SetBlend(element.color.a / 255)
+		render.SetColorModulation(proxy.color.r / 255, proxy.color.g / 255, proxy.color.b / 255)
+		render.SetBlend(proxy.color.a / 255)
 
-		local mode = element.color.a < 255 and RENDERMODE_TRANSCOLOR or RENDERMODE_NORMAL
+		local mode = proxy.color.a < 255 and RENDERMODE_TRANSCOLOR or RENDERMODE_NORMAL
 
 		if csent:GetRenderMode() != mode then
 			csent:SetRenderMode(mode)
 		end
 
-		if element.inverted then
+		if proxy.inverted then
 			render.CullMode(MATERIAL_CULLMODE_CW)
 		end
 
@@ -189,8 +191,8 @@ addSCKType("Model", {
 
 		csent:DrawModel(flags)
 
-		if element.nocull then
-			render.CullMode(element.inverted and MATERIAL_CULLMODE_CCW or MATERIAL_CULLMODE_CW)
+		if proxy.nocull then
+			render.CullMode(proxy.inverted and MATERIAL_CULLMODE_CCW or MATERIAL_CULLMODE_CW)
 			csent:DrawModel(flags)
 		end
 
@@ -213,6 +215,7 @@ addSCKType("Model", {
 })
 
 addSCKType("ClipPlane", {
+	RenderOrder = 0,
 	Init = function(self, tab, element)
 		local parent = tab[element.rel]
 
@@ -243,6 +246,7 @@ addSCKType("ClipPlane", {
 })
 
 addSCKType("Sprite", {
+	RenderOrder = -5,
 	Init = function(self, tab, element)
 		if element.quad then
 			element.angle = element.angle or angle_zero
@@ -285,10 +289,12 @@ addSCKType("Sprite", {
 
 		render.SetMaterial(element._material)
 
+		local proxy = element._proxy
+
 		if element.quad then
-			render.DrawQuadEasy(matrix:GetTranslation(), matrix:GetForward(), element.size.x, element.size.y, element.color, matrix:GetAngles().r + 180)
+			render.DrawQuadEasy(matrix:GetTranslation(), matrix:GetForward(), proxy.size.x, proxy.size.y, proxy.color, matrix:GetAngles().r + 180)
 		else
-			render.DrawSprite(matrix:GetTranslation(), element.size.x, element.size.y, element.color)
+			render.DrawSprite(matrix:GetTranslation(), proxy.size.x, proxy.size.y, proxy.color)
 		end
 	end
 })
@@ -298,6 +304,7 @@ local right =   Color(0, 255, 0)
 local up =      Color(0, 0, 255)
 
 addSCKType("Quad", {
+	RenderOrder = -10,
 	Init = function(self, tab, element)
 		element.draw_func = self[element.draw_func]
 	end,
@@ -321,7 +328,9 @@ addSCKType("Quad", {
 	end
 })
 
+
 addSCKType("Laser", {
+	RenderOrder = -10,
 	Init = function(self, tab, element)
 		fixPositions(element)
 
@@ -333,12 +342,15 @@ addSCKType("Laser", {
 			return
 		end
 
+		local proxy = element._proxy
+
 		local matrix = self:GetBoneOrientation(tab, element, ent)
-		sg.DrawLaser(matrix:GetTranslation(), matrix:GetForward(), element.length, element.width, element.color, element.brightness, element.pixvis)
+		sg.DrawLaser(matrix:GetTranslation(), matrix:GetForward(), proxy.length, proxy.width, proxy.color, proxy.brightness, element.pixvis)
 	end
 })
 
 addSCKType("Spotlight", {
+	RenderOrder = -10,
 	Init = function(self, tab, element)
 		fixPositions(element)
 
@@ -350,8 +362,10 @@ addSCKType("Spotlight", {
 			return
 		end
 
+		local proxy = element._proxy
+
 		local matrix = self:GetBoneOrientation(tab, element, ent)
-		sg.DrawSpotlight(matrix:GetTranslation(), matrix:GetForward(), element.length, element.width, element.color, element.pixvis)
+		sg.DrawSpotlight(matrix:GetTranslation(), matrix:GetForward(), proxy.length, proxy.width, proxy.color, element.pixvis)
 	end
 })
 
@@ -371,7 +385,11 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 	if parent then
 		matrix = Matrix(self:GetBoneOrientation(lookup, parent, ent))
 	else
-		local bone = ent:LookupBone(element.bone or "ValveBiped.Bip01_R_Hand")
+		local bone = 0
+
+		if #element.bone > 0 then
+			bone = ent:LookupBone(element.bone)
+		end
 
 		if not bone then
 			return
@@ -381,86 +399,77 @@ function SWEP:GetBoneOrientation(lookup, element, ent)
 		matrix:SetScale(vector_one)
 	end
 
-	if element.pos then matrix:Translate(element.pos) end
-	if element.angle then matrix:Rotate(element.angle) end
+	local proxy = element._proxy
+
+	if proxy.pos then matrix:Translate(proxy.pos) end
+	if proxy.angle then matrix:Rotate(proxy.angle) end
 
 	-- For easy manipulation through code
-	if element.pos2 then matrix:Translate(element.pos2) end
-	if element.angle2 then matrix:Rotate(element.angle2) end
+	if proxy.pos2 then matrix:Translate(proxy.pos2) end
+	if proxy.angle2 then matrix:Rotate(proxy.angle2) end
 
 	element._matrix = matrix
 
 	return matrix
 end
 
--- New bone system to replace the old one SCK uses, should be more performant since we're not recreating the entire bone setup every time we update
-function SWEP:RebuildBoneCache(vm)
-	self.BoneCache = nil
-
-	if table.Count(self.ViewModelBoneMods) == 0 then
-		return
-	end
+function SWEP:BuildBoneCache(vm)
+	self.BoneCache = {}
 
 	vm:SetupBones()
 
-	local mods = self.ViewModelBoneMods
-	local cache = {}
-
 	for i = 0, vm:GetBoneCount() - 1 do
-		local name = vm:GetBoneName(i)
-		local boneMod = mods[name]
+		self.BoneCache[i] = {
+			parent = vm:GetBoneParent(i)
+		}
+	end
+end
 
-		if boneMod then
-			cache[i] = {
-				pos = boneMod.pos or Vector(),
-				angle = boneMod.angle or Angle(),
-				scale = boneMod.scale or Vector(1, 1, 1),
-				hide = boneMod.hide
-			}
-		else
-			cache[i] = {
-				pos = Vector(0, 0, 0),
-				angle = Angle(0, 0, 0),
-				scale = Vector(1, 1, 1)
-			}
-		end
+function SWEP:GetBoneScale(vm, index)
+	local bone = self.BoneCache[index]
+
+	if bone.frame == FrameNumber() then
+		return bone.scale
 	end
 
-	-- Child bones don't scale based on their parents by default, so we do that manually here
-	for index, bone in pairs(cache) do
-		local parent = vm:GetBoneParent(index)
+	bone.frame = FrameNumber()
 
-		while parent >= 0 do
-			if cache[parent].hide then
-				bone.hide = true
-			end
+	local mod = self.ViewModelBoneMods[vm:GetBoneName(index)]
 
-			bone.scale:Mul(cache[parent].scale)
-			parent = vm:GetBoneParent(parent)
-		end
+	if mod then
+		local proxy = mod._proxy
+
+		bone.scale = proxy.hide and nan or Vector(proxy.scale)
+	else
+		bone.scale = Vector(1, 1, 1)
 	end
 
-	self.BoneCache = cache
+	if bone.scale != nan and bone.parent != -1 then
+		bone.scale:Mul(self:GetBoneScale(vm, bone.parent))
+	end
+
+	return bone.scale
 end
 
 function SWEP:ApplyBoneMods(vm)
-	local cache = self.BoneCache
-	if not cache then return end
-
-	for i = 0, #cache do
-		local bone = cache[i]
-		local scale = bone.hide and nan or bone.scale
+	for i = 0, vm:GetBoneCount() - 1 do
+		local mod = self.ViewModelBoneMods[vm:GetBoneName(i)]
+		local scale = self:GetBoneScale(vm, i)
 
 		if scale != vector_one then
 			vm:ManipulateBoneScale(i, scale)
 		end
 
-		if bone.angle != angle_zero then
-			vm:ManipulateBoneAngles(i, bone.angle)
-		end
+		if mod then
+			local proxy = mod._proxy
 
-		if bone.pos != vector_origin then
-			vm:ManipulateBonePosition(i, bone.pos)
+			if proxy.angle != angle_zero then
+				vm:ManipulateBoneAngles(i, proxy.angle)
+			end
+
+			if proxy.pos != vector_origin then
+				vm:ManipulateBonePosition(i, proxy.pos)
+			end
 		end
 	end
 
@@ -468,33 +477,27 @@ function SWEP:ApplyBoneMods(vm)
 end
 
 function SWEP:ResetBoneMods(vm)
-	local cache = self.BoneCache
-	if not cache then return end
-
-	for i = 0, #cache do
-		local bone = cache[i]
-		local scale = bone.hide and nan or bone.scale
+	for i = 0, vm:GetBoneCount() - 1 do
+		local mod = self.ViewModelBoneMods[vm:GetBoneName(i)]
+		local scale = self:GetBoneScale(vm, i)
 
 		if scale != vector_one then
 			vm:ManipulateBoneScale(i, vector_one)
 		end
 
-		if bone.angle != angle_zero then
-			vm:ManipulateBoneAngles(i, angle_zero)
-		end
+		if mod then
+			local proxy = mod._proxy
 
-		if bone.pos != vector_origin then
-			vm:ManipulateBonePosition(i, vector_origin)
+			if proxy.angle != angle_zero then
+				vm:ManipulateBoneAngles(i, angle_zero)
+			end
+
+			if proxy.pos != vector_origin then
+				vm:ManipulateBonePosition(i, vector_origin)
+			end
 		end
 	end
 end
-
-local defaultRenderOrder = {
-	["Quad"] = -10,
-	["Laser"] = -10,
-	["Spotlight"] = -10,
-	["Sprite"] = -5
-}
 
 local meta = {
 	__tostring = function(self)
@@ -508,12 +511,16 @@ function SWEP:InitSCKElements(tab)
 	for name, element in pairs(tab) do
 		setmetatable(element, meta)
 
-		element.renderorder = element.renderorder or defaultRenderOrder[element.type] or 0
 		element.name = name
+
+		 -- Animation proxy
+		element._proxy = setmetatable({}, {__index = element})
 
 		local def = SCKTypes[element.type]
 
 		if def then
+			element.renderorder = element.renderorder or def.RenderOrder
+
 			def.Init(self, tab, element)
 			table.insert(renderorder, element)
 		else
@@ -528,7 +535,11 @@ function SWEP:InitSCKElements(tab)
 	self.RenderOrder[tab] = renderorder
 end
 
-function SWEP:InitPostSCK()
+function SWEP:InitBoneMods(tab)
+	for name, element in pairs(tab) do
+		 -- Animation proxy
+		element._proxy = setmetatable({}, {__index = element})
+	end
 end
 
 function SWEP:InitSCK()
@@ -542,15 +553,11 @@ function SWEP:InitSCK()
 	self.WElements = tab.WElements or {}
 
 	self.ViewModelBoneMods = tab.ViewModelBoneMods or {}
-	self.InvalidateBoneMods = true
 
 	self:InitSCKElements(self.VElements)
 	self:InitSCKElements(self.WElements)
 
-	self:InitPostSCK()
-end
-
-function SWEP:UpdateSCK()
+	self:InitBoneMods(self.ViewModelBoneMods)
 end
 
 local lastSCKUpdate = 0
@@ -559,14 +566,16 @@ function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
 	local frame = FrameNumber()
 
 	if lastSCKUpdate != frame then
+		self:ApplySCKAnimations()
 		self:UpdateSCK()
+
 		lastSCKUpdate = frame
 	end
 
 	shouldFlip = self.ViewModelFlip and ent:GetClass() == "viewmodel"
 
 	for _, element in ipairs(self.RenderOrder[tab]) do
-		if element.hide then
+		if element._proxy.hide then
 			continue
 		end
 
@@ -579,12 +588,14 @@ function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
 	end
 end
 
+function SWEP:UpdateSCK()
+end
+
 local nullMaterial = Material("null")
 
 function SWEP:PreDrawViewModel(vm, _, ply, flags)
-	if self.InvalidateBoneMods then
-		self:RebuildBoneCache(vm)
-		self.InvalidateBoneMods = false
+	if not self.BoneCache then
+		self:BuildBoneCache(vm)
 	end
 
 	-- By applying here...

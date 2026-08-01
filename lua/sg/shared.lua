@@ -10,6 +10,7 @@ DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED
 
 client("cl_fonts.lua")
 client("cl_render.lua")
+shared("sh_animations.lua")
 shared("sh_keyframe.lua")
 shared("sh_sounds.lua")
 
@@ -21,6 +22,14 @@ end
 
 function RemapC(val, inMin, inMax, outMin, outMax)
 	return math.Clamp(math.Remap(val, inMin, inMax, outMin, outMax), math.min(outMin, outMax), math.max(outMin, outMax))
+end
+
+function GetSequenceIndex(ent, index)
+	if isnumber(index) then
+		return ent:SelectWeightedSequence(index)
+	else
+		return ent:LookupSequence(index)
+	end
 end
 
 if CLIENT then

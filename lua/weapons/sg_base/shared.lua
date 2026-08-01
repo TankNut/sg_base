@@ -6,22 +6,6 @@ SWEP.RenderGroup = RENDERGROUP_BOTH
 
 SWEP.HoldType = "normal"
 
-SWEP.Animations = {
-	Draw = ACT_VM_DRAW,
-
-	Deploy = ACT_VM_DRAW,
-	Idle = ACT_VM_IDLE,
-
-	Primary = ACT_VM_PRIMARYATTACK,
-	Secondary = ACT_VM_SECONDARYATTACK,
-	Pump = ACT_SHOTGUN_PUMP,
-
-	Reload = ACT_VM_RELOAD,
-	ReloadStart = ACT_SHOTGUN_RELOAD_START,
-	ReloadSingle = ACT_VM_RELOAD,
-	ReloadFinish = ACT_SHOTGUN_RELOAD_FINISH
-}
-
 include("cl_sck.lua")
 
 include("sh_animations.lua")
@@ -30,6 +14,8 @@ include("sh_holdtypes.lua")
 function SWEP:Initialize()
 	self:SetHoldType(self:GetTargetHoldType())
 	self:SetDeploySpeed(1)
+
+	self:InitAnimations()
 
 	if CLIENT then
 		self.InitialViewModelFOV = self.ViewModelFOV
@@ -40,11 +26,19 @@ function SWEP:Initialize()
 end
 
 function SWEP:SetupDataTables()
-	self:NetworkVar("Float", "NextIdle")
+	self:NetworkVar("String", "AnimationName")
+
+	-- What cycle were we last at?
+	self:NetworkVar("Float", "LastCycle")
+
+	-- Start/end of the current animation
+	self:NetworkVar("Float", "AnimationStart")
+	self:NetworkVar("Float", "AnimationEnd")
 end
 
 function SWEP:OnReloaded()
 	self:SetWeaponHoldType(self:GetHoldType())
+	self:InitAnimations()
 
 	if CLIENT then
 		self:InitSCK()
@@ -59,9 +53,16 @@ end
 
 function SWEP:Think()
 	self:UpdateHoldType()
+	self:UpdateAnimations()
+end
 
-	if self:GetNextIdle() <= CurTime() then
-		self:PlayAnimation("Idle")
+local eventBlacklist = {
+	[15] = true -- AE_CL_PLAYSOUND
+}
+
+function SWEP:FireAnimationEvent(pos, ang, event, name)
+	if eventBlacklist[event] then
+		return true
 	end
 end
 

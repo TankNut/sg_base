@@ -48,8 +48,6 @@ function SWEP:Reload()
 		return
 	end
 
-	self:PlayWorldAnimation(PLAYER_RELOAD)
-
 	local anim = "Reload"
 
 	if self.LoopingReload and self.UseReloadStart then

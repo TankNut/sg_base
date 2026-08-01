@@ -64,8 +64,6 @@ function SWEP:PrimaryAttack()
 		return
 	end
 
-	self:PlayWorldAnimation(PLAYER_ATTACK1)
-
 	self:SetAttackCount(self:GetAttackCount() + 1)
 	self:UpdateBurst()
 

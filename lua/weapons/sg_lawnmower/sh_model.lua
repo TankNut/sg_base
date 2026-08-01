@@ -49,3 +49,5 @@ SWEP.WElements = {
 	["top"] = { type = "Model", model = "models/props_lab/reciever01d.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(1.505, 0, 5.557), angle = Angle(90, 0, -180), size = Vector(0.2, 0.2, 0.2), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["top 2"] = { type = "Model", model = "models/props_lab/citizenradio.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top", pos = Vector(-2.25, 0, -1.82), angle = Angle(0, -180, 0), size = Vector(0.27, 0.08, 0.105), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
+
+SWEP.ViewModelBoneMods = {}

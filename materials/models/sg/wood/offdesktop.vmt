@@ -5,5 +5,5 @@ VertexLitGeneric
 
 	$envmap "env_cubemap"
 	$envmapmask "wood\offdesktop_ref"
-	$envmaptint [0.53 0.37 0.22]
+	$envmaptint "[0.53 0.37 0.22]"
 }

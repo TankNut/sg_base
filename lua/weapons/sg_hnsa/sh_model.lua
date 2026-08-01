@@ -119,6 +119,6 @@ SWEP.WElements = {
 }
 
 SWEP.ViewModelBoneMods = {
-	["ValveBiped.Bip01_L_Clavicle"] = { pos = Vector(-1.437, 0.359, 8.623) },
-	["ValveBiped.bolt"] = { hide = true }
+	["ValveBiped.Bip01_L_Clavicle"] = { scale = Vector(1, 1, 1), pos = Vector(-1.437, 0.359, 8.623), angle = Angle(0, 0, 0) },
+	["ValveBiped.bolt"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0), hide = true }
 }

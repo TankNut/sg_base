@@ -57,17 +57,19 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Pump = {Sound = "Weapon_SG.Pump"},
-	ReloadSingle = {Sound = "Weapon_M3.Insertshell"}
-}
-
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_CastleDoctrine.Single1")
 	self:EmitSound("Weapon_SG_CastleDoctrine.Single2")
+end
+
+function SWEP:OnPumpAnimation()
+	self:EmitSound("Weapon_SG.Pump")
+end
+
+function SWEP:OnReloadSingleAnimation()
+	self:EmitSound("Weapon_M3.Insertshell")
 end
 
 sound.Add({

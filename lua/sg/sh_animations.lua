@@ -60,6 +60,12 @@ function BASE:RunAnimationEvent(ent, rate, event, data)
 		ent:EmitSound(data)
 	elseif event == "PlayerAnimation" then
 		ent:PlayWorldAnimation(data)
+	elseif event == "Callback" then
+		local func = ent[data]
+
+		if func then
+			func(ent)
+		end
 	else
 		sg.ThrowError("Unhandled animation event: %s", event)
 	end

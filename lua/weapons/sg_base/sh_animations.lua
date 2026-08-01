@@ -2,16 +2,27 @@ AddCSLuaFile()
 DEFINE_BASECLASS("weapon_base")
 
 function SWEP:GetCurrentAnimation()
-	return self.Animations[self:GetAnimationName()]
+	local name = self:GetAnimationName()
+	local anim = self.Animations[name]
+
+	if anim then
+		return anim, self.AnimationRates[name] or 1
+	end
 end
 
 function SWEP:GetAnimationCycle()
 	return math.TimeFraction(self:GetAnimationStart(), self:GetAnimationEnd(), CurTime())
 end
 
+function SWEP:TranslateAnimation(name)
+end
+
 function SWEP:PlayAnimation(name)
 	-- Try to play any 'pending' events first
 	self:HandleAnimationEvents()
+
+	-- See if there's any better names we should be using
+	name = self:TranslateAnimation(name) or name
 
 	local data = self.Animations[name]
 	if not data then return 0 end
@@ -23,7 +34,7 @@ function SWEP:PlayAnimation(name)
 		duration = vm:SequenceDuration(sg.GetSequenceIndex(vm, data.Sequence))
 	end
 
-	duration = duration * 1--data.Rate
+	duration = duration / (self.AnimationRates[name] or 1)
 
 	local now = CurTime()
 
@@ -40,12 +51,12 @@ function SWEP:PlayAnimation(name)
 end
 
 function SWEP:HandleAnimationEvents()
-	local anim = self:GetCurrentAnimation()
+	local anim, rate = self:GetCurrentAnimation()
 	if not anim then return end
 
 	local cycle = self:GetAnimationCycle()
 
-	anim:HandleAnimationEffects(self, 1, self:GetLastCycle(), cycle)
+	anim:HandleAnimationEffects(self, rate, self:GetLastCycle(), cycle)
 
 	self:SetLastCycle(cycle)
 end

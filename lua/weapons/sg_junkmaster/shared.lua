@@ -56,16 +56,15 @@ SWEP.TracerConfig = {
 	Fade = true
 }
 
--- Misc
-SWEP.Animations = {
-	Reload = {Sound = "Weapon_SMG1.Reload"}
-}
-
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_Junkmaster.Single1")
 	self:EmitSound("Weapon_SG_Junkmaster.Single2")
+end
+
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_SMG1.Reload")
 end
 
 sound.Add({

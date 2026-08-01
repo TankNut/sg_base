@@ -6,6 +6,8 @@ SWEP.RenderGroup = RENDERGROUP_BOTH
 
 SWEP.HoldType = "normal"
 
+SWEP.AnimationRates = {}
+
 include("cl_sck.lua")
 
 include("sh_animations.lua")

@@ -40,7 +40,7 @@ SWEP.Recoil = {
 }
 
 SWEP.RecoilAdd = 0.09
-SWEP.ViewPunch = .5
+SWEP.ViewPunch = 0.5
 SWEP.RecoilFlip = true
 
 -- Effects
@@ -48,26 +48,33 @@ SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
+-- Animations
 SWEP.Animations = {
-	Primary = {Sound = "Weapon_SG_SwissHellBringer.Single1"},
-	Reload = {Sound = "weapons/pistol/pistol_reload1.wav"}
+	Primary_Empty = sg.Animation.WeaponSequence(ACT_VM_DRYFIRE):AddEvent(0, "Callback", "OnPrimaryAnimation"),
+	Idle_Empty = sg.Animation.WeaponSequence(ACT_VM_IDLE_EMPTY)
+}
+
+SWEP.AnimationRates = {
+	Reload = 2
 }
 
 include("sh_model.lua")
 
-function SWEP:GetIdleAnimation(data)
-	if self:Clip1() == 0 then
-		data.Index = ACT_VM_IDLE_EMPTY
+function SWEP:TranslateAnimation(name)
+	local empty = name .. "_Empty"
+
+	if self:Clip1() == 0 and self.Animations[empty] then
+		return empty
 	end
 end
 
-function SWEP:GetPrimaryAnimation(data)
-	if self:Clip1() == 0 then
-		data.Index = ACT_VM_DRYFIRE
-	end
+function SWEP:OnPrimaryAnimation()
+	self:EmitSound("Weapon_SG_SwissHellBringer.Single1")
 end
 
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_Pistol.Reload")
+end
 
 -- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({

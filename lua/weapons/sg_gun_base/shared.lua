@@ -89,7 +89,11 @@ function SWEP:SetupDataTables()
 end
 
 function SWEP:Holster()
-	return not self:IsReloading()
+	if self:IsReloading() then
+		self:AbortReload()
+	end
+
+	return true
 end
 
 function SWEP:UpdatePump()

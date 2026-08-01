@@ -75,6 +75,14 @@ function SWEP:ShouldCancelReload(first)
 	return false
 end
 
+function SWEP:AbortReload()
+	self:SetFirstReload(false)
+	self:SetCancelReload(false)
+	self:SetFinishReload(0)
+
+	self:SetNextPrimaryFire(CurTime())
+end
+
 function SWEP:FinishReload()
 	local first = self:GetFirstReload()
 

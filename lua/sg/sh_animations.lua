@@ -234,6 +234,25 @@ if CLIENT then
 
 	function BASE:UpdateSCK(ent, cycle)
 	end
+
+	function BASE:ProcessKeyframeTable(frame, dest, data)
+		if data == nil then return end
+
+		for name, element in pairs(data) do
+			if not dest[name] then dest[name] = {} end
+			local layer = dest[name]
+
+			layer[frame] = element
+		end
+	end
+
+	function BASE:FixElements(data)
+		if data == nil then return end
+
+		for _, element in pairs(data) do
+			sg.SCK.FixElementPositions(element)
+		end
+	end
 end
 
 function BASE:Initialize()
@@ -257,6 +276,35 @@ if CLIENT then
 		self:ProcessAnimationTable(ent, self.WElements, ent.WElements, cycle)
 
 		self:ProcessAnimationTable(ent, self.VBoneMods, ent.ViewModelBoneMods, cycle)
+	end
+
+	function WEAPON:ImportKeyframes(data)
+		local vBoneMods = {}
+		local vElements = {}
+		local wElements = {}
+
+		local elements = {}
+
+		for frame, tables in SortedPairs(data) do
+			if isnumber(tables) then
+				tables = data[tables]
+			else
+				self:FixElements(tables.VElements)
+				self:FixElements(tables.WElements)
+				self:FixElements(tables.Elements)
+			end
+
+			self:ProcessKeyframeTable(frame, vBoneMods, tables.ViewModelBoneMods)
+
+			self:ProcessKeyframeTable(frame, vElements, tables.VElements)
+			self:ProcessKeyframeTable(frame, wElements, tables.WElements)
+			self:ProcessKeyframeTable(frame, elements, tables.Elements)
+		end
+
+		for name, layerData in pairs(vBoneMods) do self:AddVBoneModLayer(name, layerData) end
+		for name, layerData in pairs(vElements) do self:AddVElementLayer(name, layerData) end
+		for name, layerData in pairs(wElements) do self:AddWElementLayer(name, layerData) end
+		for name, layerData in pairs(elements) do self:AddElementLayer(name, layerData) end
 	end
 end
 

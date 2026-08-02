@@ -36,11 +36,11 @@ SWEP.Delay = 0.09
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.35, 0.2),
-	Max = Angle(0.45, -0.2)
+	Min = Angle(0.35, -0.2),
+	Max = Angle(0.45, 0.2)
 }
 
-SWEP.RecoilAdd = .85
+SWEP.RecoilAdd = 0.85
 SWEP.ViewPunch = 0.35
 SWEP.RecoilFlip = true
 
@@ -61,12 +61,16 @@ function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_rainmaker.Single2")
 end
 
+function SWEP:OnReloadAnimation()
+	self:EmitSound("Weapon_SMG1.Reload")
+end
+
 sound.Add({
 	name = "Weapon_SG_rainmaker.Single1",
 	channel = CHAN_WEAPON,
 	volume = 1,
 	level = sg.LEVEL_GUNFIRE,
-	pitch = {75, 80},
+	pitch = {75, 85},
 	sound = ")weapons/ar2/fire1.wav"
 })
 
@@ -75,6 +79,6 @@ sound.Add({
 	channel = CHAN_ITEM,
 	volume = 0.25,
 	level = sg.LEVEL_GUNFIRE,
-	pitch = {80, 85},
+	pitch = {80, 90},
 	sound = ")weapons/m4a1/m4a1_unsil-1.wav"
 })

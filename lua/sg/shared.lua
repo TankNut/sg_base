@@ -12,7 +12,6 @@ client("cl_fonts.lua")
 client("cl_render.lua")
 client("cl_sck.lua")
 shared("sh_animations.lua")
-shared("sh_keyframe.lua")
 shared("sh_sounds.lua")
 
 client("sck/laser.lua")

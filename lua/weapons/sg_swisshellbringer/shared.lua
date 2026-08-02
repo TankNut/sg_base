@@ -27,19 +27,20 @@ SWEP.Firemode = 0
 -- Balance
 SWEP.AmmoCost = 1
 SWEP.Count = 1
-SWEP.Damage = 8
+SWEP.Damage = 12
 
-SWEP.Spread = nil -- Not Yet Implemented
+SWEP.Accuracy = 18
+SWEP.Range = 1000
 
-SWEP.Delay = 60 / 700
+SWEP.Delay = 0.0775
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.35, 0.3),
-	Max = Angle(0.45, 0.4)
+	Min = Angle(0.35, 0.2),
+	Max = Angle(0.45, -0.2)
 }
 
-SWEP.RecoilAdd = 0.09
+SWEP.RecoilAdd = 0.4
 SWEP.ViewPunch = 0.5
 SWEP.RecoilFlip = true
 
@@ -55,7 +56,7 @@ SWEP.Animations = {
 }
 
 SWEP.AnimationRates = {
-	Reload = 2
+	Reload = 1.35
 }
 
 include("sh_model.lua")

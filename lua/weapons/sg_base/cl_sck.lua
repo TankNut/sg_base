@@ -53,10 +53,7 @@ end
 -- Fix for a discrepancy between the old and new positioning logic
 local function fixPositions(element)
 	if element.pos then element.pos = fixPos(element.pos) end
-	if element.pos2 then element.pos2 = fixPos(element.pos2) end
-
 	if element.angle then element.angle = fixAng(element.angle) end
-	if element.angle2 then element.angle2 = fixAng(element.angle2) end
 end
 
 local badShaders = {

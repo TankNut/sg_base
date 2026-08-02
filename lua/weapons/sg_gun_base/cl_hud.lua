@@ -42,7 +42,7 @@ function SWEP:DebugWeaponStats()
 
 	local delay = self:GetDelay()
 
-	sg.DrawDebugText(string.format("Delay: %.2fs (%.0f RPM)", delay, 60 / delay), 0)
+	sg.DrawDebugText(string.format("Delay: %.3fs (%.0f RPM)", delay, 60 / delay), 0)
 
 	cam.Start3D()
 		render.SetColorMaterial()

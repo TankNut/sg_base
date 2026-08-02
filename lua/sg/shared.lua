@@ -10,9 +10,16 @@ DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED
 
 client("cl_fonts.lua")
 client("cl_render.lua")
+client("cl_sck.lua")
 shared("sh_animations.lua")
 shared("sh_keyframe.lua")
 shared("sh_sounds.lua")
+
+client("sck/laser.lua")
+client("sck/model.lua")
+client("sck/quad.lua")
+client("sck/spotlight.lua")
+client("sck/sprite.lua")
 
 local errorColor = Color(255, 100, 100)
 

@@ -30,15 +30,15 @@ SWEP.AmmoCost = 1
 SWEP.Count = 6
 SWEP.Damage = 15
 
-SWEP.Accuracy = 26
-SWEP.Range = 1000
+SWEP.Accuracy = 24
+SWEP.Range = 550
 SWEP.SpreadMod = Vector(1, 1)
 
 SWEP.Delay = 0.33
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(1, 0.5),
+	Min = Angle(1, -1),
 	Max = Angle(3, 1)
 }
 
@@ -58,13 +58,19 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Misc
-SWEP.Animations = {
-	Primary = {Sound = "Weapon_SG_Lawnmower.Single1"},
-	ReloadSingle = {Sound = "Weapon_M3.Insertshell"}
-}
-
 include("sh_model.lua")
+
+function SWEP:OnPrimaryAnimation()
+	self:EmitSound("Weapon_SG_Lawnmower.Single1")
+end
+
+function SWEP:OnPumpAnimation()
+	self:EmitSound("Weapon_SG.Pump")
+end
+
+function SWEP:OnReloadSingleAnimation()
+	self:EmitSound("Weapon_M3.Insertshell")
+end
 
 if CLIENT then
 	local ammoColor = Color(255, 255, 0)

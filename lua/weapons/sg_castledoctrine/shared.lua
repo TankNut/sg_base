@@ -31,18 +31,18 @@ SWEP.Count = 15
 SWEP.Damage = 9
 
 SWEP.Accuracy = 24
-SWEP.Range = 1000
+SWEP.Range = 350
 
-SWEP.Delay = 0.4
+SWEP.Delay = 0.55
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(2, 0.5),
+	Min = Angle(2, -0.5),
 	Max = Angle(5, 1)
 }
 
 SWEP.RecoilAdd = 0
-SWEP.ViewPunch = 0.4
+SWEP.ViewPunch = 1
 SWEP.RecoilFlip = false
 
 -- Reloading

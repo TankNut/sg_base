@@ -54,6 +54,10 @@ function BASE:RunAnimationEvent(ent, rate, event, data)
 			sequence = data
 		end
 
+		if game.SinglePlayer() then -- Fix for a weird issue to do with thirdperson
+			vm:SendViewModelMatchingSequence(-1)
+		end
+
 		vm:SendViewModelMatchingSequence(sg.GetSequenceIndex(vm, sequence))
 		vm:SetPlaybackRate(rate)
 	elseif event == "Sound" then

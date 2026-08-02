@@ -103,7 +103,8 @@ if CLIENT then
 	end
 
 	-- Properly adds a value to a shadow table, adding or mixing where necessary
-	function BASE:WriteProxy(proxy, key, value)
+	function BASE:WriteProxy(element, key, value)
+		local proxy = element._proxy
 		local existing = rawget(proxy, key)
 
 		if not existing then
@@ -125,7 +126,7 @@ if CLIENT then
 	end
 
 	-- Processes a single key for a single layer
-	function BASE:ProcessLayerKey(proxy, layer, key, cycle)
+	function BASE:ProcessLayerKey(element, layer, key, cycle)
 		local frame1, value1
 		local frame2, value2
 		local ease = false
@@ -154,8 +155,17 @@ if CLIENT then
 			end
 		end
 
-		-- We're not supposed to do anything here
-		if not frame1 or not frame2 then
+		if not frame1 then
+			frame1 = 0
+			value1 = element[key]
+		end
+
+		if not frame2 then
+			frame2 = 1
+			value2 = element[key]
+		end
+
+		if value1 == nil or value2 == nil then
 			return
 		end
 
@@ -165,7 +175,7 @@ if CLIENT then
 			localCycle = ease(localCycle)
 		end
 
-		self:WriteProxy(proxy, key, self:Lerp(value1, value2, localCycle))
+		self:WriteProxy(element, key, self:Lerp(value1, value2, localCycle))
 	end
 
 	-- Gets all of the keys a layer uses
@@ -185,8 +195,6 @@ if CLIENT then
 
 	-- Populates a single element's proxy table with the animation results
 	function BASE:PopulateElementProxy(ent, element, layers, cycle)
-		local proxy = element._proxy
-
 		for _, layer in ipairs(layers) do
 			if isfunction(layer) then
 				local callback = layer(ent, element, cycle)
@@ -196,13 +204,13 @@ if CLIENT then
 				end
 
 				for k, v in pairs(callback) do
-					self:WriteProxy(proxy, k, v)
+					self:WriteProxy(element, k, v)
 				end
 			else
 				local keys = self:GetLayerKeys(layer)
 
 				for key in pairs(keys) do
-					self:ProcessLayerKey(proxy, layer, key, cycle)
+					self:ProcessLayerKey(element, layer, key, cycle)
 				end
 			end
 		end

@@ -3,7 +3,7 @@ module("sg.SCK", package.seeall)
 AddType("Spotlight", {
 	RenderOrder = -10,
 	Init = function(self, tab, element)
-		fixPositions(element)
+		FixElementPositions(element)
 
 		element.pixvis = util.GetPixelVisibleHandle()
 	end,

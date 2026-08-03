@@ -7,7 +7,7 @@ AddType("Sprite", {
 			element.angle = element.angle or angle_zero
 		end
 
-		fixPositions(element)
+		FixElementPositions(element)
 
 		local mat = Material(element.sprite)
 

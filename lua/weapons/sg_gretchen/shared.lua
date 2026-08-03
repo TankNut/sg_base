@@ -6,7 +6,7 @@ SWEP.Base = "sg_gun_base"
 SWEP.PrintName = "Gretchen"
 SWEP.Category = "S&G Munitions"
 
-SWEP.Instructions = "Pull the trigger to check out a library book....with about three slugs being fired into the wall in front of you."
+SWEP.Instructions = "Pull the trigger to check out a library book....with about five slugs being fired into the wall in front of you."
 SWEP.Purpose = "For getting those annoying kids in the back corner to either check out a book or shut the hell up."
 
 SWEP.Slot = 3

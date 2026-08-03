@@ -12,6 +12,7 @@ include("cl_sck.lua")
 
 include("sh_animations.lua")
 include("sh_holdtypes.lua")
+include("sh_traits.lua")
 
 function SWEP:Initialize()
 	self:SetHoldType(self:GetTargetHoldType())
@@ -36,10 +37,15 @@ function SWEP:SetupDataTables()
 	-- Start/end of the current animation
 	self:NetworkVar("Float", "AnimationStart")
 	self:NetworkVar("Float", "AnimationEnd")
+
+	-- Happens way early so we can set up our NetworkVars
+	self:InitTraits(true)
 end
 
 function SWEP:OnReloaded()
 	self:SetWeaponHoldType(self:GetHoldType())
+
+	self:InitTraits()
 	self:InitAnimations()
 
 	if CLIENT then

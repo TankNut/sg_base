@@ -34,6 +34,11 @@ SWEP.Range = 1000
 
 SWEP.Delay = 0.115
 
+-- Traits
+SWEP.Traits = {
+	sg.Trait("SelfKnockback", {Force = 40})
+}
+
 -- Recoil
 SWEP.Recoil = {
 	Min = Angle(0.25, -0.25),

@@ -69,6 +69,7 @@ function SWEP:PrimaryAttack()
 
 	self:TakeAmmo()
 	self:FireWeapon()
+	self:RunHooks("PostFireWeapon")
 
 	self:AddRecoil()
 

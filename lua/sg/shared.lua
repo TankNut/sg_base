@@ -13,12 +13,15 @@ client("cl_render.lua")
 client("cl_sck.lua")
 shared("sh_animations.lua")
 shared("sh_sounds.lua")
+shared("sh_traits.lua")
 
 client("sck/laser.lua")
 client("sck/model.lua")
 client("sck/quad.lua")
 client("sck/spotlight.lua")
 client("sck/sprite.lua")
+
+shared("traits/self_knockback.lua")
 
 local errorColor = Color(255, 100, 100)
 

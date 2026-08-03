@@ -43,15 +43,15 @@ function InitElements(self, tab)
 		 -- Animation proxy
 		element._proxy = setmetatable({}, {__index = element})
 
-		local def = Types[element.type]
+		local definition = Types[element.type]
 
-		if def then
-			element.renderorder = element.renderorder or def.RenderOrder
+		if definition then
+			element.renderorder = element.renderorder or definition.RenderOrder
 
-			def.Init(self, tab, element)
+			definition.Init(self, tab, element)
 			table.insert(renderorder, element)
 		else
-			sg.ThrowError("Skipping unimplemented SCK type: " .. element.type)
+			sg.ThrowError("Ignoring unimplemented SCK type: %s", element.type)
 		end
 	end
 

@@ -1,7 +1,11 @@
 local TRAIT = {}
 
-TRAIT.Add = 0.1 -- Multiplies recoil by this amount per shot
+TRAIT.Add = 0.1 -- Adds this much to the recoil multiplier, normalized so slower firing weapons are affected more
+
+-- Min and max caps
+TRAIT.Min = -1 -- Avoid negative recoil
 TRAIT.Max = math.huge
+
 TRAIT.Reset = 1 -- Time to reset
 
 function TRAIT:SetupNetworkVars(ent)
@@ -24,7 +28,7 @@ function TRAIT:GetMultiplier(ent)
 end
 
 function TRAIT:Hook_PostFireWeapon(ent)
-	ent:SetRecoilAdd(math.min(self:GetMultiplier(ent) + self.Add, self.Max))
+	ent:SetRecoilAdd(math.Clamp(self:GetMultiplier(ent) + self.Add * ent.Delay, self.Min, self.Max))
 end
 
 function TRAIT:Hook_MultiplyRecoil(ent, val)

@@ -76,6 +76,8 @@ function SWEP:ShouldCancelReload(first)
 end
 
 function SWEP:AbortReload()
+	self:PlayAnimation("Idle")
+
 	self:SetFirstReload(false)
 	self:SetLastReload(false)
 	self:SetCancelReload(false)

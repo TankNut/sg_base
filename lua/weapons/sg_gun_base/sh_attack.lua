@@ -36,7 +36,7 @@ end
 -- Extra checks for whether the weapon can fire
 function SWEP:CanAttack()
 	if self:IsReloading() then
-		if self.LoopingReload then
+		if self.LoopingReload and not self:GetLastReload() then
 			self:SetCancelReload(true)
 		end
 

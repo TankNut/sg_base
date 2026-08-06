@@ -116,7 +116,6 @@ function SWEP:FinishReload()
 	if self.LoopingReload then
 		if self:ShouldCancelReload(first) then
 			self:SetCancelReload(false)
-			self:SetFinishReload(0)
 
 			if self.UseReloadFinish then
 				self:SetLastReload(true)

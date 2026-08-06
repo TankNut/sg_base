@@ -81,6 +81,7 @@ function SWEP:SetupDataTables()
 	-- Reloading related
 	self:NetworkVar("Float", "FinishReload")
 	self:NetworkVar("Bool", "FirstReload")
+	self:NetworkVar("Bool", "LastReload")
 	self:NetworkVar("Bool", "CancelReload")
 
 	if SERVER then

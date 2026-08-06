@@ -68,7 +68,7 @@ function SWEP:ShouldCancelReload(first)
 		return true
 	end
 
-	if self:GetCancelReload() and not first then
+	if self:GetCancelReload() and not first and not self:GetLastReload() then
 		return true
 	end
 
@@ -77,6 +77,7 @@ end
 
 function SWEP:AbortReload()
 	self:SetFirstReload(false)
+	self:SetLastReload(false)
 	self:SetCancelReload(false)
 	self:SetFinishReload(0)
 
@@ -84,9 +85,17 @@ function SWEP:AbortReload()
 end
 
 function SWEP:FinishReload()
+	-- We're done, don't even bother with the rest
+	if self:GetLastReload() then
+		self:SetLastReload(false)
+		self:SetFinishReload(0)
+
+		return
+	end
+
 	local first = self:GetFirstReload()
 
-	if first then
+	if first then -- Only reload if we've already done the intro animation
 		self:SetFirstReload(false)
 	else
 		local amount = math.min(self:GetMaxClip1() - self:Clip1(), self.ReloadAmount)
@@ -110,9 +119,10 @@ function SWEP:FinishReload()
 			self:SetFinishReload(0)
 
 			if self.UseReloadFinish then
-				self:SetNextPrimaryFire(CurTime() + self:PlayAnimation("ReloadFinish"))
+				self:SetLastReload(true)
+				self:SetFinishReload(CurTime() + self:PlayAnimation("ReloadFinish"))
 			else
-				self:SetNextPrimaryFire(CurTime())
+				self:SetFinishReload(0)
 			end
 		else
 			self:SetFinishReload(CurTime() + self:PlayAnimation("ReloadSingle"))

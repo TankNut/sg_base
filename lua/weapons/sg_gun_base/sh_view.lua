@@ -32,6 +32,8 @@ if CLIENT then
 			self.ViewModelFOV = self.InitialViewModelFOV
 		end
 
+		pos = LocalToWorld(self.ViewModelOffset, angle_zero, pos, ang)
+
 		local punch = ply:GetViewPunchAngles()
 
 		ang:Sub(punch)

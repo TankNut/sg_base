@@ -57,6 +57,10 @@ SWEP.Tracer = 1 -- 1 tracer per X bullets
 SWEP.TracerName = "sg_e_tracer" -- tracer effect
 SWEP.TracerConfig = {} -- Used to configure the tracer effect
 
+if CLIENT then
+	SWEP.ViewModelOffset = Vector()
+end
+
 include("cl_hud.lua")
 include("sh_attack.lua")
 include("sh_recoil.lua")

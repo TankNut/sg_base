@@ -63,7 +63,7 @@ AddType("Model", {
 		local proxy = element._proxy
 
 		if lod then
-			local size = math.max(math.abs(element.size.x), math.abs(element.size.x), math.abs(element.size.x))
+			local size = math.max(math.abs(proxy.size.x), math.abs(proxy.size.x), math.abs(proxy.size.x))
 			local ourlod = element._modelradius * size
 
 			if lod > ourlod then

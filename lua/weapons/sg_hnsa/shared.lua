@@ -6,7 +6,7 @@ SWEP.Base = "sg_gun_base"
 SWEP.PrintName = "HNSA"
 SWEP.Category = "S&G Munitions"
 
-SWEP.Spawnable = true
+SWEP.Spawnable = false
 
 SWEP.HoldType = "sniper"
 

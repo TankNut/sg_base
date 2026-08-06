@@ -27,11 +27,11 @@ SWEP.PumpAction = true
 
 -- Balance
 SWEP.AmmoCost = 1
+
 SWEP.Count = 15
 SWEP.Damage = 9
 
-SWEP.Accuracy = 24
-SWEP.Range = 350
+SWEP.Range = 175
 
 SWEP.Delay = 0.55
 

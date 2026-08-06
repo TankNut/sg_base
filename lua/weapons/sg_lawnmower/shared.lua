@@ -27,12 +27,11 @@ SWEP.PumpAction = false
 
 -- Balance
 SWEP.AmmoCost = 1
+
 SWEP.Count = 6
 SWEP.Damage = 15
 
-SWEP.Accuracy = 24
-SWEP.Range = 550
-SWEP.SpreadMod = Vector(1, 1)
+SWEP.Range = 275
 
 SWEP.Delay = 0.33
 

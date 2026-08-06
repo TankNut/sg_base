@@ -4,7 +4,13 @@ DEFINE_BASECLASS("sg_base")
 function SWEP:IsFinalBurstShot()
 	local firemode = self:GetFiremode()
 
-	return firemode > 1 and self:GetAttackCount() % firemode == 0
+	if firemode > 1 then
+		local count = self:GetAttackCount()
+
+		return count > 0 and count % firemode == 0
+	end
+
+	return false
 end
 
 function SWEP:UpdateBurst()
@@ -46,6 +52,7 @@ function SWEP:CanAttack()
 			self:ConCommand("-attack")
 		end
 
+		-- Prevents a quick re-fire from cancelling reloads, and sound spam
 		self:SetAttackDelay(0.2)
 
 		return false
@@ -109,7 +116,13 @@ function SWEP:GetDamage()
 end
 
 function SWEP:GetAccuracy()
-	return self.Accuracy
+	local spread = 12
+
+	self:RunHooks("GetSpread", function(func)
+		spread = func(spread) or spread
+	end)
+
+	return spread
 end
 
 function SWEP:GetRange()

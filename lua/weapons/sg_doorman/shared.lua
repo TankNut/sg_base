@@ -26,11 +26,11 @@ SWEP.Firemode = 0
 
 -- Balance
 SWEP.AmmoCost = 1
+
 SWEP.Count = 1
 SWEP.Damage = 10
 
-SWEP.Accuracy = 28
-SWEP.Range = 1000
+SWEP.Range = 450 -- Slight increase, would've been 428.571 otherwise
 
 SWEP.Delay = 0.115
 

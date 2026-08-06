@@ -26,11 +26,12 @@ SWEP.Firemode = 0
 
 -- Balance
 SWEP.AmmoCost = 1
+
 SWEP.Count = 1
 SWEP.Damage = 17.5
 
-SWEP.Accuracy = 30
-SWEP.Range = 1000
+SWEP.Range = 400
+
 SWEP.Delay = 0.1
 
 -- Recoil

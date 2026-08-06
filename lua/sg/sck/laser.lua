@@ -15,7 +15,9 @@ AddType("Laser", {
 
 		local proxy = element._proxy
 
-		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local matrix = GetBoneOrientation(tab, element, ent)
+		if not matrix then return end
+
 		sg.DrawLaser(matrix:GetTranslation(), matrix:GetForward(), proxy.length, proxy.width, proxy.color, proxy.brightness, element.pixvis)
 	end
 })

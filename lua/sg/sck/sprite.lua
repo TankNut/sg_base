@@ -39,7 +39,7 @@ AddType("Sprite", {
 		if rendergroups and bit.band(flags, STUDIO_TRANSPARENCY) == 0 then return end
 		if not element._material then return end
 
-		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local matrix = GetBoneOrientation(tab, element, ent)
 		if not matrix then return end
 
 		render.SetMaterial(element._material)

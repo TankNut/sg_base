@@ -44,7 +44,7 @@ AddType("Model", {
 			return
 		end
 
-		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local matrix = GetBoneOrientation(tab, element, ent)
 		if not matrix then return end
 
 		local pos = matrix:GetTranslation()

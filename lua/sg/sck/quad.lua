@@ -12,7 +12,9 @@ AddType("Quad", {
 		element.draw_func = self[element.draw_func]
 	end,
 	Render = function(self, tab, element, ent, flags, rendergroups)
-		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local matrix = GetBoneOrientation(tab, element, ent)
+		if not matrix then return end
+
 		local pos, ang = matrix:GetTranslation(), matrix:GetAngles()
 
 		if developerMode:GetBool() then

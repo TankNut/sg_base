@@ -15,7 +15,9 @@ AddType("Spotlight", {
 
 		local proxy = element._proxy
 
-		local matrix = self:GetBoneOrientation(tab, element, ent)
+		local matrix = GetBoneOrientation(tab, element, ent)
+		if not matrix then return end
+
 		sg.DrawSpotlight(matrix:GetTranslation(), matrix:GetForward(), proxy.length, proxy.width, proxy.color, element.pixvis)
 	end
 })

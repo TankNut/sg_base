@@ -70,3 +70,46 @@ function DrawElement(self, tab, element, ent, flags, rendergroups)
 	Types[element.type].Render(self, tab, element, ent, flags, rendergroups)
 	render.UpdateRefractTexture()
 end
+
+local vector_one = Vector(1, 1, 1)
+
+function GetBoneOrientation(lookup, element, ent)
+	if element._frame == FrameNumber() then
+		return element._matrix
+	end
+
+	element._frame = FrameNumber()
+
+	local parent = lookup[element.rel]
+	local matrix
+
+	if parent then
+		matrix = Matrix(GetBoneOrientation(lookup, parent, ent))
+	else
+		local bone = 0
+
+		if #element.bone > 0 then
+			bone = ent:LookupBone(element.bone)
+		end
+
+		if not bone then
+			return
+		end
+
+		matrix = ent:GetBoneMatrix(bone)
+		matrix:SetScale(vector_one)
+	end
+
+	local proxy = element._proxy
+
+	if proxy.pos then matrix:Translate(proxy.pos) end
+	if proxy.angle then matrix:Rotate(proxy.angle) end
+
+	-- For easy manipulation through code
+	if proxy.pos2 then matrix:Translate(proxy.pos2) end
+	if proxy.angle2 then matrix:Rotate(proxy.angle2) end
+
+	element._matrix = matrix
+
+	return matrix
+end

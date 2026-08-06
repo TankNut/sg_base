@@ -209,7 +209,7 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 	render.MaterialOverride(nil)
 
 	local rendergroups = isTranslucent and translucent or opaque
-	local lod = (ScrH() / render.ComputePixelDiameterOfSphere(self:GetPos(), 250))
+	local lod = ScrH() / render.ComputePixelDiameterOfSphere(self:GetPos(), 250)
 
 	self:DrawSCKElements(self.WElements, self, flags, rendergroups, lod)
 end

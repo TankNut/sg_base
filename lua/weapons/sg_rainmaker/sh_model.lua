@@ -43,7 +43,7 @@ SWEP.VElements = {
 	["scope"] = { type = "Model", model = "models/props_borealis/bluebarrel001.mdl", bone = "ValveBiped.base", rel = "sight base", pos = Vector(-1.21, 0, 0), angle = Angle(180, 0, 0), size = Vector(0.06, 0.06, 0.06), color = Color(255, 0, 0, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = true, material = "models/grixis/customs/polymer4", skin = 0, bodygroup = {} },
 	["scope back view"] = { type = "Model", model = "models/props_phx/wheels/magnetic_small.mdl", bone = "ValveBiped.base", rel = "scope", pos = Vector(0, 0, 1.514), angle = Angle(0, 0, 0), size = Vector(0.095, 0.095, 0.095), color = Color(138, 0, 0, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/grixis/customs/polymer3", skin = 0, bodygroup = {} },
 	["scope clip 1"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "scope", pos = Vector(0.946, -4.221, -1.326), angle = Angle(0, 0, 0)},
-	["scope clip 2"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "scope", pos = Vector(0.94, -4.67, 1.53), angle = Angle(0, 0, -180)},
+	["scope clip 2"] = { type = "ClipPlane", bone = "ValveBiped.base", rel = "scope", pos = Vector(0.94, -4.67, 1.5), angle = Angle(0, 0, -180)},
 	["scope front view"] = { type = "Model", model = "models/props_phx/wheels/magnetic_small.mdl", bone = "ValveBiped.base", rel = "scope", pos = Vector(0, 0, -1.33), angle = Angle(0, 90, 0), size = Vector(0.09, 0.09, 0.09), color = Color(138, 0, 0, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/grixis/customs/polymer3", skin = 0, bodygroup = {} },
 	["scope glass"] = { type = "Model", model = "models/props_c17/clock01.mdl", bone = "ValveBiped.base", rel = "scope", pos = Vector(0, 0, 1.654), angle = Angle(0, 90, 0), size = Vector(0.09, 0.09, 0.09), color = Color(255, 255, 255, 31), surpresslightning = false, bonemerge = false, highrender = true, nocull = false, material = "phoenix_storms/glass", skin = 0, bodygroup = {} },
 	["scope glass+"] = { type = "Model", model = "models/props_c17/clock01.mdl", bone = "ValveBiped.base", rel = "scope glass", pos = Vector(0, 0, -3.019), angle = Angle(0, 90, 0), size = Vector(0.09, 0.09, 0.09), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = true, nocull = false, material = "models/weapons/v_smg1/texture5", skin = 0, bodygroup = {} },
@@ -103,6 +103,3 @@ SWEP.ViewModelBoneMods = {
 	["ValveBiped.Bip01_Spine4"] = { scale = Vector(1, 1, 1), pos = Vector(-5.749, 1.078, -0.359), angle = Angle(0, 0, 0) },
 	["ValveBiped.base"] = { scale = Vector(1, 1, 1), pos = Vector(1.078, 0, -6.108), angle = Angle(0, 0, 0) }
 }
-
-
-

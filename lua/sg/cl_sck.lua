@@ -62,13 +62,12 @@ function InitElements(self, tab)
 	return renderorder
 end
 
-function DrawElement(self, tab, element, ent, flags, rendergroups)
+function DrawElement(self, tab, element, ent, flags, rendergroups, lod)
 	if element._proxy.hide then
 		return
 	end
 
-	Types[element.type].Render(self, tab, element, ent, flags, rendergroups)
-	render.UpdateRefractTexture()
+	Types[element.type].Render(self, tab, element, ent, flags, rendergroups, lod)
 end
 
 local vector_one = Vector(1, 1, 1)

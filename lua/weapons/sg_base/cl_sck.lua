@@ -138,21 +138,22 @@ function SWEP:InitSCK()
 	self:InitBoneMods(self.ViewModelBoneMods)
 end
 
-local lastSCKUpdate = 0
-
-function SWEP:DrawSCKElements(tab, ent, flags, rendergroups)
+function SWEP:DrawSCKElements(tab, ent, flags, rendergroups, lod)
 	local frame = FrameNumber()
+	local entTable = self:GetTable()
 
-	if lastSCKUpdate != frame then
+	if entTable.LastSCKUpdate != frame then
 		self:ApplySCKAnimations()
 		self:UpdateSCK()
 
-		lastSCKUpdate = frame
+		entTable.LastSCKUpdate = frame
 	end
 
-	for _, element in ipairs(self.RenderOrder[tab]) do
-		sg.SCK.DrawElement(self, tab, element, ent, flags, rendergroups)
+	for _, element in ipairs(entTable.RenderOrder[tab]) do
+		sg.SCK.DrawElement(self, tab, element, ent, flags, rendergroups, lod)
 	end
+
+	render.UpdateRefractTexture()
 end
 
 function SWEP:UpdateSCK()
@@ -173,20 +174,6 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	end
 end
 
-function SWEP:PostDrawViewModel(vm, _, ply, flags)
-	if not self.ShowViewModel then
-		render.MaterialOverride(nil)
-		ply:GetHands():DrawModel()
-	end
-
-	self:DrawSCKElements(self.VElements, vm, flags)
-
-	-- ... and resetting here, we avoid ever running into issues where bones leak into other viewmodels
-	self:ResetBoneMods(vm)
-end
-
-local null = Material("null")
-
 local opaque = {
 	[RENDERGROUP_OPAQUE] = true,
 	[RENDERGROUP_BOTH] = true
@@ -196,6 +183,21 @@ local translucent = {
 	[RENDERGROUP_TRANSLUCENT] = true,
 	[RENDERGROUP_BOTH] = true
 }
+
+function SWEP:PostDrawViewModel(vm, _, ply, flags)
+	if not self.ShowViewModel then
+		render.MaterialOverride(nil)
+		ply:GetHands():DrawModel()
+	end
+
+	self:DrawSCKElements(self.VElements, vm, STUDIO_RENDER + STUDIO_TWOPASS, opaque)
+	self:DrawSCKElements(self.VElements, vm, flags, translucent)
+
+	-- ... and resetting here, we avoid ever running into issues where bones leak into other viewmodels
+	self:ResetBoneMods(vm)
+end
+
+local null = Material("null")
 
 function SWEP:DrawWorldModel(flags, isTranslucent)
 	if not self.ShowWorldModel then
@@ -207,8 +209,9 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 	render.MaterialOverride(nil)
 
 	local rendergroups = isTranslucent and translucent or opaque
+	local lod = (ScrH() / render.ComputePixelDiameterOfSphere(self:GetPos(), 250))
 
-	self:DrawSCKElements(self.WElements, self, flags, rendergroups)
+	self:DrawSCKElements(self.WElements, self, flags, rendergroups, lod)
 end
 
 function SWEP:DrawWorldModelTranslucent(flags)

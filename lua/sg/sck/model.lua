@@ -1,10 +1,13 @@
 module("sg.SCK", package.seeall)
 
-local scaleMatrix = Matrix()
+local ENTITY = FindMetaTable("Entity")
+local _GetTable = ENTITY.GetTable
 
 local badShaders = {
 	["LightmappedGeneric"] = true
 }
+
+local scaleMatrix = Matrix()
 
 AddType("Model", {
 	RenderOrder = 0,
@@ -41,19 +44,31 @@ AddType("Model", {
 		end
 
 		local ent = self:CreateCSEnt(element.model)
-		ent:SetPos(self:GetPos())
-		ent:SetAngles(self:GetAngles())
+		ent:SetLocalPos(vector_origin)
+		ent:SetLocalAngles(angle_zero)
 		ent:SetParent(self)
 		ent:SetNoDraw(true)
 
+		element._modelradius = ent:GetModelRadius()
 		element._entity = ent
 	end,
-	Render = function(self, tab, element, ent, flags, rendergroups)
+	Render = function(self, tab, element, ent, flags, rendergroups, lod)
 		local csent = element._entity
 		if not IsValid(csent) then return end
 
 		if rendergroups and not rendergroups[csent:GetRenderGroup()] then
 			return
+		end
+
+		local proxy = element._proxy
+
+		if lod then
+			local size = math.max(math.abs(element.size.x), math.abs(element.size.x), math.abs(element.size.x))
+			local ourlod = element._modelradius * size
+
+			if lod > ourlod then
+				return
+			end
 		end
 
 		local matrix = GetBoneOrientation(tab, element, ent)
@@ -62,14 +77,12 @@ AddType("Model", {
 		local pos = matrix:GetTranslation()
 		local ang = matrix:GetAngles()
 
-		if self.ViewModelFlip and ent:GetClass() == "viewmodel" then
+		if _GetTable(self).ViewModelFlip and ent:GetClass() == "viewmodel" then
 			ang.r = -ang.r
 		end
 
 		csent:SetPos(pos)
 		csent:SetAngles(ang)
-
-		local proxy = element._proxy
 
 		if proxy.size != element._size then
 			-- Re-using a single matrix here for optimization

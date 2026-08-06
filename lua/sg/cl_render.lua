@@ -3,6 +3,8 @@ module("sg", package.seeall)
 IsDrawingViewModels = false
 
 function DrawDebugText(str, line, color)
+	line = line or 0
+
 	surface.SetFont("DebugOverlay")
 
 	local _, offset = surface.GetTextSize("a")
@@ -10,7 +12,9 @@ function DrawDebugText(str, line, color)
 	local x = ScreenScale(5)
 	local y = ScrH() * 0.5
 
-	draw.SimpleText(str, "DebugOverlay", x, y + offset * (line or 0), color or color_white)
+	draw.SimpleText(str, "DebugOverlay", x, y + offset * line, color or color_white)
+
+	return line + 1
 end
 
 function DrawCircle(x, y, radius, seg)

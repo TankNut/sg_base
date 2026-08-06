@@ -39,10 +39,10 @@ if CLIENT then
 				["ValveBiped.Bip01_R_Finger4"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, -38.802, 0) },
 				["ValveBiped.Bip01_R_Forearm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 23.713) },
 				["ValveBiped.Bip01_R_Hand"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(19.401, 0, 0) },
-				["ValveBiped.base"] = { scale = Vector(1, 1, 1), pos = Vector(-0.359, 1.078, -1.437), angle = Angle(12.934, 19.401, -8.623) }
+				["ValveBiped.base"] = { scale = Vector(1, 1, 1), pos = Vector(-0.46, 1.5, -1.5), angle = Angle(12.934, 15.09, -14.5) }
 			},
 			VElements = {
-				["mag"] = { pos = Vector(1.022, 2.743, 19.331), angle = Angle(0, 180, 90) }
+				["mag"] = { pos = Vector(-0.354, 2.789, 20.552), angle = Angle(0, 180, 90) }
 			}
 		},
 		[24 / 48] = 10 / 48,

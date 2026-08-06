@@ -24,6 +24,11 @@ if CLIENT then
 
 			return sg.DebugVMPos, sg.DebugVMAng
 		else
+			if sg.DebugVMPos then
+				sg.DebugVMPos = nil
+				sg.DebugVMAng = nil
+			end
+
 			self.ViewModelFOV = self.InitialViewModelFOV
 		end
 

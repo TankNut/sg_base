@@ -45,13 +45,13 @@ if CLIENT then
 	concommand.Add("sg_dev_freezevm", function()
 		local lp = LocalPlayer()
 
-		sg.DebugVMPos = lp:EyePos()
-		sg.DebugVMAng = lp:EyeAngles()
-	end)
-
-	concommand.Add("sg_dev_unfreezevm", function()
-		sg.DebugVMPos = nil
-		sg.DebugVMAng = nil
+		if DebugVMPos then
+			DebugVMPos = nil
+			DebugVMAng = nil
+		else
+			DebugVMPos = lp:EyePos()
+			DebugVMAng = lp:EyeAngles()
+		end
 	end)
 end
 

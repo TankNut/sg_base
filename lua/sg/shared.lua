@@ -23,6 +23,7 @@ client("sck/sprite.lua")
 
 shared("traits/recoil_add.lua")
 shared("traits/self_knockback.lua")
+shared("traits/spread_add.lua")
 
 local errorColor = Color(255, 100, 100)
 

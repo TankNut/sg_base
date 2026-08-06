@@ -21,22 +21,44 @@ function SWEP:InitTraits(createNetworkVars)
 	end
 end
 
-function SWEP:RunHooks(name, ...)
-	local a, b, c, d, e, f
-
+function SWEP:RunHooks(name, callback)
 	for _, trait in ipairs(self.Traits) do
 		local func = trait["Hook_" .. name]
 
-		if func then
-			a, b, c, d, e, f = func(trait, self, ...)
+		if not func then
+			continue
 		end
 
-		if a != nil then
-			return a, b, c, d, e, f
-		end
-	end
+		if callback then
+			local wrapper = function(...)
+				return func(trait, self, ...)
+			end
 
-	if isfunction(self[name]) then
-		return self[name](self, ...)
+			local res = {callback(wrapper)}
+
+			if #res > 0 then
+				return unpack(res)
+			end
+		else
+			func(trait, self)
+		end
 	end
 end
+
+-- function SWEP:RunHooks(name, ...)
+-- 	for _, trait in ipairs(self.Traits) do
+-- 		local func = trait["Hook_" .. name]
+
+-- 		if func then
+-- 			local res = {func(trait, self, ...)}
+
+-- 			if #res > 0 then
+-- 				return unpack(res)
+-- 			end
+-- 		end
+-- 	end
+
+-- 	if isfunction(self[name]) then
+-- 		return self[name](self, ...)
+-- 	end
+-- end

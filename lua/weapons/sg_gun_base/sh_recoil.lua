@@ -2,7 +2,13 @@ AddCSLuaFile()
 DEFINE_BASECLASS("sg_base")
 
 function SWEP:GetRecoilMultiplier()
-	return self.RecoilAdd * self:GetFireDuration()
+	local val = 1
+
+	self:RunHooks("MultiplyRecoil", function(func)
+		val = func(val) or val
+	end)
+
+	return val
 end
 
 function SWEP:AddRecoil(override)

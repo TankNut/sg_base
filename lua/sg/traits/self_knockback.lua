@@ -6,7 +6,7 @@ function TRAIT:Hook_PostFireWeapon(ent)
 	local ply = ent:GetOwner()
 
 	if ply:IsPlayer() and IsFirstTimePredicted() then
-		ply:SetVelocity(ply:GetAimVector() * -self.Force)
+		ply:SetVelocity(ent:GetShootDir() * -self.Force)
 	end
 end
 

@@ -27,7 +27,7 @@ function TRAIT:GetMultiplier(ent)
 	return ent:GetRecoilAdd() * frac
 end
 
-function TRAIT:Hook_PostFireWeapon(ent)
+function TRAIT:Hook_PostApplyRecoil(ent)
 	ent:SetRecoilAdd(math.Clamp(self:GetMultiplier(ent) + self.Add * ent.Delay, self.Min, self.Max))
 end
 

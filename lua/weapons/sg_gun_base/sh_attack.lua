@@ -79,6 +79,7 @@ function SWEP:PrimaryAttack()
 	self:RunHooks("PostFireWeapon")
 
 	self:AddRecoil()
+	self:RunHooks("PostApplyRecoil")
 
 	local anim = self:PlayAnimation("Primary")
 	local delay = self:GetDelay()

@@ -35,13 +35,15 @@ SWEP.Range = 275
 
 SWEP.Delay = 0.33
 
+-- Traits
+SWEP.Traits = {}
+
 -- Recoil
 SWEP.Recoil = {
 	Min = Angle(1, -1),
 	Max = Angle(3, 1)
 }
 
-SWEP.RecoilAdd = 0
 SWEP.ViewPunch = 0.75
 SWEP.RecoilFlip = false
 

@@ -43,7 +43,7 @@ function SWEP:AddRecoil(override)
 		recoil.p = recoil.p + (recoil.p * mult.p)
 		recoil.y = recoil.y + (recoil.y * mult.y)
 	else
-		recoil:Add(recoil * mult)
+		recoil:Mul(mult)
 	end
 
 	ply:ViewPunch(-recoil)

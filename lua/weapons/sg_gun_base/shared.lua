@@ -32,13 +32,15 @@ SWEP.SpreadMod = Vector(1, 1) -- Multiplier for horizontal and vertical spread
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead
 SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instead of the normal delay
 
+-- Traits
+SWEP.Traits = {} -- See the list of traits and their options in lua/sg/traits
+
 -- Recoil
 SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fire modes) more than anything
 	Min = Angle(1, 1),
 	Max = Angle(1, 1)
 }
 
-SWEP.RecoilAdd = 0 -- Adds a multiple of recoil per second based on the attack duration, can be an angle or overwritten through SWEP:GetRecoilMultiplier()
 SWEP.ViewPunch = 0.4 -- Multiplier for the amount of offset that gets added to the player's view directly
 SWEP.RecoilFlip = true -- Lets the recoil flip horizontally
 

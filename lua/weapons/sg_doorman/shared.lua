@@ -36,7 +36,8 @@ SWEP.Delay = 0.115
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("SelfKnockback", {Force = 40})
+	sg.Trait("SelfKnockback", {Force = 40}),
+	sg.Trait("RecoilAdd", {Add = 0.9})
 }
 
 -- Recoil
@@ -45,7 +46,6 @@ SWEP.Recoil = {
 	Max = Angle(.3, .25)
 }
 
-SWEP.RecoilAdd = .9
 SWEP.ViewPunch = 1
 SWEP.RecoilFlip = false
 

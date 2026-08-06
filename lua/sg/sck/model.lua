@@ -17,6 +17,18 @@ AddType("Model", {
 			return
 		end
 
+		local flipCount = 0
+
+		for _, v in ipairs({element.size:Unpack()}) do
+			if v < 0 then
+				flipCount = flipCount + 1
+			end
+		end
+
+		if flipCount % 2 == 1 then
+			element.inverted = not tobool(element.inverted)
+		end
+
 		-- Check for bad materials
 		if #element.material > 0 then
 			local shader = Material(element.material):GetShader()

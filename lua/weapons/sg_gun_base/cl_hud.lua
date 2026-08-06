@@ -34,15 +34,19 @@ function SWEP:DebugWeaponStats()
 	local accuracy = self:GetAccuracy()
 
 	local offset = accuracy * (dist / range)
+	local line = -6
 
-	sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetFiremode())), -5)
+	line = sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetFiremode())), line)
 
-	sg.DrawDebugText(string.format("Weapon range: %.0f at %.0f units", accuracy, range), -3)
-	sg.DrawDebugText(string.format("Aim distance: %.0f units (%.2fx)", dist, dist / range), -2)
+	line = sg.DrawDebugText(string.format("Weapon range: %.0f at %.0f units", accuracy, range), line)
+	line = sg.DrawDebugText(string.format("Aim distance: %.0f units (%.2fx)", dist, dist / range), line)
+
+
+	local recoil = self:GetRecoilMultiplier()
+	line = sg.DrawDebugText(string.format("Recoil %%: %.3f%%", recoil), line + 1)
 
 	local delay = self:GetDelay()
-
-	sg.DrawDebugText(string.format("Delay: %.3fs (%.0f RPM)", delay, 60 / delay), 0)
+	line = sg.DrawDebugText(string.format("Delay: %.3fs (%.0f RPM)", delay, 60 / delay), line)
 
 	cam.Start3D()
 		render.SetColorMaterial()
@@ -56,27 +60,25 @@ function SWEP:DebugAnimationState()
 	local name = self:GetAnimationName()
 	local anim = self.Animations[name]
 
+	local line = 3
+
 	if not anim then
-		sg.DrawDebugText("Animation: *NONE*", 4)
+		sg.DrawDebugText("Animation: *NONE*", line)
 		return
 	end
 
-	sg.DrawDebugText(string.format("Animation: %s", name), 4)
-	sg.DrawDebugText(string.format("Cycle: %.3f", self:GetAnimationCycle()), 5)
+	line = sg.DrawDebugText(string.format("Animation: %s", name), line)
+	line = sg.DrawDebugText(string.format("Cycle: %.3f", self:GetAnimationCycle()), line)
 
-	sg.DrawDebugText("Events:", 6)
-
-	local index = 7
+	line = sg.DrawDebugText("Events:", line)
 
 	for frame, events in SortedPairs(anim.Events) do
 		for _, event in ipairs(events) do
-			sg.DrawDebugText(string.format("\t[%.3f]: %s(%s)", frame, event[1], event[2]), index)
-			index = index + 1
+			line = sg.DrawDebugText(string.format("\t[%.3f]: %s(%s)", frame, event[1], event[2]), line)
 		end
 	end
 
-	sg.DrawDebugText("Layers:", index)
-	index = index + 1
+	line = sg.DrawDebugText("Layers:", line)
 
 	for _, tab in ipairs(layerTables) do
 		local count = 0
@@ -86,8 +88,7 @@ function SWEP:DebugAnimationState()
 		end
 
 		if count > 0 then
-			sg.DrawDebugText(string.format("\t%s: %i", tab, count), index)
-			index = index + 1
+			line = sg.DrawDebugText(string.format("\t%s: %i", tab, count), line)
 		end
 	end
 end

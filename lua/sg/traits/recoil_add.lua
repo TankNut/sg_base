@@ -1,7 +1,7 @@
 local TRAIT = {}
 
 TRAIT.Add = 0.1 -- Multiplies recoil by this amount per shot
-TRAIT.Max = 1
+TRAIT.Max = math.huge
 TRAIT.Reset = 1 -- Time to reset
 
 function TRAIT:SetupNetworkVars(ent)

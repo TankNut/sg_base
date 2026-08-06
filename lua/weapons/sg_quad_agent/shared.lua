@@ -50,14 +50,11 @@ SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
 include("sh_model.lua")
+include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_QuadAgent.Single1")
 	self:EmitSound("Weapon_SG_QuadAgent.Single2")
-end
-
-function SWEP:OnReloadAnimation()
-	self:EmitSound("")
 end
 
 sound.Add({
@@ -78,5 +75,4 @@ sound.Add({
 })
 
 --[[Grixis Notes: Still working on balancing this so values may look fucky. This one won't have breech loading in the end but 
-feel free to use this as a test base for that if needed along with scoping once we get there too. Also, noticed at least based
-on what I saw in the wiki and the sounds list from hl2_game_sounds_weapons that the 357 utilizes multiple sound scripts?]]--
+feel free to use this as a test base for that if needed along with scoping once we get there too.]]

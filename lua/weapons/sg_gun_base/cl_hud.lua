@@ -38,7 +38,7 @@ function SWEP:DebugWeaponStats()
 
 	line = sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetFiremode())), line)
 
-	line = sg.DrawDebugText(string.format("Weapon range: %.0f at %.0f units", accuracy, range), line)
+	line = sg.DrawDebugText(string.format("Weapon range: %.0f units (%.2fx spread)", range, accuracy / 12), line)
 	line = sg.DrawDebugText(string.format("Aim distance: %.0f units (%.2fx)", dist, dist / range), line)
 
 

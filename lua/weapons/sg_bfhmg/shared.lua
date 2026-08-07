@@ -53,7 +53,6 @@ SWEP.RecoilFlip = true
 SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {
-	Material = Material("effects/spark_noz"),
 	Length = {128, 256},
 	Scale = {0.5, 1.5}
 }

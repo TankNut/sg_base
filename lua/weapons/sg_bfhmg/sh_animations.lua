@@ -1,3 +1,18 @@
+local primary = sg.Animation.Weapon(SWEP.Delay)
+primary:AddEvent(0, "VMSequence", ACT_VM_PRIMARYATTACK)
+primary:AddEvent(0, "PlayerAnimation", PLAYER_ATTACK1)
+
+if CLIENT then
+	primary:AddElementLayer("barrel", {
+		[1 / 7] = {pos2 = Vector(0, 0, -5), math.ease.InSine},
+		[1]     = {pos2 = vector_origin}
+	})
+	primary:AddElementLayer("bolt", {
+		[1 / 7] = {pos2 = Vector(0, 0, -2.5), math.ease.InSine},
+		[1]     = {pos2 = vector_origin}
+	})
+end
+
 local reload = sg.Animation.WeaponSequence(ACT_VM_RELOAD)
 reload:AddEvent(0, "PlayerAnimation", PLAYER_RELOAD)
 reload:AddEvent(0, "Sound", "Weapon_AR2.Reload_Push")
@@ -19,8 +34,7 @@ if CLIENT then
 	})
 end
 
-
-
 SWEP.Animations = {
+	Primary = primary,
 	Reload = reload
 }

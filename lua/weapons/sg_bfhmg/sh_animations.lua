@@ -5,11 +5,13 @@ primary:AddEvent(0, "PlayerAnimation", PLAYER_ATTACK1)
 if CLIENT then
 	primary:AddElementLayer("barrel", {
 		[1 / 7] = {pos2 = Vector(0, 0, -5), math.ease.InSine},
-		[1]     = {pos2 = vector_origin}
+		[6 / 7] = {pos2 = vector_origin}
 	})
+
 	primary:AddElementLayer("bolt", {
-		[1 / 7] = {pos2 = Vector(0, 0, -2.5), math.ease.InSine},
-		[1]     = {pos2 = vector_origin}
+		[1 / 7] = {pos2 = Vector(0, 0, -3), math.ease.InSine},
+		[3 / 7] = {pos2 = Vector(0, 0, -3)},
+		[1]     = {pos2 = vector_origin},
 	})
 end
 

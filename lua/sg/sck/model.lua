@@ -34,11 +34,14 @@ AddType("Model", {
 
 		-- Check for bad materials
 		if #element.material > 0 then
-			local shader = Material(element.material):GetShader()
+			local mat = Material(element.material)
+			local shader = mat:GetShader()
 
-			if badShaders[shader] then
+			if mat:IsError() then
+				sg.ThrowError("Clearing %s.material: Material is invalid (%s)", element, element.material)
+				element.material = ""
+			elseif badShaders[shader] then
 				sg.ThrowError("Clearing %s.material: Bad shader (%s)", element, shader)
-
 				element.material = ""
 			end
 		end

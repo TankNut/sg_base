@@ -69,6 +69,7 @@ sound.Add({
 	pitch = {150, 165},
 	sound = ")weapons/357/357_fire2.wav"
 })
+
 sound.Add({
 	name = "Weapon_SG_QuadAgent.Single2",
 	channel = CHAN_ITEM,

@@ -19,7 +19,7 @@ SWEP.Primary.ClipSize = 75
 SWEP.Primary.DefaultClip = 225
 
 -- HoldType
-SWEP.HoldType = "ar2"
+SWEP.HoldType = "heavy"
 
 -- Firemode
 SWEP.Firemode = 0

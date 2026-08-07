@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/customs/gunmetal6"
+	$bumpmap "models/sg/customs/gunmetal6_normal"
+	$surfaceprop Metal
+
+	$phong 1
+	$phongfresnelranges "[0.5 0.75 1]"
+	$phongexponent 20
+	$phongboost 0.25
+}

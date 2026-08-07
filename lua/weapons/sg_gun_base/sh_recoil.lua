@@ -25,8 +25,8 @@ function SWEP:AddRecoil(override)
 	end
 
 	if istable(recoil) then
-		local pitch = sharedRand(recoil.Min.p, recoil.Max.p)
-		local yaw = sharedRand(recoil.Min.y, recoil.Max.y)
+		local pitch = sharedRand(recoil.x[1], recoil.x[2])
+		local yaw = sharedRand(recoil.y[1], recoil.y[2])
 
 		recoil = Angle(pitch, yaw)
 	else

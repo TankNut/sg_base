@@ -41,8 +41,8 @@ SWEP.Traits = {
 
 -- Recoil
 SWEP.Recoil = {
-	Min = Angle(0.35, 0.2),
-	Max = Angle(0.45, -0.2)
+	x = {0.35, 0.45},
+	y = {-0.2, 0.2}
 }
 
 SWEP.ViewPunch = 0.5

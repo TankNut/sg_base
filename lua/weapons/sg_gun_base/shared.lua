@@ -36,8 +36,8 @@ SWEP.Traits = {} -- See the list of traits and their options in lua/sg/traits
 
 -- Recoil
 SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fire modes) more than anything
-	Min = Angle(1, 1),
-	Max = Angle(1, 1)
+	x = {1, 1},
+	y = {1, 1}
 }
 
 SWEP.ViewPunch = 0.4 -- Multiplier for the amount of offset that gets added to the player's view directly

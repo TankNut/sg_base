@@ -10,6 +10,7 @@ end
 
 SWEP.ViewModelFOV = 54
 SWEP.ViewModelFlip = false
+SWEP.ViewModelOffset = Vector(-3, -0.4, -1)
 
 SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false

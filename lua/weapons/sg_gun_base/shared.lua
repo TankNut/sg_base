@@ -58,6 +58,7 @@ SWEP.TracerName = "sg_e_tracer" -- tracer effect
 SWEP.TracerConfig = {} -- Used to configure the tracer effect
 
 if CLIENT then
+	-- This should go into sh_model.lua
 	SWEP.ViewModelOffset = Vector()
 end
 

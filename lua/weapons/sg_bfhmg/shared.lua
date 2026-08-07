@@ -58,10 +58,6 @@ SWEP.TracerConfig = {
 	Scale = {0.5, 1.5}
 }
 
-if CLIENT then
-	SWEP.ViewModelOffset = Vector(-3, -0.4, -1)
-end
-
 include("sh_model.lua")
 include("sh_animations.lua")
 

@@ -153,8 +153,7 @@ function SWEP:FireWeapon()
 	local damage = self:GetDamage()
 
 	local spread = math.rad(self:GetSpread())
-
-	owner:FireBullets({
+	local bullet = {
 		Inflictor = self,
 
 		Src = owner:GetShootPos(),
@@ -163,10 +162,7 @@ function SWEP:FireWeapon()
 		Num = self.Count,
 		Damage = damage,
 		Force = damage * 0.25,
-		Spread = Vector(
-			spread * self.SpreadMod.x,
-			spread * self.SpreadMod.y
-		),
+		Spread = Vector(spread, spread),
 
 		Tracer = self.Tracer,
 		TracerName = self.TracerName,
@@ -174,7 +170,11 @@ function SWEP:FireWeapon()
 		Callback = function(attacker, tr, dmg)
 			self:BulletCallback(attacker, tr, dmg)
 		end
-	})
+	}
+
+	self:RunHooks("ModifyBullet", function(func) func(bullet) end)
+
+	owner:FireBullets(bullet)
 
 	if SERVER then
 		sound.EmitHint(SOUND_COMBAT, self:GetPos(), 1500, 0.2, owner)

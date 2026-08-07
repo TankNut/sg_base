@@ -89,7 +89,7 @@ sound.Add({
 sound.Add({
 	name = "Weapon_SG_BFHMG.Single2",
 	channel = CHAN_ITEM,
-	volume = .5,
+	volume = 0.5,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {75, 95},
 	sound = ")weapons/m4a1/m4a1_unsil-1.wav"

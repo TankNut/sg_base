@@ -27,7 +27,6 @@ SWEP.Count = 1 -- How many bullets are fired
 SWEP.Damage = 11 -- Can be overwritten with SWEP:GetDamage
 
 SWEP.Range = 0 -- Distance to hit a roughly torso-sized target at, SWEP:GetRange for override
-SWEP.SpreadMod = Vector(1, 1) -- Multiplier for horizontal and vertical spread
 
 SWEP.Delay = 60 / 800 -- Can be overwritten through SWEP:GetDelay(), a value of -1 will use the animation delay instead
 SWEP.BurstDelay = nil -- Ditto, if set this is used at the end of a burst instead of the normal delay

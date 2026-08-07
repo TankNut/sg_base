@@ -61,6 +61,13 @@ end
 
 function SWEP:Think()
 	self:UpdateHoldType()
+
+	if GetPredictionPlayer():IsValid() then
+		self:PredictionThink()
+	end
+end
+
+function SWEP:PredictionThink()
 	self:UpdateAnimations()
 end
 

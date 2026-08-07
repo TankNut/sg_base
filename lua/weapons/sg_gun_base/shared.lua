@@ -113,14 +113,12 @@ function SWEP:UpdatePump()
 	end
 end
 
-function SWEP:Think()
-	if GetPredictionPlayer():IsValid() then
-		self:UpdateReload()
-		self:UpdatePump()
-		self:UpdateAttack()
-	end
+function SWEP:PredictionThink()
+	self:UpdateReload()
+	self:UpdatePump()
+	self:UpdateAttack()
 
-	BaseClass.Think(self)
+	BaseClass.PredictionThink(self)
 end
 
 if CLIENT then

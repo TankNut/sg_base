@@ -13,6 +13,8 @@ function SWEP:TranslateFOV(fov)
 
 	if developerMode:GetBool() and sg.DebugVMPos then
 		self.ViewModelFOV = ply:GetFOV()
+
+		return
 	else
 		self.ViewModelFOV = self.BaseViewModelFOV
 	end

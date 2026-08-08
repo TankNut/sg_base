@@ -23,7 +23,6 @@ SWEP.HoldType = "pistol2"
 
 -- Firemode
 SWEP.Firemode = 1
-SWEP.ForceBurst = true
 
 -- Balance
 SWEP.AmmoCost = 1

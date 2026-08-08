@@ -15,6 +15,10 @@ function SWEP:GetCurrentFiremode()
 	return firemode
 end
 
+function SWEP:IsBurstFire()
+	return self:GetCurrentFiremode() > 1
+end
+
 function SWEP:IsFinalBurstShot()
 	local firemode = self:GetCurrentFiremode()
 
@@ -264,7 +268,7 @@ end
 
 -- Return true to force the weapon to fire
 function SWEP:ShouldAutoAttack()
-	if self.ForceBurst then
+	if self:IsBurstFire() then
 		local count = self:GetAttackCount()
 
 		if count > 0 and count % self:GetCurrentFiremode() != 0 then

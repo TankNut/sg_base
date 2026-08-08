@@ -16,7 +16,6 @@ SWEP.Secondary.Automatic = false
 
 -- Firemode
 SWEP.Firemode = 0 -- 0 = full-auto, 1 = semi-auto, anything higher is burst fire
-SWEP.ForceBurst = false -- If doing burst fire, force the player to keep firing
 SWEP.AutoBurst = false -- If doing burst fire, let the weapon start a new burst without requiring the player to re-engage their fire button
 
 SWEP.PumpAction = false -- Forces the weapon to play a pump animation between shots

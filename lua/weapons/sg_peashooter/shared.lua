@@ -23,7 +23,6 @@ SWEP.HoldType = "smg"
 
 -- Firemode
 SWEP.Firemode = 3
-SWEP.ForceBurst = true
 SWEP.AutoBurst = true
 
 -- Balance

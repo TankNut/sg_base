@@ -1,6 +1,9 @@
 local TRAIT = {}
 
-TRAIT.Zoom = 3 -- Can (soon) be a table to enable scroll switching zoom levels
+TRAIT.Zoom = 1.25 -- Can be a table to enable scroll switching zoom levels
+TRAIT.ZoomRange = false -- Use the zoom value as a range multiplier, not compatible with TRAIT.Range
+
+TRAIT.Firemode = nil
 TRAIT.Range = nil -- Optional range to use while aiming
 TRAIT.Recoil = 0 -- Recoil modifier while aiming
 
@@ -10,6 +13,11 @@ TRAIT.Offset = Vector() -- Position offset to use while aiming
 
 function TRAIT:SetupNetworkVars(ent)
 	ent:NetworkVar("Float", "AimState")
+	ent:NetworkVar("Float", "ZoomIndex")
+
+	if SERVER then
+		ent:SetZoomIndex(1)
+	end
 end
 
 function TRAIT:ShouldAim(ent)
@@ -33,11 +41,37 @@ function TRAIT:GetState(ent, from, to)
 end
 
 function TRAIT:GetZoom(ent)
-	return Lerp(self:GetState(ent, 0.25, 1), 1, self.Zoom)
+	local zoom = self.Zoom
+
+	if istable(zoom) then
+		zoom = zoom[ent:GetZoomIndex()]
+	end
+
+	return Lerp(self:GetState(ent, 0.25, 1), 1, zoom)
 end
 
 function TRAIT:Hook_Think(ent)
 	ent:SetAimState(math.Approach(ent:GetAimState(), self:ShouldAim(ent) and 1 or 0, FrameTime() / self.AimTime))
+
+	if istable(self.Zoom) and self:IsAiming(ent) then
+		local cmd = ent:GetOwner():GetCurrentCommand()
+		local wheel = math.Clamp(cmd:GetMouseWheel(), -1, 1)
+
+		if wheel != 0 then
+			local index = ent:GetZoomIndex() + wheel
+
+			if index > 0 and index <= #self.Zoom then
+				ent:EmitSound("Default.Zoom")
+				ent:SetZoomIndex(index)
+			end
+		end
+	end
+end
+
+function TRAIT:Hook_OverrideFiremode(ent, firemode)
+	if self.Firemode != nil and self:IsAiming(ent) then
+		return self.Firemode
+	end
 end
 
 function TRAIT:Hook_MultiplyRecoil(ent, val)
@@ -45,7 +79,9 @@ function TRAIT:Hook_MultiplyRecoil(ent, val)
 end
 
 function TRAIT:Hook_GetRange(ent, val)
-	if self.Range then
+	if self.ZoomRange then
+		return Lerp(self:GetState(ent), val, val * self:GetZoom(ent))
+	elseif self.Range then
 		return Lerp(self:GetState(ent), val, self.Range)
 	end
 end
@@ -68,6 +104,12 @@ if CLIENT then
 		offset:Rotate(ang)
 
 		pos:Add(offset * state)
+	end
+
+	function TRAIT:Hook_HUDShouldDraw(ent, hud)
+		if hud == "CHudWeaponSelection" and self:IsAiming(ent) then
+			return false
+		end
 	end
 end
 

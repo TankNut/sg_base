@@ -23,6 +23,7 @@ SWEP.HoldType = "pistol2"
 
 -- Firemode
 SWEP.Firemode = 1
+SWEP.ForceBurst = true
 
 -- Balance
 SWEP.AmmoCost = 1
@@ -37,8 +38,10 @@ SWEP.Delay = 0.06
 -- Traits
 SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
-		Offset = Vector(0, 2, 2),
-		Range = 4000
+		Zoom = {1.25, 3, 5, 10},
+		ZoomRange = true,
+		Firemode = 3,
+		Offset = Vector(0, 2, 2)
 	}),
 	sg.Trait("RecoilAdd", {Add = 0.1})
 }

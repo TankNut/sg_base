@@ -1,8 +1,22 @@
 AddCSLuaFile()
 DEFINE_BASECLASS("sg_base")
 
-function SWEP:IsFinalBurstShot()
+function SWEP:GetCurrentFiremode()
 	local firemode = self:GetFiremode()
+
+	self:RunHooks("OverrideFiremode", function(func)
+		local override = func(firemode)
+
+		if override != nil then
+			firemode = override
+		end
+	end)
+
+	return firemode
+end
+
+function SWEP:IsFinalBurstShot()
+	local firemode = self:GetCurrentFiremode()
 
 	if firemode > 1 then
 		local count = self:GetAttackCount()
@@ -14,7 +28,7 @@ function SWEP:IsFinalBurstShot()
 end
 
 function SWEP:UpdateBurst()
-	local firemode = self:GetFiremode()
+	local firemode = self:GetCurrentFiremode()
 
 	if firemode == 0 or self.AutoBurst then
 		self.Primary.Automatic = true
@@ -120,7 +134,11 @@ function SWEP:GetAccuracy()
 	local spread = 12
 
 	self:RunHooks("GetSpread", function(func)
-		spread = func(spread) or spread
+		local override = func(spread)
+
+		if override != nil then
+			spread = override
+		end
 	end)
 
 	return spread
@@ -130,7 +148,11 @@ function SWEP:GetRange()
 	local range = self.Range
 
 	self:RunHooks("GetRange", function(func)
-		range = func(range) or range
+		local override = func(range)
+
+		if override != nil then
+			range = override
+		end
 	end)
 
 	return range
@@ -245,7 +267,7 @@ function SWEP:ShouldAutoAttack()
 	if self.ForceBurst then
 		local count = self:GetAttackCount()
 
-		if count > 0 and count % self:GetFiremode() != 0 then
+		if count > 0 and count % self:GetCurrentFiremode() != 0 then
 			return true
 		end
 	end

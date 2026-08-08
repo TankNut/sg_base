@@ -124,6 +124,10 @@ function SWEP:PredictionThink()
 end
 
 if CLIENT then
+	function SWEP:HUDShouldDraw(hud)
+		return self:RunHooks("HUDShouldDraw", nil, hud)
+	end
+
 	function SWEP:ConfigureTracer(effect)
 		for k, v in pairs(self.TracerConfig) do
 			if k == "BaseClass" then

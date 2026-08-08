@@ -36,7 +36,7 @@ function SWEP:DebugWeaponStats()
 	local offset = accuracy * (dist / range)
 	local line = -6
 
-	line = sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetFiremode())), line)
+	line = sg.DrawDebugText(string.format("Firemode: %s", firemodeToText(self:GetCurrentFiremode())), line)
 
 	line = sg.DrawDebugText(string.format("Weapon range: %.0f units (%.2fx spread)", range, accuracy / 12), line)
 	line = sg.DrawDebugText(string.format("Aim distance: %.0f units (%.2fx)", dist, dist / range), line)

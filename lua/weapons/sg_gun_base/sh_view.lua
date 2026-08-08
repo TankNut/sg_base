@@ -18,7 +18,11 @@ function SWEP:TranslateFOV(fov)
 	end
 
 	self:RunHooks("TranslateFOV", function(func)
-		fov = func(fov) or fov
+		local override = func(fov)
+
+		if override != nil then
+			fov = override
+		end
 	end)
 
 	return fov

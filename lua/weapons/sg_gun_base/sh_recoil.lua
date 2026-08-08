@@ -5,7 +5,11 @@ function SWEP:GetRecoilMultiplier()
 	local val = 1
 
 	self:RunHooks("MultiplyRecoil", function(func)
-		val = func(val) or val
+		local override = func(val)
+
+		if override != nil then
+			val = override
+		end
 	end)
 
 	return val

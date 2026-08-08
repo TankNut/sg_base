@@ -21,7 +21,7 @@ function SWEP:Initialize()
 	self:InitAnimations()
 
 	if CLIENT then
-		self.InitialViewModelFOV = self.ViewModelFOV
+		self.BaseViewModelFOV = self.ViewModelFOV
 
 		self.CSEnts = {}
 		self:InitSCK()
@@ -49,6 +49,8 @@ function SWEP:OnReloaded()
 	self:InitAnimations()
 
 	if CLIENT then
+		self.BaseViewModelFOV = self.ViewModelFOV
+
 		self:InitSCK()
 	end
 end

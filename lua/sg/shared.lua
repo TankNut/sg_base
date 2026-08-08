@@ -22,6 +22,7 @@ client("sck/spotlight.lua")
 client("sck/sprite.lua")
 
 shared("traits/recoil_add.lua")
+shared("traits/secondary_aim.lua")
 shared("traits/self_knockback.lua")
 shared("traits/spread_add.lua")
 shared("traits/spread_mod.lua")

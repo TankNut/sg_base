@@ -127,7 +127,13 @@ function SWEP:GetAccuracy()
 end
 
 function SWEP:GetRange()
-	return self.Range
+	local range = self.Range
+
+	self:RunHooks("GetRange", function(func)
+		range = func(range) or range
+	end)
+
+	return range
 end
 
 function SWEP:GetSpread()
@@ -172,7 +178,7 @@ function SWEP:FireWeapon()
 		end
 	}
 
-	self:RunHooks("ModifyBullet", function(func) func(bullet) end)
+	self:RunHooks("ModifyBullet", nil, bullet)
 
 	owner:FireBullets(bullet)
 

@@ -114,6 +114,8 @@ function SWEP:UpdatePump()
 end
 
 function SWEP:PredictionThink()
+	self:RunHooks("Think")
+
 	self:UpdateReload()
 	self:UpdatePump()
 	self:UpdateAttack()

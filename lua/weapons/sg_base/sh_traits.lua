@@ -40,7 +40,11 @@ function SWEP:RunHooks(name, callback, ...)
 				return unpack(res)
 			end
 		else
-			func(trait, self, ...)
+			local res = {func(trait, self, ...)}
+
+			if #res > 0 then
+				return unpack(res)
+			end
 		end
 	end
 end

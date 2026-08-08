@@ -21,6 +21,7 @@ client("sck/quad.lua")
 client("sck/spotlight.lua")
 client("sck/sprite.lua")
 
+shared("traits/hyper_burst.lua")
 shared("traits/recoil_add.lua")
 shared("traits/secondary_aim.lua")
 shared("traits/self_knockback.lua")

@@ -42,7 +42,8 @@ SWEP.Traits = {
 		Firemode = 3,
 		Offset = Vector(0, 2, 2)
 	}),
-	sg.Trait("RecoilAdd", {Add = 0.1})
+	sg.Trait("RecoilAdd", {Add = 0.1}),
+	sg.Trait("HyperBurst")
 }
 
 -- Recoil

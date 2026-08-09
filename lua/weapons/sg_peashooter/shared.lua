@@ -37,8 +37,15 @@ SWEP.Delay = 0.08
 SWEP.BurstDelay = SWEP.Delay * 2
 
 -- Traits
+
 SWEP.Traits = {
-	sg.Trait("RecoilAdd", {Add = 0.8})
+	sg.Trait("SecondaryAim", {
+		Zoom = {1.75},
+		ZoomRange = true,
+		Offset = Vector(-6, 3.5, 1)
+	}),
+	sg.Trait("RecoilAdd", {Add = 0.8}),
+	sg.Trait("HyperBurst")
 }
 
 -- Recoil

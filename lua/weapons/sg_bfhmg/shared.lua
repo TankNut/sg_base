@@ -50,11 +50,11 @@ SWEP.ViewPunch = 1
 SWEP.RecoilFlip = true
 
 -- Effects
-SWEP.Tracer = 3
+SWEP.Tracer = 2
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {
 	Length = {128, 256},
-	Scale = {0.5, 1.5}
+	Scale = 3
 }
 
 include("sh_model.lua")

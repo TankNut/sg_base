@@ -78,7 +78,7 @@ sound.Add({
 sound.Add({
 	name = "Weapon_SG_HNSA.Single2",
 	channel = CHAN_ITEM,
-	volume = 1,
+	volume = 0.5,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {100, 120},
 	sound = "^npc/sniper/echo1.wav"

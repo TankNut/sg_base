@@ -3,26 +3,86 @@ DEFINE_BASECLASS("sg_gun_base")
 
 SWEP.Base = "sg_gun_base"
 
-SWEP.PrintName = "HNSA"
+SWEP.PrintName = "The Hide n' Seek Advanced"
 SWEP.Category = "S&G Munitions"
 
-SWEP.Spawnable = false
+SWEP.Instructions = "Pull the trigger to achieve victory."
+SWEP.Purpose = "What's that? Neighborhood kids are way too good at hide and seek? Not when you're carrying this rifle around, they're not."
 
+SWEP.Slot = 3
+
+SWEP.Spawnable = true
+
+-- Ammo
+SWEP.Primary.Ammo = "Xbowbolt"
+SWEP.Primary.ClipSize = 10
+SWEP.Primary.DefaultClip = 30
+
+-- HoldType
 SWEP.HoldType = "sniper"
 
-SWEP.Primary.Ammo = "XBowBolt"
-SWEP.Primary.ClipSize = 1
-SWEP.Primary.DefaultClip = 1
+-- Firemode
+SWEP.Firemode = 1
 
-SWEP.Delay = -1
+-- Balance
+SWEP.AmmoCost = 1
 
-SWEP.AnimSounds = {
-	Primary = "Weapon_Crossbow.Single",
-	Reload = "Weapon_Crossbow.Reload"
+SWEP.Count = 1
+SWEP.Damage = 75
+
+SWEP.Range = 2000
+
+SWEP.Delay = 0.25
+
+-- Traits
+SWEP.Traits = {
+	sg.Trait("SecondaryAim", {
+		Zoom = {4, 10},
+		ZoomRange = true,
+		Offset = Vector(-6, 4, 2)
+	}),
+	sg.Trait("RecoilAdd", {Add = 5})
 }
 
-include("sh_model.lua")
+-- Recoil
+SWEP.Recoil = {
+	x = {0.01, 0.04},
+	y = {0.025, 0.05}
+}
 
-function SWEP:GetIdleAnimation()
-	return self:Clip1() == 0 and ACT_VM_FIDGET or ACT_VM_IDLE
+SWEP.ViewPunch = 1.3
+SWEP.RecoilFlip = true
+
+-- Effects
+SWEP.Tracer = 3
+SWEP.TracerName = "sg_e_tracer"
+SWEP.TracerConfig = {}
+
+include("sh_model.lua")
+include("sh_animations.lua")
+
+function SWEP:OnPrimaryAnimation()
+	self:EmitSound("Weapon_SG_HNSA.Single1")
+	self:EmitSound("Weapon_SG_HNSA.Single2")
 end
+
+sound.Add({
+	name = "Weapon_SG_HNSA.Single1",
+	channel = CHAN_WEAPON,
+	volume = 1,
+	level = sg.LEVEL_GUNFIRE,
+	pitch = {130, 150},
+	sound = ")weapons/tmp/tmp-1.wav"
+})
+
+sound.Add({
+	name = "Weapon_SG_HNSA.Single2",
+	channel = CHAN_ITEM,
+	volume = 1,
+	level = sg.LEVEL_GUNFIRE,
+	pitch = {100, 120},
+	sound = ")npc/sniper/echo1.wav"
+})
+
+--[[Grixis's notes: Mostly complete not counting balancing. Zoom used temporarily until scoping is implemented. Did not include
+a drop down for the reload just yet since the hands and gun move independently.]]--

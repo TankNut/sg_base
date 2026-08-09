@@ -39,7 +39,7 @@ SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
 		Zoom = 1.25,
 		ZoomRange = true,
-		Offset = Vector(0, 2, 2)
+		Offset = Vector(-2, 2, 2)
 	}),
 	sg.Trait("RecoilAdd", {Add = 0.1}),
 	sg.Trait("HyperBurst")
@@ -73,9 +73,32 @@ end
 if CLIENT then
 	local ammoColor = Color(255, 0, 0)
 
+	local startUnload = 8 / 44
+	local finishUnload = 14 / 44
+
+	local startLoad = 19 / 44
+	local finishLoad = 25 / 44
+
 	function SWEP:DrawAmmoCounter()
-		local clip = self:IsReloading() and 0 or self:Clip1()
+		local clip = self:Clip1()
 		local y = 123
+
+		if self:IsReloading() then
+			local cycle = self:GetAnimationCycle()
+
+			if cycle < finishUnload then
+				local interp = math.Round(sg.RemapC(cycle, startUnload, finishUnload, self.Primary.ClipSize, 0))
+
+				clip = math.min(interp, clip)
+			elseif cycle < startLoad then
+				clip = 0
+			else
+				local interp = math.Round(sg.RemapC(cycle, startLoad, finishLoad, 0, self.Primary.ClipSize))
+				local ammo = sg.InfiniteAmmo:GetBool() and math.huge or self:Ammo1()
+
+				clip = math.min(interp, clip + ammo)
+			end
+		end
 
 		draw.SimpleText(clip, "SG_Ammo", -30, 0, ammoColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 

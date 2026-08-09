@@ -40,7 +40,7 @@ SWEP.BurstDelay = SWEP.Delay * 2
 
 SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
-		Zoom = {1.75},
+		Zoom = 1.75,
 		ZoomRange = true,
 		Offset = Vector(-6, 3.5, 1)
 	}),

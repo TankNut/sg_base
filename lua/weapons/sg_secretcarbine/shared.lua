@@ -37,7 +37,7 @@ SWEP.Delay = 0.09
 -- Traits
 SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
-		Zoom = {2},
+		Zoom = 2,
 		ZoomRange = true,
 		Offset = Vector(-7, 5, 1.5)
 	}),

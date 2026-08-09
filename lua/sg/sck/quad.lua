@@ -17,18 +17,16 @@ AddType("Quad", {
 
 		local pos, ang = matrix:GetTranslation(), matrix:GetAngles()
 
+		if element.draw_func then
+			cam.Start3D2D(pos, ang, element.size)
+				element.draw_func(self, element, ent, flags, rendergroups)
+			cam.End3D2D()
+		end
+
 		if developerMode:GetBool() then
-			render.DrawLine(pos - ang:Up(), pos + ang:Up(), forward)
+			render.DrawLine(pos, pos + ang:Up(), forward)
 			render.DrawLine(pos - ang:Forward(), pos + ang:Forward(), right)
 			render.DrawLine(pos - ang:Right(), pos + ang:Right(), up)
 		end
-
-		if not element.draw_func then
-			return
-		end
-
-		cam.Start3D2D(pos, ang, element.size)
-			element.draw_func(self, element, ent, flags, rendergroups)
-		cam.End3D2D()
 	end
 })

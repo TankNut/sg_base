@@ -1,7 +1,7 @@
 VertexLitGeneric
 {
-	$basetexture "models/grixis/customs/barrelvent1"
-	$bumpmap "models/grixis/customs/barrelvent1_normal"
+	$basetexture "models/sg/customs/barrelvent1"
+	$bumpmap "models/sg/customs/barrelvent1_normal"
 	$surfaceprop "metal"
 
 	$phong 1

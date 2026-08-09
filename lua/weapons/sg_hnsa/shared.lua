@@ -81,7 +81,7 @@ sound.Add({
 	volume = 1,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {100, 120},
-	sound = ")npc/sniper/echo1.wav"
+	sound = "^npc/sniper/echo1.wav"
 })
 
 --[[Grixis's notes: Mostly complete not counting balancing. Zoom used temporarily until scoping is implemented. Did not include

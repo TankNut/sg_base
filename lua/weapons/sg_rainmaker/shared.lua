@@ -36,6 +36,12 @@ SWEP.Delay = 0.09
 
 -- Traits
 SWEP.Traits = {
+	sg.Trait("SecondaryAim", {
+		Zoom = {4},
+		ZoomRange = true,
+		Firemode = 3,
+		Offset = Vector(-6, 3, 1)
+	}),
 	sg.Trait("RecoilAdd", {Add = 0.85})
 }
 
@@ -54,6 +60,7 @@ SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
 include("sh_model.lua")
+include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_rainmaker.Single1")

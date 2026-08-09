@@ -28,14 +28,19 @@ SWEP.Firemode = 1
 SWEP.AmmoCost = 1
 
 SWEP.Count = 1
-SWEP.Damage = 35
+SWEP.Damage = 45
 
-SWEP.Range = 1200
+SWEP.Range = 2000
 
 SWEP.Delay = 0.45
 
 -- Traits
 SWEP.Traits = {
+	sg.Trait("SecondaryAim", {
+		Zoom = {4, 8},
+		ZoomRange = true,
+		Offset = Vector(-3, 1, 0.5)
+	}),
 	sg.Trait("RecoilAdd", {Add = 0.5})
 }
 
@@ -64,10 +69,10 @@ end
 sound.Add({
 	name = "Weapon_SG_QuadAgent.Single1",
 	channel = CHAN_WEAPON,
-	volume = 1,
+	volume = 0.2,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {150, 165},
-	sound = ")weapons/357/357_fire2.wav"
+	sound = ")weapons/scout/scout_fire-1.wav"
 })
 
 sound.Add({

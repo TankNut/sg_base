@@ -22,6 +22,7 @@ client("sck/spotlight.lua")
 client("sck/sprite.lua")
 
 shared("traits/hyper_burst.lua")
+shared("traits/movement_modifier.lua")
 shared("traits/recoil_add.lua")
 shared("traits/secondary_aim.lua")
 shared("traits/self_knockback.lua")
@@ -59,6 +60,20 @@ if CLIENT then
 		end
 	end)
 end
+
+local function moveHook(name)
+	hook.Add(name, "sg_base", function(ply, ...)
+		local swep = ply:GetActiveWeapon()
+
+		if swep:IsValid() and weapons.IsBasedOn(swep:GetClass(), "sg_base") and swep[name] then
+			swep[name](swep, ply, ...)
+		end
+	end)
+end
+
+moveHook("StartCommand")
+moveHook("SetupMove")
+moveHook("Move")
 
 -- Disabled/unfinished optimization tool, found to have no discernable impact on performance
 

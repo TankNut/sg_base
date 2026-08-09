@@ -42,6 +42,12 @@ function SWEP:SetupDataTables()
 	self:InitTraits(true)
 end
 
+function SWEP:Deploy()
+	self:SetNextPrimaryFire(0)
+
+	return true
+end
+
 function SWEP:OnReloaded()
 	self:SetWeaponHoldType(self:GetHoldType())
 
@@ -82,6 +88,10 @@ function SWEP:FireAnimationEvent(pos, ang, event, name)
 		return true
 	end
 end
+
+function SWEP:StartCommand(ply, cmd) self:RunHooks("StartCommand", nil, ply, cmd) end
+function SWEP:SetupMove(ply, mv, cmd) self:RunHooks("SetupMove", nil, ply, mv, cmd) end
+function SWEP:Move(ply, mv) self:RunHooks("Move", nil, ply, mv) end
 
 -- Helper functions
 function SWEP:ConCommand(str)

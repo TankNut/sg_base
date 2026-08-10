@@ -29,6 +29,7 @@ SWEP.AmmoCost = 1
 
 SWEP.Count = 8
 SWEP.Damage = 10
+SWEP.Force = sg.FORCE_SHOTGUN
 
 SWEP.Range = 325
 

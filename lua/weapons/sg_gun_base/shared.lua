@@ -22,8 +22,10 @@ SWEP.PumpAction = false -- Forces the weapon to play a pump animation between sh
 
 -- Balance
 SWEP.AmmoCost = 1 -- Amount of ammo it takes out of the clip when firing
+
 SWEP.Count = 1 -- How many bullets are fired
 SWEP.Damage = 11 -- Can be overwritten with SWEP:GetDamage
+SWEP.Force = sg.FORCE_DEFAULT -- Check sh_enums.lua
 
 SWEP.Range = 0 -- Distance to hit a roughly torso-sized target at, SWEP:GetRange for override
 

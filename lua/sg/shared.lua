@@ -8,6 +8,8 @@ function shared(path) AddCSLuaFile(path) include(path) end
 InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
 
+shared("sh_enums.lua")
+
 client("cl_fonts.lua")
 client("cl_render.lua")
 client("cl_sck.lua")

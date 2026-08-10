@@ -30,6 +30,7 @@ SWEP.AmmoCost = 1
 
 SWEP.Count = 5
 SWEP.Damage = 17
+SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 425
 

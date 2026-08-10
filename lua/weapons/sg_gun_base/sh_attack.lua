@@ -193,7 +193,7 @@ function SWEP:FireWeapon()
 
 		Num = self.Count,
 		Damage = damage,
-		Force = damage * 0.25,
+		Force = self.Force,
 		Spread = Vector(spread, spread),
 
 		Tracer = self.Tracer,

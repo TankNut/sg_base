@@ -71,7 +71,7 @@ function SWEP:CanAttack()
 		end
 
 		-- Prevents a quick re-fire from cancelling reloads, and sound spam
-		self:SetAttackDelay(0.2)
+		self:SetAttackDelay(0.4)
 
 		return false
 	end

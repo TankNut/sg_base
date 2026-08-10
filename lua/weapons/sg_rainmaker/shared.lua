@@ -15,8 +15,8 @@ SWEP.Spawnable = true
 
 -- Ammo
 SWEP.Primary.Ammo = "smg1"
-SWEP.Primary.ClipSize = 31
-SWEP.Primary.DefaultClip = 186
+SWEP.Primary.ClipSize = 30
+SWEP.Primary.DefaultClip = 180
 
 -- HoldType
 SWEP.HoldType = "smg"

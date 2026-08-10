@@ -49,7 +49,7 @@ function SWEP:DebugWeaponStats()
 	line = sg.DrawDebugText(string.format("Delay: %.3fs (%.0f RPM)", delay, 60 / delay), line)
 
 	cam.Start3D()
-		render.SetColorMaterial()
+		render.SetColorMaterialIgnoreZ()
 		render.DrawSphere(tr.HitPos, offset, 20, 20, sphere_red)
 	cam.End3D()
 end
@@ -98,8 +98,12 @@ function SWEP:DrawDebugHUD()
 	self:DebugAnimationState()
 end
 
-function SWEP:DrawHUDBackground()
+function SWEP:DoDrawCrosshair(x, y)
+	local should = self:RunHooks("DrawCrosshair", nil, x, y)
+
 	if developerMode:GetBool() then
 		self:DrawDebugHUD()
 	end
+
+	return should
 end

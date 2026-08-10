@@ -3,6 +3,9 @@ local TRAIT = {}
 TRAIT.Zoom = 1.25 -- Can be a table to enable scroll switching zoom levels
 TRAIT.ZoomRange = false -- Use the zoom value as a range multiplier, not compatible with TRAIT.Range
 
+TRAIT.Scoped = false -- If enabled, draws a scope when aiming
+TRAIT.ScopeFunc = nil -- Name of a SWEP function to call instead to draw the scope
+
 TRAIT.Firemode = nil
 TRAIT.Range = nil -- Optional range to use while aiming
 TRAIT.Recoil = 0 -- Recoil modifier while aiming
@@ -26,6 +29,10 @@ end
 
 function TRAIT:IsAiming(ent)
 	return ent:GetAimState() > 0.2
+end
+
+function TRAIT:IsScoped(ent)
+	return self.Scoped and self:IsAiming(ent)
 end
 
 function TRAIT:GetState(ent, from, to)
@@ -97,6 +104,10 @@ function TRAIT:Hook_TranslateFOV(ent, fov)
 end
 
 if CLIENT then
+	function TRAIT:Hook_ShouldHideViewModel(ent)
+		return self:IsScoped(ent)
+	end
+
 	function TRAIT:Hook_GetViewModelPosition(ent, pos, ang)
 		local state = self:GetState(ent, 0, 0.8)
 
@@ -104,6 +115,20 @@ if CLIENT then
 		offset:Rotate(ang)
 
 		pos:Add(offset * state)
+	end
+
+	function TRAIT:Hook_DrawCrosshair(ent, x, y)
+		if not self:IsScoped(ent) then return end
+
+		if self.ScopeFunc then
+			ent[self.ScopeFunc](ent, x, y)
+
+			return true
+		end
+
+		sg.DrawScope(ent, self:GetZoom(ent))
+
+		return true
 	end
 
 	function TRAIT:Hook_HUDShouldDraw(ent, hud)

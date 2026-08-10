@@ -188,3 +188,78 @@ end
 -- Tracking viewmodel rendering so we can responsibly reset render.DepthRange
 hook.Add("PreDrawViewModels", "sg_base", function() IsDrawingViewModels = true end)
 hook.Add("PreDrawEffects", "sg_base", function() IsDrawingViewModels = false end)
+
+local refract = Material("gmod/scope-refract")
+local scope = Material("gmod/scope")
+
+local function drawRect(x, y, w, h)
+	x = math.Round(x)
+	y = math.Round(y)
+	w = math.Round(w)
+	h = math.Round(h)
+
+	surface.DrawRect(x, y, w, h)
+end
+
+function DrawScope(ent, zoom)
+	local screenW = ScrW()
+	local screenH = ScrH()
+
+	local h = screenH
+	local w = (4 / 3) * h
+
+	local dw = (screenW - w) * 0.5
+
+	local midX = screenW * 0.5 - 1
+	local midY = screenH * 0.5
+
+	surface.SetDrawColor(0, 0, 0)
+
+	surface.DrawRect(0, 0, dw, h)
+	surface.DrawRect(w + dw, 0, dw, h)
+
+	surface.SetMaterial(refract)
+	surface.DrawTexturedRect(dw, 0, w, h)
+
+	surface.SetMaterial(scope)
+	surface.DrawTexturedRect(dw, 0, w, h)
+
+	local dist = 0.5 * zoom
+
+	surface.SetDrawColor(0, 0, 0)
+	surface.DrawLine(0, midY, midX - dist, midY) -- Left
+	surface.DrawLine(midX, 0, midX, midY - dist) -- Up
+	surface.DrawLine(midX + dist, midY, screenW, midY) -- Right
+	surface.DrawLine(midX, midY + dist, midX, screenH) -- Down
+
+	local interval = 3 * zoom
+
+	for i = 1, 22 do
+		local size = ((i % 2 == 0) and 6 or 2) * (zoom / 4)
+		local offset = i * interval
+
+		surface.DrawLine(midX - offset, midY - size, midX - offset, midY + size) -- Left
+		surface.DrawLine(midX - size, midY - offset, midX + size, midY - offset) -- Up
+		surface.DrawLine(midX + offset, midY - size, midX + offset, midY + size) -- Right
+		surface.DrawLine(midX - size, midY + offset, midX + size, midY + offset) -- Down
+
+		if i == 22 then
+			drawRect(1, midY - size, midX - offset, size * 2) -- Left
+			drawRect(midX - size, 1, size * 2, midY - offset) -- Up
+			drawRect(midX + offset, midY - size, screenW, size * 2) -- Right
+			drawRect(midX - size, midY + offset, size * 2, screenH) -- Down
+		end
+	end
+
+	local offset = interval * 44
+	local size = 5 * zoom
+
+	surface.DrawLine(midX - offset, midY - size, midX - offset, midY + size) -- Left
+	surface.DrawLine(midX - size, midY - offset, midX + size, midY - offset) -- Up
+	surface.DrawLine(midX + offset, midY - size, midX + offset, midY + size) -- Right
+	surface.DrawLine(midX - size, midY + offset, midX + size, midY + offset) -- Down
+
+	surface.SetDrawColor(255, 0, 0)
+	surface.DrawLine(midX - dist, midY, midX + dist, midY) -- Left to right
+	surface.DrawLine(midX, midY - dist, midX, midY + dist) -- Up to down
+end

@@ -162,6 +162,10 @@ end
 local nullMaterial = Material("null")
 
 function SWEP:PreDrawViewModel(vm, _, ply, flags)
+	if self:RunHooks("ShouldHideViewModel") then
+		return true
+	end
+
 	if not self.BoneCache then
 		self:BuildBoneCache(vm)
 	end

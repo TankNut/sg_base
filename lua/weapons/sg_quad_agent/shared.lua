@@ -39,6 +39,7 @@ SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
 		Zoom = {4, 8},
 		ZoomRange = true,
+		Scoped = true,
 		Offset = Vector(-3, 1, 0.5)
 	}),
 	sg.Trait("RecoilAdd", {Add = 0.5})

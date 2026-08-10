@@ -2,6 +2,7 @@
 	"recommendations": [
 		"astonedpenguin.glua",
 		"venner.vscode-glua-enhanced",
-		"stefan-h-at.source-engine-support"
+		"stefan-h-at.source-engine-support",
+		"goz3rr.vscode-glualint"
 	]
 }

@@ -42,16 +42,17 @@ SWEP.Traits = {
 		Firemode = 3,
 		Offset = Vector(-6, 3, 1)
 	}),
-	sg.Trait("RecoilAdd", {Add = 0.85})
+	sg.Trait("RecoilAdd", {Add = 1}),
+	sg.Trait("HyperBurst")
 }
 
 -- Recoil
 SWEP.Recoil = {
-	x = {0.35, 0.45},
-	y = {-0.2, 0.2}
+	x = {0.3, 0.35},
+	y = {0.1, 0.2}
 }
 
-SWEP.ViewPunch = 0.35
+SWEP.ViewPunch = 0.5
 SWEP.RecoilFlip = true
 
 -- Effects

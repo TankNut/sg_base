@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	$basetexture "metal/metalgrate_silo01b"
+	$surfaceprop "metal"
+}

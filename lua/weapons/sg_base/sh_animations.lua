@@ -115,4 +115,11 @@ if CLIENT then
 
 		anim:UpdateSCK(self, self:GetAnimationCycle())
 	end
+
+	function SWEP:GetViewModelOffset()
+		local anim = self:GetCurrentAnimation()
+		if not anim then return end
+
+		return anim:GetViewModelOffset(self:GetAnimationCycle())
+	end
 end

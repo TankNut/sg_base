@@ -54,6 +54,11 @@ if CLIENT then
 		end
 
 		pos = LocalToWorld(self.ViewModelOffset, angle_zero, pos, ang)
+		local animPos, animAng = self:GetViewModelOffset()
+
+		if animPos then
+			pos, ang = LocalToWorld(animPos, animAng, pos, ang)
+		end
 
 		self:RunHooks("GetViewModelPosition", nil, pos, ang)
 

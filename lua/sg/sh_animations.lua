@@ -126,7 +126,7 @@ if CLIENT then
 	end
 
 	-- Processes a single key for a single layer
-	function BASE:ProcessLayerKey(element, layer, key, cycle)
+	function BASE:ProcessLayerKey(layer, key, cycle, fallback)
 		local frame1, value1
 		local frame2, value2
 		local ease = false
@@ -157,12 +157,12 @@ if CLIENT then
 
 		if not frame1 then
 			frame1 = 0
-			value1 = element[key]
+			value1 = fallback
 		end
 
 		if not frame2 then
 			frame2 = 1
-			value2 = element[key]
+			value2 = fallback
 		end
 
 		if value1 == nil or value2 == nil then
@@ -175,7 +175,7 @@ if CLIENT then
 			localCycle = ease(localCycle)
 		end
 
-		self:WriteProxy(element, key, self:Lerp(value1, value2, localCycle))
+		return self:Lerp(value1, value2, localCycle)
 	end
 
 	-- Gets all of the keys a layer uses
@@ -210,7 +210,11 @@ if CLIENT then
 				local keys = self:GetLayerKeys(layer)
 
 				for key in pairs(keys) do
-					self:ProcessLayerKey(element, layer, key, cycle)
+					local val = self:ProcessLayerKey(layer, key, cycle, element[key])
+
+					if val then
+						self:WriteProxy(element, key, val)
+					end
 				end
 			end
 		end
@@ -267,6 +271,7 @@ if CLIENT then
 	function WEAPON:AddVElementLayer(name, data) self:Insert(self.VElements, name, data) return self end
 	function WEAPON:AddWElementLayer(name, data) self:Insert(self.WElements, name, data) return self end
 	function WEAPON:AddVBoneModLayer(name, data) self:Insert(self.VBoneMods, name, data) return self end
+	function WEAPON:AddViewModelOffsets(data) self.VMOffsets = data end
 
 	-- For adding to both at the same time
 	function WEAPON:AddElementLayer(name, data) self:Insert(self.VElements, name, data) self:Insert(self.WElements, name, data) return self end
@@ -276,6 +281,13 @@ if CLIENT then
 		self:ProcessAnimationTable(ent, self.WElements, ent.WElements, cycle)
 
 		self:ProcessAnimationTable(ent, self.VBoneMods, ent.ViewModelBoneMods, cycle)
+	end
+
+	function WEAPON:GetViewModelOffset(cycle)
+		local pos = self:ProcessLayerKey(self.VMOffsets, "pos", cycle, vector_origin)
+		local ang = self:ProcessLayerKey(self.VMOffsets, "angle", cycle, angle_zero)
+
+		return pos, ang
 	end
 
 	function WEAPON:ImportKeyframes(data)
@@ -315,6 +327,7 @@ function WEAPON:Initialize()
 	self.WElements = {}
 
 	self.VBoneMods = {}
+	self.VMOffsets = {}
 end
 
 function Weapon(duration)

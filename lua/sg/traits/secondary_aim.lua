@@ -68,7 +68,7 @@ function TRAIT:Hook_Think(ent)
 			local index = ent:GetZoomIndex() + wheel
 
 			if index > 0 and index <= #self.Zoom then
-				ent:EmitSound("Default.Zoom")
+				ent:EmitSound("Weapon_SG.Zoom")
 				ent:SetZoomIndex(index)
 			end
 		end

@@ -22,3 +22,20 @@ sound.Add({
 	sound = ")weapons/shotgun/shotgun_cock.wav"
 })
 
+sound.Add({
+	name = "Weapon_SG.Zoom",
+	channel = CHAN_STATIC,
+	volume = 1,
+	level = LEVEL_MISC,
+	pitch = 100,
+	sound = ")weapons/zoom.wav"
+})
+
+sound.Add({
+	name = "Weapon_SG.Bolt",
+	channel = CHAN_STATIC,
+	volume = 1,
+	level = LEVEL_MISC,
+	pitch = 100,
+	sound = ")weapons/aug/aug_boltpull.wav"
+})

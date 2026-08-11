@@ -3,12 +3,12 @@ local TRAIT = {}
 TRAIT.Zoom = 1.25 -- Can be a table to enable scroll switching zoom levels
 TRAIT.ZoomRange = false -- Use the zoom value as a range multiplier, not compatible with TRAIT.Range
 
-TRAIT.Scoped = false -- If enabled, draws a scope when aiming
-TRAIT.ScopeFunc = nil -- Name of a SWEP function to call instead to draw the scope
-
 TRAIT.Firemode = nil
 TRAIT.Range = nil -- Optional range to use while aiming
 TRAIT.Recoil = 0 -- Recoil modifier while aiming
+
+TRAIT.Scoped = false -- If enabled, draws a scope when aiming
+TRAIT.ScopeFunc = nil -- Name of a SWEP function to call instead to draw the scope
 
 TRAIT.AimTime = 0.35 -- Seconds to fully transition to/from
 
@@ -86,11 +86,13 @@ function TRAIT:Hook_MultiplyRecoil(ent, val)
 end
 
 function TRAIT:Hook_GetRange(ent, val)
+	local range = self.Range or val
+
 	if self.ZoomRange then
-		return Lerp(self:GetState(ent), val, val * self:GetZoom(ent))
-	elseif self.Range then
-		return Lerp(self:GetState(ent), val, self.Range)
+		range = range * self:GetZoom(ent)
 	end
+
+	return Lerp(self:GetState(ent), val, range)
 end
 
 function TRAIT:Hook_TranslateFOV(ent, fov)

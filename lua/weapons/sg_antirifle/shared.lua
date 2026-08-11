@@ -23,6 +23,7 @@ SWEP.HoldType = "sniper"
 
 -- Firemode
 SWEP.Firemode = 1
+SWEP.PumpAction = true
 
 -- Balance
 SWEP.AmmoCost = 1
@@ -31,15 +32,16 @@ SWEP.Count = 1
 SWEP.Damage = 100
 SWEP.Force = sg.FORCE_SNIPER
 
-SWEP.Range = 2000
+SWEP.Range = 400
 
-SWEP.Delay = 1.5
+SWEP.Delay = 0.3
 
 -- Traits
 SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
 		Zoom = {8, 20},
 		ZoomRange = true,
+		Range = 2000,
 		Scoped = true,
 		Offset = Vector(-6, 4, 2)
 	})
@@ -47,12 +49,12 @@ SWEP.Traits = {
 
 -- Recoil
 SWEP.Recoil = {
-	x = {0.3, 0.4},
-	y = {0.025, 0.05}
+	x = 1,
+	y = {0.1, 0.4}
 }
 
-SWEP.ViewPunch = 4
-SWEP.RecoilFlip = true
+SWEP.ViewPunch = 2
+SWEP.RecoilFlip = false
 
 -- Effects
 SWEP.Tracer = 3

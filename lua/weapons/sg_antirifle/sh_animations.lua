@@ -4,7 +4,7 @@ local pump = sg.Animation.WeaponSequence(ACT_VM_RELOAD)
 pump:AddEvent(29 / 56, "Sound", "Weapon_SG.Bolt")
 
 if CLIENT then
-	local offset = {pos = Vector(0, 0, -5), angle = Angle(5, 0, 0)}
+	local offset = {pos = Vector(0, 0, -3.5), angle = Angle(5, 0, 0)}
 
 	pump:AddViewModelOffsets({
 		[0] = {math.ease.InOutSine},

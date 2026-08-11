@@ -31,15 +31,16 @@ SWEP.Count = 1
 SWEP.Damage = 75
 SWEP.Force = sg.FORCE_DEFAULT
 
-SWEP.Range = 2000
+SWEP.Range = 550
 
-SWEP.Delay = 0.25
+SWEP.Delay = 0.4
 
 -- Traits
 SWEP.Traits = {
 	sg.Trait("SecondaryAim", {
 		Zoom = {4, 10},
 		ZoomRange = true,
+		Range = 1000,
 		Scoped = true,
 		Offset = Vector(-6, 4, 2)
 	}),

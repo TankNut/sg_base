@@ -57,9 +57,8 @@ SWEP.ViewPunch = 2
 SWEP.RecoilFlip = false
 
 -- Effects
-SWEP.Tracer = 3
-SWEP.TracerName = "sg_e_tracer"
-SWEP.TracerConfig = {}
+SWEP.Tracer = 1
+SWEP.TracerName = "sg_e_tracer_smoke"
 
 include("sh_model.lua")
 include("sh_animations.lua")

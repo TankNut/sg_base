@@ -33,7 +33,7 @@ SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 1000
 
-SWEP.Delay = 0.09
+SWEP.Delay = 0.13
 
 -- Traits
 SWEP.Traits = {

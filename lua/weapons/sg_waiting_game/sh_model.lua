@@ -33,7 +33,6 @@ SWEP.VElements = {
 	["stock"] = { type = "Model", model = "models/props_vehicles/carparts_door01a.mdl", bone = "ValveBiped.base", rel = "underside", pos = Vector(-0.12, 6.99, -0.36), angle = Angle(0, 0, -180), size = Vector(0.08, 0.08, 0.16), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["underside"] = { type = "Model", model = "models/props_trainstation/train005.mdl", bone = "ValveBiped.base", rel = "body", pos = Vector(0, -16.057, 0), angle = Angle(-90, 180, 0), size = Vector(0.03, 0.03, 0.03), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
- 
 SWEP.WElements = {
 	["back"] = { type = "Model", model = "models/props_lab/kennel_physics.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(-1.78, -8.5, 0), angle = Angle(0, -90, -90), size = Vector(0.043, 0.05, 0.08), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrel"] = { type = "Model", model = "models/props_rooftop/roof_vent002.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "front", pos = Vector(0, -0.53, 5.68), angle = Angle(0, 0, 0), size = Vector(0.125, 0.125, 0.125), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

@@ -37,7 +37,6 @@ SWEP.VElements = {
 	["stock clip1"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_Spine4", rel = "stock", pos = Vector(22.995, -9.49, -9.783), angle = Angle(21.557, 0, 0)},
 	["under"] = { type = "Model", model = "models/props_phx/misc/iron_beam1.mdl", bone = "ValveBiped.Gun", rel = "midcover", pos = Vector(0, 1.1, 0), angle = Angle(0, 90, -180), size = Vector(0.168, 0.212, 0.23), color = Color(104, 119, 131, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/gunmetal1", skin = 0, bodygroup = {} }
 }
- 
 SWEP.WElements = {
 	["barrel"] = { type = "Model", model = "models/props_junk/propane_tank001a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "front body", pos = Vector(-0.949, 0.055, -2.175), angle = Angle(0, -90, -2.264), size = Vector(0.15, 0.15, 0.25), color = Color(216, 215, 215, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/gunmetal3", skin = 0, bodygroup = {} },
 	["bolt"] = { type = "Model", model = "models/props_junk/meathook001a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "bolt top", pos = Vector(0.03, -6.39, 2.38), angle = Angle(0, 0, -63.396), size = Vector(0.15, 0.15, 0.15), color = Color(200, 255, 250, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

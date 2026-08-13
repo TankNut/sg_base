@@ -82,7 +82,6 @@ function SWEP:OnReloadAnimation()
 	self:EmitSound("Weapon_Pistol.Reload")
 end
 
--- Changed the level to 105, that's the default for gunshots and makes it audible at range
 sound.Add({
 	name = "Weapon_SG_SwissHellBringer.Single1",
 	channel = CHAN_WEAPON,

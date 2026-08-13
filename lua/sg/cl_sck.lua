@@ -6,24 +6,17 @@ function AddType(name, data)
 	Types[name] = data
 end
 
-local function fixPos(pos)
-	pos = Vector(pos)
-	pos.y = -pos.y
-
-	return pos
-end
-
-local function fixAng(ang)
-	ang = Angle(ang)
-	ang.p = -ang.p
-
-	return ang
-end
-
 -- Fix for a discrepancy between the old and new positioning logic
 function FixElementPositions(element)
-	if element.pos then element.pos = fixPos(element.pos) end
-	if element.angle then element.angle = fixAng(element.angle) end
+	if element.pos then
+		element.pos = Vector(element.pos)
+		element.pos.y = -element.pos.y
+	end
+
+	if element.angle then
+		element.angle = Angle(element.angle)
+		element.angle.p = -element.angle.p
+	end
 end
 
 local meta = {
@@ -40,7 +33,7 @@ function InitElements(self, tab)
 
 		element.name = name
 
-		 -- Animation proxy
+		-- Animation proxy
 		element._proxy = setmetatable({}, {__index = element})
 
 		local definition = Types[element.type]
@@ -51,6 +44,7 @@ function InitElements(self, tab)
 			definition.Init(self, tab, element)
 			table.insert(renderorder, element)
 		else
+			-- The element still exists, but since it's not added to the render order it never gets drawn
 			sg.ThrowError("Ignoring unimplemented SCK type: %s", element.type)
 		end
 	end

@@ -97,6 +97,10 @@ end
 
 -- Where ammo should be taken (if any)
 function SWEP:TakeAmmo()
+	if self:GetMaxClip1() == -1 and sg.InfiniteAmmo:GetBool() then
+		return
+	end
+
 	self:TakePrimaryAmmo(self.AmmoCost)
 end
 

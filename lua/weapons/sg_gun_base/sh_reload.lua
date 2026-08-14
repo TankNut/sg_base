@@ -30,6 +30,10 @@ function SWEP:GetReloadAmount()
 end
 
 function SWEP:CanReload()
+	if self:GetMaxClip1() == -1 then
+		return false
+	end
+
 	if self:IsReloading() then
 		return false
 	end

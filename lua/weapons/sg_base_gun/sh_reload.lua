@@ -1,5 +1,5 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_base")
+DEFINE_BASECLASS("sg_base_weapon")
 
 function SWEP:IsReloading()
 	return self:GetFinishReload() != 0

@@ -1,5 +1,5 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_base")
+DEFINE_BASECLASS("sg_base_weapon")
 
 function SWEP:GetRecoilMultiplier()
 	local val = 1

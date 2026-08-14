@@ -67,7 +67,7 @@ local function moveHook(name)
 	hook.Add(name, "sg_base", function(ply, ...)
 		local swep = ply:GetActiveWeapon()
 
-		if swep:IsValid() and weapons.IsBasedOn(swep:GetClass(), "sg_base") and swep[name] then
+		if swep:IsValid() and weapons.IsBasedOn(swep:GetClass(), "sg_base_weapon") and swep[name] then
 			swep[name](swep, ply, ...)
 		end
 	end)
@@ -122,7 +122,7 @@ if CLIENT then
 
 		local swep = LocalPlayer():GetActiveWeapon()
 
-		if not weapons.IsBasedOn(swep:GetClass(), "sg_base") then
+		if not weapons.IsBasedOn(swep:GetClass(), "sg_base_weapon") then
 			return
 		end
 

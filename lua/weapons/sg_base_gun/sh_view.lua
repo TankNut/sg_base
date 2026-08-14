@@ -1,5 +1,5 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_base")
+DEFINE_BASECLASS("sg_base_weapon")
 
 local vmRatio = 0.4
 local developerMode = sg.DeveloperMode

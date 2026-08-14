@@ -1,7 +1,7 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_base")
+DEFINE_BASECLASS("sg_base_weapon")
 
-SWEP.Base = "sg_base"
+SWEP.Base = "sg_base_weapon"
 
 -- Set these as you normally would
 SWEP.Primary.Ammo = ""

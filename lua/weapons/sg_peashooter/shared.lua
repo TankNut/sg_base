@@ -1,7 +1,7 @@
 AddCSLuaFile()
-DEFINE_BASECLASS("sg_gun_base")
+DEFINE_BASECLASS("sg_base_gun")
 
-SWEP.Base = "sg_gun_base"
+SWEP.Base = "sg_base_gun"
 
 SWEP.PrintName = "The Pea Shooter"
 SWEP.Category = "S&G Munitions"

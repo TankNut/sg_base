@@ -14,6 +14,7 @@ client("cl_fonts.lua")
 client("cl_render.lua")
 client("cl_sck.lua")
 shared("sh_animations.lua")
+shared("sh_math.lua")
 shared("sh_sounds.lua")
 shared("sh_traits.lua")
 
@@ -36,14 +37,6 @@ local errorColor = Color(255, 100, 100)
 
 function ThrowError(...)
 	MsgC(errorColor, "[sg_base] ", string.format(...), "\n")
-end
-
-function RemapC(val, inMin, inMax, outMin, outMax)
-	return math.Clamp(math.Remap(val, inMin, inMax, outMin, outMax), math.min(outMin, outMax), math.max(outMin, outMax))
-end
-
-function TimeFraction(start, finish)
-	return math.Clamp(math.TimeFraction(start, finish, CurTime()), 0, 1)
 end
 
 function GetSequenceIndex(ent, index)

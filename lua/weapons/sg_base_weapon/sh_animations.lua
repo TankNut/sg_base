@@ -11,7 +11,7 @@ function SWEP:GetCurrentAnimation()
 end
 
 function SWEP:GetAnimationCycle()
-	return math.min(math.TimeFraction(self:GetAnimationStart(), self:GetAnimationEnd(), CurTime()), 1)
+	return sg.TimeFraction(self:GetAnimationStart(), self:GetAnimationEnd())
 end
 
 function SWEP:TranslateAnimation(name)

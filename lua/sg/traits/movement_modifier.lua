@@ -27,7 +27,7 @@ function TRAIT:GetSlow(ent)
 
 	if self.Attack != nil then
 		local nextFire = ent:GetNextPrimaryFire() + engine.TickInterval()
-		local fraction = math.Clamp(math.TimeFraction(nextFire, nextFire + self.AttackDecay, CurTime()), 0, 1)
+		local fraction = sg.TimeFraction(nextFire, nextFire + self.AttackDecay)
 
 		if fraction == 0 then
 			slow = self.Attack

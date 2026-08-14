@@ -22,7 +22,7 @@ function TRAIT:GetSpread(ent)
 		start = ct
 	end
 
-	local frac = 1 - math.Clamp(math.TimeFraction(start, start + self.Reset, ct), 0, 1)
+	local frac = 1 - sg.TimeFraction(start, start + self.Reset)
 
 	return ent:GetSpreadAdd() * frac
 end

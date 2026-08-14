@@ -136,6 +136,8 @@ function SWEP:InitSCK()
 	self:InitSCKElements(self.WElements)
 
 	self:InitBoneMods(self.ViewModelBoneMods)
+
+	self:RunHooks("InitSCK")
 end
 
 function SWEP:DrawSCKElements(tab, ent, flags, rendergroups, lod)
@@ -144,6 +146,7 @@ function SWEP:DrawSCKElements(tab, ent, flags, rendergroups, lod)
 
 	if entTable.LastSCKUpdate != frame then
 		self:ApplySCKAnimations()
+		self:RunHooks("UpdateSCK")
 		self:UpdateSCK()
 
 		entTable.LastSCKUpdate = frame

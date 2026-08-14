@@ -64,4 +64,6 @@ function SWEP:AddRecoil(override)
 
 		ply:SetEyeAngles(ply:EyeAngles() - recoil)
 	end
+
+	self:RunHooks("PostApplyRecoil")
 end

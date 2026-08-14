@@ -44,15 +44,31 @@ function SWEP:UpdateBurst()
 end
 
 function SWEP:GetDelay()
+	local delay = self.Delay
+
 	if self.BurstDelay != nil and self:IsFinalBurstShot() then
-		return self.BurstDelay
+		delay = self.BurstDelay
 	end
 
-	return self.Delay
+	self:RunHooks("GetDelay", function(func)
+		local override = func(delay)
+
+		if override != nil then
+			delay = override
+		end
+	end)
+
+	return delay
 end
 
 -- Extra checks for whether the weapon can fire
 function SWEP:CanAttack()
+	local override = self:RunHooks("CanAttack")
+
+	if override != nil then
+		return override
+	end
+
 	if self:IsReloading() then
 		if self.LoopingReload and not self:GetLastReload() then
 			self:SetCancelReload(true)
@@ -97,7 +113,6 @@ function SWEP:PrimaryAttack()
 	self:RunHooks("PostFireWeapon")
 
 	self:AddRecoil()
-	self:RunHooks("PostApplyRecoil")
 
 	local anim = self:PlayAnimation("Primary")
 	local delay = self:GetDelay()

@@ -23,6 +23,7 @@ client("sck/quad.lua")
 client("sck/spotlight.lua")
 client("sck/sprite.lua")
 
+shared("traits/gatling_fire.lua")
 shared("traits/hyper_burst.lua")
 shared("traits/movement_modifier.lua")
 shared("traits/recoil_add.lua")
@@ -39,6 +40,10 @@ end
 
 function RemapC(val, inMin, inMax, outMin, outMax)
 	return math.Clamp(math.Remap(val, inMin, inMax, outMin, outMax), math.min(outMin, outMax), math.max(outMin, outMax))
+end
+
+function TimeFraction(start, finish)
+	return math.Clamp(math.TimeFraction(start, finish, CurTime()), 0, 1)
 end
 
 function GetSequenceIndex(ent, index)

@@ -15,7 +15,7 @@ SWEP.Spawnable = true
 
 -- Ammo
 SWEP.Primary.Ammo = "pistol"
-SWEP.Primary.ClipSize = 40
+SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = 200
 
 -- HoldType
@@ -37,7 +37,14 @@ SWEP.Delay = 60 / 400
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("RecoilAdd", {Add = 0.25})
+	--sg.Trait("RecoilAdd", {Add = 0.25}),
+	sg.Trait("GatlingFire", {
+		Delay = 60 / 800,
+		SpinupTime = 6,
+		SpindownTime = 4,
+		Barrels = 3,
+		Element = "spin"
+	})
 }
 
 -- Recoil
@@ -54,33 +61,11 @@ SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Animations
-SWEP.Animations = {
-	Primary_Empty = sg.Animation.WeaponSequence(ACT_VM_DRYFIRE):AddEvent(0, "Callback", "OnPrimaryAnimation"),
-	Idle_Empty = sg.Animation.WeaponSequence(ACT_VM_IDLE_EMPTY)
-}
-
-SWEP.AnimationRates = {
-	Reload = 1
-}
-
 include("sh_model.lua")
-
-function SWEP:TranslateAnimation(name)
-	local empty = name .. "_Empty"
-
-	if self:Clip1() == 0 and self.Animations[empty] then
-		return empty
-	end
-end
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_SalvagedSidearm.Single1")
 	self:EmitSound("Weapon_SG_SalvagedSidearm.Single2")
-end
-
-function SWEP:OnReloadAnimation()
-	self:EmitSound("Weapon_Pistol.Reload")
 end
 
 sound.Add({

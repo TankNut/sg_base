@@ -4,6 +4,7 @@ Traits = Traits or {}
 
 function RegisterTrait(class, trait)
 	if Traits[class] then
+		table.Empty(Traits[class])
 		table.Merge(Traits[class], trait)
 	else
 		Traits[class] = trait

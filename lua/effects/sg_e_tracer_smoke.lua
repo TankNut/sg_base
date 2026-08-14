@@ -44,7 +44,7 @@ local drift = 0.5
 
 function EFFECT:Render()
 	local frac = sg.TimeFraction(self.Time, self.Time + self.Lifetime)
-	local frac2 = math.Remap(frac, 0, 0.5, 0, 1)
+	local frac2 = sg.RemapC(frac, 0, 0.5, 0, 1)
 
 	local alpha = Lerp(math.ease.OutSine(frac), 255, 0)
 	local size = Lerp(frac, 2, 20)

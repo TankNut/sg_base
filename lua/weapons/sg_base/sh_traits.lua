@@ -17,6 +17,10 @@ function SWEP:InitTraits(createNetworkVars)
 			trait:SetupNetworkVars(self)
 		end
 
+		if trait.Initialize then
+			trait:Initialize(self)
+		end
+
 		table.insert(self.Traits, trait)
 	end
 end

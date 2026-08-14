@@ -25,12 +25,6 @@ function Trait(class, config)
 			return
 		end
 
-		local trait = setmetatable(config, {__index = definition})
-
-		if trait.Initialize then
-			trait:Initialize()
-		end
-
-		return trait
+		return setmetatable(config, {__index = definition})
 	end
 end

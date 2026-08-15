@@ -1,6 +1,12 @@
 AddCSLuaFile()
 
+local enable = sg.Convars.MovementModifiers
+
 function SWEP:GetMoveSpeed()
+	if not enable:GetBool() then
+		return 1
+	end
+
 	local val = 1
 
 	self:RunHooks("GetMoveSpeed", function(func)

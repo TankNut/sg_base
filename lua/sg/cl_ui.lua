@@ -54,5 +54,7 @@ hook.Add("PopulateToolMenu", "sg_base", function()
 
 		pnl:CheckBox("Infinite ammo", "sg_infiniteammo")
 		pnl:ControlHelp("Infinite ammo only applies to reserve ammo, not individual clips."):DockMargin(32, 4, 32, 8)
+
+		pnl:CheckBox("Enable movespeed modifiers", "sg_movement")
 	end)
 end)

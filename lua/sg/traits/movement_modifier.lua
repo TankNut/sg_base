@@ -43,35 +43,8 @@ function TRAIT:GetSlow(ent)
 	return slow
 end
 
-function TRAIT:Hook_StartCommand(ent, ply, cmd)
-	local slow = self:GetSlow(ent)
-
-	if slow == -1 then
-		cmd:ClearMovement()
-		cmd:RemoveKey(IN_JUMP)
-	end
-end
-
-function TRAIT:Hook_SetupMove(ent, ply, mv, cmd)
-	local slow = self:GetSlow(ent)
-	if not slow or slow >= 1 then return end
-
-	if slow >= 0.5 then
-		mv:SetMaxClientSpeed(math.Remap(slow, 0.5, 1, ply:GetWalkSpeed(), ply:GetRunSpeed()))
-	elseif slow >= 0 then
-		mv:SetMaxClientSpeed(math.Remap(slow, 0, 0.5, ply:GetSlowWalkSpeed(), ply:GetWalkSpeed()))
-	end
-end
-
-function TRAIT:Hook_Move(ent, ply, mv)
-	local slow = self:GetSlow(ent)
-	if not slow or slow <= 1 then return end
-
-	-- Speed increase is based on non-sprint speed, but we might be sprinting faster anyways
-	local speed = math.max(mv:GetMaxSpeed(), ply:GetWalkSpeed() * slow)
-
-	mv:SetMaxSpeed(speed)
-	mv:SetMaxClientSpeed(speed)
+function TRAIT:Hook_GetMoveSpeed(ent, val)
+	return self:GetSlow(ent)
 end
 
 sg.RegisterTrait("MovementModifier", TRAIT)

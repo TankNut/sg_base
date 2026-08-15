@@ -12,6 +12,7 @@ include("cl_sck.lua")
 
 include("sh_animations.lua")
 include("sh_holdtypes.lua")
+include("sh_movement.lua")
 include("sh_traits.lua")
 
 function SWEP:Initialize()
@@ -88,10 +89,6 @@ function SWEP:FireAnimationEvent(pos, ang, event, name)
 		return true
 	end
 end
-
-function SWEP:StartCommand(ply, cmd) self:RunHooks("StartCommand", nil, ply, cmd) end
-function SWEP:SetupMove(ply, mv, cmd) self:RunHooks("SetupMove", nil, ply, mv, cmd) end
-function SWEP:Move(ply, mv) self:RunHooks("Move", nil, ply, mv) end
 
 -- Helper functions
 function SWEP:ConCommand(str)

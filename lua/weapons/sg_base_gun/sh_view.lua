@@ -2,7 +2,7 @@ AddCSLuaFile()
 DEFINE_BASECLASS("sg_base_weapon")
 
 local vmRatio = 0.4
-local developerMode = sg.DeveloperMode
+local developerMode = sg.Convars.DeveloperMode
 
 function SWEP:TranslateFOV(fov)
 	local ply = self:GetOwner()

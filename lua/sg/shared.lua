@@ -4,15 +4,13 @@ function client(path) if CLIENT then include(path) else AddCSLuaFile(path) end e
 function server(path) if SERVER then include(path) end end
 function shared(path) AddCSLuaFile(path) include(path) end
 
--- Console commands
-InfiniteAmmo = CreateConVar("sg_infiniteammo", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
-DeveloperMode = CreateConVar("sg_developer", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY})
-
 shared("sh_enums.lua")
+shared("sh_convars.lua")
 
 client("cl_fonts.lua")
 client("cl_render.lua")
 client("cl_sck.lua")
+client("cl_ui.lua")
 shared("sh_animations.lua")
 shared("sh_math.lua")
 shared("sh_sounds.lua")

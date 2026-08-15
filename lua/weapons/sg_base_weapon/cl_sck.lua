@@ -205,8 +205,16 @@ function SWEP:PostDrawViewModel(vm, _, ply, flags)
 end
 
 local null = Material("null")
+local lodMult = sg.Convars.LODMultiplier
+local shouldDraw = sg.Convars.DrawWorldSCK
 
 function SWEP:DrawWorldModel(flags, isTranslucent)
+	if not shouldDraw:GetBool() then
+		self:DrawModel(flags)
+
+		return
+	end
+
 	if not self.ShowWorldModel then
 		render.MaterialOverride(null)
 	end
@@ -217,6 +225,8 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 
 	local rendergroups = isTranslucent and translucent or opaque
 	local lod = ScrH() / render.ComputePixelDiameterOfSphere(self:GetPos(), 250)
+
+	lod = lod * lodMult:GetFloat()
 
 	self:DrawSCKElements(self.WElements, self, flags, rendergroups, lod)
 end

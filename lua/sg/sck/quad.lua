@@ -1,6 +1,6 @@
 module("sg.SCK", package.seeall)
 
-local developerMode = sg.DeveloperMode
+local developerMode = sg.Convars.DeveloperMode
 
 local forward = Color(255, 0, 0)
 local right =   Color(0, 255, 0)

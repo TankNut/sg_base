@@ -5,7 +5,7 @@ function SWEP:IsReloading()
 	return self:GetFinishReload() != 0
 end
 
-local infiniteAmmo = sg.InfiniteAmmo
+local infiniteAmmo = sg.Convars.InfiniteAmmo
 
 function SWEP:HasEnoughReserveAmmo(amount)
 	if infiniteAmmo:GetBool() then

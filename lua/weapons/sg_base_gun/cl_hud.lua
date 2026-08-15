@@ -6,7 +6,7 @@ if SERVER then
 end
 
 local sphere_red = Color(255, 0, 0, 50)
-local developerMode = sg.DeveloperMode
+local developerMode = sg.Convars.DeveloperMode
 
 local function firemodeToText(mode)
 	if mode == 0 then

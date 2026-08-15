@@ -95,9 +95,11 @@ function SWEP:CanAttack()
 	return true
 end
 
+local infiniteAmmo = sg.Convars.InfiniteAmmo
+
 -- Where ammo should be taken (if any)
 function SWEP:TakeAmmo()
-	if self:GetMaxClip1() == -1 and sg.InfiniteAmmo:GetBool() then
+	if self:GetMaxClip1() == -1 and infiniteAmmo:GetBool() then
 		return
 	end
 

@@ -80,6 +80,8 @@ if CLIENT then
 	local startLoad = 19 / 44
 	local finishLoad = 25 / 44
 
+	local infiniteAmmo = sg.Convars.InfiniteAmmo
+
 	function SWEP:DrawAmmoCounter()
 		local clip = self:Clip1()
 		local y = 123
@@ -95,7 +97,7 @@ if CLIENT then
 				clip = 0
 			else
 				local interp = math.Round(sg.RemapC(cycle, startLoad, finishLoad, 0, self.Primary.ClipSize))
-				local ammo = sg.InfiniteAmmo:GetBool() and math.huge or self:Ammo1()
+				local ammo = infiniteAmmo:GetBool() and math.huge or self:Ammo1()
 
 				clip = math.min(interp, clip + ammo)
 			end

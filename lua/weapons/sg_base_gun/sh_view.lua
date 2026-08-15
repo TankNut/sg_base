@@ -4,6 +4,8 @@ DEFINE_BASECLASS("sg_base_weapon")
 local vmRatio = 0.4
 local developerMode = sg.Convars.DeveloperMode
 
+local expRecoil = sg.Convars.Exp_Recoil
+
 function SWEP:TranslateFOV(fov)
 	local ply = self:GetOwner()
 
@@ -36,6 +38,10 @@ if CLIENT then
 			return
 		end
 
+		if expRecoil:GetBool() then
+			return pos, ang, fov
+		end
+
 		return pos, ang - ply:GetViewPunchAngles() * vmRatio, fov
 	end
 
@@ -62,17 +68,19 @@ if CLIENT then
 
 		self:RunHooks("GetViewModelPosition", nil, pos, ang)
 
-		local punch = ply:GetViewPunchAngles()
+		if not expRecoil:GetBool() then
+			local punch = ply:GetViewPunchAngles()
 
-		ang:Sub(punch)
+			ang:Sub(punch)
 
-		local fov, vm = ply:GetFOV(), self.ViewModelFOV
+			local fov, vm = ply:GetFOV(), self.ViewModelFOV
 
-		local min = math.tan(math.min(fov, vm) * const)
-		local max = math.tan(math.max(fov, vm) * const)
-		local ratio = (min / max) * vmRatio
+			local min = math.tan(math.min(fov, vm) * const)
+			local max = math.tan(math.max(fov, vm) * const)
+			local ratio = (min / max) * vmRatio
 
-		ang:Add(punch * (1 - ratio))
+			ang:Add(punch * (1 - ratio))
+		end
 
 		return pos, ang
 	end

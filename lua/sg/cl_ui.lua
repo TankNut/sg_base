@@ -56,5 +56,10 @@ hook.Add("PopulateToolMenu", "sg_base", function()
 		pnl:ControlHelp("Infinite ammo only applies to reserve ammo, not individual clips."):DockMargin(32, 4, 32, 8)
 
 		pnl:CheckBox("Enable movespeed modifiers", "sg_movement")
+
+		pnl:Help("Experimental settings")
+
+		pnl:CheckBox("Alternative recoil", "sg_exp_recoil")
+		pnl:ControlHelp("Removes the aim deflection from recoil, making shots always follow your crosshair."):DockMargin(32, 4, 32, 8)
 	end)
 end)

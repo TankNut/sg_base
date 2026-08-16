@@ -228,7 +228,10 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 
 	lod = lod * lodMult:GetFloat()
 
-	self:DrawSCKElements(self.WElements, self, flags, rendergroups, lod)
+	local owner = self:GetOwner()
+	local ent = owner:IsValid() and owner or self
+
+	self:DrawSCKElements(self.WElements, ent, flags, rendergroups, lod)
 end
 
 function SWEP:DrawWorldModelTranslucent(flags)

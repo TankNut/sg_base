@@ -13,6 +13,7 @@ SWEP.ViewModelFlip = false
 
 SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false
+SWEP.ViewModelOffset = Vector(0, 0, -1)
 
 SWEP.VElements = {
 	["Body"] = { type = "Model", model = "models/weapons/c_357.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "", pos = Vector(0.322, -0.922, 2.592), angle = Angle(0, 0, 0), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = true, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

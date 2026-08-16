@@ -1,0 +1,16 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/weapons/annabelle"
+	$bumpmap "models/sg/weapons/annabelle_n" 
+
+	$envmap "env_cubemap"
+	$envmapfresnel 1
+	$envmaptint "[0.3 0.3 0.3]"
+	$normalmapalphaenvmapmask 1
+
+	$phong 1
+	$phongboost 12
+	$phongexponenttexture "models/sg/weapons/annabelle_e"
+	$phongalbedotint 1
+	$phongfresnelranges "[0.15 0.45 1]"
+}

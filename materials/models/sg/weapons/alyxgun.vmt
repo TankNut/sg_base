@@ -1,0 +1,9 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/weapons/alyxgun"
+
+	$envmap "env_cubemap"
+	$envmapcontrast 1
+
+	$basealphaenvmapmask 1
+}

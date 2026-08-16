@@ -1,0 +1,16 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/weapons/mosin_wood"
+	$bumpmap "models/sg/weapons/mosin_wood_normal"
+
+	$normalmapalphaenvmapmask "1"
+
+	$envmap	"env_cubemap"
+	$envmaptint "[0.025 0.02 0.02]"
+
+	$phong 1
+	$phongboost 20
+	$phongexponenttexture "models/sg/weapons/mosin_wood_gloss"
+	$phongalbedotint 1
+	$phongfresnelranges "[0.1 0.5 1]"
+}

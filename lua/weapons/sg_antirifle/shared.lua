@@ -43,7 +43,8 @@ SWEP.Traits = {
 		ZoomRange = true,
 		Range = 2000,
 		Scoped = true,
-		Offset = Vector(-6, 4, 2)
+		MoveSpeed = 0,
+		Offset = Vector(-6, 4, 2),
 	})
 }
 

@@ -9,6 +9,8 @@ TRAIT.SpinupTime = 0.75 -- Time it takes to hit max RPM
 TRAIT.SpindownTime = 1.4 -- Time it takes to spin down from max RPM
 TRAIT.SpindownDelay = 1 -- How long it takes before the weapon starts spinning down
 
+TRAIT.MoveSpeed = nil -- Movement modifier
+
 -- Visual settings
 TRAIT.Barrels = 1 -- More barrels = slower rotation
 TRAIT.Direction = Angle(0, 1, 0)
@@ -88,6 +90,12 @@ function TRAIT:Hook_Think(ent)
 	ang:Add(self.Direction * rate)
 
 	ent:SetBarrelRotation(ang)
+end
+
+function TRAIT:Hook_GetMoveSpeed(ent, val)
+	if self.MoveSpeed then
+		return Lerp(self:GetSpin(ent), 1, self.MoveSpeed)
+	end
 end
 
 if CLIENT then

@@ -11,6 +11,7 @@ TRAIT.Scoped = false -- If enabled, draws a scope when aiming
 TRAIT.ScopeFunc = nil -- Name of a SWEP function to call instead to draw the scope
 
 TRAIT.AimTime = 0.35 -- Seconds to fully transition to/from
+TRAIT.MoveSpeed = 0.5 -- Movement modifier
 
 TRAIT.Offset = Vector() -- Position offset to use while aiming
 
@@ -103,6 +104,12 @@ function TRAIT:Hook_TranslateFOV(ent, fov)
 	end
 
 	return target
+end
+
+function TRAIT:Hook_GetMoveSpeed(ent, val)
+	if self.MoveSpeed then
+		return Lerp(self:GetState(ent), 1, self.MoveSpeed)
+	end
 end
 
 if CLIENT then

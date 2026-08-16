@@ -57,7 +57,7 @@ SWEP.ViewPunch = 0.65
 SWEP.RecoilFlip = true
 
 -- Effects
-SWEP.Tracer = 3
+SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 

@@ -2,6 +2,15 @@ AddCSLuaFile()
 
 local enable = sg.Convars.MovementModifiers
 
+-- The following values are used:
+-- -1: No movement at all
+-- 0: SlowWalk (+alt walk)
+-- 0.5: Walk (non-sprint)
+-- 1: Sprint (normal movespeed)
+-- 1+: Multiplies walk speed
+
+-- The most restrictive value applies
+
 function SWEP:GetMoveSpeed()
 	if not enable:GetBool() then
 		return 1
@@ -12,7 +21,7 @@ function SWEP:GetMoveSpeed()
 	self:RunHooks("GetMoveSpeed", function(func)
 		local override = func(val)
 
-		if override != nil then
+		if override != nil and override < val then
 			val = override
 		end
 	end)

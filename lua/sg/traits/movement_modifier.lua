@@ -1,17 +1,10 @@
 local TRAIT = {}
 
--- For all of these modifiers, the following values are implemented:
--- -1: No movement at all
--- 0: SlowWalk (+alt walk)
--- 0.5: Walk (non-sprint)
--- 1: Sprint (normal movespeed)
--- 1+: Multiplies walk speed
-
 -- The most restrictive value applies
-
 TRAIT.Passive = nil -- Always applies
 TRAIT.Reload = nil -- During reloads only
 TRAIT.Attack = nil -- While firing
+TRAIT.AttackDelay = 0 -- How long the attack slow lingers at full power
 TRAIT.AttackDecay = 1 -- How long the attack slow takes to decay
 
 function TRAIT:GetSlow(ent)
@@ -27,7 +20,7 @@ function TRAIT:GetSlow(ent)
 
 	if self.Attack != nil then
 		local nextFire = ent:GetNextPrimaryFire() + engine.TickInterval()
-		local fraction = sg.TimeFraction(nextFire, nextFire + self.AttackDecay)
+		local fraction = sg.TimeFraction(nextFire + self.AttackDelay, nextFire + self.AttackDecay)
 
 		if fraction == 0 then
 			slow = self.Attack

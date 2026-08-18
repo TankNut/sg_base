@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 SWEP.UseHands = true
 SWEP.ViewModel = Model("models/sg/weapons/sunrust/c_famas.mdl")
-SWEP.WorldModel = Model("models/weapons/w_crossbow.mdl")
+SWEP.WorldModel = Model("models/weapons/w_rif_famas.mdl")
 
 if SERVER then
 	return

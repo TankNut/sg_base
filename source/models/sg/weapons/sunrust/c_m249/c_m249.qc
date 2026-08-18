@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_m249_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_m249.mdl"
 $body studio "c_mach_m249para_v_m249_ref.smd"
 
 $surfaceprop "default"

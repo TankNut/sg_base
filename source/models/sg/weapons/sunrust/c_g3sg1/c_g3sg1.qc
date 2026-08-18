@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_g3sg1_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_g3sg1.mdl"
 
 $bodygroup "studio"
 {

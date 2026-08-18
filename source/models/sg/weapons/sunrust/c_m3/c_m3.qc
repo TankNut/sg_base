@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_m3_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_m3.mdl"
 $body studio "m3_mirrored_ref.smd"
 
 $surfaceprop "default"

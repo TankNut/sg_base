@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_m4a1_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_m4a1.mdl"
 $body studio "m4a1_ref_so.smd"
 
 $bodygroup "silencer"

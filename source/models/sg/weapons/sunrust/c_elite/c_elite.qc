@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_elite_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_elite.mdl"
 $body studio "v_elite_ref.smd"
 
 $surfaceprop "default"

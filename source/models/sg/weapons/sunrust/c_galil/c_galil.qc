@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_galil_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_galil.mdl"
 $body studio "v_galil_ref.smd"
 
 $bodygroup "bottle"

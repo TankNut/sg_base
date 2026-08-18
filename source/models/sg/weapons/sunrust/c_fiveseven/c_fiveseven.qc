@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_fiveseven_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_fiveseven.mdl"
 $body studio "fiveseven_mirrored_ref.smd"
 
 $surfaceprop "default"

@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_glock_reanim.mdl"
+$modelname "sg/weapons/sunrust/c_glock.mdl"
 $body studio "glock18_mirrored_ref.smd"
 
 $surfaceprop "default"

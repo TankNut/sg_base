@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.UseHands = true
-SWEP.ViewModel = Model("models/sg/weapons/sunrust/c_m4a1_reanim.mdl")
+SWEP.ViewModel = Model("models/sg/weapons/sunrust/c_m4a1.mdl")
 SWEP.WorldModel = Model("models/weapons/w_smg1.mdl")
 
 if SERVER then
@@ -32,7 +32,7 @@ SWEP.VElements = {
 	["grip2 clip1"] = { type = "ClipPlane", bone = "gun", rel = "grip2", pos = Vector(-2.03, 17.69, -34.81), angle = Angle(45.269, 0, 180)},
 	["grip2 clip2"] = { type = "ClipPlane", bone = "gun", rel = "grip2", pos = Vector(26.32, -1.93, -4.18), angle = Angle(-25.868, 0, 180)},
 	["knob"] = { type = "Model", model = "models/props_citizen_tech/firetrap_button01a.mdl", bone = "gun", rel = "body 2", pos = Vector(-0.168, 0.894, -2.664), angle = Angle(0, -90, -36.226), size = Vector(0.16, 0.16, 0.16), color = Color(255, 0, 0, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "metal2", skin = 0, bodygroup = {} },
-	["mag"] = { type = "Model", model = "models/weapons/zs/c_m4a1_reanim.mdl", bone = "gun", rel = "", pos = Vector(6.699, -3.678, -16.472), angle = Angle(89.999, -89.987, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = true, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["mag"] = { type = "Model", model = "models/sg/weapons/sunrust/c_m4a1.mdl", bone = "gun", rel = "", pos = Vector(6.699, -3.678, -16.472), angle = Angle(89.999, -89.987, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = true, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["mag clip1"] = { type = "ClipPlane", bone = "gun", rel = "mag", pos = Vector(-4.3, 0.54, -4.85), angle = Angle(0, 0, 180)},
 	["mag clip2"] = { type = "ClipPlane", bone = "gun", rel = "mag", pos = Vector(14.15, -6.88, -12.79), angle = Angle(75.449, 0, 180)},
 	["pullbackslot"] = { type = "Model", model = "models/props_trainstation/train005.mdl", bone = "gun", rel = "body 2", pos = Vector(1.637, 0.825, -0.904), angle = Angle(0, 0, 90), size = Vector(0.014, 0.017, 0.01), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

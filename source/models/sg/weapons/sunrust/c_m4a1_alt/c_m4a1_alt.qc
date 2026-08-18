@@ -1,6 +1,6 @@
 // Created by Crowbar++ 0.74
 
-$modelname "sg/weapons/sunrust/c_m4a1_reanim_alt.mdl"
+$modelname "sg/weapons/sunrust/c_m4a1_alt.mdl"
 $body studio "m4a1_mirrored_ref.smd"
 
 $surfaceprop "default"

@@ -62,7 +62,6 @@ SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
 include("sh_model.lua")
-include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_HNSA.Single1")
@@ -86,6 +85,3 @@ sound.Add({
 	pitch = {100, 120},
 	sound = "^npc/sniper/echo1.wav"
 })
-
---[[Grixis's notes: Mostly complete not counting balancing. Zoom used temporarily until scoping is implemented. Did not include
-a drop down for the reload just yet since the hands and gun move independently.]]--

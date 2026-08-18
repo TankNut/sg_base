@@ -41,7 +41,7 @@ SWEP.Traits = {
 		Zoom = 3,
 		ZoomRange = true,
 		Firemode = 3,
-		Offset = Vector(-6, 3, 1)
+		Offset = Vector(-5, 3, 1)
 	}),
 	sg.Trait("RecoilAdd", {Add = 1}),
 	sg.Trait("HyperBurst", {

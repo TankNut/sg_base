@@ -284,6 +284,10 @@ if CLIENT then
 	end
 
 	function WEAPON:GetViewModelOffset(cycle)
+		if isfunction(self.VMOffsets) then
+			return self.VMOffsets(ent, cycle)
+		end
+
 		local pos = self:ProcessLayerKey(self.VMOffsets, "pos", cycle, vector_origin)
 		local ang = self:ProcessLayerKey(self.VMOffsets, "angle", cycle, angle_zero)
 

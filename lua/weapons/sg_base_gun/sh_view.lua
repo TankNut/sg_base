@@ -51,6 +51,12 @@ if CLIENT then
 		local ply = self:GetOwner()
 
 		if developerMode:GetBool() and sg.DebugVMPos then
+			local animPos, animAng = self:GetViewModelOffset()
+
+			if animPos then
+				return LocalToWorld(animPos, animAng, sg.DebugVMPos, sg.DebugVMAng)
+			end
+
 			return sg.DebugVMPos, sg.DebugVMAng
 		else
 			if sg.DebugVMPos then

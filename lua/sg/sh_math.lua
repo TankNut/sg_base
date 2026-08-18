@@ -11,3 +11,9 @@ end
 function TimeFraction(start, finish)
 	return math.min(math.max((CurTime() - start) / (finish - start), 0), 1)
 end
+
+function RotateAroundPivot(matrix, ang, pivot)
+	matrix:Translate(pivot)
+	matrix:Rotate(ang)
+	matrix:Translate(-pivot)
+end

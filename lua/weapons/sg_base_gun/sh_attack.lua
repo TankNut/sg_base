@@ -195,7 +195,7 @@ function SWEP:GetSpread()
 	local yards = (range / 0.75) / 36
 	local MOA = (inches * 100) / yards
 
-	return MOA / 60
+	return math.rad(MOA / 60)
 end
 
 function SWEP:BulletCallback(attacker, tr, dmg)
@@ -205,7 +205,7 @@ function SWEP:FireWeapon()
 	local owner = self:GetOwner()
 	local damage = self:GetDamage()
 
-	local spread = math.rad(self:GetSpread())
+	local spread = self:GetSpread()
 	local bullet = {
 		Inflictor = self,
 

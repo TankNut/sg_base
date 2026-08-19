@@ -32,8 +32,13 @@ hook.Add("PopulateToolMenu", "sg_base", function()
 		pnl:Help("Client Settings. These settings save automatically and only affect you.")
 
 		pnl:ToolPresets("options_sg_client", buildToolPreset({
+			"sg_vm_sway",
 			"sg_sck_worldmodels", "sg_sck_lod"
 		}))
+
+		pnl:Help("Viewmodel Settings")
+
+		pnl:CheckBox("Enable extra viewmodel sway", "sg_vm_sway")
 
 		pnl:Help("SCK Settings")
 

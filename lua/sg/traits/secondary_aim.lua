@@ -118,12 +118,7 @@ if CLIENT then
 	end
 
 	function TRAIT:Hook_GetViewModelPosition(ent, pos, ang)
-		local state = self:GetState(ent, 0, 0.8)
-
-		local offset = Vector(self.Offset)
-		offset:Rotate(ang)
-
-		pos:Add(offset * state)
+		pos:Add(self.Offset * self:GetState(ent, 0, 0.8))
 	end
 
 	function TRAIT:Hook_DrawCrosshair(ent, x, y)

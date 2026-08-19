@@ -2,8 +2,8 @@ AddCSLuaFile()
 DEFINE_BASECLASS("sg_base_weapon")
 
 local vmRatio = 0.4
-local developerMode = sg.Convars.DeveloperMode
 
+local developerMode = sg.Convars.DeveloperMode
 local expRecoil = sg.Convars.Exp_Recoil
 
 function SWEP:TranslateFOV(fov)
@@ -45,17 +45,73 @@ if CLIENT then
 		return pos, ang - ply:GetViewPunchAngles() * vmRatio, fov
 	end
 
+	-- We can do both of these things with local variables because there's only ever going to be one viewmodel being drawn
+	local _crouch = 0
+
+	local function getCrouchState(ply)
+		local target = math.TimeFraction(ply:GetViewOffset().z, ply:GetViewOffsetDucked().z, ply:GetCurrentViewOffset().z)
+		local diff = math.abs(target - _crouch)
+
+		_crouch = math.Approach(_crouch, target, FrameTime() * 5 * diff)
+
+		return math.ease.InOutSine(_crouch)
+	end
+
+	local _roll = 0
+
+	local function getSidewaysState(ply)
+		local vel = ply:GetVelocity()
+		local sideways = vel:GetNormalized():Dot(ply:EyeAngles():Right()) * vel:Length()
+		local run = ply:GetRunSpeed()
+
+		local target = sg.RemapC(sideways, -run, run, -1, 1)
+		local diff = math.abs(target - _roll)
+
+		_roll = math.Approach(_roll, target, FrameTime() * 10 * diff)
+
+		return _roll
+	end
+
+	function SWEP:AddComputedOffsets(pos, ang)
+		local ply = self:GetOwner()
+		local eye = ply:EyeAngles()
+
+		do -- Roll
+			local roll = 10
+			local state = getSidewaysState(ply)
+
+			ang.r = ang.r + (state * roll)
+		end
+
+		do -- Pitch
+			local pitch = math.ease.InSine(math.Remap(eye.p, 0, 90, 0, 1))
+
+			if eye.p > 0 then
+				pos.z = pos.z + pitch
+			else
+				pos.z = pos.z - pitch * 3
+			end
+		end
+
+		local crouch = getCrouchState(ply)
+
+		pos.x = pos.x - crouch
+		pos.z = pos.z - (crouch * 1.5)
+
+		ang.p = ang.p - crouch
+		ang.r = ang.r - (crouch * 5)
+	end
+
 	local const = math.pi / 360
+	local vmSway = sg.Convars.ViewModelSway
 
 	function SWEP:GetViewModelPosition(pos, ang)
 		local ply = self:GetOwner()
 
 		if developerMode:GetBool() and sg.DebugVMPos then
-			local animPos, animAng = self:GetViewModelOffset()
+			local animPos, animAng = Vector(), Angle()
 
-			if animPos then
-				return LocalToWorld(animPos, animAng, sg.DebugVMPos, sg.DebugVMAng)
-			end
+			self:GetViewModelOffset(animPos, animAng)
 
 			return sg.DebugVMPos, sg.DebugVMAng
 		else
@@ -65,14 +121,18 @@ if CLIENT then
 			end
 		end
 
-		pos = LocalToWorld(self.ViewModelOffset, angle_zero, pos, ang)
-		local animPos, animAng = self:GetViewModelOffset()
+		local offsetPos = Vector(self.ViewModelOffset)
+		local offsetAng = Angle(angle_zero)
 
-		if animPos then
-			pos, ang = LocalToWorld(animPos, animAng, pos, ang)
+		self:GetViewModelOffset(offsetPos, offsetAng)
+
+		self:RunHooks("GetViewModelPosition", nil, offsetPos, offsetAng)
+
+		if vmSway:GetBool() then
+			self:AddComputedOffsets(offsetPos, offsetAng)
 		end
 
-		self:RunHooks("GetViewModelPosition", nil, pos, ang)
+		pos, ang = LocalToWorld(offsetPos, offsetAng, pos, ang)
 
 		if not expRecoil:GetBool() then
 			local punch = ply:GetViewPunchAngles()

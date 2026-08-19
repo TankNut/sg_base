@@ -283,15 +283,18 @@ if CLIENT then
 		self:ProcessAnimationTable(ent, self.VBoneMods, ent.ViewModelBoneMods, cycle)
 	end
 
-	function WEAPON:GetViewModelOffset(cycle)
+	function WEAPON:GetViewModelOffset(pos, ang, cycle)
+		local offsetPos, offsetAng
+
 		if isfunction(self.VMOffsets) then
-			return self.VMOffsets(ent, cycle)
+			offsetPos, offsetAng = self.VMOffsets(ent, cycle)
+		else
+			offsetPos = self:ProcessLayerKey(self.VMOffsets, "pos", cycle, vector_origin)
+			offsetAng = self:ProcessLayerKey(self.VMOffsets, "angle", cycle, angle_zero)
 		end
 
-		local pos = self:ProcessLayerKey(self.VMOffsets, "pos", cycle, vector_origin)
-		local ang = self:ProcessLayerKey(self.VMOffsets, "angle", cycle, angle_zero)
-
-		return pos, ang
+		if offsetPos then pos:Add(offsetPos) end
+		if offsetAng then ang:Add(offsetAng) end
 	end
 
 	function WEAPON:ImportKeyframes(data)

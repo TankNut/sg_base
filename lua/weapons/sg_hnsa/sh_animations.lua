@@ -18,7 +18,7 @@ if CLIENT then
 		matrix:Identity()
 		matrix:Translate(Vector(0, y, z))
 
-		sg.RotateAroundPivot(matrix, Angle(p), Vector(3.5, 0, -3.3))
+		sg.RotateAroundPivot(matrix, Angle(p, 0, 0), Vector(3.5, 0, -3.3))
 
 		return matrix:GetTranslation(), matrix:GetAngles()
 	end)

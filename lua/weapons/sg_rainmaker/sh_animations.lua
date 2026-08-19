@@ -18,11 +18,12 @@ if CLIENT then
 		matrix:Identity()
 		matrix:Translate(Vector(0, y, z))
 
-		sg.RotateAroundPivot(matrix, Angle(p), Vector(10, 0, 0))
+		sg.RotateAroundPivot(matrix, Angle(p, 0, 0), Vector(10, 0, 0))
 
 		return matrix:GetTranslation(), matrix:GetAngles()
 	end)
 end
+
 
 
 local primary = sg.Animation.Weapon(SWEP.Delay)

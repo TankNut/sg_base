@@ -46,5 +46,6 @@ SWEP.WElements = {
 
 SWEP.ViewModelBoneMods = {
 	["ValveBiped.clip"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
-	["ValveBiped.hammer"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
+	["ValveBiped.hammer"] = { scale = Vector(0.01, 0.01, 0.01), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) },
+	["ValveBiped.clip2"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0), hide = true }
 }

@@ -62,6 +62,7 @@ SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
 include("sh_model.lua")
+include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_HNSA.Single1")

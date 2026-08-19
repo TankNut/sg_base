@@ -10,6 +10,7 @@ end
 
 SWEP.ViewModelFOV = 55
 SWEP.ViewModelFlip = false
+SWEP.ViewModelOffset = Vector(-4, 0, 0)
 
 SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false
@@ -18,7 +19,7 @@ SWEP.VElements = {
 	["barrel"] = { type = "Model", model = "models/props_rooftop/chimneypipe01a.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "frontbarrelholder", pos = Vector(0, 1, 0), angle = Angle(-90, 0, 0), size = Vector(0.05, 0.05, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrelmain+"] = { type = "Model", model = "models/xqm/jetbody2fuselage.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "body", pos = Vector(0, 12.01, 1.964), angle = Angle(0, -90, -180), size = Vector(0.23, 0.045, 0.1), color = Color(100, 110, 96, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/gunmetal3", skin = 0, bodygroup = {} },
 	["body"] = { type = "Model", model = "models/Items/BoxMRounds.mdl", bone = "ValveBiped.base", rel = "", pos = Vector(-0.097, 1.294, 0.536), angle = Angle(0, 0, -90), size = Vector(0.16, 0.492, 0.265), color = Color(106, 106, 106, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
-	["bolt"] = { type = "Model", model = "models/props_c17/TrapPropeller_Lever.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "mech", pos = Vector(1.364, -1.364, 2.6), angle = Angle(0, -90, 0), size = Vector(0.152, 0.095, 0.379), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
+	["bolt"] = { type = "Model", model = "models/props_c17/TrapPropeller_Lever.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "mech", pos = Vector(1.2, 1, 2.7), angle = Angle(0, -90, 0), size = Vector(0.2, 0.095, 0.379), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["clip"] = { type = "Model", model = "models/Items/BoxSRounds.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "mech", pos = Vector(-4.6, 0, 2), angle = Angle(-90, 0, 0), size = Vector(0.265, 0.265, 0.322), color = Color(106, 104, 106, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["cover"] = { type = "Model", model = "models/props_interiors/VendingMachineSoda01a_door.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "barrelmain+", pos = Vector(-1.91, 0, -1.46), angle = Angle(90, 0, 0), size = Vector(0.09, 0.015, 0.12), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["flashlight"] = { type = "Model", model = "models/props_wasteland/light_spotlight01_lamp.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "frontbarrelholder", pos = Vector(1.364, 0.3, 0), angle = Angle(0, 0, -90), size = Vector(0.209, 0.06, 0.06), color = Color(92, 96, 96, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

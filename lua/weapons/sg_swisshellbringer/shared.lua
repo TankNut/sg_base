@@ -54,25 +54,8 @@ SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
--- Animations
-SWEP.Animations = {
-	Primary_Empty = sg.Animation.WeaponSequence(ACT_VM_DRYFIRE):AddEvent(0, "Callback", "OnPrimaryAnimation"),
-	Idle_Empty = sg.Animation.WeaponSequence(ACT_VM_IDLE_EMPTY)
-}
-
-SWEP.AnimationRates = {
-	Reload = 1.35
-}
-
 include("sh_model.lua")
-
-function SWEP:TranslateAnimation(name)
-	local empty = name .. "_Empty"
-
-	if self:Clip1() == 0 and self.Animations[empty] then
-		return empty
-	end
-end
+include("sh_animations.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_SwissHellBringer.Single1")

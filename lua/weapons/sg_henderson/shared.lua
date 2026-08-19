@@ -33,7 +33,7 @@ SWEP.Force = sg.FORCE_SHOTGUN
 
 SWEP.Range = 325
 
-SWEP.Delay = 0.2
+SWEP.Delay = 60 / 250
 
 -- Traits
 SWEP.Traits = {
@@ -60,7 +60,7 @@ SWEP.LoopingReload = true
 SWEP.UseReloadStart = true
 SWEP.UseReloadFinish = true
 
-SWEP.ReloadAmount = 5
+SWEP.ReloadAmount = 4
 
 -- Effects
 SWEP.Tracer = 3

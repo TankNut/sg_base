@@ -33,7 +33,7 @@ SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 450
 
-SWEP.Delay = 0.135
+SWEP.Delay = 60 / 400
 
 -- Traits
 SWEP.Traits = {
@@ -98,6 +98,4 @@ sound.Add({
 })
 
 
---[[Grixis's notes: Not a ton of work that has to be done on this one, mostly balancing. I would like to explore letting this thing
-do classic sighting (i.e. pulling the gun close but not actually using the iron sights) and maybe having that reduce how much knockback and
-recoil the gun does but otherwise this thing's fine in the short term.]]--
+--[[Grixis's notes: May experiment with letting this thing sight in, otherwise it just needs balancing]]--

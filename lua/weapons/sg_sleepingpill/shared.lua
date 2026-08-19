@@ -33,7 +33,7 @@ SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 1250
 
-SWEP.Delay = 0.06
+SWEP.Delay = 60 / 1000
 
 -- Traits
 SWEP.Traits = {
@@ -42,8 +42,7 @@ SWEP.Traits = {
 		ZoomRange = true,
 		Offset = Vector(-2, 2, 2)
 	}),
-	sg.Trait("RecoilAdd", {Add = 0.1}),
-	sg.Trait("HyperBurst")
+	sg.Trait("RecoilAdd", {Add = 0.1})
 }
 
 -- Recoil

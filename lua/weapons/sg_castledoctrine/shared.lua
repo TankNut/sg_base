@@ -62,6 +62,10 @@ SWEP.TracerConfig = {}
 
 include("sh_model.lua")
 
+SWEP.Animations = {
+	Primary = sg.Animation.WeaponSequence(ACT_VM_SECONDARYATTACK):AddEvent(0, "PlayerAnimation", PLAYER_ATTACK1)
+}
+
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_CastleDoctrine.Single1")
 	self:EmitSound("Weapon_SG_CastleDoctrine.Single2")

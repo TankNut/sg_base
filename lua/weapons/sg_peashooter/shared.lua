@@ -34,7 +34,7 @@ SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 750
 
-SWEP.Delay = 0.08
+SWEP.Delay = 60 / 700
 SWEP.BurstDelay = SWEP.Delay * 2
 
 -- Traits

@@ -15,7 +15,7 @@ SWEP.Spawnable = true
 
 -- Ammo
 SWEP.Primary.Ammo = "pistol"
-SWEP.Primary.ClipSize = 15
+SWEP.Primary.ClipSize = 18
 SWEP.Primary.DefaultClip = 125
 
 -- HoldType
@@ -33,11 +33,11 @@ SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 850 -- Slight decrease, would've been 857.142 otherwise
 
-SWEP.Delay = 0.075
+SWEP.Delay = 60 / 1000
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("RecoilAdd", {Add = 0.45})
+	sg.Trait("RecoilAdd", {Add = 0.9})
 }
 
 -- Recoil

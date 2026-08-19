@@ -17,7 +17,7 @@ include("sh_traits.lua")
 
 function SWEP:Initialize()
 	self:SetHoldType(self:GetTargetHoldType())
-	self:SetDeploySpeed(1)
+	self:SetDeploySpeed(math.huge)
 
 	self:InitAnimations()
 
@@ -44,7 +44,7 @@ function SWEP:SetupDataTables()
 end
 
 function SWEP:Deploy()
-	self:SetNextPrimaryFire(0)
+	self:SetNextPrimaryFire(CurTime() + self:PlayAnimation("Deploy"))
 
 	return true
 end

@@ -32,7 +32,7 @@ hook.Add("PopulateToolMenu", "sg_base", function()
 		pnl:Help("Client Settings. These settings save automatically and only affect you.")
 
 		pnl:ToolPresets("options_sg_client", buildToolPreset({
-			"sg_sck_lod"
+			"sg_sck_worldmodels", "sg_sck_lod"
 		}))
 
 		pnl:Help("SCK Settings")
@@ -48,7 +48,7 @@ hook.Add("PopulateToolMenu", "sg_base", function()
 		pnl:Help("Server Settings. These settings can only be changed by the person who created the game server through the main menu.")
 
 		pnl:ToolPresets("options_sg_client", buildToolPreset({
-			"sg_infiniteammo",
+			"sg_infiniteammo", "sg_movement",
 			"sg_exp_recoil"
 		}))
 

@@ -73,10 +73,9 @@ sound.Add({
 sound.Add({
 	name = "Weapon_SG_StraightRazor.Single2",
 	channel = CHAN_ITEM,
-	volume = 0.5,
+	volume = 0.75,
 	level = sg.LEVEL_GUNFIRE,
 	pitch = {70, 80},
 	sound = ")weapons/aug/aug-1.wav"
 })
 
---[[Grixis Notes: Another bladed weapon for when we finally get that in. Also would like to get this one using the single-action anims that are packaged with the SRZS revolver model.]]

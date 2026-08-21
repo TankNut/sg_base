@@ -32,7 +32,7 @@ primary:AddEvent( 40 / 60, "Sound", "weapons/p228/p228_slidepull.wav")
 
 local reload = sg.Animation.WeaponSequence("reload_sa")
 reload:AddEvent(0, "PlayerAnimation", PLAYER_RELOAD)
-reload:AddEvent(7 / 111, "Sound", "weapons/usp/usp_slideback2.wav")
+reload:AddEvent(7 / 111, "Sound", "weapons/usp/usp_sliderelease.wav")
 reload:AddEvent(27 / 111, "Sound", "Weapon_357.OpenLoader")
 reload:AddEvent(38 / 111, "Sound", "weapons/p90/p90_clipout.wav")
 reload:AddEvent(72 / 111, "Sound", "weapons/p90/p90_clipin.wav")

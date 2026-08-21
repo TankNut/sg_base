@@ -24,6 +24,17 @@ if CLIENT then
 	end)
 end
 
+local reload = sg.Animation.WeaponSequence(ACT_VM_RELOAD)
+reload:AddEvent(0, "PlayerAnimatioin", PLAYER_RELOAD)
+
+if CLIENT then
+	reload:AddVBoneModLayer("ValveBiped.Bip01_L_Clavicle", {
+		[10 / 60] = {pos = Vector(0, 0, 0)},
+		[48 / 60] = {pos = vector_origin},
+	})
+end
+
 SWEP.Animations = {
-	Idle = idle
+	Idle = idle,
+	Reload = reload
 }

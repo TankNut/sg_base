@@ -24,7 +24,6 @@ client("sck/spotlight.lua")
 client("sck/sprite.lua")
 
 shared("traits/gatling_fire.lua")
-shared("traits/hyper_burst.lua")
 shared("traits/movement_modifier.lua")
 shared("traits/recoil_add.lua")
 shared("traits/secondary_aim.lua")

@@ -43,6 +43,7 @@ SWEP.Recoil = { -- Can also be a single angle, but that's for direct use (alt-fi
 
 SWEP.ViewPunch = 0.4 -- Multiplier for the amount of offset that gets added to the player's view directly
 SWEP.RecoilFlip = true -- Lets the recoil flip horizontally
+SWEP.BurstRecoil = nil -- Multiplier when the weapon is in a burst
 
 -- Reloading
 SWEP.LoopingReload = false -- Your shotgun reloads, uses ReloadSingle

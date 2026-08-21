@@ -4,6 +4,10 @@ DEFINE_BASECLASS("sg_base_weapon")
 function SWEP:GetRecoilMultiplier()
 	local val = 1
 
+	if self.BurstRecoil and self:IsBurstFire() and not self:IsFinalBurstShot() then
+		val = self.BurstRecoil
+	end
+
 	self:RunHooks("MultiplyRecoil", function(func)
 		local override = func(val)
 

@@ -44,9 +44,6 @@ SWEP.Traits = {
 		Offset = Vector(-5, 3, 1)
 	}),
 	sg.Trait("RecoilAdd", {Add = 1}),
-	sg.Trait("HyperBurst", {
-		Mult = 0.5,
-	})
 }
 
 -- Recoil
@@ -57,6 +54,7 @@ SWEP.Recoil = {
 
 SWEP.ViewPunch = 0.5
 SWEP.RecoilFlip = true
+SWEP.BurstRecoil = 0.5
 
 -- Effects
 SWEP.Tracer = 3

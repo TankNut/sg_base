@@ -31,7 +31,13 @@ function SWEP:PlayAnimation(name)
 	local duration = data.Duration
 
 	if not duration then
-		duration = vm:SequenceDuration(sg.GetSequenceIndex(vm, data.Sequence))
+		local sequence = sg.GetSequenceIndex(vm, data.Sequence)
+
+		if sequence == -1 then
+			return
+		end
+
+		duration = vm:SequenceDuration(sequence)
 	end
 
 	duration = duration / (self.AnimationRates[name] or 1)

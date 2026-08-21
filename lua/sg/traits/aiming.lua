@@ -142,4 +142,4 @@ if CLIENT then
 	end
 end
 
-sg.RegisterTrait("SecondaryAim", TRAIT)
+sg.RegisterTrait("Aiming", TRAIT)

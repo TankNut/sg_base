@@ -35,4 +35,4 @@ function TRAIT:Hook_GetSpread(ent, val)
 	return val + self:GetSpread(ent)
 end
 
-sg.RegisterTrait("SpreadAdd", TRAIT)
+sg.RegisterTrait("AddSpread", TRAIT)

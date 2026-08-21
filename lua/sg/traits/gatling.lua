@@ -108,4 +108,4 @@ if CLIENT then
 	end
 end
 
-sg.RegisterTrait("GatlingFire", TRAIT)
+sg.RegisterTrait("Gatling", TRAIT)

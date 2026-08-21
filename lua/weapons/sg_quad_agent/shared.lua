@@ -37,14 +37,14 @@ SWEP.Delay = 0.45
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("SecondaryAim", {
+	sg.Trait("Aiming", {
 		Zoom = {4, 8},
 		ZoomRange = true,
 		Range = 1000,
 		Scoped = true,
 		Offset = Vector(-3, 1, 0.5)
 	}),
-	sg.Trait("RecoilAdd", {Add = 0.5})
+	sg.Trait("AddRecoil", {Add = 0.5})
 }
 
 -- Recoil

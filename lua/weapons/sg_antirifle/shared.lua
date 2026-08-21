@@ -38,7 +38,7 @@ SWEP.Delay = 0.3
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("SecondaryAim", {
+	sg.Trait("Aiming", {
 		Zoom = {8, 20},
 		ZoomRange = true,
 		Range = 2000,

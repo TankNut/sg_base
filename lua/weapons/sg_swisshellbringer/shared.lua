@@ -37,7 +37,7 @@ SWEP.Delay = 60 / 800
 
 -- Traits
 SWEP.Traits = {
-	sg.Trait("RecoilAdd", {Add = 0.4})
+	sg.Trait("AddRecoil", {Add = 0.4})
 }
 
 -- Recoil

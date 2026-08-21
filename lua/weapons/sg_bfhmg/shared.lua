@@ -38,7 +38,7 @@ SWEP.Delay = 60 / 400
 -- Traits
 SWEP.Traits = {
 	sg.Trait("SelfKnockback", {Force = 43}),
-	sg.Trait("RecoilAdd", {Add = 0.4}),
+	sg.Trait("AddRecoil", {Add = 0.4}),
 	sg.Trait("MovementModifier", {Attack = 0})
 }
 

@@ -37,8 +37,8 @@ SWEP.Delay = 60 / 400
 
 -- Traits
 SWEP.Traits = {
-	--sg.Trait("RecoilAdd", {Add = 0.25}),
-	sg.Trait("GatlingFire", {
+	--sg.Trait("AddRecoil", {Add = 0.25}),
+	sg.Trait("Gatling", {
 		Delay = 60 / 800,
 		SpinupTime = 6,
 		SpindownTime = 4,

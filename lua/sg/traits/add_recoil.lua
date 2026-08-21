@@ -35,4 +35,4 @@ function TRAIT:Hook_MultiplyRecoil(ent, val)
 	return val + self:GetMultiplier(ent)
 end
 
-sg.RegisterTrait("RecoilAdd", TRAIT)
+sg.RegisterTrait("AddRecoil", TRAIT)

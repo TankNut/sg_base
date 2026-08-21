@@ -94,7 +94,7 @@ end
 
 function TRAIT:Hook_GetMoveSpeed(ent, val)
 	if self.MoveSpeed then
-		return Lerp(self:GetSpin(ent), 1, self.MoveSpeed)
+		return Lerp(self:GetSpin(ent), val, self.MoveSpeed)
 	end
 end
 

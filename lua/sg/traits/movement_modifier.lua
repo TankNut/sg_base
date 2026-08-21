@@ -7,37 +7,23 @@ TRAIT.Attack = nil -- While firing
 TRAIT.AttackDelay = 0 -- How long the attack slow lingers at full power
 TRAIT.AttackDecay = 1 -- How long the attack slow takes to decay
 
-function TRAIT:GetSlow(ent)
-	local slow = math.huge
-
-	if self.Passive != nil then
-		slow = math.min(slow, self.Passive)
-	end
-
-	if self.Reload != nil and ent:IsReloading() then
-		slow = math.min(slow, self.Reload)
-	end
-
+function TRAIT:Hook_GetMoveSpeed(ent, val)
 	if self.Attack != nil then
 		local nextFire = ent:GetNextPrimaryFire() + engine.TickInterval()
-		local fraction = sg.TimeFraction(nextFire + self.AttackDelay, nextFire + self.AttackDecay)
+		local fraction = sg.TimeFraction(nextFire + self.AttackDelay, nextFire + self.AttackDelay + self.AttackDecay)
 
 		if fraction == 0 then
-			slow = self.Attack
+			val = self.Attack
 		else
-			slow = math.min(slow, Lerp(fraction, math.max(self.Attack, 0), 1))
+			val = Lerp(fraction, self.Attack, val)
 		end
+	elseif self.Reload != nil and ent:IsReloading() then
+		val = self.Reload
+	elseif self.Passive then
+		val = self.Passive
 	end
 
-	if slow == math.huge then
-		return nil
-	end
-
-	return slow
-end
-
-function TRAIT:Hook_GetMoveSpeed(ent, val)
-	return self:GetSlow(ent)
+	return val
 end
 
 sg.RegisterTrait("MovementModifier", TRAIT)

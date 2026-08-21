@@ -9,8 +9,6 @@ local enable = sg.Convars.MovementModifiers
 -- 1: Sprint (normal movespeed)
 -- 1+: Multiplies walk speed
 
--- The most restrictive value applies
-
 function SWEP:GetMoveSpeed()
 	if not enable:GetBool() then
 		return 1
@@ -21,7 +19,7 @@ function SWEP:GetMoveSpeed()
 	self:RunHooks("GetMoveSpeed", function(func)
 		local override = func(val)
 
-		if override != nil and override < val then
+		if override != nil then
 			val = override
 		end
 	end)
@@ -46,6 +44,8 @@ function SWEP:SetupMove(ply, mv, cmd)
 		mv:SetMaxClientSpeed(math.Remap(speed, 0.5, 1, ply:GetWalkSpeed(), ply:GetRunSpeed()))
 	elseif speed >= 0 then
 		mv:SetMaxClientSpeed(math.Remap(speed, 0, 0.5, ply:GetSlowWalkSpeed(), ply:GetWalkSpeed()))
+	elseif speed > -1 then
+		mv:SetMaxClientSpeed(math.Remap(speed, -1, 0, 0, ply:GetSlowWalkSpeed()))
 	end
 
 	self:RunHooks("SetupMove", nil, ply, mv, cmd)

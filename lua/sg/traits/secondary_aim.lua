@@ -108,7 +108,7 @@ end
 
 function TRAIT:Hook_GetMoveSpeed(ent, val)
 	if self.MoveSpeed then
-		return Lerp(self:GetState(ent), 1, self.MoveSpeed)
+		return Lerp(self:GetState(ent), val, self.MoveSpeed)
 	end
 end
 

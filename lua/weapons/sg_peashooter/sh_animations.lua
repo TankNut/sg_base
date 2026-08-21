@@ -25,7 +25,7 @@ if CLIENT then
 end
 
 local reload = sg.Animation.WeaponSequence(ACT_VM_RELOAD)
-reload:AddEvent(0, "PlayerAnimatioin", PLAYER_RELOAD)
+reload:AddEvent(0, "PlayerAnimation", PLAYER_RELOAD)
 
 if CLIENT then
 	reload:AddVBoneModLayer("ValveBiped.Bip01_L_Clavicle", {

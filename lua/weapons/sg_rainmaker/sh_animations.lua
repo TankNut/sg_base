@@ -39,9 +39,13 @@ end
 
 
 
-local reload = sg.Animation.WeaponSequence(ACT_VM_RELOAD)
+local reload = sg.Animation.WeaponSequence("reload_empty_boltrel")
 reload:AddEvent(0, "PlayerAnimation", PLAYER_RELOAD)
-
+reload:AddEvent(0 / 60, "Sound", "weapons/m4a1/m4a1_boltpull.wav")
+reload:AddEvent(2 / 60, "Sound", "weapons/m4a1/m4a1_clipout.wav")
+reload:AddEvent(22 / 60, "Sound", "weapons/m4a1/m4a1_clipin.wav")
+reload:AddEvent(38 / 60, "Sound", "weapons/ump45/ump45_clipout.wav")
+reload:AddEvent(48 / 60, "Sound", "weapons/ump45/ump45_boltslap.wav")
 if CLIENT then
 	reload:AddElementLayer("boltpull", {
 		[0]       = {pos2 = vector_origin},
@@ -59,6 +63,7 @@ end
 
 
 SWEP.Animations = {
+	Deploy = sg.Animation.WeaponSequence(ACT_VM_DRAW_DEPLOYED),
 	Idle = idle,
 	Primary = primary,
 	Reload = reload

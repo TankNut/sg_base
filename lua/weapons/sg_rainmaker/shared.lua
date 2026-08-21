@@ -28,7 +28,7 @@ SWEP.Firemode = 0
 SWEP.AmmoCost = 1
 
 SWEP.Count = 1
-SWEP.Damage = 15
+SWEP.Damage = 25
 SWEP.Force = sg.FORCE_DEFAULT
 
 SWEP.Range = 1000 -- Slight decrease, would've been 1028.571 otherwise
@@ -69,10 +69,6 @@ include("sh_animations.lua")
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_rainmaker.Single1")
 	self:EmitSound("Weapon_SG_rainmaker.Single2")
-end
-
-function SWEP:OnReloadAnimation()
-	self:EmitSound("Weapon_SMG1.Reload")
 end
 
 sound.Add({

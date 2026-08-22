@@ -126,7 +126,7 @@ AddType("Model", {
 			csent:SetMaterial(proxy.material)
 		end
 
-		if proxy.suppresslightning then
+		if proxy.surpresslightning then
 			render.SuppressEngineLighting(true)
 		end
 

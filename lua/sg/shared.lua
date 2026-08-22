@@ -27,6 +27,7 @@ shared("traits/add_recoil.lua")
 shared("traits/add_spread.lua")
 shared("traits/aiming.lua")
 shared("traits/gatling.lua")
+shared("traits/heat.lua")
 shared("traits/movement_modifier.lua")
 shared("traits/self_knockback.lua")
 shared("traits/spread_mod.lua")
@@ -42,6 +43,25 @@ function GetSequenceIndex(ent, index)
 		return ent:SelectWeightedSequence(index)
 	else
 		return ent:LookupSequence(index)
+	end
+end
+
+if SERVER then
+	function Explosion(pos, owner, damage, spawnflags, radius)
+		local ent = ents.Create("env_explosion")
+
+		ent:SetOwner(owner)
+		ent:SetPos(pos)
+		ent:SetKeyValue("spawnflags", bit.bor(32, spawnflags or 0)) -- We always disable sparks
+		ent:SetKeyValue("iMagnitude", damage)
+
+		if radius then
+			ent:SetKeyValue("iRadiusOverride", radius)
+		end
+
+		ent:Spawn()
+		ent:Activate()
+		ent:Fire("Explode")
 	end
 end
 

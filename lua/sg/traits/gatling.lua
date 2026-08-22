@@ -1,6 +1,8 @@
 local TRAIT = {}
 
 TRAIT.Delay = nil -- Max fire rate
+TRAIT.Range = nil -- Range when at max fire rate
+
 TRAIT.MinSpin = 0 -- Minimum spin amount (0-1) before the gun can fire
 TRAIT.AllowSpin = false -- Whether the player can manually spin with +attack2
 TRAIT.Ease = nil -- Specify a math.ease function to use for RPM, usually something like math.ease.InSine
@@ -33,7 +35,7 @@ end
 function TRAIT:ShouldSpin(ent)
 	local ply = ent:GetOwner()
 
-	if ply:KeyDown(IN_ATTACK) then
+	if ply:KeyDown(IN_ATTACK) or ent:ShouldAutoAttack() then
 		return true
 	end
 
@@ -46,6 +48,12 @@ end
 
 function TRAIT:GetSpin(ent)
 	return self.Ease and self.Ease(ent:GetSpinRate()) or ent:GetSpinRate()
+end
+
+function TRAIT:Hook_GetRange(ent, val)
+	if self.Range then
+		return Lerp(self:GetSpin(ent), val, self.Range)
+	end
 end
 
 function TRAIT:Hook_CanAttack(ent)

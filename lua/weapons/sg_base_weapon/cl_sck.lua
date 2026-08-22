@@ -120,6 +120,9 @@ function SWEP:InitBoneMods(tab)
 	end
 end
 
+function SWEP:PreInitSCK()
+end
+
 function SWEP:InitSCK()
 	self:ClearCSEnts()
 
@@ -131,6 +134,8 @@ function SWEP:InitSCK()
 	self.WElements = tab.WElements or {}
 
 	self.ViewModelBoneMods = tab.ViewModelBoneMods or {}
+
+	self:PreInitSCK()
 
 	self:InitSCKElements(self.VElements)
 	self:InitSCKElements(self.WElements)

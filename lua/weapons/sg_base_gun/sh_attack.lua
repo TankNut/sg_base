@@ -77,7 +77,7 @@ function SWEP:CanAttack()
 		return false
 	end
 
-	if self:GetMaxClip1() > 0 and self:Clip1() < self.AmmoCost then
+	if not self:HasEnoughAmmo() then
 		self:EmitSound("Weapon_SG.Empty")
 
 		if self:CanReload() then
@@ -96,6 +96,19 @@ function SWEP:CanAttack()
 end
 
 local infiniteAmmo = sg.Convars.InfiniteAmmo
+
+function SWEP:HasEnoughAmmo()
+	if self:GetMaxClip1() > 0 then
+		return self:Clip1() >= self.AmmoCost
+	end
+
+	if self:GetPrimaryAmmoType() != -1 and not infiniteAmmo:GetBool() then
+		return self:Ammo1() >= self.AmmoCost
+	end
+
+	return true
+end
+
 
 -- Where ammo should be taken (if any)
 function SWEP:TakeAmmo()

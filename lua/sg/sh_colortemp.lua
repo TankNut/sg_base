@@ -5,6 +5,7 @@ module("sg", package.seeall)
 -- Sourced from http://www.vendian.org/mncharity/dir3/blackbody/ and http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html
 -- Using the CIE 1964 10 degree CMF values
 local lookup = {
+	{0, 0, 0, 0},
 	{1000, 255, 56, 0},
 	{1100, 255, 71, 0},
 	{1200, 255, 83, 0},
@@ -399,7 +400,7 @@ local lookup = {
 }
 
 function ColorTemperature(k)
-	k = math.Clamp(k, 1000, 40000)
+	k = math.Clamp(k, 0, 40000)
 
 	local from, to
 
@@ -412,6 +413,7 @@ function ColorTemperature(k)
 			from = data
 		elseif temperature > k then
 			to = data
+			break
 		end
 	end
 

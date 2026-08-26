@@ -143,14 +143,15 @@ end
 
 if CLIENT then
 	local elements = {
-		["barrel 1"] = 500,
-		["barrel 1+"] = 500,
-		["barrel 1++"] = 500,
+		["barrel 1"] = 1000,
+		["barrel 1+"] = 1000,
+		["barrel 1++"] = 1000,
 		["engine"] = 2000,
-		["connect"] = 300,
-		["connect 2"] = 300,
+		["connect"] = 1000,
+		["connect 2"] = 1000,
 		["lower spin engine"] = 2000,
-		["receiver"] = 500}
+		["receiver"] = 1000
+	}
 
 	function SWEP:PreInitSCK()
 		for element in pairs(elements) do
@@ -159,8 +160,8 @@ if CLIENT then
 			v.pos = vector_origin
 			v.angle = angle_zero
 			v.material = "model_color"
-			v.surpresslightning = true
 			v.renderorder = -1
+			v.additive = true
 
 			local w = table.Copy(self.WElements[element])
 			w.rel = element
@@ -168,6 +169,7 @@ if CLIENT then
 			w.angle = angle_zero
 			w.material = "model_color"
 			w.renderorder = -1
+			w.additive = true
 
 			self.VElements[element .. " heat"] = v
 			self.WElements[element .. " heat"] = w
@@ -182,12 +184,8 @@ if CLIENT then
 
 			if self:GetOverheating() then
 				color = sg.ColorTemperature(Lerp(self:GetOverheatFraction(), max, 10000))
-				color.a = 100
 			else
-				local heat = sg.RemapC(val, 0, 1, 0, max)
-
-				color = sg.ColorTemperature(heat)
-				color.a = sg.RemapC(val, 0, 1, 0, 100)
+				color = sg.ColorTemperature(sg.RemapC(val, 0, 1, 0, max))
 			end
 
 			self.VElements[element .. " heat"].color = color

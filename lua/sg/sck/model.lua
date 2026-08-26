@@ -143,6 +143,10 @@ AddType("Model", {
 			render.CullMode(MATERIAL_CULLMODE_CW)
 		end
 
+		if proxy.additive then
+			render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+		end
+
 		if element.clipplanes then
 			render.EnableClipping(true)
 
@@ -179,6 +183,8 @@ AddType("Model", {
 
 		-- All of this is just restoring to the default gmod state, so we don't actually have to check if anything changed
 		render.CullMode(MATERIAL_CULLMODE_CCW)
+
+		render.OverrideBlend(false)
 
 		render.SetBlend(1)
 		render.SetColorModulation(1, 1, 1)

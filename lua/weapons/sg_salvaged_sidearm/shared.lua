@@ -73,7 +73,7 @@ SWEP.OverheatTimer = 2
 
 include("sh_model.lua")
 include("sh_animations.lua")
-include("sh_heat.lua")
+include("sh_behavior.lua")
 
 function SWEP:OnPrimaryAnimation()
 	self:EmitSound("Weapon_SG_SalvagedSidearm.Single1")

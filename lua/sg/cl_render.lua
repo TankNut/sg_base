@@ -78,7 +78,6 @@ end
 do
 	local dir = Vector()
 
-	-- Returns false if done rendering
 	function Tracer(startpos, endpos, velocity, length, time, callback)
 		dir:Set(endpos)
 		dir:Sub(startpos)
@@ -87,15 +86,10 @@ do
 
 		dir:Normalize()
 
-		-- Minimum length
-		if distance <= 128 then
-			return false
-		end
-
 		local lifetime = (distance + length) / velocity
 
 		if time > lifetime then
-			return false
+			return
 		end
 
 		local startDistance = velocity * time
@@ -112,7 +106,7 @@ do
 
 		callback(startPoint, endPoint, uv1, uv2, dir)
 
-		return true
+		return
 	end
 end
 

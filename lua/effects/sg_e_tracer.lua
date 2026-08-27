@@ -18,11 +18,11 @@ function EFFECT:Init(data)
 
 	self.Start = self:GetTracerShootPos(self.Pos, self.Entity, self.Attachment)
 	self.End = data:GetOrigin()
+	self.Distance = self.Start:Distance(self.End)
 
 	self:SetRenderBoundsWS(self.Start, self.End)
 
 	self.Time = 0
-	self.Active = true
 
 	self.Material = material
 	self.Velocity = 5000
@@ -44,11 +44,15 @@ function EFFECT:Init(data)
 		end
 	end
 
+	self.Lifetime = (self.Distance + self.Length) / self.Velocity
+
 	effects.TracerSound(self.Start, self.End)
 end
 
 function EFFECT:Think()
-	return self.Active
+	self.Time = self.Time + FrameTime()
+
+	return self.Time < self.Lifetime
 end
 
 local color = Color(255, 255, 255)
@@ -57,12 +61,10 @@ local spriteColor = Color(255, 255, 255)
 local sprite = Material("sprites/light_glow02_add")
 
 function EFFECT:Render()
-	self.Time = self.Time + FrameTime()
-
 	local r, g, b = self.Color:Unpack()
 	local drawBeam = self.Fade and sg.DrawFadedBeam or render.DrawBeam
 
-	self.Active = sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Time, function(startPos, endPos, uv1, uv2, dir)
+	sg.Tracer(self.Start, self.End, self.Velocity, self.Length, self.Time, function(startPos, endPos, uv1, uv2, dir)
 		local v1, v2 = startPos:ToScreen(), endPos:ToScreen()
 		v1, v2 = Vector(v1.x, v1.y), Vector(v2.x, v2.y)
 

@@ -20,7 +20,6 @@ function TRAIT:HandlePenetration(ent, attacker, tr, bullet, damage, distance)
 	local trace
 	local hit = false
 
-	-- Not perfect, we can't deal with intersecting props atm (where exiting one starts us inside of another) but it works well on other stuff
 	for i = STEP_SIZE, distance + STEP_SIZE, STEP_SIZE do
 		local pos = start + dir * i
 		local contents = util.PointContents(pos)

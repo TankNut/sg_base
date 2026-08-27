@@ -45,7 +45,8 @@ SWEP.Traits = {
 		Scoped = true,
 		MoveSpeed = 0,
 		Offset = Vector(-6, 4, 2),
-	})
+	}),
+	sg.Trait("Penetration")
 }
 
 -- Recoil

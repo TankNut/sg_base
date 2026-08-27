@@ -28,6 +28,7 @@ shared("traits/add_spread.lua")
 shared("traits/aiming.lua")
 shared("traits/gatling.lua")
 shared("traits/movement_modifier.lua")
+shared("traits/penetration.lua")
 shared("traits/self_knockback.lua")
 shared("traits/spread_mod.lua")
 

@@ -211,7 +211,8 @@ function SWEP:GetSpread()
 	return math.rad(MOA / 60)
 end
 
-function SWEP:BulletCallback(attacker, tr, dmg)
+function SWEP:BulletCallback(attacker, tr, dmg, bullet)
+	self:RunHooks("BulletCallback", nil, attacker, tr, dmg, bullet)
 end
 
 function SWEP:FireWeapon()
@@ -232,11 +233,11 @@ function SWEP:FireWeapon()
 
 		Tracer = self.Tracer,
 		TracerName = self.TracerName,
-
-		Callback = function(attacker, tr, dmg)
-			self:BulletCallback(attacker, tr, dmg)
-		end
 	}
+
+	bullet.Callback = function(attacker, tr, dmg)
+		self:BulletCallback(attacker, tr, dmg, bullet)
+	end
 
 	self:RunHooks("ModifyBullet", nil, bullet)
 

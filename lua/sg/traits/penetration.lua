@@ -43,8 +43,9 @@ function TRAIT:HandlePenetration(ent, attacker, tr, bullet, damage, distance)
 	if hit then
 		distance = distance - start:Distance(trace.HitPos)
 
-		-- 0 thickness surface, nudge ourselves forward so we don't end up infinitely hitting the same spot
+		-- 0 thickness surface, nudge ourselves forward so we don't end up hitting the same spot indefinitely
 		if trace.HitPos == start then
+			distance = distance - 1
 			trace.HitPos:Add(dir)
 		end
 

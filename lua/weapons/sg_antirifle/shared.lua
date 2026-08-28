@@ -61,6 +61,7 @@ SWEP.RecoilFlip = false
 -- Effects
 SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer_smoke"
+SWEP.TracerConfig = {}
 
 include("sh_model.lua")
 include("sh_animations.lua")

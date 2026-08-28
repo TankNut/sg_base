@@ -65,6 +65,7 @@ end
 
 include("cl_hud.lua")
 include("sh_attack.lua")
+include("sh_effects.lua")
 include("sh_recoil.lua")
 include("sh_reload.lua")
 include("sh_view.lua")
@@ -90,6 +91,9 @@ function SWEP:SetupDataTables()
 	self:NetworkVar("Bool", "FirstReload")
 	self:NetworkVar("Bool", "LastReload")
 	self:NetworkVar("Bool", "CancelReload")
+
+	-- Misc
+	self:NetworkVar("Int", "TracerNum")
 
 	if SERVER then
 		self:SetFiremode(self.Firemode)

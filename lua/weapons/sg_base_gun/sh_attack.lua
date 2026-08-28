@@ -231,11 +231,12 @@ function SWEP:FireWeapon()
 		Force = self.Force,
 		Spread = Vector(spread, spread),
 
-		Tracer = self.Tracer,
-		TracerName = self.TracerName,
+		Tracer = 0,
+		TracerName = "",
 	}
 
 	bullet.Callback = function(attacker, tr, dmg)
+		self:CreateEffects(tr)
 		self:BulletCallback(attacker, tr, dmg, bullet)
 	end
 

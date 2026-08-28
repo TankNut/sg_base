@@ -73,13 +73,7 @@ function TRAIT:HandlePenetration(ent, attacker, tr, bullet, damage, distance)
 		util.Effect("Impact", effect, false)
 
 		local callback = function(_, tr2)
-			local tracer = EffectData()
-			tracer:SetStart(tr2.StartPos)
-			tracer:SetEntity(ent)
-			tracer:SetOrigin(tr2.HitPos)
-			tracer:SetAttachment(0) -- Force an invalid attachment so we render at the start pos rather than the weapon's muzzle
-
-			util.Effect(bullet.TracerName, tracer, true)
+			ent:CreateTracer(tr2.StartPos, tr2.HitPos, true)
 
 			self:HandlePenetration(ent, attacker, tr2, bullet, damage, distance)
 		end

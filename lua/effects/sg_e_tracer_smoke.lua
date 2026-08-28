@@ -1,11 +1,8 @@
 function EFFECT:Init(data)
-	self.Pos = data:GetStart()
-	self.Entity = data:GetEntity()
+	data = sg.GetEffectData(data)
 
-	self.Attachment = data:GetAttachment()
-
-	self.Start = self:GetTracerShootPos(self.Pos, self.Entity, self.Attachment)
-	self.End = data:GetOrigin()
+	self.Start = sg.GetEffectOrigin(data)
+	self.End = data.Origin
 
 	self:SetRenderBoundsWS(self.Start, self.End)
 
@@ -32,6 +29,8 @@ function EFFECT:Init(data)
 			uv -- Texture end
 		}
 	end
+
+	effects.TracerSound(self.Start, self.End)
 end
 
 function EFFECT:Think()

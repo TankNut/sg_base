@@ -47,6 +47,16 @@ function GetSequenceIndex(ent, index)
 	end
 end
 
+ModelCache = {}
+
+function GetModelInfo(mdl)
+	if not ModelCache[mdl] then
+		ModelCache[mdl] = util.GetModelInfo(mdl)
+	end
+
+	return ModelCache[mdl]
+end
+
 if SERVER then
 	function Explosion(pos, owner, damage, spawnflags, radius)
 		local ent = ents.Create("env_explosion")

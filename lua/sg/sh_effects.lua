@@ -46,9 +46,9 @@ if CLIENT then
 		return data
 	end
 
-	function GetTracerOrigin(data)
+	function GetEffectOrigin(data)
 		local ent = data.Entity
-		local pos = data.Start or Vector()
+		local pos = data.Start or data.Origin or Vector()
 
 		if data.Detach or not ent or not ent:IsWeapon() or ent:IsDormant() then
 			return pos

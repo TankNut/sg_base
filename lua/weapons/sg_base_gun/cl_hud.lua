@@ -98,6 +98,27 @@ function SWEP:DrawDebugHUD()
 	self:DebugAnimationState()
 end
 
+local color_red = Color(255, 0, 0)
+local color_green = Color(0, 255, 0)
+local color_blue = Color(0, 0, 255)
+
+function SWEP:DrawHUD()
+	if not developerMode:GetBool() then
+		return
+	end
+
+	cam.Start3D()
+		local pos, ang = self:GetTracerOrigin()
+		local offset = function(x) return LocalToWorld(x, angle_zero, pos, ang) end
+
+		cam.IgnoreZ(true)
+			render.DrawLine(pos, offset(Vector(3, 0, 0)), color_red, true)
+			render.DrawLine(pos, offset(Vector(0, 3, 0)), color_green, true)
+			render.DrawLine(pos, offset(Vector(0, 0, 3)), color_blue, true)
+		cam.IgnoreZ(false)
+	cam.End3D()
+end
+
 function SWEP:DoDrawCrosshair(x, y)
 	local should = self:RunHooks("DrawCrosshair", nil, x, y)
 

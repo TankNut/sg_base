@@ -12,6 +12,18 @@ SWEP.ViewModelFOV = 54
 SWEP.ViewModelFlip = false
 SWEP.ViewModelOffset = Vector(-1.5, 0.25, 0.25)
 
+SWEP.ViewModelMuzzle = {
+	Attachment = "spark",
+	Pos = Vector(38, 0, 0),
+	Angle = Angle(0, 0, -90)
+}
+
+SWEP.WorldModelMuzzle = {
+	Bone = "ValveBiped.bone",
+	Pos = Vector(6.7, 14.7, 48),
+	Angle = Angle(-73, 52, -145)
+}
+
 SWEP.ShowViewModel = false
 SWEP.ShowWorldModel = false
 

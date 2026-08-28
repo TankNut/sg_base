@@ -110,7 +110,7 @@ if CLIENT then
 
 	function SWEP:GetTracerOrigin()
 		local ply = self:GetOwner()
-		local vm = not ply:ShouldDrawLocalPlayer()
+		local vm = self:IsCarriedByLocalPlayer() and not ply:ShouldDrawLocalPlayer()
 		local ent = vm and ply:GetViewModel() or self
 
 		if vm then

@@ -11,6 +11,7 @@ SWEP.AnimationRates = {}
 include("cl_sck.lua")
 
 include("sh_animations.lua")
+include("sh_attachments.lua")
 include("sh_holdtypes.lua")
 include("sh_movement.lua")
 include("sh_traits.lua")

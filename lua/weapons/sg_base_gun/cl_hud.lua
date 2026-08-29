@@ -107,8 +107,11 @@ function SWEP:DrawHUD()
 		return
 	end
 
+	-- Need to make this into a generic attachment draw func
 	cam.Start3D()
-		local pos, ang = self:GetTracerOrigin()
+		local pos, ang = self:GetCustomAttachment("Muzzle")
+		if not pos then cam.End3D() return end
+
 		local offset = function(x) return LocalToWorld(x, angle_zero, pos, ang) end
 
 		cam.IgnoreZ(true)

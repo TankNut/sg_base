@@ -58,7 +58,7 @@ SWEP.RecoilFlip = false
 SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {
-	Material = Material("effects/gunshiptracer"),
+	Material = "effects/gunshiptracer",
 	Length = {128, 256},
 	Scale = {0.5, 1.5}
 }

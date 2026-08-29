@@ -4,6 +4,18 @@ SWEP.UseHands = true
 SWEP.ViewModel = Model("models/sg/weapons/sunrust/c_m4a1.mdl")
 SWEP.WorldModel = Model("models/weapons/w_smg1.mdl")
 
+SWEP.ViewModelAttachments = {
+	Muzzle = {
+		Attachment = "1"
+	}
+}
+
+SWEP.WorldModelAttachments = {
+	Muzzle = {
+		Attachment = "muzzle"
+	}
+}
+
 if SERVER then
 	return
 end
@@ -55,7 +67,7 @@ SWEP.VElements = {
 	["stock2"] = { type = "Model", model = "models/props_combine/combine_barricade_tall02b.mdl", bone = "gun", rel = "stock", pos = Vector(-2.7, 0, -4.736), angle = Angle(-90, 0, 0), size = Vector(0.019, 0.019, 0.019), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["trademarkedglowpart"] = { type = "Model", model = "models/xqm/cylinderx2large.mdl", bone = "gun", rel = "stock", pos = Vector(-0.11, -0.03, 12.075), angle = Angle(-90, 180, 0), size = Vector(0.076, 0.027, 0.038), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = true, nocull = false, material = "models/props_lab/tank_glass001", skin = 0, bodygroup = {} }
 }
- 
+
 SWEP.WElements = {
 	["ammocounter"] = { type = "Model", model = "models/props_lab/monitor01b.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body 2", pos = Vector(2.137, 0.046, -4.528), angle = Angle(-20.377, 0, -90), size = Vector(0.1, 0.1, 0.123), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = true, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barre upper"] = { type = "Model", model = "models/props/de_nuke/powerplanttank.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "barrel", pos = Vector(0.583, -0.007, -0.622), angle = Angle(0, -180, 0), size = Vector(0.013, 0.013, 0.017), color = Color(153, 146, 146, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/polymer2", skin = 0, bodygroup = {} },

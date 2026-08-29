@@ -4,6 +4,18 @@ SWEP.UseHands = true
 SWEP.ViewModel = Model("models/weapons/c_357.mdl")
 SWEP.WorldModel = Model("models/weapons/w_357.mdl")
 
+SWEP.ViewModelAttachments = {
+	Muzzle = {
+		Attachment = "muzzle"
+	}
+}
+
+SWEP.WorldModelAttachments = {
+	Muzzle = {
+		Attachment = "muzzle"
+	}
+}
+
 if SERVER then
 	return
 end

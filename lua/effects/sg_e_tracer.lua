@@ -1,5 +1,3 @@
-local material = Material("effects/spark")
-
 --[[
 Configurable fields:
 	Material - The sprite that gets drawn, usually left blank (for the default) or set to effects/gunshiptracer for the AR2 effect
@@ -8,33 +6,26 @@ Configurable fields:
 	Scale - The thiccness of the tracer, can be a table for a random range
 	Color - The color of the tracer
 	Brightness - How bright the tracer is, overdraws on values above 1
+	Fade - Draws a faded beam instead of a solid one
 ]]
 
 function EFFECT:Init(data)
-	self.Pos = data:GetStart()
-	self.Entity = data:GetEntity()
+	data = sg.GetEffectData(data)
 
-	self.Attachment = data:GetAttachment()
-
-	self.Start = self:GetTracerShootPos(self.Pos, self.Entity, self.Attachment)
-	self.End = data:GetOrigin()
-	self.Distance = self.Start:Distance(self.End)
+	self.Start = sg.GetEffectOrigin(data)
+	self.End = data.Origin
 
 	self:SetRenderBoundsWS(self.Start, self.End)
 
 	self.Time = 0
 
-	self.Material = material
-	self.Velocity = 5000
-	self.Length = math.Rand(64, 128)
-	self.Scale = math.Rand(0.75, 0.9)
-	self.Color = Color(255, 255, 255)
-	self.Brightness = 1
-	self.Fade = false
-
-	if self.Entity.ConfigureTracer then
-		self.Entity:ConfigureTracer(self)
-	end
+	self.Material = Material(data.Material or "effects/spark")
+	self.Velocity = data.Velocity or 5000
+	self.Length = data.Length or math.Rand(64, 128)
+	self.Scale = data.Scale or math.Rand(0.75, 0.9)
+	self.Color = (data.Color or color_white):Copy()
+	self.Brightness = data.Brightness or 1
+	self.Fade = tobool(data.Fade)
 
 	for _, key in ipairs({"Velocity", "Length", "Scale", "Brightness"}) do
 		local val = self[key]
@@ -44,7 +35,9 @@ function EFFECT:Init(data)
 		end
 	end
 
-	self.Lifetime = (self.Distance + self.Length) / self.Velocity
+	local distance = self.Start:Distance(self.End)
+
+	self.Lifetime = (distance + self.Length) / self.Velocity
 
 	effects.TracerSound(self.Start, self.End)
 end

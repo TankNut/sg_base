@@ -48,14 +48,25 @@ if CLIENT then
 
 	function GetEffectOrigin(data)
 		local ent = data.Entity
-		local pos = data.Start or data.Origin or Vector()
+		local pos = data.Start or data.Origin
 
-		if data.Detach or not ent or not ent:IsWeapon() or ent:IsDormant() then
-			return pos
+		if data.Attachment and IsValid(ent) and not ent:IsDormant() then
+			return ent:GetCustomAttachment(data.Attachment) or pos
 		end
 
-		return ent:GetTracerOrigin()
+		return pos
 	end
+
+	-- function GetEffectOrigin(data)
+	-- 	local ent = data.Entity
+	-- 	local pos = data.Start or data.Origin or Vector()
+
+	-- 	if data.Detach or not ent or not ent:IsWeapon() or ent:IsDormant() then
+	-- 		return pos
+	-- 	end
+
+	-- 	return ent:GetTracerOrigin()
+	-- end
 
 	net.Receive("sg_effect", function()
 		local classname = net.ReadString()

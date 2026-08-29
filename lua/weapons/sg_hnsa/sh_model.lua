@@ -12,7 +12,7 @@ SWEP.ViewModelAttachments = {
 
 SWEP.WorldModelAttachments = {
 	Muzzle = {
-		Bone = "muzzle"
+		Attachment = "muzzle"
 	}
 }
 

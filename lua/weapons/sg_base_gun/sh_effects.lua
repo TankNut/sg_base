@@ -11,6 +11,22 @@ function SWEP:CreateEffects(tr)
 end
 
 function SWEP:CreateMuzzleEffect()
+	if self.MuzzleEffect == "" or not IsFirstTimePredicted() then return end
+
+	local ply = self:GetOwner()
+	local data = {
+		Entity = self,
+		Attachment = "Muzzle"
+	}
+
+	for k, v in pairs(self.MuzzleConfig) do
+		if k != "BaseClass" then
+			data[k] = v
+		end
+	end
+
+	sg.Effect(self.MuzzleEffect, ply:GetShootPos(), data, nil, ply)
+
 	-- TODO
 end
 

@@ -49,12 +49,15 @@ if CLIENT then
 	function GetEffectOrigin(data)
 		local ent = data.Entity
 		local pos = data.Start or data.Origin
+		local ang = data.Angle or angle_zero
 
 		if data.Attachment and IsValid(ent) and not ent:IsDormant() then
-			return ent:GetCustomAttachment(data.Attachment) or pos
+			local pos2, ang2 = ent:GetCustomAttachment(data.Attachment)
+
+			return pos2 or pos, ang2 or ang
 		end
 
-		return pos
+		return pos, ang
 	end
 
 	-- function GetEffectOrigin(data)

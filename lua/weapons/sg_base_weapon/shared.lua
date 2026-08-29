@@ -82,7 +82,9 @@ function SWEP:PredictionThink()
 end
 
 local eventBlacklist = {
-	[15] = true -- AE_CL_PLAYSOUND
+	[15] = true, -- AE_CL_PLAYSOUND
+	[5001] = true, -- CL_EVENT_MUZZLEFLASH0
+	[5003] = true -- CL_EVENT_NPC_MUZZLEFLASH0
 }
 
 function SWEP:FireAnimationEvent(pos, ang, event, name)

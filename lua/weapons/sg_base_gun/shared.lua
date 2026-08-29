@@ -58,6 +58,9 @@ SWEP.Tracer = 1 -- 1 tracer per X bullets
 SWEP.TracerName = "sg_e_tracer" -- tracer effect
 SWEP.TracerConfig = {} -- Used to configure the tracer effect
 
+SWEP.MuzzleEffect = "" -- Muzzle effect
+SWEP.MuzzleConfig = {} -- Used to configure the muzzle effect
+
 if CLIENT then
 	-- This should go into sh_model.lua
 	SWEP.ViewModelOffset = Vector()

@@ -88,5 +88,3 @@ sound.Add({
 	pitch = {80, 90},
 	sound = ")weapons/awp/awp1.wav"
 })
-
---[[Grixis's notes: Would like to explore whether bolting between shots is a thing for this. If there was also any weapon that may benefit from a penetration system, this would be it. Will also be getting anims + different reload sounds.]]--

@@ -50,7 +50,7 @@ SWEP.VElements = {
 	["wood clip+"] = { type = "ClipPlane", bone = "ValveBiped.Bip01_Spine4", rel = "bottom wood", pos = Vector(-0.627, -3.499, -1.004), angle = Angle(0, 94.85, 90)},
 	["wood top"] = { type = "Model", model = "models/props_phx/construct/wood/wood_boardx1.mdl", bone = "Python", rel = "top frame", pos = Vector(0.23, -0.28, 0), angle = Angle(0, 0, 90), size = Vector(0.157, 0.09, 0.09), color = Color(172, 149, 135, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/wood/offdra", skin = 0, bodygroup = {} }
 }
- 
+
 SWEP.WElements = {
 	["back sight"] = { type = "Model", model = "models/props_wasteland/light_spotlight02_base.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "top frame", pos = Vector(-7.209, -0.281, 0.025), angle = Angle(0, 0, -90), size = Vector(0.16, 0.1, 0.06), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/metal/metalfloor005a", skin = 0, bodygroup = {} },
 	["barrel"] = { type = "Model", model = "models/props_mining/pipe_goopit01.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(12.141, 0.858, -4.725), angle = Angle(-3.816, 0.647, -86.783), size = Vector(0.015, 0.012, 0.012), color = Color(170, 151, 145, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },

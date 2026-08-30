@@ -111,6 +111,7 @@ function EFFECT:Render()
 		end
 
 		if emitter and emitter:IsValid() then
+			emitter:SetPos(pos)
 			emitter:Draw()
 		end
 	cam.End3D()

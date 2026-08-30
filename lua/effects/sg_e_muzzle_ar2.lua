@@ -10,7 +10,7 @@ local worldMaterials = {}
 
 local striderMuzzle = Material("effects/strider_muzzle")
 
-for i = 1, 4 do
+for i = 1, 2 do
 	viewMaterials[i] = Material("effects/combinemuzzle" .. i .. "_noz")
 	worldMaterials[i] = Material("effects/combinemuzzle" .. i)
 end
@@ -47,7 +47,7 @@ function EFFECT:InitView()
 		p:SetRoll(math.random(0, 360))
 	end
 
-	local p = self.ViewEmitter:Add(table.Random(viewMaterials), Vector())
+	local p = self.ViewEmitter:Add(table.Random(viewMaterials), vector_origin)
 
 	p:SetDieTime(0.025)
 
@@ -65,7 +65,7 @@ function EFFECT:InitView()
 end
 
 function EFFECT:InitWorld()
-	self.WorldEmitter = ParticleEmitter(Vector())
+	self.WorldEmitter = ParticleEmitter(vector_origin)
 	self.WorldEmitter:SetNoDraw(true)
 
 	local forward = Vector(1, 0, 0)
@@ -186,6 +186,7 @@ function EFFECT:Render()
 		end
 
 		if emitter and emitter:IsValid() then
+			emitter:SetPos(pos)
 			emitter:Draw()
 		end
 	cam.End3D()

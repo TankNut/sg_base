@@ -83,6 +83,8 @@ end
 
 local eventBlacklist = {
 	[15] = true, -- AE_CL_PLAYSOUND
+	[21] = true, -- AE_MUZZLEFLASH
+	[22] = true, -- AE_NPC_MUZZLEFLASH
 	[5001] = true, -- CL_EVENT_MUZZLEFLASH0
 	[5003] = true -- CL_EVENT_NPC_MUZZLEFLASH0
 }

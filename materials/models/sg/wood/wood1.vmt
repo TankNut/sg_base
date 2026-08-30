@@ -1,0 +1,12 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/wood/wood1"
+	$bumpmap "models/sg/wood/wood1_normal"
+	$surfaceprop Wood
+
+	$phong 1
+	$phongfresnelranges "[0.24 0.62 1]"
+	$phongexponent 20
+	$phongboost 0.3
+	$phongalbedoboost 4.79
+}

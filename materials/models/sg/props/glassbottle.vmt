@@ -1,0 +1,14 @@
+VertexLitGeneric
+{
+	$basetexture "models/sg/props/glassbottle.vmt"
+	$bumpmap "models/sg/props/glassbottle_normal.vmt"
+	$surfaceprop Glassbottle
+
+	$phong 1
+	$phongfresnelranges "[0.73 0.86 1]"
+	$phongtint "[0.60 0.60 0.60]"
+	$halflambert 1
+	$phongexponent 20
+	$phongboost 0.24
+	$phongalbedoboost 6.95
+}

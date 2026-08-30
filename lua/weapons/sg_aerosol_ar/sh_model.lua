@@ -6,13 +6,17 @@ SWEP.WorldModel = Model("models/weapons/w_smg1.mdl")
 
 SWEP.ViewModelAttachments = {
 	Muzzle = {
-		Attachment = "muzzle"
+		Attachment = "muzzle",
+		Pos = Vector(4.8, 0, 0.1),
+		Angle = Angle(0, 0, -90)
 	}
 }
 
 SWEP.WorldModelAttachments = {
 	Muzzle = {
-		Attachment = "muzzle"
+		Attachment = "muzzle",
+		Pos = Vector(5.8, -1.2, 0),
+		Angle = Angle(0, 0, -90)
 	}
 }
 
@@ -58,7 +62,7 @@ SWEP.VElements = {
 	["toprial"] = { type = "Model", model = "models/props_lab/filecabinet02.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "toprailback", pos = Vector(-3.9, 0, -0.67), angle = Angle(90, 0, -180), size = Vector(0.01, 0.05, 0.187), color = Color(64, 63, 66, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["topsupp"] = { type = "Model", model = "models/props_lab/reciever01b.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "top", pos = Vector(0, -0.7, -1.364), angle = Angle(0, 90, 180), size = Vector(0.152, 0.069, 0.152), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} }
 }
- 
+
 SWEP.WElements = {
 	["barrel"] = { type = "Model", model = "models/props_rooftop/chimneypipe01a.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "frontbarrelholder", pos = Vector(0, 1, 0), angle = Angle(-90, 0, 0), size = Vector(0.05, 0.05, 0.05), color = Color(255, 255, 255, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "", skin = 0, bodygroup = {} },
 	["barrelmain"] = { type = "Model", model = "models/xqm/jetbody2fuselage.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "body", pos = Vector(0, 12.01, 1.964), angle = Angle(0, -90, 180), size = Vector(0.23, 0.045, 0.1), color = Color(100, 110, 96, 255), surpresslightning = false, bonemerge = false, highrender = false, nocull = false, material = "models/sg/customs/gunmetal3", skin = 0, bodygroup = {} },

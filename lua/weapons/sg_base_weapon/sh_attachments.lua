@@ -4,24 +4,42 @@ SWEP.ViewModelAttachments = {}
 SWEP.WorldModelAttachments = {}
 
 -- Used to translate viewmodel attachments into the correct perspective/FOV
-local function translateToVM(pos)
+local function translatePos(pos)
 	local setup = render.GetViewSetup()
 
 	local worldx = math.tan(setup.fov * (math.pi / 360))
 	local viewx = math.tan(setup.fovviewmodel * (math.pi / 360))
 
-	local factor = Vector(worldx / viewx, worldx / viewx, 0)
+	local factor = worldx / viewx
 	local tmp = pos - setup.origin
 
 	local eye = setup.angles
 	local transformed = Vector(eye:Right():Dot(tmp), eye:Up():Dot(tmp), eye:Forward():Dot(tmp))
 
-	transformed.x = transformed.x * factor.x
-	transformed.y = transformed.y * factor.y
+	transformed.x = transformed.x * factor
+	transformed.y = transformed.y * factor
 
 	local out = (eye:Right() * transformed.x) + (eye:Up() * transformed.y) + (eye:Forward() * transformed.z)
 
 	return setup.origin + out
+end
+
+local function translateAng(ang)
+	local setup = render.GetViewSetup()
+
+	local worldx = math.tan(setup.fov * (math.pi / 360))
+	local viewx = math.tan(setup.fovviewmodel * (math.pi / 360))
+
+	local factor = 1 - (viewx / worldx)
+
+	if factor != 0 then
+		local diff = setup.angles - ang
+		local sub = Angle(diff.x * factor, diff.y * factor, 0)
+
+		ang:Sub(sub)
+	end
+
+	return ang
 end
 
 local matrix = Matrix()
@@ -76,7 +94,8 @@ function SWEP:GetCustomAttachment(name)
 	end
 
 	if isViewModel then
-		pos = translateToVM(pos)
+		pos = translatePos(pos)
+		ang = translateAng(ang)
 	end
 
 	return pos, ang

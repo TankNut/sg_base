@@ -63,6 +63,11 @@ SWEP.Tracer = 1
 SWEP.TracerName = "sg_e_tracer_smoke"
 SWEP.TracerConfig = {}
 
+SWEP.MuzzleEffect = "sg_e_muzzle_smg"
+SWEP.MuzzleConfig = {
+	Scale = 3
+}
+
 include("sh_model.lua")
 include("sh_animations.lua")
 

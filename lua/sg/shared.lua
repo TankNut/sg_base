@@ -57,6 +57,20 @@ function GetModelInfo(mdl)
 	return ModelCache[mdl]
 end
 
+if CLIENT then
+	RenderGroupCache = {}
+
+	function GetRenderGroup(mdl)
+		if not RenderGroupCache[mdl] then
+			local csent = ClientsideModel(mdl, RENDERGROUP_OTHER)
+			RenderGroupCache[mdl] = csent:GetRenderGroup()
+			csent:Remove()
+		end
+
+		return RenderGroupCache[mdl]
+	end
+end
+
 if SERVER then
 	function Explosion(pos, owner, damage, spawnflags, radius)
 		local ent = ents.Create("env_explosion")

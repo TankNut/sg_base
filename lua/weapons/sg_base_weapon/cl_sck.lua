@@ -220,7 +220,9 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 		return
 	end
 
-	if not self.ShowWorldModel then
+	local rendergroups = isTranslucent and translucent or opaque
+
+	if not self.ShowWorldModel or not rendergroups[sg.GetRenderGroup(self:GetModel())] then
 		render.MaterialOverride(null)
 	end
 
@@ -228,7 +230,6 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 
 	render.MaterialOverride(nil)
 
-	local rendergroups = isTranslucent and translucent or opaque
 	local lod = ScrH() / render.ComputePixelDiameterOfSphere(self:GetPos(), 250)
 
 	lod = lod * lodMult:GetFloat()

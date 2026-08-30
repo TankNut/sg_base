@@ -59,6 +59,9 @@ SWEP.TracerConfig = {
 	Scale = 3
 }
 
+SWEP.MuzzleEffect = "sg_e_muzzle_smg"
+SWEP.MuzzleConfig = {}
+
 include("sh_model.lua")
 include("sh_animations.lua")
 

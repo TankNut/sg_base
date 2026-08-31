@@ -15,7 +15,7 @@ SWEP.Spawnable = true
 
 -- Ammo
 SWEP.Primary.Ammo = "smg1"
-SWEP.Primary.ClipSize = 20
+SWEP.Primary.ClipSize = 25
 SWEP.Primary.DefaultClip = 200
 
 -- HoldType
@@ -28,32 +28,32 @@ SWEP.Firemode = 1
 SWEP.AmmoCost = 1
 
 SWEP.Count = 1
-SWEP.Damage = 30
+SWEP.Damage = 45
 SWEP.Force = sg.FORCE_DEFAULT
 
-SWEP.Range = 1000
+SWEP.Range = 850
 
-SWEP.Delay = 60 / 500
+SWEP.Delay = 60 / 300
 
 -- Traits
 SWEP.Traits = {
 	sg.Trait("Aiming", {
 		Zoom = 4,
 		ZoomRange = true,
-		Range = 1500,
+		Range = 1450,
 		Firemode = 1,
 		Offset = Vector(-6, 4, 0.5)
 	}),
-	sg.Trait("AddRecoil", {Add = 0.75})
+	sg.Trait("AddRecoil", {Add = 1})
 }
 
 -- Recoil
 SWEP.Recoil = {
-	x = {0.25, 0.3},
-	y = {0.2, 0.3}
+	x = {0.2, 0.3},
+	y = {0.1, 0.2}
 }
 
-SWEP.ViewPunch = 0.65
+SWEP.ViewPunch = 0.9
 SWEP.RecoilFlip = true
 
 -- Effects

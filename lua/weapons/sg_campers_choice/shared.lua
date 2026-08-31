@@ -6,8 +6,8 @@ SWEP.Base = "sg_base_gun"
 SWEP.PrintName = "The Camper's Choice"
 SWEP.Category = "S&G Munitions"
 
-SWEP.Instructions = "Pull the trigger to wait."
-SWEP.Purpose = "For playing the waiting game with a clip full of hollow point rounds."
+SWEP.Instructions = "Pull the trigger to survive the apocalypse."
+SWEP.Purpose = "Only the finest in post-apocalyptic weaponry, this fine rifle (made from the finest chair and furniture wood) is perfect for the aspiring wasteland survivalist or annoying douchebag hiding in a corner."
 
 SWEP.Slot = 2
 
@@ -45,7 +45,7 @@ SWEP.Traits = {
 		Scoped = true,
 		Offset = Vector(-6, 4, 0.5 )
 	}),
-	sg.Trait("AddRecoil", {Add = 1})
+	sg.Trait("AddRecoil", {Add = 1.35})
 }
 
 -- Recoil

@@ -58,6 +58,9 @@ SWEP.TracerConfig = {
 	Fade = true
 }
 
+SWEP.MuzzleEffect = "sg_e_muzzle_ar2"
+SWEP.MuzzleConfig = {}
+
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()

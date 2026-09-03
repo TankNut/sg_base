@@ -109,3 +109,15 @@ end
 function SWEP:GetViewModel(index)
 	return self:GetOwner():GetViewModel(index)
 end
+
+if CLIENT then
+	function SWEP:GetBaseRenderGroup()
+		if not self.BaseRenderGroup then
+			self.RenderGroup = nil
+			self.BaseRenderGroup = self:GetRenderGroup()
+			self.RenderGroup = RENDERGROUP_BOTH
+		end
+
+		return self.BaseRenderGroup
+	end
+end

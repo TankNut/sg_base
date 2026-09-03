@@ -222,7 +222,7 @@ function SWEP:DrawWorldModel(flags, isTranslucent)
 
 	local rendergroups = isTranslucent and translucent or opaque
 
-	if not self.ShowWorldModel or not rendergroups[sg.GetRenderGroup(self:GetModel())] then
+	if not self.ShowWorldModel or not rendergroups[self:GetBaseRenderGroup()] then
 		render.MaterialOverride(null)
 	end
 

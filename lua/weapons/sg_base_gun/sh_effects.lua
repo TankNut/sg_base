@@ -26,8 +26,6 @@ function SWEP:CreateMuzzleEffect()
 	end
 
 	sg.Effect(self.MuzzleEffect, ply:GetShootPos(), data, nil, ply)
-
-	-- TODO
 end
 
 function SWEP:CreateTracer(start, origin, detach)

@@ -31,7 +31,7 @@ SWEP.Count = 1
 SWEP.Damage = 22
 SWEP.Force = sg.FORCE_DEFAULT
 
-SWEP.Range = 850 -- Slight decrease, would've been 857.142 otherwise
+SWEP.Range = 850
 
 SWEP.Delay = 60 / 1000
 
@@ -73,6 +73,7 @@ sound.Add({
 	pitch = {110, 125},
 	sound = ")weapons/pistol/pistol_fire2.wav"
 })
+
 sound.Add({
 	name = "Weapon_SG_GrandPrize.Single2",
 	channel = CHAN_ITEM,

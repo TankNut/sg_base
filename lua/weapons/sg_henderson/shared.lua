@@ -67,6 +67,9 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
+SWEP.MuzzleEffect = "sg_e_muzzle_smg"
+SWEP.MuzzleConfig = {}
+
 include("sh_model.lua")
 
 function SWEP:OnPrimaryAnimation()

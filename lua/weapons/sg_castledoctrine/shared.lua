@@ -60,6 +60,9 @@ SWEP.Tracer = 3
 SWEP.TracerName = "sg_e_tracer"
 SWEP.TracerConfig = {}
 
+SWEP.MuzzleEffect = "sg_e_muzzle_smg"
+SWEP.MuzzleConfig = {}
+
 SWEP.Animations = {
 	Primary = sg.Animation.WeaponSequence(ACT_VM_SECONDARYATTACK):AddEvent(0, "PlayerAnimation", PLAYER_ATTACK1)
 }

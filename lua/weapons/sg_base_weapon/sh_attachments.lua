@@ -34,9 +34,10 @@ local function translateAng(ang)
 
 	if factor != 0 then
 		local diff = setup.angles - ang
-		local sub = Angle(diff.x * factor, diff.y * factor, 0)
+		diff:Mul(factor)
+		diff.r = 0
 
-		ang:Sub(sub)
+		ang:Sub(diff)
 	end
 
 	return ang
@@ -85,15 +86,21 @@ function SWEP:GetCustomAttachment(name)
 	local func = self["Get" .. (isViewModel and "View" or "World") .. name .. "Attachment"]
 	local pos, ang
 
+	if isViewModel then self:ApplyBoneMods(ent) end
+
 	if func then
 		pos, ang = getAttachment(ent, func(self))
 	elseif tab[name] then
 		pos, ang = getAttachment(ent, tab[name])
 	else
+		if isViewModel then self:ResetBoneMods(ent) end
+
 		return
 	end
 
 	if isViewModel then
+		self:ResetBoneMods(ent)
+
 		pos = translatePos(pos)
 		ang = translateAng(ang)
 	end

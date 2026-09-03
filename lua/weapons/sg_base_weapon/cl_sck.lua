@@ -87,8 +87,6 @@ function SWEP:ApplyBoneMods(vm)
 			end
 		end
 	end
-
-	vm:SetupBones()
 end
 
 function SWEP:ResetBoneMods(vm)
@@ -180,6 +178,8 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 
 	-- By applying here...
 	self:ApplyBoneMods(vm)
+
+	vm:SetupBones()
 
 	if not self.ShowViewModel then
 		render.MaterialOverride(nullMaterial)

@@ -1,5 +1,5 @@
 --[[
-SDK References: 
+SDK References:
 
 CTempEnts::MuzzleFlash_SMG1_Player
 FX_MuzzleEffectAttached
@@ -32,13 +32,11 @@ function EFFECT:InitView()
 	for i = 1, 6 do
 		local offset = forward * (i * 8 * scale)
 		local p = self.ViewEmitter:Add(table.Random(viewMaterials), offset)
-
 		p:SetDieTime(0.025)
 
 		p:SetColor(255, 255, math.random(200, 255))
 
 		local size = (math.Rand(6, 8) * (8 - i) / 6) * scale
-
 		p:SetStartSize(size)
 		p:SetEndSize(size)
 
@@ -56,14 +54,12 @@ function EFFECT:InitWorld()
 	for i = 1, 9 do
 		local offset = forward * (i * 2 * scale)
 		local p = self.WorldEmitter:Add(table.Random(worldMaterials), offset)
-
 		p:SetDieTime(0.025)
 
 		p:SetStartAlpha(255)
 		p:SetEndAlpha(128)
 
 		local size = (math.Rand(6, 9) * (12 - i) / 9) * scale
-
 		p:SetStartSize(size)
 		p:SetEndSize(size)
 
@@ -110,7 +106,7 @@ function EFFECT:Render()
 			emitter = self.ViewEmitter
 		end
 
-		if emitter and emitter:IsValid() then
+		if emitter:IsValid() then
 			emitter:SetPos(pos)
 			emitter:Draw()
 		end

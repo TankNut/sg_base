@@ -1,5 +1,5 @@
 --[[
-SDK References: 
+SDK References:
 
 CTempEnts::MuzzleFlash_Combine_Player
 CTempEnts::MuzzleFlash_Combine_NPC
@@ -34,13 +34,11 @@ function EFFECT:InitView()
 	for i = 1, 5 do
 		local offset = forward * (i * 4 * scale)
 		local p = self.ViewEmitter:Add(table.Random(viewMaterials), offset)
-
 		p:SetDieTime(0.025)
 
 		p:SetColor(255, 255, math.random(200, 255))
 
 		local size = (math.Rand(6, 8) * (12 - i) / 12) * scale
-
 		p:SetStartSize(size)
 		p:SetEndSize(size)
 
@@ -48,7 +46,6 @@ function EFFECT:InitView()
 	end
 
 	local p = self.ViewEmitter:Add(table.Random(viewMaterials), vector_origin)
-
 	p:SetDieTime(0.025)
 
 	p:SetColor(255, 255, 255)
@@ -57,7 +54,6 @@ function EFFECT:InitView()
 	p:SetEndAlpha(32)
 
 	local size = math.Rand(10, 16) * self.Scale
-
 	p:SetStartSize(size)
 	p:SetEndSize(size)
 
@@ -76,7 +72,6 @@ function EFFECT:InitWorld()
 
 	local function createParticle(offset, dir)
 		local p = self.WorldEmitter:Add(table.Random(worldMaterials), offset)
-
 		p:SetDieTime(0.1)
 
 		p:SetVelocity(dir * burst)
@@ -132,7 +127,6 @@ function EFFECT:InitWorld()
 	end
 
 	local p = self.WorldEmitter:Add(striderMuzzle, Vector())
-
 	p:SetDieTime(math.Rand(0.3, 0.4))
 
 	p:SetColor(255, 255, 255)
@@ -185,7 +179,7 @@ function EFFECT:Render()
 			emitter = self.ViewEmitter
 		end
 
-		if emitter and emitter:IsValid() then
+		if emitter:IsValid() then
 			emitter:SetPos(pos)
 			emitter:Draw()
 		end

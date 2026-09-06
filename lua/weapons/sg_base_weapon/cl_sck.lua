@@ -166,10 +166,14 @@ function SWEP:UpdateSCK()
 end
 
 local nullMaterial = Material("null")
+local hidden = false
 
 function SWEP:PreDrawViewModel(vm, _, ply, flags)
 	if self:RunHooks("ShouldHideViewModel") then
-		return true
+		render.MaterialOverride(nullMaterial)
+		hidden = true
+
+		return
 	end
 
 	if not self.BoneCache then
@@ -178,7 +182,6 @@ function SWEP:PreDrawViewModel(vm, _, ply, flags)
 
 	-- By applying here...
 	self:ApplyBoneMods(vm)
-
 	vm:SetupBones()
 
 	if not self.ShowViewModel then
@@ -197,6 +200,13 @@ local translucent = {
 }
 
 function SWEP:PostDrawViewModel(vm, _, ply, flags)
+	if hidden then
+		render.MaterialOverride(nil)
+		hidden = false
+
+		return
+	end
+
 	if not self.ShowViewModel then
 		render.MaterialOverride(nil)
 		ply:GetHands():DrawModel()

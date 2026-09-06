@@ -6,13 +6,17 @@ SWEP.WorldModel = Model("models/weapons/w_pistol.mdl")
 
 SWEP.ViewModelAttachments = {
 	Muzzle = {
-		Attachment = "muzzle"
+		Attachment = "muzzle",
+		Pos = Vector(0, 0, 1),
+		Angle = Angle(-90, 0, -90)
 	}
 }
 
 SWEP.WorldModelAttachments = {
 	Muzzle = {
-		Attachment = "muzzle"
+		Attachment = "muzzle",
+		Pos = Vector(0, -0.2, 0),
+		Angle = Angle(0, 0, -90)
 	}
 }
 

@@ -34,8 +34,8 @@ local function translateAng(ang)
 
 	if factor != 0 then
 		local diff = setup.angles - ang
+		diff:Normalize()
 		diff:Mul(factor)
-		diff.r = 0
 
 		ang:Sub(diff)
 	end

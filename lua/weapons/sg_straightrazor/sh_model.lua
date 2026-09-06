@@ -16,7 +16,7 @@ SWEP.WorldModelAttachments = {
 	Muzzle = {
 		Attachment = "muzzle",
 		Pos = Vector(0, 0, 0),
-		Angle = Angle(0, 0, 0)
+		Angle = Angle(-3, 0, 0)
 	}
 }
 

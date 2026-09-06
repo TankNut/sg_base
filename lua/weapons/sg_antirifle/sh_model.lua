@@ -15,7 +15,7 @@ SWEP.ViewModelAttachments = {
 SWEP.WorldModelAttachments = {
 	Muzzle = {
 		Bone = "ValveBiped.bone",
-		Pos = Vector(6.7, 14.7, 48),
+		Pos = Vector(49, -2.5, 3),
 		Angle = Angle(-73, 52, -145)
 	}
 }

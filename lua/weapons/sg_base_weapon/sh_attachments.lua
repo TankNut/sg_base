@@ -65,7 +65,10 @@ local function getAttachment(ent, data)
 	local pos = data.Pos or vector_origin
 	local ang = data.Angle or angle_zero
 
-	return LocalToWorld(pos, ang, matrix:GetTranslation(), matrix:GetAngles())
+	matrix:Rotate(ang)
+	matrix:Translate(pos)
+
+	return matrix:GetTranslation(), matrix:GetAngles()
 end
 
 function SWEP:GetCustomAttachment(name)
